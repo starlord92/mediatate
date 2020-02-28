@@ -1,60 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Mediatate</title>
-	<style>
-
-		html, body {
-			display: grid;
-
-			font: bold 1.5em "Trebuchet MS", sans-serif;
-
-			justify-content: center;
-
-			align-items: center;
-			
-			height: 100%;
-		}
-
-		div {
-			
-			border-radius: 10px;
-			padding: 7px;
-			background-color: #2997ff;
-			color: white;
-		}
-
-	</style>
+	<title>meditate</title>
 	
+	<style src="">
+	</style>
+
+	<script src="timer_script.js" type="text/javascript">
+	</script>
+
 </head>
 <body>
-		<div id="timer"></div>
 
-		<script>
-	
-		var five = 6000;
-
-		// Update the count down every 1 second
-		var x = setInterval(function() {
-		five = five - 1000;
-		var seconds = five/1000;
-		// Output the result
-		document.getElementById("timer").innerHTML = seconds + "";    
-
-			if (five < 0) {
-				clearInterval(x);
-				document.getElementById("timer").innerHTML = "time is up";
-			}
-		}, 1000);
-
-		</script>
-
-		
-	
-	
-		
-	
-	
+	<div id="timer"></div>
 	
 </body>
 </html>
