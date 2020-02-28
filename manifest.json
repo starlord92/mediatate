@@ -1,13 +1,13 @@
 {
+
 	"name": "Mediatate",
 	"version": "0.1",
-	"manifest version": "0",
-
+	"manifest_version": 2,
 	"description": "5 minute meditation",
 	"permissions": ["storage"],
 
-	"chrome_url_overrides": {                //set HTML page for new tabs 
-		"newtab": "home.html"
+	"chrome_url_overrides": {                
+		"newtab": "timer_interface/home.html"
 	},
 
 	"background": {
@@ -17,15 +17,19 @@
 
 	"browser_action": {					
 		"default_icon": {					 
-			"16": "ensoicon16.png",  	
-			"48": "ensoicon48.png",
-			"128": "ensoicon128.png"
+			"16": "images/ensoicon16.png",  	
+			"48": "images/ensoicon48.png",
+			"128": "images/ensoicon128.png"
       }
     },
 
-	"icons": {								// images on the extension management page, 
-      "16": "ensoicon16.png",  				//  the permissions warning, and favicon.
-      "48": "ensoicon48.png",
-      "128": "ensoicon128.png"
-    },
+	"icons": {								
+      "16": "images/ensoicon16.png",  				
+      "48": "images/ensoicon48.png",
+      "128": "images/ensoicon128.png"
+    }
+
+	
+
+
 }
