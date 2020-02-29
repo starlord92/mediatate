@@ -3,8 +3,7 @@
 <head>
 	<title>meditate</title>
 	
-	<style src="">
-	</style>
+	<link rel="stylesheet" href="timer.css">
 
 	<script src="timer_script.js" type="text/javascript">
 	</script>
@@ -12,7 +11,20 @@
 </head>
 <body>
 
-	<div id="timer"></div>
+	<div id="timer" onclick="startTimer()">
+		start meditation
+	</div>
+
+	<audio id="zenbellsound">
+		<source src="sound_effects/bell.mp3" typ="audio/mp3">
+	    Your browser does not support the
+	    <code>audio</code> element.
+	</audio>
+	
+	
+
+
+	
 	
 </body>
 </html>
