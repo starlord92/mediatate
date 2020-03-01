@@ -5,6 +5,8 @@ var five = 30000;
 
 var interval;
 
+
+
 // update the count down every 1 second
 
 var x = function updateTimer() {
@@ -31,16 +33,15 @@ var x = function updateTimer() {
 	}
 }
 
-document.getElementById("timer").addEventListener("click", whynot());
 
-
-var whynot = function startTimer() {
+function startTimer() {
 	var bell_sound = document.getElementById("zenbellsound");
 	bell_sound.play();
 	interval = setInterval(x, 1000);
-
 }
 
+
+document.getElementById("timer").addEventListener("click", startTimer);
 
 
 
