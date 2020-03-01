@@ -1,7 +1,7 @@
 //https://www.w3schools.com/howto/howto_js_countdown.asp
 //
 
-var five = 60000;
+var five = 30000;
 
 var interval;
 
@@ -13,21 +13,32 @@ var x = function updateTimer() {
 	document.getElementById("timer").innerHTML = seconds + "";    
 	if (five < 0) {
 		clearInterval(interval);
-		document.getElementById("timer").innerHTML = "approach each task without judgement";
+		document.getElementById("timer").innerHTML = "appoach each of your tasks without any judgment";
+		
 		var bell_sound = document.getElementById("zenbellsound");
 		bell_sound.play();
-			
+		document.getElementById("timer").removeEventListener("click", startTimer);
+		document.getElementById("timer").style.cursor= "initial";
+
+
+
+		// var img = document.createElement("img");
+		// img.src = "uzimeme.png";
+		// var src = document.getElementById("meme");
+		// src.appendChild(img);
+
+
 	}
 }
 
-document.getElementById("timer").addEventListener("click", startTimer);
+document.getElementById("timer").addEventListener("click", whynot());
 
 
-function startTimer() {
+var whynot = function startTimer() {
 	var bell_sound = document.getElementById("zenbellsound");
 	bell_sound.play();
+	interval = setInterval(x, 1000);
 
-	interval = setInterval(x, 1000);	
 }
 
 

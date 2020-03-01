@@ -10,10 +10,10 @@
 		"newtab": "timer_interface/home.html"
 	},
 
-	"background": {
-		"scripts": ["timer.js"],
-		"persistent": false
-	},
+	// "background": {
+	// 	"scripts": ["timer.js"],
+	// 	"persistent": false
+	// },
 
 	"browser_action": {					
 		"default_icon": {					 
