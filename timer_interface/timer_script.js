@@ -1,31 +1,33 @@
 
-var five = 30000;
+var time = 20000;
 
 var interval;
 
 function generateTime(timer_length) {
-	five = five - 1000;     
-	//algorithm: https://www.w3schools.com/howto/howto_js_countdown.asp
-	var minutes = Math.floor((five % (1000 * 60 * 60))/(1000 * 60)); 
-	var seconds = Math.floor((five % (1000 * 60)) / 1000);
-	document.getElementById("button").innerHTML = "0" + minutes + ":" + seconds ;
+	time = time - 1000;     
+	var minutes = Math.floor((time % (1000 * 60 * 60))/(1000 * 60)); 
+	var seconds = Math.floor((time % (1000 * 60)) / 1000);
+	document.getElementById("timer_control").innerHTML = "0" + minutes + ":" + seconds ;
 }
 
 //update the count down every 1 second
 var x = function updateTimer() {     
 	
-	generateTime(five);
+	generateTime(time);
 
-	
-	if (five < 0) {         
+	if (time < 0) {         
 		clearInterval(interval);
 		var bell_sound = document.getElementById("zenbellsound");
 		bell_sound.play();
 
-		document.getElementById("button").innerHTML = "meditate again";
+		document.getElementById("timer_control").innerHTML = "meditate again";
 
-		// document.getElementById("button").addEventListener("click", start);
-		// document.getElementById("button").style.cursor= "pointer";
+		// document.getElementById("timer_display").innerHTML = "00:00";
+
+		time = 20000;
+
+		// document.getElementById("timer_control").addEventListener("click", start);
+		document.getElementById("timer_control").style.cursor= "pointer";
 
 		
 	}
@@ -35,16 +37,12 @@ var x = function updateTimer() {
 var start = function startTimer() {
 	var bell_sound = document.getElementById("zenbellsound");
 	bell_sound.play();
-	// document.getElementById("button").removeEventListener("click", start);
-	document.getElementById("button").style.cursor= "initial";
+	// document.getElementById("timer_control").removeEventListener("click", start);
+	document.getElementById("timer_control").style.cursor= "initial";
 	interval = setInterval(x, 1000);
-
-		// document.getElementById("button").addEventListener("click", start);
-
 }
 
-
-	document.getElementById("button").addEventListener("click", start);
+document.getElementById("timer_control").addEventListener("click", start);
 
 
 
