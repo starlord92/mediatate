@@ -1,47 +1,53 @@
-//https://www.w3schools.com/howto/howto_js_countdown.asp
-////
 
 var five = 30000;
 
 var interval;
 
-// update the count down every 1 second
+function generateTime(timer_length) {
+	five = five - 1000;     
+	//algorithm: https://www.w3schools.com/howto/howto_js_countdown.asp
+	var minutes = Math.floor((five % (1000 * 60 * 60))/(1000 * 60)); 
+	var seconds = Math.floor((five % (1000 * 60)) / 1000);
+	document.getElementById("button").innerHTML = "0" + minutes + ":" + seconds ;
+}
 
-var x = function updateTimer() {
-	five = five - 1000;
-	var seconds = five/1000;
-	document.getElementById("timer").innerHTML = seconds + "";    
-	if (five < 0) {
+//update the count down every 1 second
+var x = function updateTimer() {     
+	
+	generateTime(five);
+
+	
+	if (five < 0) {         
 		clearInterval(interval);
-		document.getElementById("timer").innerHTML = "appoach each of your tasks without any judgment";
-		
 		var bell_sound = document.getElementById("zenbellsound");
 		bell_sound.play();
-		document.getElementById("timer").removeEventListener("click", startTimer);
-		document.getElementById("timer").style.cursor= "initial";
 
+		document.getElementById("button").innerHTML = "meditate again";
 
+		// document.getElementById("button").addEventListener("click", start);
+		// document.getElementById("button").style.cursor= "pointer";
 
-		// var img = document.createElement("img");
-		// img.src = "uzimeme.png";
-		// var src = document.getElementById("meme");
-		// src.appendChild(img);
-
-
+		
 	}
 }
 
 
-
-
-var whynot = function startTimer() {
+var start = function startTimer() {
 	var bell_sound = document.getElementById("zenbellsound");
 	bell_sound.play();
+	// document.getElementById("button").removeEventListener("click", start);
+	document.getElementById("button").style.cursor= "initial";
 	interval = setInterval(x, 1000);
+
+		// document.getElementById("button").addEventListener("click", start);
 
 }
 
-document.getElementById("timer").addEventListener("click", whynot);
+
+	document.getElementById("button").addEventListener("click", start);
+
+
+
 
 
 

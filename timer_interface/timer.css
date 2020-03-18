@@ -1,35 +1,36 @@
 html, body {
 	display: grid;
-
 	font: bold 1.5em "Trebuchet MS", sans-serif;
 
+	/* Horizontally center EACH element in a grid with regard to its inline axis*/
 	justify-content: center;
+	
 
-	align-items: center;
-			
+	/* Vertically center EACH element in a grid with regard to its cell/track, mor more accurately grid area*/
+	align-items: center; 
+	
 	height: 100%;
-
-	/*background-color: #CCD0D5;*/
-
-
-
+	width: 100%;
+	background-color: #e9ebee;	/*fb desktop background*/
 }
 
-div, button {
-			
+
+
+#timer {
+	display: grid;
+	align-items: start; 
+	height: 100%;
+	width: 100%;
+}
+
+#button, #encore {
 	border-radius: 10px;
-	padding: 7px;
+	padding: 2%;	
 	background-color: #2997ff;
 	color: white;
-	text-align: center;
-	margin: 1.5%;
+	margin: 2%;
 	cursor: pointer;
-
+	text-align: center;
 }
 
-/*p {
-	border-radius: 10px;
-	padding: 7px;
-	margin: 1.5%;
-	text-align: center;
-}*/
+
