@@ -24,7 +24,7 @@ var x = function updateTimer() {
 
 		// document.getElementById("timer_display").innerHTML = "00:00";
 
-		time = 20000;
+		time = 20000; //must do this so the timer can reset to 20 seconds.  see https://stackoverflow.com/questions/45808844/adding-start-stop-reset-button-for-timer
 
 		// document.getElementById("timer_control").addEventListener("click", start);
 		document.getElementById("timer_control").style.cursor= "pointer";
