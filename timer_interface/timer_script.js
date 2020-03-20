@@ -45,6 +45,7 @@ var start = function startTimer() {
 document.getElementById("timer_control").addEventListener("click", start);
 
 
+console.log('timer script running ' + time);
 
 
 
