@@ -79,10 +79,13 @@ function openMeditationTab() {
 //auxiliary function: check if it is time to open the meditation tab
 function checkTime() {
 	curr_time = new Date();
-	// console.log("current time is is " + curr_time);
+	console.log("current time is is " + curr_time);
+	
+	//to test if exec work, set a specific curr_time and see if a new tab open:
+	//curr_time = new Date('December 17, 1995 22:06:00');
 
 	
-	if (curr_time.getMinutes() == 0  && curr_time.getSeconds() == 0 && curr_time.getHours() >= work_start_time_hr && curr_time.getHours() <= work_end_time_hr) {
+	if (curr_time.getMinutes() == 13  && curr_time.getSeconds() == 0 && curr_time.getHours() >= work_start_time_hr && curr_time.getHours() <= work_end_time_hr) {
 		 openMeditationTab();
 		 console.log("time to meditate");
 	}
