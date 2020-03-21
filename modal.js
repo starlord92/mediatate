@@ -17,19 +17,33 @@ chrome.runtime.onInstalled.addListener(function() {
     }]);
   	});
 
-  	//what setInterval here does: check every second to see if the current local time is (a) in between work start time and work end time interval and (b) if it is exactly x'clock.  if so, open a new meditation tab
-	// startMeditation(setInterval(checkTime, 1000));
-	setDefaultTimeSetting(startMeditation(setInterval(checkTime, 1000)));
-
+  	exec();
 });
+
+//we will use an I/O button for the app and add a listener to it so that exec() is called when needed
+
+var work_start_time_hr, work_start_time_min, work_start_time_sec;
+var work_end_time_hr, work_end_time_min, work_end_time_sec;
+
+
+//what setInterval here does: check every second to see if the current local time is (a) in between work start time and work end time interval and (b) if it is exactly x'clock.  if so, open a new meditation tab.
+//Order of execution: set default settings, startMeditation
+
+function exec() {
+ 	setDefaultTimeSetting(0, function() {
+ 		startMeditation(0, function() {
+			setInterval(checkTime, 1000);
+		});
+	});
+};
 
 
 //create default input for settings
 //how to format html input of type time: https://www.w3schools.com/jsref/prop_input_time_value.asp
-function setDefaultTimeSetting(callback) {
+function setDefaultTimeSetting(val, callback) {
 	chrome.storage.sync.set({stored_work_start_time: '7:00:00'}, function() {	
 	});;
-	chrome.storage.sync.set({stored_work_end_time: '10:00:00'}, function() {
+	chrome.storage.sync.set({stored_work_end_time: '23:00:00'}, function() {
 	});;
 	chrome.storage.sync.set({stored_medi_duration: '5'}, function() {
 	});;
@@ -41,10 +55,8 @@ function setDefaultTimeSetting(callback) {
 
 
 
-var work_start_time_hr, work_start_time_min, work_start_time_sec;
-var work_end_time_hr, work_end_time_min, work_end_time_sec;
 
-function startMeditation(callback) {
+function startMeditation(val, callback) {
 	//outer function: exchange messages with settings.js to check for updated user input of work_start_time, work_end_time, meditation duration.  
 	//Actually let's first try to read for update from chrome.storage.sync and convert them to integer:
 	parseTimeToInt();
@@ -58,17 +70,24 @@ function startMeditation(callback) {
 
 
 //auxiliary function: open a new tab nudging user to meditate
+//activetabs/current tabs only
 function openMeditationTab() {
-	chrome.tabs.create({'url':'timer_interface/timer.html'}, );
+	chrome.tabs.create({'url':'timer_interface/home.html'}, );
 }
 
 
 //auxiliary function: check if it is time to open the meditation tab
 function checkTime() {
 	curr_time = new Date();
+	// console.log("current time is is " + curr_time);
 
+	
 	if (curr_time.getMinutes() == 0  && curr_time.getSeconds() == 0 && curr_time.getHours() >= work_start_time_hr && curr_time.getHours() <= work_end_time_hr) {
 		 openMeditationTab();
+		 console.log("time to meditate");
+	}
+	else {
+		console.log("not time to meditate");
 	}
 }
 
