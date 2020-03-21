@@ -29,11 +29,5 @@ user_setting_submit.onclick = function(element) {
 	chrome.storage.sync.set({stored_medi_duration: medi_duration}, function() {
 		console.log('the duration of each mediation period is ' + medi_duration);
 	});;
-
-	//proof that user input is sucessful stored in chrome.storage.sync
-	chrome.storage.sync.get('stored_work_end_time', function(data) {
-   		console.log(" stored work end time is " + data.stored_work_end_time);
-  });
-
   
 };
