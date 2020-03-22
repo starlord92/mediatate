@@ -9,6 +9,7 @@ chrome.runtime.onInstalled.addListener(function() {
 	console.log("Installed");
 
 	// brings manifest's page_action default popup file into play
+	//so when user click on the icon, time settings appears
   	chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -39,7 +40,7 @@ function exec() {
 //create default input for settings
 //how to format html input of type time: https://www.w3schools.com/jsref/prop_input_time_value.asp
 function setDefaultTimeSetting(val, callback) {
-	chrome.storage.sync.set({stored_work_start_time: '7:00:00'}, function() {	
+	chrome.storage.sync.set({stored_work_start_time: '6:00:00'}, function() {	
 	});;
 	chrome.storage.sync.set({stored_work_end_time: '23:00:00'}, function() {
 	});;
@@ -59,28 +60,35 @@ function checkTime() {
 	updateTimeSetting();
 
 	curr_time = new Date();
-	console.log("current time is " + curr_time);
+	//console.log("current time is " + curr_time);
 	
 	//to test if exec work, set a specific curr_time and see if a new tab open:
 	//curr_time = new Date('December 17, 1995 22:00:00');
 
 	
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() <= work_end_time_hr) {
-		 	console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 0) {
+		 	// console.log('the current time is between work_end_time and work_start_time');
+			if(curr_time.getMinutes() == 0 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		console.log("open meditation tab");
 			}
 	}
-	if (curr_time.getHours() < work_start_time_hr || curr_time.getHours() > work_end_time_hr) {
-		console.log("the current time is NOT between work_end_time and work_start_time");
-	}
+	// if (curr_time.getHours() < work_start_time_hr || curr_time.getHours() > work_end_time_hr) {
+	// 	console.log("the current time is NOT between work_end_time and work_start_time");
+	// }
 }
 
 //auxiliary function: open a new tab nudging user to meditate
 //activetabs/current tabs only
+
 function openMeditationTab() {
-	chrome.tabs.create({'url':'timer_interface/home.html'}, );
+	//chrome.tabs.create defaults to the current window, which is different from the one in focus: https://developer.chrome.com/extensions/windows#current-window
+	//chrome.tabs.create({'url':'timer_interface/home.html'}, );
+
+	//e have to create and then update the state for fullscreen.  creating alone doesn't work. poor design on chrome's part
+	chrome.windows.create({'url':'timer_interface/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
+		function(w) {chrome.windows.update(w.id,{'state':'fullscreen'});}
+		);
 }
 
 
@@ -91,26 +99,26 @@ function openMeditationTab() {
 
 		chrome.storage.sync.get('stored_work_start_time', function(data) 
 		{
-		console.log(" updated work start time is " + data.stored_work_start_time);
+		// console.log(" updated work start time is " + data.stored_work_start_time);
 		var arr = data.stored_work_start_time.split(':');
 		work_start_time_hr = parseInt(arr[0], 10); 
 		work_start_time_min = parseInt(arr[1], 10);
 		work_start_time_sec = parseInt(arr[2], 10);
-		console.log(" updated work start hour is " + work_start_time_hr);
-		console.log(" updated work start min is " + work_start_time_min);
-		console.log(" updated work start sec is " + work_start_time_sec);
+		// console.log(" updated work start hour is " + work_start_time_hr);
+		// console.log(" updated work start min is " + work_start_time_min);
+		// console.log(" updated work start sec is " + work_start_time_sec);
 		});
 
 		chrome.storage.sync.get('stored_work_end_time', function(data) 
 		{
-		console.log(" updated work end time is " + data.stored_work_end_time);
+		// console.log(" updated work end time is " + data.stored_work_end_time);
 		var arr = data.stored_work_end_time.split(':');
 		work_end_time_hr = parseInt(arr[0], 10); 
 		work_end_time_min = parseInt(arr[1], 10);
 		work_end_time_sec = parseInt(arr[2], 10);
-		console.log(" updated work end hour is " + work_end_time_hr);
-		console.log(" updated work end min is " + work_end_time_min);
-		console.log(" updated work end sec is " + work_end_time_sec);
+		// console.log(" updated work end hour is " + work_end_time_hr);
+		// console.log(" updated work end min is " + work_end_time_min);
+		// console.log(" updated work end sec is " + work_end_time_sec);
 		});
 
 		if (callback) {

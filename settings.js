@@ -2,7 +2,7 @@
 console.log('settings.js running');
 
 
-//take user input and store it using sotrage.sync (When using storage.sync, the stored data will automatically be synced to any Chrome browser that the user is logged into, provided the user has sync enabled.) 
+//take user input and store it using chrome.storage.sync (When using storage.sync, the stored data will automatically be synced to any Chrome browser that the user is logged into, provided the user has sync enabled.) 
 
 
 //upon submission, save the input to chrome.storage.sync
