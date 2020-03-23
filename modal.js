@@ -5,6 +5,8 @@
 
 //we will use an I/O button for the app and add a listener to it so that exec() is called when needed
 
+
+
 chrome.runtime.onInstalled.addListener(function() {
 	console.log("Installed");
 
@@ -20,6 +22,8 @@ chrome.runtime.onInstalled.addListener(function() {
   	});
 
   	exec();
+
+ 
 });
 
 

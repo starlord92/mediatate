@@ -26,7 +26,7 @@ html, body {
 	
 }
 
-#timer_control, #timer_display  {
+#timer_control  {
 	border-radius: 10px;
 	padding: 4px; /*percentage value cause padding-right to not work and i don't know why*/
 
@@ -35,10 +35,6 @@ html, body {
 	margin: 2%;
 	text-align: center;
 	cursor: pointer;
-}
-
-#timer_display {
-	background-color: green;
 }
 
 

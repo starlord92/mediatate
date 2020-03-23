@@ -4,15 +4,15 @@
 	"version": "0.1",
 	"manifest_version": 2,
 	"description": "5 minute meditation",
-	"permissions": ["declarativeContent","storage", "activeTab", "tabs"],
+	"permissions": ["declarativeContent","storage", "activeTab", "tabs", "webRequest", "*://www.facebook.com/*"],
 
 	"chrome_url_overrides": {                
 		"newtab": "timer_interface/home.html"
 	},
 
 	"background": {
-		"scripts": ["modal.js"],
-		"persistent": false
+		"scripts": ["modal.js", "intercept/distractingsites_background.js"],
+		"persistent": true
 	},
 
 	"page_action": {					
