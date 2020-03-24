@@ -64,7 +64,7 @@ function checkTime() {
 	updateTimeSetting();
 
 	curr_time = new Date();
-	//console.log("current time is " + curr_time);
+	console.log("current time is " + curr_time);
 	
 	//to test if exec work, set a specific curr_time and see if a new tab open:
 	//curr_time = new Date('December 17, 1995 22:00:00');
