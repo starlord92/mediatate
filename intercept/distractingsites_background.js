@@ -24,9 +24,9 @@ chrome.webRequest.onBeforeRequest.addListener(
 				console.log ("receive the message to " + message.action);
 				chrome.webRequest.onBeforeRequest.removeListener(callback);
 				chrome.tabs.update({'url': 'https://www.fb.com/','active':true}); 
-				// setTimeout(function() {
-				// 	chrome.webRequest.onBeforeRequest.addListener(callback, filter, opt_extraInfoSpec);	
-				// }, 10000);
+				setTimeout(function() {
+					chrome.webRequest.onBeforeRequest.addListener(callback, filter, opt_extraInfoSpec);	
+				}, 10000);
 					
 			}
 				
