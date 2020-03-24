@@ -4,7 +4,7 @@
 	"version": "0.1",
 	"manifest_version": 2,
 	"description": "5 minute meditation",
-	"permissions": ["declarativeContent","storage", "activeTab", "tabs", "webRequest", "*://www.facebook.com/*"],
+	"permissions": ["declarativeContent","storage", "activeTab", "tabs", "webRequest", "webRequestBlocking", "*://www.facebook.com/*"],
 
 	"chrome_url_overrides": {                
 		"newtab": "timer_interface/home.html"

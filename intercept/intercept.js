@@ -1,8 +1,7 @@
 
-console.log('timer script running ' + time);
 
 
-var time = 300000;
+var time = 60000;
 
 var interval;
 
@@ -27,7 +26,7 @@ var x = function updateTimer() {
 
 		// document.getElementById("timer_display").innerHTML = "00:00";
 
-		time = 300000; //must do this so the timer can reset to 20 seconds.  see https://stackoverflow.com/questions/45808844/adding-start-stop-reset-button-for-timer
+		time = 60000; //must do this so the timer can reset to 20 seconds.  see https://stackoverflow.com/questions/45808844/adding-start-stop-reset-button-for-timer
 
 		// document.getElementById("timer_control").addEventListener("click", start);
 		document.getElementById("timer_control").style.cursor= "pointer";
@@ -49,13 +48,20 @@ document.getElementById("timer_control").addEventListener("click", start);
 
 
 
-// 
-document.getElementById("bypass_nudge").addEventListener("click", start);
+var override = function tellBackgroundtoOverride() {
+	chrome.runtime.sendMessage({action: "continue to distracting site"});
+	console.log("send message to distractingsites_background event listener to continue to distracting site");
+}
+
+
+//
+document.getElementById("override_nudge").addEventListener("click", override);
 
 
 
 
 
+console.log('timer script running ' + time);
 
 
 

@@ -8,7 +8,7 @@
 
 
 chrome.runtime.onInstalled.addListener(function() {
-	console.log("Installed");
+	console.log("modal.js: extension is installed");
 
 	// brings manifest's page_action default popup file into play
 	//so when user click on the icon, time settings appears
@@ -72,7 +72,7 @@ function checkTime() {
 	
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() <= work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 0 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() ==1 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		console.log("open meditation tab");
 			}
