@@ -6,7 +6,6 @@
 //we will use an I/O button for the app and add a listener to it so that exec() is called when needed
 
 
-
 chrome.runtime.onInstalled.addListener(function() {
 	console.log("modal.js: extension is installed");
 
@@ -22,7 +21,6 @@ chrome.runtime.onInstalled.addListener(function() {
   	});
 
   	exec();
-
  
 });
 
@@ -64,7 +62,7 @@ function checkTime() {
 	updateTimeSetting();
 
 	curr_time = new Date();
-	console.log("current time is " + curr_time);
+	//console.log("current time is " + curr_time);
 	
 	//to test if exec work, set a specific curr_time and see if a new tab open:
 	//curr_time = new Date('December 17, 1995 22:00:00');
@@ -72,7 +70,7 @@ function checkTime() {
 	
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() <= work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() ==1 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() ==0 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		console.log("open meditation tab");
 			}
@@ -129,6 +127,9 @@ function openMeditationTab() {
 			callback();
 		}
 	};
+
+
+
 
 
 
