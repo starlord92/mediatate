@@ -18,14 +18,27 @@
 
 	"content_scripts": [{
       "matches": [
-        "https://*.bbc.com/*"
+        "https://*.google.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
         "modal_script.js" 
       ],
       "css": ["modal.css"],
       "run_at": "document_start"
-    }],
+    },
+
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "js": [ "jquery-3.4.1.js",
+        "modal_script.js" 
+      ],
+      "css": ["modal.css"],
+      "run_at": "document_start"
+    }
+
+	],
 
 	"web_accessible_resources": ["jquery-3.4.1.js","modal.html"],
 
@@ -60,5 +73,5 @@
 }
 
 
-
+//injecting html to a site:https://stackoverflow.com/questions/15873904/adding-complex-html-using-a-chrome-content-script 
 //places to include jquery file: https://stackoverflow.com/questions/22595339/using-jquery-in-a-content-script
