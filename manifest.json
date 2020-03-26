@@ -16,9 +16,10 @@
 		"persistent": false
 	},
 
-	"content_scripts": [{
+	"content_scripts": [
+	{
       "matches": [
-        "https://*.google.com/*"
+        "https://*.nytimes.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
         "modal_script.js" 
@@ -30,6 +31,17 @@
     {
       "matches": [
         "https://*.facebook.com/*"
+      ],
+      "js": [ "jquery-3.4.1.js",
+        "modal_script.js" 
+      ],
+      "css": ["modal.css"],
+      "run_at": "document_start"
+    },
+
+    {
+      "matches": [
+        "https://*.pashi.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
         "modal_script.js" 
