@@ -30,7 +30,7 @@
 
     {
       "matches": [
-        "https://*.facebook.com/*"
+        "https://*.reddit.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
         "modal_script.js" 
@@ -41,7 +41,8 @@
 
     {
       "matches": [
-        "https://*.pashi.com/*"
+        "https://*.facebook.com/*"
+
       ],
       "js": [ "jquery-3.4.1.js",
         "modal_script.js" 

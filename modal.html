@@ -3,196 +3,63 @@
 <head>
 	<title>nudge modal</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-	<!-- <script src="modal_script"></script> -->
-
-
-	<style>
-		body {font-family: Arial, Helvetica, sans-serif;}
-
-		/* The Modal (background) */
-		.modal {
-		  display: block; 
-		  position: fixed; /* Stay in place */
-		  z-index: 100000000000; /* Sit on top */
-		  padding-top: 100px; /* Location of the box */
-		  
-		  right:0;
-		  bottom:0;
-		  width: 100%; /* Full width */
-		  height: 100%; /* Full height */
-		  /*overflow: auto;*/ /* Enable scroll if needed */
-		  
-		  background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-		  /*background-color: #f6f8f9;*/
-		  background-color: rgba(130,136,143,0.8);
-		}
-
-		/* Modal Content */
-		.modal-content {
-		  	display: block;
-		  	border-radius: 6px;
-		  	background-color: #fefefe;
-		  	margin: auto;	  	
-			position: fixed;
-		 	right:8%;
-		 	bottom:10%;
-		 	left:8%;
-		 	top:10%;
-		 	/*border: 1px solid #888;*/	
-		}
-
-		#timer {
-			display: grid;
-			align-items: center; 
-			justify-content: center;
-			height: 100%;
-			width: 100%;	
-		}
-
-
-#timer_control,   {
-	border-radius: 10px;
-	padding: 4px; /*percentage value cause padding-right to not work and i don't know why*/
-
-	background-color: #2997ff;
-	color: white;
-	margin: 2%;
-	text-align: center;
-	cursor: pointer;
-}
-
-
-		/* The Close Button */
-		.close {
-		  color: #aaaaaa;
-		  float: right;
-		  font-size: 28px;
-		  font-weight: bold;
-		}
-
-		.close:hover,
-		.close:focus {
-		  color: #000;
-		  text-decoration: none;
-		  cursor: pointer;
-		}
-	</style>
-
-
+	<link rel="stylesheet" href="modal.css">
 </head>
 <body>
 
-	<!-- The Modal -->
-	<div id="myModal" class="modal">
+	<div class="modal" id="myModal">
 
-	  <!-- Modal content -->
-	  <div class="modal-content">
-	    <!-- <span class="close">&times;</span> -->
-	    <div id='timer'>
-	    	<div id="timer_control">
-			start meditation
-			<!-- <div id="timer_display"></div> -->
-			</div>
+		<div class="modal-content">  
+			<!--  <span class="close">&times;</span> -->
 
-	<audio id="zenbellsound">
-		<source src="timer_interface/sound_effects/bell.mp3" typ="audio/mp3">
-	    Your browser does not support the
-	    <code>audio</code> element.
-	</audio>
+		    <div id="timer">
 
-	
-	<script>
+		    	<div id="timer_control">
 
+		    		<div>
+		    			before you continue to this distracting site, let's first take a deep breath
+		    		</div>
+					 
+					<audio id="zenbellsound">
+					<source src="timer_interface/sound_effects/bell.mp3" typ="audio/mp3">
+				    Your browser does not support the
+				    <code>audio</code> element.
+					</audio> 					
+			 	</div>
 
-var time = 30000;
+			 	<div class="close">
+					continue to the distracting site
+					</div>
 
-var interval;
+		 		
 
-function generateTime(timer_length) {
-	time = time - 1000;     
-	var minutes = Math.floor((time % (1000 * 60 * 60))/(1000 * 60)); 
-	var seconds = Math.floor((time % (1000 * 60)) / 1000);
-	document.getElementById("timer_control").innerHTML = "0" + minutes + ":" + seconds ;
-}
+		 	</div>
 
-//update the count down every 1 second
-var x = function updateTimer() {     
-	
-	generateTime(time);
-
-	if (time < 0) {         
-		clearInterval(interval);
-		var bell_sound = document.getElementById("zenbellsound");
-		bell_sound.play();
-
-		document.getElementById("timer_control").innerHTML = "meditate again";
-
-		// document.getElementById("timer_display").innerHTML = "00:00";
-
-		console.log("click to start meditation is registered")
-
-		time = 30000; //must do this so the timer can reset to 20 seconds.  see https://stackoverflow.com/questions/45808844/adding-start-stop-reset-button-for-timer
-
-		// document.getElementById("timer_control").addEventListener("click", start);
-		document.getElementById("timer_control").style.cursor= "pointer";
-
-		
-	}
-}
-
-
-var start = function startTimer() {
-	var bell_sound = document.getElementById("zenbellsound");
-	bell_sound.play();
-	document.getElementById("timer_control").removeEventListener("click", start);
-	document.getElementById("timer_control").style.cursor= "initial";
-	interval = setInterval(x, 1000);
-}
-
-
-window.onload = function() {
- 
-    document.getElementById("timer_control").addEventListener("click", start);
-
-
-console.log('timer script running ' + time);
- 
-};
-
-
-
-
-
-
-
-
-
-	</script>
-
-
-	    </div>
-	    
-	  </div>
+		</div>
 
 	</div>
 
+	
 	<script>
-	// Get the modal
+
+
+
+
+
+		// Get the modal
 	var modal = document.getElementById("myModal");
 
 	// Get the button that opens the modal
 	var btn = document.getElementById("myBtn");
 
 	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
+	var close_btn = document.getElementsByClassName("close")[0];
 
 
 	// // When the user clicks on <span> (x), close the modal
-	// span.onclick = function() {
-	//  modal.style.display = "none";
-	//  window.location = "https://www.google.com";
-	// }
+	close_btn.onclick = function() {
+	 modal.style.display = "none";
+	}
 
 	//When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
@@ -206,3 +73,9 @@ console.log('timer script running ' + time);
 
 </body>
 </html>
+
+
+
+
+
+

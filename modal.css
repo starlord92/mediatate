@@ -1,2 +1,84 @@
 /*make sure something is in front of all other elements using z-index: 
 https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-chrome-extension*/
+
+html, body {
+	display: grid;
+	font: bold 1.4em, sans-serif  !important;
+
+	/* Horizontally center EACH element in a grid with regard to its inline axis*/
+	justify-content: center;
+	
+
+	/* Vertically center EACH element in a grid with regard to its cell/track, mor more accurately grid area*/
+	/*align-items: center;*/ 
+	
+	height: 100%;
+	width: 100%;
+	/*background-color: #e9ebee;*/	/*fb desktop background*/
+}
+
+
+
+.modal {
+  display: block; 
+  position: fixed; 
+  z-index: 100000000000; 
+  right:0;
+  bottom:0;
+  width: 100%; 
+  height: 100%; 
+  
+  background-color: rgba(0,0,0,0.8); 
+  background-color: rgba(130,136,143,0.8);
+}
+
+
+.modal-content {
+  	display: block;
+  	border-radius: 6px;
+  	background-color: #fefefe;
+  	margin: auto;	  	
+	position: fixed;
+ 	right:10%;
+ 	bottom:20%;
+ 	left:10%;
+ 	top:20%;
+ 	
+}
+
+
+#timer {
+	display: grid;
+	align-items: center; 
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	
+	
+}
+
+#timer_control {
+	border-radius: 10px;
+	padding: 4px; 
+	background-color: #2997ff;
+	color: white;
+	margin: 2%;
+	text-align: center;
+	cursor: pointer;
+}
+
+
+	
+	.close {
+	  color: #aaaaaa;
+	  font-size: 1em;
+	  font-weight: bold;
+
+	}
+
+	.close:hover,
+	.close:focus {
+	  color: #000;
+	  text-decoration: none;
+	  cursor: pointer;
+	}
