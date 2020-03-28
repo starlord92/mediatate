@@ -18,8 +18,8 @@ html, body {
 }
 
 
-/*.modal take the width and height of 'iframe1.css'*/
-.modal {
+
+/*.modal {
   display: block; 
   position: fixed; 
   z-index: 100000000000; 
@@ -30,7 +30,7 @@ html, body {
   
   background-color: rgba(0,0,0,0.8); 
   background-color: rgba(130,136,143,0.8);
-}
+}*/
 
 
 .modal-content {
@@ -69,15 +69,15 @@ html, body {
 
 
 	
-	#close5019550752 {
+	.close {
 	  color: #aaaaaa;
 	  font-size: 1em;
 	  font-weight: bold;
 
 	}
 
-	#close5019550752:hover,
-	#close5019550752:focus {
+	.close:hover,
+	.close:focus {
 	  color: #000;
 	  text-decoration: none;
 	  cursor: pointer;
