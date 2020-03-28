@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 
 // Get the modal
-	var modal = document.getElementById("myModal");
+	var modal = document.getElementById("myModal472826662848262673");
 	// Get the <span> element that closes the modal
 	// var span = document.getElementsByClassName("close")[0];
 
@@ -22,7 +22,7 @@ function generateTime(timer_length) {
 	time = time - 1000;     
 	var minutes = Math.floor((time % (1000 * 60 * 60))/(1000 * 60)); 
 	var seconds = Math.floor((time % (1000 * 60)) / 1000);
-	document.getElementById("timer_control").innerHTML = "0" + minutes + ":" + seconds ;
+	document.getElementById("timer_control535676465768").innerHTML = "0" + minutes + ":" + seconds ;
 }
 
 //update the count down every 1 second
@@ -36,7 +36,7 @@ var x = function updateTimer() {
 		// bell_sound.play();
 
 		//bring user back to their work website
-		var quit_site_button = document.getElementById("timer_control")
+		var quit_site_button = document.getElementById("timer_control535676465768")
 		quit_site_button.innerHTML = "return to work";
 		quit_site_button.style.cursor= "pointer";
 		quit_site_button.addEventListener("click", function() {
@@ -64,7 +64,7 @@ var x = function updateTimer() {
 
 
 function startTimer() {
-	var bell_sound = document.getElementById("zenbellsound");
+	//var bell_sound = document.getElementById("zenbellsound");
 	// bell_sound.play();
 	// document.getElementById("timer_control").style.cursor= "initial";
 	interval = setInterval(x, 1000);
