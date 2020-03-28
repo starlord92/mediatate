@@ -19,7 +19,7 @@ html, body {
 
 
 
-/*.modal {
+.modal {
   display: block; 
   position: fixed; 
   z-index: 100000000000; 
@@ -30,7 +30,7 @@ html, body {
   
   background-color: rgba(0,0,0,0.8); 
   background-color: rgba(130,136,143,0.8);
-}*/
+}
 
 
 .modal-content {
