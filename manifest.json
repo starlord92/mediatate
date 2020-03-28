@@ -22,9 +22,9 @@
         "https://*.nytimes.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
-        "modal_script.js" 
+        "inject_modal.js" 
       ],
-      "css": ["modal.css"],
+      "css": ["iframe_modal.css"],
       "run_at": "document_start"
     },
 
@@ -33,9 +33,9 @@
         "https://*.reddit.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
-        "modal_script.js" 
+        "inject_modal.js" 
       ],
-      "css": ["modal.css"],
+      "css": ["iframe_modal.css"],
       "run_at": "document_start"
     },
 
@@ -45,27 +45,27 @@
 
       ],
       "js": [ "jquery-3.4.1.js",
-        "modal_script.js" 
+        "inject_modal.js" 
       ],
-      "css": ["iframe1.css"],
+      "css": ["iframe_modal.css"],
       "run_at": "document_start"
     },
 
-        {
+     {
       "matches": [
         "https://*.twitter.com/*"
 
       ],
       "js": [ "jquery-3.4.1.js",
-        "modal_script.js" 
+        "inject_modal.js" 
       ],
-      "css": ["modal.css"],
+      "css": ["iframe_modal.css"],
       "run_at": "document_start"
     }
 
 	],
 
-	"web_accessible_resources": ["jquery-3.4.1.js","modal_script.js","modal.html", "iframe.html", "modal.css"],
+	"web_accessible_resources": ["jquery-3.4.1.js","modal.html", "iframe.html", "modal.css", "inject_modal.js"],
 
 
 	"page_action": {					
