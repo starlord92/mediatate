@@ -3,8 +3,8 @@ https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-ch
 
 html, body {
 	/*display: grid;*/
-	/*font: bold 1.4em, sans-serif  !important;
-*/
+	/*font: bold 1.4em, sans-serif  !important;*/
+
 	/* Horizontally center EACH element in a grid with regard to its inline axis*/
 	/*justify-content: center;*/
 	
@@ -15,7 +15,9 @@ html, body {
 	/*height: 100%;
 	width: 100%;*/
 	/*background-color: #e9ebee;*/	/*fb desktop background*/
+	
 }
+
 
 
 
@@ -37,13 +39,20 @@ html, body {
 #modal-content66345654628423 {
   	display: block;
   	border-radius: 6px;
-  	background-color: #fefefe;
+  	/*background-color: #fefefe;*/
   	margin: auto;	  	
 	position: fixed;
  	right:10%;
  	bottom:20%;
  	left:10%;
  	top:20%;
+
+ 	background: url('https://cdn.statically.io/gh/starlord92/git-visual/d2984666/morning.jpg') no-repeat center center fixed;
+	background-size: cover;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
  	
 }
 
@@ -70,15 +79,15 @@ html, body {
 
 
 	
-	.close174162884722728293 {
+	#close174162884722728293 {
 	  color: #aaaaaa;
 	  font-size: 1em;
 	  font-weight: bold;
 
 	}
 
-	.close174162884722728293:hover,
-	.close174162884722728293:focus {
+	#close174162884722728293:hover,
+	#close174162884722728293:focus {
 	  color: #000;
 	  text-decoration: none;
 	  cursor: pointer;

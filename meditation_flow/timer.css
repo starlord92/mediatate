@@ -1,9 +1,18 @@
+html {
+	background: url('morning.jpg') no-repeat center center fixed;
+	background-size: cover;
+	  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 html, body {
-	display: grid;
-	font: bold 1.5em "Trebuchet MS", sans-serif;
+	/*display: grid;*/
+	font: bold 1em "Trebuchet MS", sans-serif;
 
 	/* Horizontally center EACH element in a grid with regard to its inline axis*/
-	justify-content: center;
+	/*justify-content: center;*/
 	
 
 	/* Vertically center EACH element in a grid with regard to its cell/track, mor more accurately grid area*/
@@ -12,11 +21,19 @@ html, body {
 	height: 100%;
 	width: 100%;
 	/*background-color: #e9ebee;*/	/*fb desktop background*/
+
+
+
 }
 
 
 
-#timer {
+#ensoicon {
+	
+}
+
+
+/*#timer {
 	display: grid;
 	align-items: center; 
 	justify-content: center;
@@ -24,18 +41,18 @@ html, body {
 	width: 100%;
 	
 	
-}
-
+}*/
+/*
 #timer_control, #proceed  {
 	border-radius: 10px;
-	padding: 4px; /*percentage value cause padding-right to not work and i don't know why*/
+	padding: 4px; *//*percentage value cause padding-right to not work and i don't know why*/
 
-	background-color: #2997ff;
+	/*background-color: #2997ff;
 	color: white;
 	margin: 2%;
 	text-align: center;
 	cursor: pointer;
-}
+}*/
 
 /*#timer_display, #override_nudge {
 	background-color: green;

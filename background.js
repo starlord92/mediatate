@@ -3,9 +3,6 @@
 
 //as extension is installed, allow user to edit settings (set by settings.js via the interafce settings.html) and save it: tbd
 
-//we will use an I/O button for the app and add a listener to it so that exec() is called when needed
-
-
 chrome.runtime.onInstalled.addListener(function() {
 	console.log("modal.js: extension is installed");
 
@@ -85,10 +82,10 @@ function checkTime() {
 
 function openMeditationTab() {
 	//chrome.tabs.create defaults to the current window, which is different from the one in focus: https://developer.chrome.com/extensions/windows#current-window
-	//chrome.tabs.create({'url':'timer_interface/home.html'}, );
+	//chrome.tabs.create({'url':'meditation_flow/home.html'}, );
 
 	//e have to create and then update the state for fullscreen.  creating alone doesn't work. poor design on chrome's part
-	chrome.windows.create({'url':'timer_interface/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
+	chrome.windows.create({'url':'meditation_flow/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
 		function(w) {chrome.windows.update(w.id,{'state':'fullscreen'});}
 		);
 }
