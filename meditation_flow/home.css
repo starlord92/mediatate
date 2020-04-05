@@ -1,0 +1,171 @@
+html {
+	background: url('morning.jpg') no-repeat center center fixed;
+	background-size: cover;
+
+  
+/*  background-color: #CBF4C3;*/
+}
+
+html, body {	
+	font: bold 1em "avenir", sans-serif;
+
+	/* Horizontally center EACH element in a grid with regard to its inline axis*/
+	/*justify-content: center;*/
+	
+
+	/* Vertically center EACH element in a grid with regard to its cell/track, mor more accurately grid area*/
+	/*align-items: center;*/
+	
+	height: 99%;
+	width: 99%;
+	/*background-color: #e9ebee;*/	/*fb desktop background*/
+}
+
+body{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: .2fr 1fr 1fr 1fr;
+
+}
+
+
+
+
+/*#user_profile_my_stats_9809403065 {
+	cursor: pointer;
+}
+
+#user_profile_settings_9809403065 {
+	cursor: pointer;
+}
+
+#user_profile_nudge_9809403065 {
+	cursor: pointer;
+}*/
+
+
+.meditation_control_9809403065 {
+	grid-row-start:2;
+	grid-column-start:4;
+	grid-column-end:7;
+}
+
+
+
+#user_profile_icon_9809403065 {
+	grid-row-start:1;
+	grid-column-start:9;
+
+	cursor: pointer;
+}
+
+.user_profile_section_hide_9809403065 {
+	display: none;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 0.87em; 
+}
+
+.user_profile_section_show_9809403065 {
+	display: grid;
+	grid-row-start:2;
+	grid-column-start:1;
+	grid-column-end:10;
+
+	border-radius: 5px;
+
+	/*background-color: #9ee6aa;*/
+
+	cursor: initial;
+
+	justify-content: center;
+
+
+}
+
+
+.user_profile_menu_hide_9809403065 {
+	display: none;
+}
+.user_profile_menu_show_9809403065 {
+	grid-row-start:1;
+	grid-column-start:2;
+	grid-column-end:8;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+#user_profile_my_stats_9809403065, #user_profile_settings_9809403065, #user_profile_nudge_9809403065 {
+	cursor: pointer;
+}
+
+
+
+/*#setting_options_9809403065 {
+	font: 0.87em "avenir", sans-serif;
+}*/
+
+
+/*input[type=submit] {
+	font: 0.87em "avenir", sans-serif;
+	cursor: pointer;
+}
+*/
+
+
+input{
+	font: 0.87em "avenir", sans-serif;
+}
+
+#settings_options_save_9809403065 {
+	cursor: pointer;
+	border-radius: 3px;
+	background-color: #6bcba4;
+	color: white;
+	padding: 3px;
+	display: block;
+	position: absolute;
+	right:48%;
+	font-weight: bold;
+
+	text-align: center
+	
+}
+
+/*.lower_background_9809403065 {
+	display: block;
+	grid-row-start:3;
+	grid-column-start:1;
+	grid-column-end:10;
+}*/
+
+
+/*#timer {
+	display: grid;
+	align-items: center; 
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	
+	
+}*/
+/*
+#timer_control, #proceed  {
+	border-radius: 10px;
+	padding: 4px; *//*percentage value cause padding-right to not work and i don't know why*/
+
+	/*background-color: #2997ff;
+	color: white;
+	margin: 2%;
+	text-align: center;
+	cursor: pointer;
+}*/
+
+/*#timer_display, #override_nudge {
+	background-color: green;
+}
+*/
+
+
+

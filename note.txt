@@ -1,3 +1,0 @@
-center align of elements in a CSS grid: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Box_Alignment_in_CSS_Grid_Layout 
-
-adding web fonts: https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Web_fonts

@@ -20,14 +20,14 @@ user_setting_submit.onclick = function(element) {
 	//store the input inside chrome.storage.sync 
 	chrome.storage.sync.set({stored_work_start_time: work_start_time}, function() {
 		console.log('work start time is ' + work_start_time);
-	});;
+	});
 
 	chrome.storage.sync.set({stored_work_end_time: work_end_time}, function() {
 		console.log('work end time is ' + work_end_time);
-	});;
+	});
 
 	chrome.storage.sync.set({stored_medi_duration: medi_duration}, function() {
 		console.log('the duration of each mediation period is ' + medi_duration);
-	});;
+	});
   
 };

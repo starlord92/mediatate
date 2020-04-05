@@ -62,7 +62,7 @@
 			"48": "images/ensoicon48.png",
 			"128": "images/ensoicon128.png"
       },
-      	"default_popup": "settings.html"
+      	"default_popup": "page_action.html"
     },
 
   //   "browser_action": {					
