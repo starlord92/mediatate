@@ -13,38 +13,45 @@ $(document).ready(function() {
 
 	//clicking 'settings' reveal previously saved setting options
 	$('#user_profile_settings_9809403065').on('click', function (event) {
-		$('#user_profile_display_box_9809403065').load("../settings_options.html", function() {
-		});
-		
-		// $.ajax({
-		//   method: "GET",
-		//   url: "../settings_options.js",
-		//   dataType: "script"
-		// });
-
-		//chrome.tabs.executeScript({file:'settings_options.js'});
-
-
-		// var duration;
-		// 	chrome.storage.sync.get(['stored_medi_duration'], function(data) {
-		// 	          console.log('stored_medi_duration is ' + data.stored_medi_duration);
-		// 	          duration = data.stored_medi_duration;
-		// 	});
-
-		// $('#medi_duration_9809403065').attr('value',duration);
-
-		// $.getScript("../settings_options.js", function(){
-		//     //alert("Running test.js");
-		// });
+		$('#nudge_options_9809403065').hide();
+		$('#my_stats_options_9809403065').css("dislay", "none");
+		$('#settings_options_9809403065').show();
+		console.log('HI HI HI HI');
 	});
+	// $('#user_profile_settings_9809403065').on('click', function (event) {
+	// 	$('#user_profile_display_box_9809403065').load("../settings_options.html", function() {
+	// 	});
+		
+	// 	// $.ajax({
+	// 	//   method: "GET",
+	// 	//   url: "../settings_options.js",
+	// 	//   dataType: "script"
+	// 	// });
+
+	// 	//chrome.tabs.executeScript({file:'settings_options.js'});
+
+
+	// 	// var duration;
+	// 	// 	chrome.storage.sync.get(['stored_medi_duration'], function(data) {
+	// 	// 	          console.log('stored_medi_duration is ' + data.stored_medi_duration);
+	// 	// 	          duration = data.stored_medi_duration;
+	// 	// 	});
+
+	// 	// $('#medi_duration_9809403065').attr('value',duration);
+
+	// 	// $.getScript("../settings_options.js", function(){
+	// 	//     //alert("Running test.js");
+	// 	// });
+	// });
 
 
 
 
 	//clicking 'nudge' reveal setting options
 	$('#user_profile_nudge_9809403065').on('click', function (event) {
-		$('#user_profile_display_box_9809403065').load("../nudge_options.html", function() {
-		});
+		$('#settings_options_9809403065').hide();
+		$('#nudge_options_9809403065').show();
+		$('#my_stats_options_9809403065').css("dislay", "none");
 	});
 
 
@@ -80,10 +87,6 @@ $(document).ready(function() {
 		chrome.storage.sync.set({stored_scheduled_meditation_checkbox: scheduled_meditation_checkbox }, 
 			function() {//console.log('scheduled meditation?  ' + scheduled_meditation_checkbox );
 		});
- 
-			
-
-
 
 		var work_start_time = $('#work_start_time_9809403065').val();
 		var work_end_time = $('#work_end_time_9809403065').val();
