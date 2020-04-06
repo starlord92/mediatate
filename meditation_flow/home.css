@@ -79,8 +79,14 @@ body{
 	cursor: initial;
 
 	justify-content: center;
+}
 
+#settings_options_9809403065 {
+	display: none;
+}
 
+#nudge_options_9809403065 {
+	display: none;
 }
 
 
@@ -131,6 +137,12 @@ input{
 
 	text-align: center
 	
+}
+
+
+#timer_control_9809403065 {
+	text-align: center;
+	cursor: pointer;
 }
 
 /*.lower_background_9809403065 {

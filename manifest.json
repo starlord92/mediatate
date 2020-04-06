@@ -5,7 +5,7 @@
 	"manifest_version": 2,
 	"description": "5 minute meditation",
 	"permissions": ["declarativeContent","storage", "activeTab", "tabs", "notifications", "*://www.facebook.com/*"],
-	//permission for all sites: "*://*/*"
+	//permission for sall sites: "*://*/*"
 
 	"chrome_url_overrides": {                
 		"newtab": "meditation_flow/home.html"
@@ -53,7 +53,7 @@
 
 	],
 
-	"web_accessible_resources": ["jquery-3.4.1.js","modal.html"],
+	"web_accessible_resources": ["jquery-3.4.1.js","modal.html", "settings_option.html", "settings_option.js"],
 
 
 	"page_action": {					
@@ -78,13 +78,30 @@
       "16": "images/ensoicon16.png",  				
       "48": "images/ensoicon48.png",
       "128": "images/ensoicon128.png"
-    }
+    },
+
+
+    "sandbox": {
+    "pages": [
+      "home.html",
+      "settings_options.html"
+    ]}
+   
+
+
+// "content_security_policy": "default-src 'unsafe-inline'; object-src 'self'"
+
+
+
+
+
 
 	
 
 
 }
 
+  // "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 
 //injecting html to a site:https://stackoverflow.com/questions/15873904/adding-complex-html-using-a-chrome-content-script 
 //places to include jquery file: https://stackoverflow.com/questions/22595339/using-jquery-in-a-content-script
