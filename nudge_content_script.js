@@ -53,18 +53,32 @@ function checkNudgeOnCriteria (val, callback) {
 		    var current_min = now.getMinutes();
 	    	
 
-		    //two scenarios: if time is set between 7 pm and 1 am the next morning (start time < end time) or between 1 am and 5 am (start time > end time):
-	    	if ( 1==1
-			// current_hour>= nudge_start_hour && current_hour < nudge_end_hour 
-			// ||
-			// current_hour<= nudge_start_hour && current_hour > nudge_end_hour 
-			) 
+		    //three scenarios: 
+		    //(a)time is set between 7 pm and 1 am the next morning (start time < end time) 
+		    //(b) between 1 am and 5 am (start time > end time)
+		    //(c) start time < end time
+	    	if (
+	    		(nudge_start_hour < nudge_end_hour && 
+	    		current_hour >= nudge_start_hour && 
+	    		current_hour < nudge_end_hour) 
 
-	    	{
+			    ||
 
-	    		displayNudge();
+			    (nudge_start_hour > nudge_end_hour 
+			    &&
+			    ((current_hour >= nudge_start_hour && current_hour >= nudge_end_hour) || (current_hour <= nudge_start_hour && current_hour < nudge_end_hour))
+			    )
 
-	    	} //end the if clause
+			    ||
+
+			    (nudge_start_hour == nudge_end_hour)
+			)
+
+	    		{
+
+					displayNudge();
+
+	    		} 
 
 	    }
 	});
