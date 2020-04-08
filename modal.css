@@ -79,15 +79,15 @@ html, body {
 
 
 	
-	#close174162884722728293 {
+	#close_button_174162884722728293 {
 	  color: #aaaaaa;
 	  font-size: 1em;
 	  font-weight: bold;
 
 	}
 
-	#close174162884722728293:hover,
-	#close174162884722728293:focus {
+	#close_button_174162884722728293:hover,
+	#close_button_174162884722728293:focus {
 	  color: #000;
 	  text-decoration: none;
 	  cursor: pointer;

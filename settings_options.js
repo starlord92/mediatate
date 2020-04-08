@@ -53,6 +53,26 @@ $(document).ready(function() {
 	});
 
 
+	var nudge_start_time;
+	chrome.storage.sync.get(['stored_nudge_start_time'], function(data) {
+	          // console.log('stored_nudge_start_time is ' + data.stored_work_start_time);
+	          nudge_start_time = data.stored_nudge_start_time;
+	          $('#nudge_start_time_9809403065').attr('value',nudge_start_time);
+
+	});
+
+
+	var nudge_end_time;
+	chrome.storage.sync.get(['stored_nudge_end_time'], function(data) {
+	          // console.log('stored_nudge_end_time is ' + data.stored_end_start_time);
+	          nudge_end_time = data.stored_nudge_end_time;
+	          $('#nudge_end_time_9809403065').attr('value',nudge_end_time);
+
+	});
+
+
+
+
 
 
 

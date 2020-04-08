@@ -74,11 +74,15 @@ body{
 
 	border-radius: 5px;
 
-	background-color: #9ee6aa;
+	/*background-color: #9ee6aa;*/
 
 	cursor: initial;
 
 	justify-content: center;
+}
+
+#my_stats_options_9809403065 {
+	display: none;
 }
 
 #settings_options_9809403065 {
@@ -124,7 +128,7 @@ input{
 	font: 0.87em "avenir", sans-serif;
 }
 
-#settings_options_save_9809403065 {
+#settings_options_save_9809403065, #nudge_options_save_9809403065 {
 	cursor: pointer;
 	border-radius: 3px;
 	background-color: #6bcba4;

@@ -12,7 +12,7 @@
 	},
 
 	"background": {
-		"scripts": ["background.js"],
+		"scripts": ["background.js", "nudge_background.js"],
 		"persistent": false
 	},
 
@@ -22,7 +22,7 @@
         "https://*.nytimes.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
-        "modal_script.js" 
+        "nudge_content_script.js" 
       ],
       "css": ["modal.css"],
       "run_at": "document_start"
@@ -33,7 +33,7 @@
         "https://*.reddit.com/*"
       ],
       "js": [ "jquery-3.4.1.js",
-        "modal_script.js" 
+        "nudge_content_script.js" 
       ],
       "css": ["modal.css"],
       "run_at": "document_start"
@@ -45,7 +45,7 @@
 
       ],
       "js": [ "jquery-3.4.1.js",
-        "modal_script.js" 
+        "nudge_content_script.js" 
       ],
       "css": ["modal.css"],
       "run_at": "document_start"
@@ -53,7 +53,8 @@
 
 	],
 
-	"web_accessible_resources": ["jquery-3.4.1.js","modal.html", "settings_option.html", "settings_option.js"],
+	"web_accessible_resources": ["jquery-3.4.1.js","modal.html", "settings_option.html", "settings_option.js", "nudge_content_script.js",
+    "user_profile_settings.js"],
 
 
 	"page_action": {					
@@ -86,18 +87,6 @@
       "home.html",
       "settings_options.html"
     ]}
-   
-
-
-// "content_security_policy": "default-src 'unsafe-inline'; object-src 'self'"
-
-
-
-
-
-
-	
-
 
 }
 

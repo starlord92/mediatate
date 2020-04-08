@@ -29,12 +29,15 @@ chrome.runtime.onInstalled.addListener(function() {
 			        //console.log('stored_installed_time_stamp is ' + data.stored_installed_time_stamp);
 			});
 	});
-
+  	//scheduled meditation is on at installation
   	exec();
- 
+
+ //  	chrome.runtime.sendMessage({message: "turn off: nudge for nudge_content_script.js"}, function(r) {});
+	// chrome.runtime.sendMessage({message: "turn on: nudge for nudge_content_script.js"}, function(r) {});
 });
 
 
+//scheduled meditation
 //Order of execution: 
 	//set default time settings
 	//via setIntervals(), check every second to see if the current local time is (a) in between work start time and work end time interval and (b) if it is exactly x'clock.  if so, open a new meditation tab.
@@ -62,10 +65,14 @@ chrome.runtime.onMessage.addListener(
     if (incoming.message == "turn on") {
     	exec();
     }
+    return Promise.resolve("Dummy response to keep the console quiet");
       
   }); 
     
-    
+
+
+
+
 
 //create default input for settings
 //how to format html input of type time: https://www.w3schools.com/jsref/prop_input_time_value.asp
@@ -84,6 +91,15 @@ function setDefaultTimeSetting(val, callback) {
 	});
 	chrome.storage.sync.set({stored_scheduled_meditation_checkbox: true}, function() {
 	});
+
+	//nudge 
+	chrome.storage.sync.set({stored_nudge_checkbox: true}, function() {
+	});
+	chrome.storage.sync.set({stored_nudge_start_time: '4:00:00'}, function() {
+	});
+	chrome.storage.sync.set({stored_nudge_end_time: '23:00:00'}, function() {
+	});
+
 	
 	if (callback) {
 		callback();
@@ -103,7 +119,7 @@ function checkTime() {
 	//to test if exec work, set a specific curr_time and see if a new tab open:
 	//curr_time = new Date('December 17, 1995 22:00:00');
 
-	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() <= work_end_time_hr) {
+	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
 			if(curr_time.getMinutes() ==0 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
@@ -128,9 +144,7 @@ function openMeditationTab() {
 }
 
 
-
-
-//listen  for updated setting convert string user input for work start and end time stored in chrome.storage.sync to hour, minute, second in integer
+// actively listen for updated setting convert string user input for work start and end time stored in chrome.storage.sync to hour, minute, second in integer.  udpate will be written to chrome.storage by user_profile_settings.js
 
 chrome.storage.onChanged.addListener(function () {
 
