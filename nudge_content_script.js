@@ -6,7 +6,135 @@
 
 var nudge_start_time;
 var nudge_end_time;
+//var imgURL = chrome.extension.getURL("meditation_flow/morning.jpg");
 
+function injectHTML(val, callback) {
+
+	// $(document).ready(function() {
+		$.get(chrome.extension.getURL('/nudge.html'), function(data) {
+	    $(data).appendTo('body');
+	    console.log("nudge.html injected");
+		});
+	// });
+
+	if (callback) {
+		callback();
+	}
+	
+
+};
+
+
+function displayNudge () {
+	$(document).ready(function() {
+
+		
+		//document.getElementById("modal-content66345654628423").src = imgURL;
+
+
+		var time = 1000;
+		var interval;
+
+		function generateTime(timer_length) {
+			time = time - 1000;     
+			// var minutes = Math.floor((time % (1000 * 60 * 60))/(1000 * 60)); 
+			// var seconds = Math.floor((time % (1000 * 60)) / 1000);
+			// document.getElementById("timer_control535676465768").innerHTML = "0" + minutes + ":" + seconds ;
+		}
+
+		//update the count down every 1 second
+		var x = function updateTimer() {     
+			
+			generateTime(time);
+
+			if (time < 0) {         
+				clearInterval(interval);
+				// var bell_sound = document.getElementById("zenbellsound");
+				// bell_sound.play();
+
+				//bring user back to their work website
+				var quit_site_button = document.getElementById("timer_control535676465768")
+				quit_site_button.innerHTML = "return to work";
+				quit_site_button.style.cursor= "pointer";
+				quit_site_button.addEventListener("click", function() {
+						window.location = "https://www.google.com";
+					}
+				);
+
+
+		
+
+			var modal = document.getElementById("myModal472826662848262673");
+			var close_button_174162884722728293 = document.getElementById("close_button_174162884722728293");
+
+			close_button_174162884722728293.addEventListener("click", function() {
+					modal.style.display = "none";
+				}
+			);
+
+			// $('#user_profile_icon_9809403065').on('click', function(event) {
+				
+			// 	$('#myModal472826662848262673').hide();
+			// });
+
+			//close the modal
+			// close_button_174162884722728293.onclick = function() {
+			//  modal.style.display = "none";
+			// };
+			//When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			  if (event.target == modal) {
+			    modal.style.display = "none";  
+			  }
+			};
+
+
+			}	
+		};
+		function startTimer() {
+			//var bell_sound = document.getElementById("zenbellsound");
+			// bell_sound.play();
+			// document.getElementById("timer_control").style.cursor= "initial";
+			interval = setInterval(x, 1000);
+		}
+		startTimer();
+
+		// 
+		// Get the close element that closes the modal
+
+		// function dummy () {
+
+		// 	var modal = document.getElementById("myModal472826662848262673");
+		// 	var close_button_174162884722728293 = document.getElementById("close_button_174162884722728293");
+
+		// 	close_button_174162884722728293.addEventListener("click", function() {
+		// 			modal.style.display = "none";
+		// 		}
+		// 	);
+
+		// 	$('#user_profile_icon_9809403065').on('click', function(event) {
+				
+		// 		$('#myModal472826662848262673').hide();
+		// 	});
+
+		// 	//close the modal
+		// 	close_button_174162884722728293.onclick = function() {
+		// 	 modal.style.display = "none";
+		// 	};
+		// 	//When the user clicks anywhere outside of the modal, close it
+		// 	window.onclick = function(event) {
+		// 	  if (event.target == modal) {
+		// 	    modal.style.display = "none";  
+		// 	  }
+		// 	};
+
+
+		// };
+
+
+
+		}); //ready
+};
 
  
 
@@ -75,11 +203,11 @@ function checkNudgeOnCriteria (val, callback) {
 			)
 
 	    		{
-
-					displayNudge();
-
+					injectHTML(0,function() {
+						displayNudge();
+					});
+					
 	    		} 
-
 	    }
 	});
 
@@ -87,76 +215,7 @@ function checkNudgeOnCriteria (val, callback) {
 
 
 
-function displayNudge () {
-	$(document).ready(function() {
 
-	$.get(chrome.extension.getURL('/modal.html'), function(data) {
-	    $(data).appendTo('body');
-	    console.log("modal.html injected");
-	});
-
-	var time = 3000;
-	var interval;
-
-	function generateTime(timer_length) {
-		time = time - 1000;     
-		var minutes = Math.floor((time % (1000 * 60 * 60))/(1000 * 60)); 
-		var seconds = Math.floor((time % (1000 * 60)) / 1000);
-		document.getElementById("timer_control535676465768").innerHTML = "0" + minutes + ":" + seconds ;
-	}
-
-	//update the count down every 1 second
-	var x = function updateTimer() {     
-		
-		generateTime(time);
-
-		if (time < 0) {         
-			clearInterval(interval);
-			// var bell_sound = document.getElementById("zenbellsound");
-			// bell_sound.play();
-
-			//bring user back to their work website
-			var quit_site_button = document.getElementById("timer_control535676465768")
-			quit_site_button.innerHTML = "return to work";
-			quit_site_button.style.cursor= "pointer";
-			quit_site_button.addEventListener("click", function() {
-					window.location = "https://www.google.com";
-				}
-			);
-		}	
-	};
-	function startTimer() {
-		//var bell_sound = document.getElementById("zenbellsound");
-		// bell_sound.play();
-		// document.getElementById("timer_control").style.cursor= "initial";
-		interval = setInterval(x, 1000);
-	}
-	startTimer();
-
-	// 
-	// Get the close element that closes the modal
-
-	// var modal = document.getElementById("myModal472826662848262673");
-	// var close_button_174162884722728293 = document.getElementById("close_button_174162884722728293");
-
-	// close_button_174162884722728293.addEventListener("click", function() {
-	// 		modal.style.display = "none";
-	// 	}
-	// );
-
-	// // close the modal
-	// close174162884722728293.onclick = function() {
-	//  modal.style.display = "none";
-	// };
-	// //When the user clicks anywhere outside of the modal, close it
-	// window.onclick = function(event) {
-	//   if (event.target == modal) {
-	//     modal.style.display = "none";  
-	//   }
-	// };
-
-	}); //ready
-};
 
 
 

@@ -95,9 +95,9 @@ function setDefaultTimeSetting(val, callback) {
 	//nudge 
 	chrome.storage.sync.set({stored_nudge_checkbox: true}, function() {
 	});
-	chrome.storage.sync.set({stored_nudge_start_time: '20:00:00'}, function() {
+	chrome.storage.sync.set({stored_nudge_start_time: '10:00:00'}, function() {
 	});
-	chrome.storage.sync.set({stored_nudge_end_time: '22:00:00'}, function() {
+	chrome.storage.sync.set({stored_nudge_end_time: '23:00:00'}, function() {
 	});
 
 	
@@ -193,3 +193,71 @@ chrome.storage.sync.get('stored_scheduled_meditation_checkbox', function(data) {
 });
 
 });
+
+
+chrome.webRequest.onBeforeRequest.addListener(
+	function(details) { 
+		
+chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+    // console.log(tabs[0].url);
+});
+
+	},
+	{urls: []},
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
