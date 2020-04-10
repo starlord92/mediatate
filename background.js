@@ -195,26 +195,91 @@ chrome.storage.sync.get('stored_scheduled_meditation_checkbox', function(data) {
 });
 
 
-chrome.webRequest.onBeforeRequest.addListener(
-	function(details) { 
+// chrome.webRequest.onBeforeRequest.addListener(
+// 	function(details) { 
 		
-chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-    // console.log(tabs[0].url);
-});
+// chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+//     // console.log(tabs[0].url);
+// });
 
-	},
-	{urls: []},
-);
-
-
+// 	},
+// 	{urls: []},
+// );
 
 
+//check that the webrequest is in the distracting site list: if tru
+// check that the current url of the tab making the request is not nudge redirect.  if tru, redirect user to nudge_redirect
+//
+
+
+// var current_url;
+
+// var nudge_redirect = "https://dev-do-not-share-bombay-legends.pashi.com/";
+// var distracting_site = "https://www.nytimes.com/";
 
 
 
+// function getCurrentURL(requested_url, callback) {
+// 	chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+// 	        current_url = tabs[0].url;        
+// 	    });
+// 	callback(requested_url);
+// };
+
+
+// var callback = function(request) {
+
+// 	getCurrentURL(request.url, function (request_url) {
+// 		if ( current_url.localeCompare(nudge_redirect) == 0 
+// 	      	&& request_url.localeCompare(distracting_site) == 0) {
+// 			console.log("current url: "+current_url+"  requests "+request.url);
+// 			return {cancel: false};
+//    		 }
+
+// 	    else {
+// 	    	return {redirectUrl: "https://www.reddit.com/"};
+// 	    } 
+// 	}
+
+// 	); 
+
+
+// };
+
+// var filters = {
+//     urls: []
+// };
+
+// var extraInfoSpec = ["blocking"];
+
+// chrome.webRequest.onBeforeRequest.addListener(callback, filters, extraInfoSpec);
 
 
 
+    //setTimeout(function(){ 
+
+   //  	if ( current_url.localeCompare(nudge_redirect) == 0 
+	  //     	&& request.url.localeCompare(distracting_site) == 0) {
+			// console.log("current url: "+current_url+"  requests "+request.url);
+			// return {cancel: false};
+   // 		 }
+
+	  //   else {
+	  //   	return {redirectUrl: "https://www.reddit.com/"};
+	  //   } 
+
+    //},1);
+
+
+// function tryMe (param1, param2) {
+//     alert(param1 + " and " + param2);
+// }
+
+// function callbackTester (callback) {
+//     callback (arguments[1], arguments[2]);
+// }
+
+// callbackTester (tryMe, "hello", "goodbye");
 
 
 
