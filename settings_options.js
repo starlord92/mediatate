@@ -1,3 +1,4 @@
+///display saved and updated settings
 $(document).ready(function() {
 
 
@@ -52,10 +53,18 @@ $(document).ready(function() {
 
 	});
 
+	var nudge_checkbox_value;
+	chrome.storage.sync.get(['stored_nudge_checkbox'], function(data) {
+	          console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox);
+	          nudge_checkbox_value = data.stored_nudge_checkbox;
+	          $('#nudge_checkbox_9809403065').attr('value',nudge_checkbox_value);
+
+	});
+
 
 	var nudge_start_time;
 	chrome.storage.sync.get(['stored_nudge_start_time'], function(data) {
-	          // console.log('stored_nudge_start_time is ' + data.stored_work_start_time);
+	          console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
 	          nudge_start_time = data.stored_nudge_start_time;
 	          $('#nudge_start_time_9809403065').attr('value',nudge_start_time);
 
@@ -64,7 +73,7 @@ $(document).ready(function() {
 
 	var nudge_end_time;
 	chrome.storage.sync.get(['stored_nudge_end_time'], function(data) {
-	          // console.log('stored_nudge_end_time is ' + data.stored_end_start_time);
+	          console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
 	          nudge_end_time = data.stored_nudge_end_time;
 	          $('#nudge_end_time_9809403065').attr('value',nudge_end_time);
 

@@ -32,13 +32,14 @@ html, body {
   
   background-color: rgba(0,0,0,0.8); 
   background-color: rgba(130,136,143,0.8);
+
 }
 
 
 
 #modal-content66345654628423 {
   	display: block;
-  	border-radius: 6px;
+  	/*border-radius: 6px;*/
   	/*background-color: #fefefe;*/
   	margin: auto;	  	
 	position: fixed;
@@ -53,8 +54,8 @@ html, body {
 
 background: url('https://cdn.statically.io/gh/starlord92/git-visual/d2984666/morning.jpg') no-repeat center center fixed;
 
-/*background: url('chrome-extension://cniabmfhflgaankghinamkbojmgidedk/meditation_flow/morning.jpg') no-repeat center center fixed;*/
-
+/*background: url('chrome-extension://cniabmfhflgaankghinamkbojmgidedk/meditation_flow/morning.jpg') no-repeat center center fixed;
+*/
 
 	background-size: cover;
 	-webkit-background-size: cover;

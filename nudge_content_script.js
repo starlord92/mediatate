@@ -27,11 +27,6 @@ function injectHTML(val, callback) {
 
 function displayNudge () {
 	$(document).ready(function() {
-
-		
-		//document.getElementById("modal-content66345654628423").src = imgURL;
-
-
 		var time = 1000;
 		var interval;
 
@@ -41,12 +36,9 @@ function displayNudge () {
 			// var seconds = Math.floor((time % (1000 * 60)) / 1000);
 			// document.getElementById("timer_control535676465768").innerHTML = "0" + minutes + ":" + seconds ;
 		}
-
 		//update the count down every 1 second
 		var x = function updateTimer() {     
-			
 			generateTime(time);
-
 			if (time < 0) {         
 				clearInterval(interval);
 				// var bell_sound = document.getElementById("zenbellsound");
@@ -60,9 +52,6 @@ function displayNudge () {
 						window.location = "https://www.google.com";
 					}
 				);
-
-
-		
 
 			var modal = document.getElementById("myModal472826662848262673");
 			var close_button_174162884722728293 = document.getElementById("close_button_174162884722728293");
@@ -87,7 +76,6 @@ function displayNudge () {
 			    modal.style.display = "none";  
 			  }
 			};
-
 
 			}	
 		};
@@ -137,91 +125,100 @@ function displayNudge () {
 };
 
  
-
+//////////logic to decide whether the modal should be displayed or not////////
 
 // get stored nudge start and end time
-function getStoredNudgePeriod (val, callback) {
+function getStoredNudgePeriod (val) {
 
-	chrome.storage.sync.get(['stored_nudge_start_time'], function(data) {
-	          console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
-	          nudge_start_time = data.stored_nudge_start_time;
+	return new Promise(function(resolve) {
+		chrome.storage.sync.get(['stored_nudge_start_time'], function(data) {
+		          console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
+		          nudge_start_time = data.stored_nudge_start_time;
+		});
+		chrome.storage.sync.get(['stored_nudge_end_time'], function(data) {
+		          console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
+		          nudge_end_time = data.stored_nudge_end_time;
+		});
+		resolve(val);
 	});
-	chrome.storage.sync.get(['stored_nudge_end_time'], function(data) {
-	          console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
-	          nudge_end_time = data.stored_nudge_end_time;
-	});
-
-	if (callback) {
-		callback();
-	}
 };
 
+//getStoredNudgePeriod(1).then(function(val){console.log(" val is " + val)});
 
-function checkNudgeOnCriteria (val, callback) {
+function checkNudgeOnCriteria (val) {
 
-	chrome.storage.sync.get(['stored_nudge_checkbox'], function(data){	    
-	    if (data.stored_nudge_checkbox == false) {
-	    	// console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox + ' so no nudge');
-	    }
 
-	    else {
+	return new Promise(function(resolve) {
 
-	    	// console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox);
+		
 
-	    	var arr1 = nudge_start_time.split(':');
-			var nudge_start_hour = parseInt(arr1[0], 10); 
-			var nudge_start_min = parseInt(arr1[1], 10);
+		chrome.storage.sync.get(['stored_nudge_checkbox'], function(data){	    
+		    if (data.stored_nudge_checkbox == false) {
+		    	// console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox + ' so no nudge');
+		    }
 
-			var arr2 = nudge_end_time.split(':');
-			var nudge_end_hour = parseInt(arr2[0], 10);
-			var nudge_end_min = parseInt(arr2[1], 10);
+		    else {
 
-			var now = new Date(); // current time
-		    var current_hour = now.getHours();
-		    var current_min = now.getMinutes();
-	    	
+		    	// console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox);
 
-		    //three scenarios: 
-		    //(a)time is set between 7 pm and 1 am the next morning (start time < end time) 
-		    //(b) between 1 am and 5 am (start time > end time)
-		    //(c) start time < end time
-	    	if (
-	    		(nudge_start_hour < nudge_end_hour && 
-	    		current_hour >= nudge_start_hour && 
-	    		current_hour < nudge_end_hour) 
+		    	var arr1 = nudge_start_time.split(':');
+				var nudge_start_hour = parseInt(arr1[0], 10); 
+				var nudge_start_min = parseInt(arr1[1], 10);
 
-			    ||
+				var arr2 = nudge_end_time.split(':');
+				var nudge_end_hour = parseInt(arr2[0], 10);
+				var nudge_end_min = parseInt(arr2[1], 10);
 
-			    (nudge_start_hour > nudge_end_hour 
-			    &&
-			    ((current_hour >= nudge_start_hour && current_hour >= nudge_end_hour) || (current_hour <= nudge_start_hour && current_hour < nudge_end_hour))
-			    )
+				var now = new Date(); // current time
+			    var current_hour = now.getHours();
+			    var current_min = now.getMinutes();
+		    	
 
-			    ||
+			    //three scenarios: 
+			    //(a)time is set between 7 pm and 1 am the next morning (start time < end time) 
+			    //(b) between 1 am and 5 am (start time > end time)
+			    //(c) start time < end time
+		    	if (
+		    		(nudge_start_hour < nudge_end_hour && 
+		    		current_hour >= nudge_start_hour && 
+		    		current_hour < nudge_end_hour) 
 
-			    (nudge_start_hour == nudge_end_hour)
-			)
+				    ||
 
-	    		{
-					injectHTML(0,function() {
-						displayNudge();
-					});
-					
-	    		} 
-	    }
+				    (nudge_start_hour > nudge_end_hour 
+				    &&
+				    ((current_hour >= nudge_start_hour && current_hour >= nudge_end_hour) || (current_hour <= nudge_start_hour && current_hour < nudge_end_hour))
+				    )
+
+				    ||
+
+				    (nudge_start_hour == nudge_end_hour)
+				)
+
+		    		{
+						injectHTML(0,function() {
+							displayNudge();
+						});
+						
+		    		} 
+		    }
+		});
+
+		//console.log("val passed to checkNudgeOnCriteria is: " + val);
+
+		resolve(val);
+
 	});
 
 };
 
+getStoredNudgePeriod(1).then(function(val) {checkNudgeOnCriteria(val);}).
+                        then(function(val) {console.log(" value passed  to last then is " +  val)});
 
 
-
-
-
-
-getStoredNudgePeriod(0, function() {
-	checkNudgeOnCriteria(0);
-});
+// getStoredNudgePeriod(0, function() {
+// 	checkNudgeOnCriteria(0);
+// });
 
 
 

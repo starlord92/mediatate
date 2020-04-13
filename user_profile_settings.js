@@ -169,7 +169,7 @@ $(document).ready(function() {
 			function() {console.log(' nudge on? ' + nudge_checkbox );
 		});
 
-		//store distracting sites
+		//store times
 		var nudge_start_time = $('#nudge_start_time_9809403065').val();
 		var nudge_end_time = $('#nudge_end_time_9809403065').val();
 		
@@ -185,7 +185,7 @@ $(document).ready(function() {
 
 		chrome.storage.sync.set({stored_nudge_end_time: nudge_end_time}, 
 			function() {
-			//console.log('work end time is ' + work_end_time);
+			console.log('work end time is ' + data.nudge_end_time);
 		});
 
 
