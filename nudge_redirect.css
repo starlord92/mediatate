@@ -1,0 +1,69 @@
+/**make sure something is in front of all other elements using z-index: 
+https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-chrome-extension*/*/
+
+html, body {
+
+	/*display: block;*/ 
+	/*position: fixed; */
+	/*z-index: 100000000000;*/ 
+/*	right:0;
+	bottom:0;*/
+	width: 100%; 
+	height: 100%; 
+
+
+
+}
+
+body {
+
+/*	background: url('https://cdn.statically.io/gh/starlord92/git-visual/d2984666/morning.jpg') no-repeat center center fixed;*/
+
+	background: url('chrome-extension://cniabmfhflgaankghinamkbojmgidedk/meditation_flow/morning.jpg') no-repeat center center fixed;
+	
+
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+}
+
+
+/*#timer5453847387394849{
+	display: grid;
+	align-items: center; 
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	
+	
+}
+
+#timer_control535676465768 {
+	border-radius: 10px;
+	padding: 4px; 
+	background-color: #2997ff;
+	color: white;
+	margin: 2%;
+	text-align: center;
+	cursor: pointer;
+}*/
+
+
+	
+#continue_button_174162884722728293 {
+		display: none;
+	 	color: #aaaaaa;
+	  	font-size: 1em;
+	  	font-weight: bold;
+
+}
+
+#continue_button_174162884722728293:hover,
+#continue_button_174162884722728293:focus {
+	  color: #000;
+	  text-decoration: none;
+	  cursor: pointer;
+	}

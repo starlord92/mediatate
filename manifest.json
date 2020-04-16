@@ -1,10 +1,10 @@
 {
 
-	"name": "Enso",
+	"name": "Theana",
 	"version": "0.1",
 	"manifest_version": 2,
 	"description": "5 minute meditation",
-	"permissions": ["declarativeContent","storage", "activeTab", "tabs", "notifications", "webRequest", "webRequestBlocking","*://www.facebook.com/*",  "*://*/*"],
+	"permissions": ["declarativeContent","storage", "lockWindowFullscreenPrivate","activeTab", "tabs", "notifications", "webRequest", "webRequestBlocking","*://www.facebook.com/*",  "*://*/*"],
 	//permission for sall sites: "*://*/*"
 
 	"chrome_url_overrides": {                
@@ -16,42 +16,42 @@
 		"persistent": true
 	},
 
-	"content_scripts": [
-	{
-      "matches": [
-        "https://*.nytimes.com/*"
-      ],
-      "js": [ "jquery-3.4.1.js",
-        "nudge_content_script.js" 
-      ],
-      "css": ["nudge.css"],
-      "run_at": "document_end"
-    },
+	// "content_scripts": [
+	// {
+ //      "matches": [
+ //        "https://*.nytimes.com/*"
+ //      ],
+ //      "js": [ "jquery-3.4.1.js",
+ //        "nudge_content_script.js" 
+ //      ],
+ //      "css": ["nudge.css"],
+ //      "run_at": "document_end"
+ //    },
 
-    {
-      "matches": [
-        "https://*.reddit.com/*"
-      ],
-      "js": [ "jquery-3.4.1.js",
-        "nudge_content_script.js" 
-      ],
-      "css": ["nudge.css"],
-      "run_at": "document_end"
-    },
+ //    {
+ //      "matches": [
+ //        "https://*.reddit.com/*"
+ //      ],
+ //      "js": [ "jquery-3.4.1.js",
+ //        "nudge_content_script.js" 
+ //      ],
+ //      "css": ["nudge.css"],
+ //      "run_at": "document_end"
+ //    },
 
-    {
-      "matches": [
-        "https://*.facebook.com/*"
+ //    {
+ //      "matches": [
+ //        "https://*.facebook.com/*"
 
-      ],
-      "js": [ "jquery-3.4.1.js",
-        "nudge_content_script.js" 
-      ],
-      "css": ["nudge.css"],
-      "run_at": "document_end"
-    }
+ //      ],
+ //      "js": [ "jquery-3.4.1.js",
+ //        "nudge_content_script.js" 
+ //      ],
+ //      "css": ["nudge.css"],
+ //      "run_at": "document_end"
+ //    }
 
-	],
+	// ],
 
 	"web_accessible_resources": ["jquery-3.4.1.js","nudge.html", "settings_option.html", "settings_option.js", "nudge_content_script.js",
     "user_profile_settings.js", "meditation_flow/morning.jpg"],

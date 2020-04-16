@@ -102,12 +102,16 @@ function setDefaultTimeSetting(val, callback) {
 	});
 	
 	//each distracting site has an override_nudge signal that is 'on' when user choose to continue
-	chrome.storage.sync.set({stored_facebook_override_nudge: false}, function() {
+	chrome.storage.sync.set({stored_facebook_continue: false}, function() {
 		});
-	chrome.storage.sync.set({stored_nytimes_override_nudge: false}, function() {
+	chrome.storage.sync.set({stored_nytimes_continue: false}, function() {
 		});
-	chrome.storage.sync.set({stored_reddit_override_nudge: false}, function() {
+	chrome.storage.sync.set({stored_reddit_continue: false}, function() {
 		});
+
+	chrome.storage.sync.set({stored_last_distracting_site_accessed: "" }, function() {});
+
+
 
 	
 	if (callback) {
@@ -115,6 +119,32 @@ function setDefaultTimeSetting(val, callback) {
 	}
 };
 
+// if (
+// 		    		(work_start_hour < work_end_hour && 
+// 		    		current_hour >= work_start_hour && 
+// 		    		current_hour < work_end_hour) 
+
+// 				    ||
+
+// 				    (work_start_hour > ork_end_hour 
+// 				    &&
+// 				    ((current_hour >= nudge_start_hour && current_hour >= nudge_end_hour) || (current_hour <= nudge_start_hour && current_hour < nudge_end_hour))
+// 				    )
+
+// 				    ||
+
+// 				    (nudge_start_hour == nudge_end_hour)
+// 				)
+
+// 		    		{
+// 						enable_nudge = 1;
+// 						//console.log('nudge is enabled because it is during the period nudge is set to be active');
+						
+// 		    		} 
+// 		    	else {
+// 		    		enable_nudge = 0;
+// 		    		//console.log('nudge is disabled because it is NOT during the period nudge is set to be active');
+// 		    	}
 
 //check for updated user settings
 //check it is time to open the meditation tab and do so 
@@ -124,13 +154,15 @@ function checkTime() {
 
 	curr_time = new Date();
 	//console.log("current time is " + curr_time);
+	current_hour = curr_time.getHours();
+
 	
 	//to test if exec work, set a specific curr_time and see if a new tab open:
 	//curr_time = new Date('December 17, 1995 22:00:00');
 
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() ==0 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() == 0 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		//console.log("open meditation tab");
 			}
@@ -140,6 +172,20 @@ function checkTime() {
 	// }
 }
 
+
+	chrome.tabs.create({'url':'meditation_flow/home.html'}, 
+		function(tab) {
+			console.log("tab.windowId is " + tab.windowId);
+			//chrome.windows.getCurrent
+			chrome.windows.update(tab.windowId,{'state':'fullscreen'});
+		}
+	);
+
+		// chrome.windows.create({'url':'meditation_flow/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
+		// function(w) {chrome.windows.update(w.id,{'state':'maximized'});}
+		// );
+
+
 //auxiliary function: open a new tab nudging user to meditate
 //activetabs/current tabs only
 function openMeditationTab() {
@@ -147,9 +193,16 @@ function openMeditationTab() {
 	//chrome.tabs.create({'url':'meditation_flow/home.html'}, );
 
 	//we have to create and then update the state for fullscreen.  creating alone doesn't work. poor design on chrome's part
-	chrome.windows.create({'url':'meditation_flow/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
-		function(w) {chrome.windows.update(w.id,{'state':'fullscreen'});}
-		);
+	// chrome.windows.create({'url':'meditation_flow/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
+	// 	function(w) {chrome.windows.update(w.id,{'state':'fullscreen'});}
+	// 	);
+	chrome.tabs.create({'url':'meditation_flow/home.html'}, 
+		function(tab) {
+			console.log("tab.windowId is " + tab.windowId);
+			//chrome.windows.getCurrent
+			chrome.windows.update(tab.windowId,{'state':'fullscreen'});
+		}
+	);
 }
 
 
@@ -207,12 +260,13 @@ chrome.storage.sync.get('stored_scheduled_meditation_checkbox', function(data) {
 
 
 
-var enable_nudge = 1;  // 0 = disable nudge |   1 = enable nudge
-var nudge_start_time;
-var nudge_end_time;
+
 
 //////////logic to determine if nudge is enabled, and so, whether it is active based on he period the user set nudge to be active////////
 
+var enable_nudge = 1;  // 0 = disable nudge |   1 = enable nudge
+var nudge_start_time;
+var nudge_end_time;
 // get stored nudge start and end time
 function getStoredNudgePeriod (val) {
 
@@ -300,20 +354,60 @@ function checkNudgeOnCriteria (val) {
 
 
 
-// create an object with list of distracting sites to display nudge modal
+// create an object with list of distracting sites to display nudge 
 let distracting_sites_list = ["facebook", "nytimes", "reddit"];
 chrome.storage.sync.set({stored_distracting_sites_list: distracting_sites_list}, function() {
 	});
 //regular expression to ensure any url and links belonging to a distracting site 
-const facebook_match = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}facebook\.com(.*)/) ;
-const nytimes_match = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}nytimes\.com(.*)/) ;
-const reddit_match = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}reddit\.com(.*)/) ;
+const facebook = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}facebook\.com(.*)/) ;
+const reddit = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}reddit\.com(.*)/) ;
+const instagram = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}instagram\.com(.*)/) ;
+const twitter = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}twitter\.com(.*)/) ;
+
+const nytimes = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}nytimes\.com(.*)/) ;
+const cnn = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}cnn\.com(.*)/);
+const buzzfeed = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}buzzfeed\.com(.*)/);
+const youtube = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}youtube\.com(.*)/);
+
+const netflix = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}netflix\.com(.*)/);
+const hulu = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}hulu\.com(.*)/);
+const disneyplus = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}hulu\.com(.*)/);
+const hbonow = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}hbonow\.com(.*)/);
+const hbogo = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}hbogo\.com(.*)/);
+
+const tinder = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}tinder\.com(.*)/);
+const pinterest = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}pinterest\.com(.*)/);
+const fandom = new RegExp(/^https?:\/\/([a-zA-Z\d-]+\.){0,}fandom\.com(.*)/);
+
+var last_nudge_time = new Date('December 17, 1995 22:00:00');
+console.log("last_nudge_time set at installation: " + last_nudge_time);
+
+
 //console.log(nytimes_match.test('https://jesus.mobile.nytimes.com//world'));
 
+//instagram, cnn, buzzfeed, tumblr, netflix, pinterest, hulu, tinder, imgur, vimeo, amazon, yahoo
+//
 
+let distracting_site_matches = [facebook, reddit, instagram, twitter, nytimes, cnn, buzzfeed, netflix, hulu, youtube, disneyplus, hbonow, hbogo, tinder, pinterest, fandom];
 
-var current_url;
-var nudge_redirect = "https://dev-do-not-share-bombay-legends.pashi.com/";
+function distracting_site_flag (request) {
+	var result = false;
+	for (var i = 0; i < distracting_site_matches.length; i++) {
+		if (distracting_site_matches[i].test(request) == true) {
+			console.log(i);
+			result = true;
+			console.log("match result is " + result);
+			return (result);
+		}
+	}
+	console.log("match result is " + result);
+	return (result);
+}
+
+distracting_site_flag("https://mobile.fb.com///world");
+
+///logic of nudge redirect
+var nudge_redirect = chrome.extension.getURL('nudge_redirect.html');
 var distracting_site = "https://www.nytimes.com/";
 var tabIdToPreviousUrl = {};
 
@@ -321,9 +415,11 @@ var tabIdToPreviousUrl = {};
 async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_id) {
 
 	let promise = await getStoredNudgePeriod(1).then(function(val) {checkNudgeOnCriteria(val);}).
-                        then(function(val) {console.log(" value passed  to last then is " +  val)});
+                        then(function(val) {});
+
+    //console.log("DISTRACTING SITE ? " + distracting_site_flag(changeInfo_url));
 	
-	console.log("enable_nudge status after checkNudgeOnCriteria and before the logic  " +  enable_nudge);
+	//console.log("enable_nudge status after checkNudgeOnCriteria and before the logic  " +  enable_nudge);
 
 	if (enable_nudge == 0) {
 		console.log("nudge is not active or enabled. distracting sites can be accessed. ");
@@ -334,27 +430,37 @@ async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_
 		var previous_url;
 		
 		if (changeInfo_url != undefined) {
-			 console.log(" changeInfo_url is not undefined and is: " + changeInfo_url);
+			 console.log(" changeInfo_url is: " + changeInfo_url);
 	        //make sure the tab has the right id before getting its url 
 	        if (tabId == tab_dot_id) {
 	        	
 	        	previousUrl = stored_previous_url;
-	            console.log("tabId == tab_dot_id");
+	            //console.log("tabId == tab_dot_id");
 	            console.log("stored_previous_url is " + stored_previous_url);
 	        }
 	        else {
-	        	console.log("tabId !== tab_dot_id");
-	        	console.log("tabID = " + tabId + " tab_dot_id " + tab_dot_id);
+	        	//console.log("tabId !== tab_dot_id");
+	        	//console.log("tabID = " + tabId + " tab_dot_id " + tab_dot_id);
 	        }
-	        //allow user to proceed to the distracting site after they press the 'continue' button.  use messaging OR store something in storage
-	        if (previousUrl != undefined && previousUrl === nudge_redirect && changeInfo.url ===distracting_site) {
-	          console.log("previous url =  nudge_redirect.  allows user to access the site");
-	          chrome.tabs.update(tabId, { url: 'https://www.nytimes.com' });
+	        if (previousUrl != undefined && previousUrl === nudge_redirect &&  distracting_site_flag(changeInfo_url) == true
+	        	) {
+		          console.log("allows user to continue the site");
+		          chrome.storage.sync.set({stored_last_distracting_site_accessed: changeInfo_url }, function() {});
+		          chrome.tabs.update(tabId, { url: changeInfo_url });
+
 	        }
 
-	        else if (changeInfo_url === distracting_site){
-	          chrome.tabs.update(tabId, { url: nudge_redirect });
-	          console.log("nudge redirects user to breathing practice where they can override it");
+	        else if (distracting_site_flag(changeInfo_url) == true){
+	        	console.log ("last nudge time is: " + last_nudge_time) ;
+	        	console.log ("current time is: " + Date.now()) ;
+	        	if (Date.now() - last_nudge_time > 600000) {
+	        		 chrome.tabs.update(tabId, { url: nudge_redirect });
+	          		console.log("nudge redirects user to breathing practice where they can override it");
+	          		last_nudge_time = Date.now();
+	        	}
+
+    	   		chrome.storage.sync.set({stored_last_distracting_site_accessed: changeInfo_url }, function() {});
+	         
 	        }
 	        else {
 	          ;
@@ -362,9 +468,10 @@ async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_
 	        // Add the current url as previous url
 	        tabIdToPreviousUrl[tabId] = changeInfo_url;
 	        //console.log("adding url " + tabIdToPreviousUrl[tabId])
+	       
 	    }
 	    else {
-	    	console.log(" changeInfo_url is " + changeInfo_url + ".  Ignore this tab update.");
+	    	//console.log(" changeInfo_url is " + changeInfo_url + ".  Ignore this tab update.");
 	    }
 
 	}
@@ -377,56 +484,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 			resolveNudge(changeInfo.url, tabIdToPreviousUrl[tabId], tabId, tab.id);
 		}
 		else {;}
-		
-	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-// 	//IF NUDGE TIME IS OFF, QUIT
-//     console.log(tab);
-//     console.log("change info url is " + changeInfo.url);
-//     if (changeInfo.url != undefined) {
-//         //console.log("last previousUrl is " + tabIdToPreviousUrl[tabId]);
-//         //console.log("now change the previousUrl to " + changeInfo.url);
-//         var previousUrl = "";
-//         //make sure the tab has the right id before getting its url 
-//         if (tabId == tab.id) {
-//             previousUrl = tabIdToPreviousUrl[tabId];
-//         }
-//         //allow user to proceed to the distracting site after they press the 'continue' button.  use messaging OR store something in storage
-//         if (previousUrl === nudge_redirect && changeInfo.url ===distracting_site) {
-//           //console.log("previous url should allow user to access the site");
-//           chrome.tabs.update(tabId, { url: 'https://www.nytimes.com' });
-//         }
-
-//         else if (changeInfo.url === distracting_site){
-//           chrome.tabs.update(tabId, { url: nudge_redirect });
-//         }
-//         else {
-//           ;
-//         }
-//         // Add the current url as previous url
-//         tabIdToPreviousUrl[tabId] = changeInfo.url;
-//         //console.log("adding url " + tabIdToPreviousUrl[tabId])
-//     }
-
-// })
-
-
+});
 
 
 
