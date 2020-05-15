@@ -1,13 +1,29 @@
+
+
+@font-face {
+    font-family: 'robotolight';
+    src: url('../font/roboto_wott2/roboto-light-webfont.woff2') format('woff2'),
+         url('../font/roboto_wott2/roboto-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 html {
-	background: url('morning.jpg') no-repeat center center fixed;
+	/*background: url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
 	background-size: cover;
+	background-color: #9de5aa; /*#6bcba3;*/
 
   
 /*  background-color: #CBF4C3;*/
 }
 
 html, body {	
-	font: bold 1em "avenir", sans-serif;
+	/*font: bold 1.5em "avenir", sans-serif;*/
+	font: bold 1.2em 'robotolight';
+	/*font-family: roboto-light;*/
+	color: #08596a;
 
 	/* Horizontally center EACH element in a grid with regard to its inline axis*/
 	/*justify-content: center;*/

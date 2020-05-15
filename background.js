@@ -162,7 +162,7 @@ function checkTime() {
 
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 0 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() == 29 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		//console.log("open meditation tab");
 			}
@@ -196,6 +196,7 @@ function openMeditationTab() {
 	// chrome.windows.create({'url':'meditation_flow/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
 	// 	function(w) {chrome.windows.update(w.id,{'state':'fullscreen'});}
 	// 	);
+
 	chrome.tabs.create({'url':'meditation_flow/home.html'}, 
 		function(tab) {
 			console.log("tab.windowId is " + tab.windowId);
@@ -453,7 +454,7 @@ async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_
 	        else if (distracting_site_flag(changeInfo_url) == true){
 	        	console.log ("last nudge time is: " + last_nudge_time) ;
 	        	console.log ("current time is: " + Date.now()) ;
-	        	if (Date.now() - last_nudge_time > 600000) {
+	        	if (Date.now() - last_nudge_time > 900000) {
 	        		 chrome.tabs.update(tabId, { url: nudge_redirect });
 	          		console.log("nudge redirects user to breathing practice where they can override it");
 	          		last_nudge_time = Date.now();
