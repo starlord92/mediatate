@@ -173,13 +173,13 @@ function checkTime() {
 }
 
 
-	chrome.tabs.create({'url':'meditation_flow/home.html'}, 
-		function(tab) {
-			console.log("tab.windowId is " + tab.windowId);
-			//chrome.windows.getCurrent
-			chrome.windows.update(tab.windowId,{'state':'fullscreen'});
-		}
-	);
+	// chrome.tabs.create({'url':'meditation_flow/home.html'}, 
+	// 	function(tab) {
+	// 		console.log("tab.windowId is " + tab.windowId);
+	// 		//chrome.windows.getCurrent
+	// 		chrome.windows.update(tab.windowId,{'state':'fullscreen'});
+	// 	}
+	// );
 
 		// chrome.windows.create({'url':'meditation_flow/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
 		// function(w) {chrome.windows.update(w.id,{'state':'maximized'});}

@@ -10,20 +10,32 @@
 }
 
 
+@font-face {
+    font-family: 'apercu';
+    src: url('../font/apercu/ApercuPro.woff2') format('woff2'),
+         url('../font/apercu/ApercuPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 html {
 	/*background: url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
 	background-size: cover;
-	background-color: #9de5aa; /*#6bcba3;*/
+	background-color: /*#9de5aa;*/ /*#6bcba3;*/ white;
 
   
 /*  background-color: #CBF4C3;*/
 }
 
 html, body {	
-	/*font: bold 1.5em "avenir", sans-serif;*/
-	font: bold 1.2em 'robotolight';
+	/*font:  1em "avenir";*/
+	font: 1em 'apercu';
+	/*font: bold 1.2em 'robotolight';*/
 	/*font-family: roboto-light;*/
-	color: #08596a;
+	/*color: #08596a;*/
+	color: black;
 
 	/* Horizontally center EACH element in a grid with regard to its inline axis*/
 	/*justify-content: center;*/
@@ -40,7 +52,7 @@ html, body {
 body{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: .2fr 1fr 1fr 1fr;
+	grid-template-rows: .2fr 1fr 1fr 1fr 1fr;
 
 }
 
@@ -68,9 +80,31 @@ body{
 
 
 
+
+
 #user_profile_icon_9809403065 {
-	grid-row-start:1;
-	grid-column-start:9;
+	position: fixed;
+
+	
+	border: solid black 1px;
+	
+
+	bottom:0;
+	right:0;
+	left:0;
+	width: 100%;
+	height: 50px;
+	text-align: left;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	align-items: center;
+}
+
+
+#user_profile_name_9809403065 {
+	
+	grid-column-start:6;
 
 	cursor: pointer;
 }
@@ -87,8 +121,8 @@ body{
 	grid-row-start:2;
 	grid-column-start:1;
 	grid-column-end:10;
-
 	border-radius: 5px;
+
 
 	/*background-color: #9ee6aa;*/
 
