@@ -6,12 +6,18 @@ $(document).ready(function() {
 //========USER INTERACTION WITH THE MENU: MY STATS * SETTINGS * NUDGE======
 
 	//clicking user icon toggles user profile & setting section on and off
-	$('#user_profile_icon_9809403065').on('click', function(event) {
+	$('#settings_9809403065').on('click', function(event) {
 		
 		$(".meditation_control_9809403065").toggle({duration: 0});
 		$(".user_profile_section_hide_9809403065").toggleClass("user_profile_section_show_9809403065");
 		$(".user_profile_menu_hide_9809403065").toggleClass("user_profile_menu_show_9809403065");
 		// $(this).css("background-color", "#9ee6aa");
+
+		$( "html" ).css( "background", "white" );
+
+		$('#settings_options_9809403065').show();
+		$('#nudge_options_9809403065').hide();
+		$('#my_stats_options_9809403065').hide();
 	});
 
 
@@ -20,8 +26,17 @@ $(document).ready(function() {
 		$('#settings_options_9809403065').hide();
 		$('#nudge_options_9809403065').hide();
 		$('#my_stats_options_9809403065').show();
+		$('#user_profile_my_stats_9809403065').css("color", "#313c47");
+		
 	});
 
+
+		//clicking 'nudge' reveal setting options
+	$('#user_profile_nudge_9809403065').on('click', function (event) {
+		$('#settings_options_9809403065').hide();
+		$('#nudge_options_9809403065').show();
+		$('#my_stats_options_9809403065').hide();
+	});
 
 	//clicking 'settings' reveal previously saved setting options
 	$('#user_profile_settings_9809403065').on('click', function (event) {
@@ -56,12 +71,7 @@ $(document).ready(function() {
 	// 	// });
 	// });
 
-	//clicking 'nudge' reveal setting options
-	$('#user_profile_nudge_9809403065').on('click', function (event) {
-		$('#settings_options_9809403065').hide();
-		$('#nudge_options_9809403065').show();
-		$('#my_stats_options_9809403065').hide();
-	});
+
 
 
 //=======SAVING ON/OFF STATE AND SETTINGS OF SCHEDULED MEDITATION=============

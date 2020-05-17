@@ -25,7 +25,9 @@ html {
 	 /*url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
 
 	background-size: cover;
-	background-color: /*#9de5aa;*/ /*#6bcba3;*/ /*#2a3743*/ /* #2e3943 */      /*#313c47*/ ;
+	background-color: /*#9de5aa*/ /*#6bcba3*/ /*#2a3743*/ /*#2e3943*/         /*#313c47*/ white ;
+
+
 
   
 /*  background-color: #CBF4C3;*/
@@ -33,7 +35,7 @@ html {
 
 html, body {	
 	/*font:  1em "avenir";*/
-	font: 1.18em 'apercu';
+	font: 1.1em 'apercu';
 	/*font: bold 1.2em 'robotolight';*/
 	/*font-family: roboto-light;*/
 	/*color: #08596a;*/
@@ -54,7 +56,7 @@ html, body {
 body{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: .2fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
 }
 
@@ -84,9 +86,10 @@ body{
 
 
 
-#user_profile_icon_9809403065 {
+#bottom_fixed_nav_bar_9809403065 {
 	position: fixed;
-
+	z-index: 1;
+	background-color: white; 
 	
 	border-top: 2.5px solid #a5abb8 ;
 	
@@ -119,48 +122,112 @@ body{
 }
 
 .user_profile_section_show_9809403065 {
+
+
+	grid-row-start:5;
+	grid-row-end:7;
+	grid-column-start:3;
+	grid-column-end:8;
+
 	display: grid;
-	grid-row-start:2;
-	grid-column-start:1;
-	grid-column-end:10;
-	border-radius: 5px;
+	grid-template-rows: 1fr 1fr 1fr;
 
-
-	/*background-color: #9ee6aa;*/
-
+	color: #313c47;
 	cursor: initial;
 
-	justify-content: center;
+	/*justify-content: center;*/
+	/*align-items: top;*/
 }
 
 #my_stats_options_9809403065 {
-	display: none;
+	display: block;
+
 }
 
 #settings_options_9809403065 {
-	display: none;
+	display: block;
 }
 
 #nudge_options_9809403065 {
-	display: none;
+	display: block;
 }
 
 
+
+/*MY STATS, SCHEDULE, NUDGE CLICKABLES ======================================*/
 .user_profile_menu_hide_9809403065 {
 	display: none;
 }
 .user_profile_menu_show_9809403065 {
-	grid-row-start:1;
-	grid-column-start:2;
+	grid-row-start:4;
+	grid-row-end:4;
+	grid-column-start:3;
 	grid-column-end:8;
 
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-column: 1fr 1fr 1fr;
+	grid-template-row: 1fr 1fr 1fr ;
+
+	/*border-right: solid #a5abb8 1.5px;*/
+
+
 }
 
-#user_profile_my_stats_9809403065, #user_profile_settings_9809403065, #user_profile_nudge_9809403065 {
-	cursor: pointer;
+#user_profile_my_stats_9809403065 {
+	
+	grid-row-start:2;
+	grid-row-end:2;
+	grid-column-start:1;
+	grid-column-end:3;
+
+
 }
+
+#user_profile_my_stats_text_9809403065 {
+	border-bottom: .5px solid #a5abb8;
+	cursor: pointer;
+	
+}
+
+
+ #user_profile_settings_9809403065 {
+	cursor: pointer;
+	grid-row-start:2;
+	grid-row-end:2;
+	grid-column-start:3;
+	grid-column-end:5;
+}
+
+#user_profile_settings_text_9809403065 {
+	border-bottom: .5px solid #a5abb8;
+	cursor: pointer;
+	
+}
+
+
+#user_profile_nudge_9809403065 {
+	cursor: pointer;
+	grid-row-start:2;
+	grid-row-end:2;
+	grid-column-start:5;
+	grid-column-end:7;
+}
+
+#user_profile_nudge_text_9809403065 {
+	border-bottom: .5px solid #a5abb8;
+	cursor: pointer;
+	
+}
+
+/*#user_profile_menu_line_9809403065 {
+	grid-row-start:2;
+	grid-row-end:2;
+	grid-column-start:1;
+	grid-column-end:6;
+
+	border-bottom: 1px solid #a5abb8 ;
+
+}*/
 
 
 
@@ -177,13 +244,16 @@ body{
 
 
 input{
-	font: 1.18em 'apercu';
+	font: 1em 'apercu' ;
+	font-color: #313c47;
+
+	/*border-radius: 10px;*/
 }
 
 #settings_options_save_9809403065, #nudge_options_save_9809403065 {
 	cursor: pointer;
 	border-radius: 3px;
-	background-color: #6bcba4;
+	background-color: #313c47;
 	color: white;
 	padding: 3px;
 	display: block;
@@ -194,7 +264,7 @@ input{
 	text-align: center
 	
 }
-
+/*===========================================================================*/
 
 #timer_control_9809403065 {
 	text-align: left;
