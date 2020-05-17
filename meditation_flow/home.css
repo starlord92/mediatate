@@ -21,8 +21,9 @@
 
 
 html {
-/*	background: url('https://cdn.statically.io/gh/starlord92/mediatate/1b262e7f/images/early_dawn_background.jpg') no-repeat center center fixed;*/
+	background: url('https://cdn.statically.io/gh/starlord92/mediatate/d6a979fa/images/early_dawn_background.jpg') no-repeat center center fixed;
 	 /*url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
+	 
 	background-size: cover;
 	background-color: /*#9de5aa;*/ /*#6bcba3;*/ /*#2a3743*/ /* #2e3943 */      /*#313c47*/ ;
 
