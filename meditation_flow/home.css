@@ -21,7 +21,7 @@
 
 
 html {
-	background: url('https://cdn.statically.io/gh/starlord92/mediatate/e9b642bb/images/dawn_background.jpg') no-repeat center center fixed;
+	background: url('https://cdn.statically.io/gh/starlord92/mediatate/1b262e7f/images/early_dawn_background.jpg') no-repeat center center fixed;
 	 /*url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
 	background-size: cover;
 	background-color: /*#9de5aa;*/ /*#6bcba3;*/ white;
@@ -87,7 +87,7 @@ body{
 	position: fixed;
 
 	
-	border: solid black 1px;
+	border-top: 2.5px solid #3B4147 ;
 	
 
 	bottom:0;
@@ -98,14 +98,14 @@ body{
 	text-align: left;
 
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	align-items: center;
 }
 
 
 #user_profile_name_9809403065 {
 	
-	grid-column-start:6;
+	grid-column-start:7;
 
 	cursor: pointer;
 }
