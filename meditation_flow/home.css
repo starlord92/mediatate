@@ -74,7 +74,7 @@ body{
 	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	font: 1.1em 'apercu';
 	color: /*#c695c6;*/  #a5abb8;
-	color: /*#c695c6;*/  #a5abb8;
+	
 	height: 100%;
 	width: 100%;
 
@@ -162,12 +162,27 @@ body{
 
 
 
-/*.user_profile_section_hide_9809403065 {
-	display: none;
-	cursor: pointer;
-	font-weight: normal;
-	font-size: 0.87em; 
-}*/
+.user_profile_id_9809403065 {
+
+	grid-row-start:2;
+	grid-row-end:4;
+	grid-column-start:4;
+	grid-column-end:7;
+
+	text-align: center;
+
+	display: grid;
+/*
+	justify-content: center;
+	align-items: top;*/
+}
+
+.user_profile_pic_9809403065 {
+	max-width: 200%; 
+    max-height: 200%;
+
+    border-radius: 50%;
+ }
 
 .user_profile_section_show_9809403065 {
 
@@ -212,6 +227,8 @@ body{
 	grid-column-end:9;
 
 	background: white;
+
+	border-radius: ;
 
 	/*border: 5px black solid;*/
 }

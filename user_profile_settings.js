@@ -7,9 +7,11 @@ $(document).ready(function() {
 
 
 function hide_settings_page () {
+		$(".user_profile_id_9809403065").hide();
 		$(".user_profile_section_show_9809403065").hide();
 		$(".user_profile_menu_show_9809403065").hide();
 		$(".user_profile_section_and_menu_grid_divider_show_9809403065").hide()
+
 		$('html').removeClass();;
 }
 
@@ -38,6 +40,7 @@ $('#meditations_page_9809403065').on('click', function(event) {
 $('#settings_9809403065').on('click', function(event) {
 	hide_meditations_page();
 	$('html').addClass('setting_page_background');
+	$(".user_profile_id_9809403065").show();
 	$(".user_profile_section_show_9809403065").show();
 	$(".user_profile_menu_show_9809403065").show();
 	$(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
