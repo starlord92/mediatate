@@ -12,7 +12,7 @@ function hide_settings_page () {
 		$(".user_profile_menu_show_9809403065").hide();
 		$(".user_profile_section_and_menu_grid_divider_show_9809403065").hide()
 
-		$('html').removeClass();;
+		$('html').removeClass();
 }
 
 function hide_meditations_page () {
@@ -25,6 +25,8 @@ function hide_meditations_page () {
 hide_settings_page ();
 $('html').addClass('meditations_page_background');
 $(".recommended_meditation_recording_9809403065").show();
+
+
 
 
 //clicking meditations page shows recommended meditations and other recordings while hiding other pages:
@@ -44,6 +46,21 @@ $('#settings_9809403065').on('click', function(event) {
 	$(".user_profile_section_show_9809403065").show();
 	$(".user_profile_menu_show_9809403065").show();
 	$(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
+
+	
+	//by default show the 'scheduled' subpage
+	$('#settings_options_9809403065').hide();
+	$('#nudge_options_9809403065').hide();
+	$('#my_stats_options_9809403065').show();
+
+	$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
+	$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+	$('#user_profile_settings_text_9809403065').css("color", "#5c84f1");
+	$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
+
+	$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
+	$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
 
 	
 
@@ -72,8 +89,33 @@ $('#settings_9809403065').on('click', function(event) {
 		$('#nudge_options_9809403065').hide();
 		$('#my_stats_options_9809403065').show();
 
-		$('#user_profile_my_stats_9809403065').css("color", "#313c47");
+		$('#user_profile_my_stats_text_9809403065').css("color", "#5c84f1");
+		$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
 
+		$('#user_profile_settings_text_9809403065').css("color", "#a5abb8");
+		$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+		$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
+		$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+	});
+
+	//clicking 'settings' reveal previously saved setting options
+	$('#user_profile_settings_9809403065').on('click', function (event) {
+		$('#nudge_options_9809403065').hide();
+		$('#my_stats_options_9809403065').hide();
+		$('#settings_options_9809403065').show();
+
+		$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
+		$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+		$('#user_profile_settings_text_9809403065').css("color", "#5c84f1");
+		$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
+
+		$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
+		$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+
+		//console.log('HI HI HI HI');
 	});
 
 
@@ -82,15 +124,19 @@ $('#settings_9809403065').on('click', function(event) {
 		$('#settings_options_9809403065').hide();
 		$('#nudge_options_9809403065').show();
 		$('#my_stats_options_9809403065').hide();
+
+
+		$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
+		$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+		$('#user_profile_settings_text_9809403065').css("color", "#a5abb8");
+		$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+		$('#user_profile_nudge_text_9809403065').css("color", "#5c84f1");
+		$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
 	});
 
-	//clicking 'settings' reveal previously saved setting options
-	$('#user_profile_settings_9809403065').on('click', function (event) {
-		$('#nudge_options_9809403065').hide();
-		$('#my_stats_options_9809403065').hide();
-		$('#settings_options_9809403065').show();
-		//console.log('HI HI HI HI');
-	});
+
 	// $('#user_profile_settings_9809403065').on('click', function (event) {
 	// 	$('#user_profile_display_box_9809403065').load("../settings_options.html", function() {
 	// 	});

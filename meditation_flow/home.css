@@ -115,6 +115,186 @@ body{
 
 
 
+/*========================settings page elements=============================*/
+
+
+/*profile pic in settings -----------------------------------------------------*/
+
+
+.user_profile_id_9809403065 {
+	grid-row-start:2;
+	grid-row-end:3;
+	grid-column-start:4;
+	grid-column-end:7;
+
+	text-align: center;
+
+	display: grid;
+}
+
+
+.user_profile_pic_9809403065 {
+	max-width: 30%; 
+    max-height: 120%;
+    border-radius: 50%;
+ }
+
+
+
+/*setting menu elements -----------------------------------------------------*/
+
+.user_profile_section_and_menu_grid_divider_show_9809403065 {
+	display: block;
+	grid-row-start:1;
+	grid-row-end:12;
+	grid-column-start:2;
+	grid-column-end:9;
+
+	background: white;
+
+	border-radius: ;
+
+	/*border: 5px black solid;*/
+}
+
+/*.user_profile_menu_hide_9809403065 {
+	display: none;
+}*/
+	.user_profile_menu_show_9809403065 {
+		grid-row-start:4;
+		grid-row-end:4;
+		grid-column-start:3;
+		grid-column-end:8;
+
+		display: grid;
+		grid-template-column: 1fr 1fr 1fr;
+		grid-template-row: 1fr 1fr 1fr ;
+		/*border-right: solid #a5abb8 1.5px;*/
+	}
+
+		#user_profile_my_stats_9809403065 {
+			grid-row-start:2;
+			grid-row-end:2;
+			grid-column-start:1;
+			grid-column-end:3;
+		}
+
+			#user_profile_my_stats_text_9809403065 {
+				border-bottom: .5px solid #a5abb8;
+				cursor: pointer;
+				text-align: center;
+			}
+
+
+		 #user_profile_settings_9809403065 {
+			cursor: pointer;
+			grid-row-start:2;
+			grid-row-end:2;
+			grid-column-start:3;
+			grid-column-end:5;
+		}
+
+			#user_profile_settings_text_9809403065 {
+				border-bottom: .5px solid #a5abb8;
+				cursor: pointer;
+				text-align: center;
+			}
+
+
+		#user_profile_nudge_9809403065 {
+			cursor: pointer;
+			grid-row-start:2;
+			grid-row-end:2;
+			grid-column-start:5;
+			grid-column-end:7;
+		}
+
+			#user_profile_nudge_text_9809403065 {
+				border-bottom: .5px solid #a5abb8;
+				cursor: pointer;
+				text-align: center;
+				
+			}
+
+/*input[type=submit] {
+	font: 0.87em "avenir", sans-serif;
+	cursor: pointer;
+}
+*/
+
+
+input{
+	font: 1em 'apercu' ;
+	font-color: #313c47;
+
+	/*border-radius: 10px;*/
+}
+
+
+/*setting's section element--------------------------------------------------*/
+
+.user_profile_section_show_9809403065 {
+	grid-row-start:5;
+	grid-row-end:7;
+	grid-column-start:3;
+	grid-column-end:8;
+
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr;
+
+	color: #313c47;
+	cursor: initial;
+	/*justify-content: center;*/
+	/*align-items: top;*/
+}
+
+#settings_options_save_9809403065, #nudge_options_save_9809403065 {
+	grid-row-start:3;
+	grid-row-end:3;
+
+	cursor: pointer;
+	border-radius: 3px;
+	background-color: #5c84f1;
+	color: white;
+	padding: 3px;
+	font-weight: bold;
+	text-align: center;
+}
+
+/*#settings_options_save_9809403065, #nudge_options_save_9809403065 {
+	cursor: pointer;
+	border-radius: 3px;
+	background-color: #5c84f1;
+	color: white;
+	padding: 3px;
+
+	display: block;
+	position: absolute;
+	right:48%;
+
+	font-weight: bold;
+	text-align: center;
+}*/
+
+
+#my_stats_options_9809403065 {
+	display: block;
+}
+
+#settings_options_9809403065 {
+	display: block;
+}
+
+#nudge_options_9809403065 {
+	display: block;
+}
+
+
+/*===========================================================================*/
+
+
+
+
 
 /*==========================bottom fixed nav bar=============================*/
 #bottom_fixed_nav_bar_9809403065 {
@@ -154,204 +334,6 @@ body{
 /*
 ===========================================================================
 */
-
-
-/*========================settings page elements=============================*/
-
-/*setting's section element--------------------------------------------------*/
-
-
-
-.user_profile_id_9809403065 {
-
-	grid-row-start:2;
-	grid-row-end:4;
-	grid-column-start:4;
-	grid-column-end:7;
-
-	text-align: center;
-
-	display: grid;
-	/*grid-template-columns: 1fr 1fr 1fr 1fr 1fr;*/
-
-/*
-	justify-content: center;
-	align-items: top;*/
-}
-
-.user_profile_pic_9809403065 {
-	max-width: 60%; 
-    max-height: 180%;
-
-    border-radius: 48%;
-/*
-    grid-column-start:1;
-	grid-column-end:5;*/
- }
-
-.user_profile_section_show_9809403065 {
-
-	grid-row-start:5;
-	grid-row-end:7;
-	grid-column-start:3;
-	grid-column-end:8;
-
-	display: grid;
-	grid-template-rows: 1fr 1fr 1fr;
-
-	color: #313c47;
-	cursor: initial;
-
-	/*justify-content: center;*/
-	/*align-items: top;*/
-}
-
-#my_stats_options_9809403065 {
-	display: block;
-
-}
-
-#settings_options_9809403065 {
-	display: block;
-}
-
-#nudge_options_9809403065 {
-	display: block;
-}
-
-
-
-/*setting menu elements -----------------------------------------------------*/
-
-
-.user_profile_section_and_menu_grid_divider_show_9809403065 {
-	display: block;
-	grid-row-start:1;
-	grid-row-end:12;
-	grid-column-start:2;
-	grid-column-end:9;
-
-	background: white;
-
-	border-radius: ;
-
-	/*border: 5px black solid;*/
-}
-
-/*.user_profile_menu_hide_9809403065 {
-	display: none;
-}*/
-.user_profile_menu_show_9809403065 {
-	grid-row-start:4;
-	grid-row-end:4;
-	grid-column-start:3;
-	grid-column-end:8;
-
-	display: grid;
-	grid-template-column: 1fr 1fr 1fr;
-	grid-template-row: 1fr 1fr 1fr ;
-
-	/*border-right: solid #a5abb8 1.5px;*/
-
-
-}
-
-#user_profile_my_stats_9809403065 {
-	
-	grid-row-start:2;
-	grid-row-end:2;
-	grid-column-start:1;
-	grid-column-end:3;
-
-
-}
-
-#user_profile_my_stats_text_9809403065 {
-	border-bottom: .5px solid #a5abb8;
-	cursor: pointer;
-	text-align: center;
-	
-}
-
-
- #user_profile_settings_9809403065 {
-	cursor: pointer;
-	grid-row-start:2;
-	grid-row-end:2;
-	grid-column-start:3;
-	grid-column-end:5;
-}
-
-#user_profile_settings_text_9809403065 {
-	border-bottom: .5px solid #a5abb8;
-	cursor: pointer;
-	text-align: center;
-	
-}
-
-
-#user_profile_nudge_9809403065 {
-	cursor: pointer;
-	grid-row-start:2;
-	grid-row-end:2;
-	grid-column-start:5;
-	grid-column-end:7;
-}
-
-#user_profile_nudge_text_9809403065 {
-	border-bottom: .5px solid #a5abb8;
-	cursor: pointer;
-	text-align: center;
-	
-}
-
-/*#user_profile_menu_line_9809403065 {
-	grid-row-start:3;
-	grid-row-end:3;
-	grid-column-start:1;
-	grid-column-end:6;
-
-	border-bottom: 10px solid #a5abb8 ;
-	border-top: 10px solid #a5abb8 ;
-
-}*/
-
-
-
-/*#setting_options_9809403065 {
-	font: 0.87em "avenir", sans-serif;
-}*/
-
-
-/*input[type=submit] {
-	font: 0.87em "avenir", sans-serif;
-	cursor: pointer;
-}
-*/
-
-
-input{
-	font: 1em 'apercu' ;
-	font-color: #313c47;
-
-	/*border-radius: 10px;*/
-}
-
-#settings_options_save_9809403065, #nudge_options_save_9809403065 {
-	cursor: pointer;
-	border-radius: 3px;
-	background-color: #313c47;
-	color: white;
-	padding: 3px;
-	display: block;
-	position: absolute;
-	right:48%;
-	font-weight: bold;
-
-	text-align: center;
-	
-}
-/*===========================================================================*/
 
 
 
