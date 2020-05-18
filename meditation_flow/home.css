@@ -172,16 +172,21 @@ body{
 	text-align: center;
 
 	display: grid;
+	/*grid-template-columns: 1fr 1fr 1fr 1fr 1fr;*/
+
 /*
 	justify-content: center;
 	align-items: top;*/
 }
 
 .user_profile_pic_9809403065 {
-	max-width: 200%; 
-    max-height: 200%;
+	max-width: 60%; 
+    max-height: 180%;
 
-    border-radius: 50%;
+    border-radius: 48%;
+/*
+    grid-column-start:1;
+	grid-column-end:5;*/
  }
 
 .user_profile_section_show_9809403065 {
