@@ -3,35 +3,78 @@ $(document).ready(function() {
 	console.log("user_profile_settings script is working");
 
 
+
+
+
+function hide_settings_page () {
+		$(".user_profile_section_show_9809403065").hide();
+		$(".user_profile_menu_show_9809403065").hide();
+		$(".user_profile_section_and_menu_grid_divider_show_9809403065").hide()
+		$('html').removeClass();;
+}
+
+function hide_meditations_page () {
+		$(".recommended_meditation_recording_9809403065").hide();
+		$('html').removeClass();	
+}
+
+
+//by defaulf we show meditations page:
+hide_settings_page ();
+$('html').addClass('meditations_page_background');
+$(".recommended_meditation_recording_9809403065").show();
+
+
+//clicking meditations page shows recommended meditations and other recordings while hiding other pages:
+$('#meditations_page_9809403065').on('click', function(event) {
+	hide_settings_page ();
+	$('html').addClass('meditations_page_background');
+	$(".recommended_meditation_recording_9809403065").show();
+
+});
+
+//clicking user icon shows user profile menu and section and hides other pages
+
+$('#settings_9809403065').on('click', function(event) {
+	hide_meditations_page();
+	$('html').addClass('setting_page_background');
+	$(".user_profile_section_show_9809403065").show();
+	$(".user_profile_menu_show_9809403065").show();
+	$(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
+
+	
+
+	
+	// $(this).css("background-color", "#9ee6aa");
+
+	// $( "html" ).css( "background", "#fafafa" );
+
+
+	// $('html').attr('background', function(index, attr) {
+
+	// 	return attr == "#fafafa" ? "url('https://cdn.statically.io/gh/starlord92/mediatate/1537ecf3/images/early_dawn_background.jpg') no-repeat center center fixed" : "#fafafa";
+	// });
+
+	//by default, show the settings option page
+	$('#settings_options_9809403065').show();
+	$('#nudge_options_9809403065').hide();
+	$('#my_stats_options_9809403065').hide();
+});
+
 //========USER INTERACTION WITH THE MENU: MY STATS * SETTINGS * NUDGE======
-
-	//clicking user icon toggles user profile & setting section on and off
-	$('#settings_9809403065').on('click', function(event) {
-		
-		$(".meditation_control_9809403065").toggle({duration: 0});
-		$(".user_profile_section_hide_9809403065").toggleClass("user_profile_section_show_9809403065");
-		$(".user_profile_menu_hide_9809403065").toggleClass("user_profile_menu_show_9809403065");
-		// $(this).css("background-color", "#9ee6aa");
-
-		$( "html" ).css( "background", "white" );
-
-		$('#settings_options_9809403065').show();
-		$('#nudge_options_9809403065').hide();
-		$('#my_stats_options_9809403065').hide();
-	});
-
 
 	//clicking 'my stats' reveal current stats
 	$('#user_profile_my_stats_9809403065').on('click', function (event) {
 		$('#settings_options_9809403065').hide();
 		$('#nudge_options_9809403065').hide();
 		$('#my_stats_options_9809403065').show();
+
 		$('#user_profile_my_stats_9809403065').css("color", "#313c47");
-		
+
 	});
 
 
-		//clicking 'nudge' reveal setting options
+	//clicking 'nudge' reveal setting options
 	$('#user_profile_nudge_9809403065').on('click', function (event) {
 		$('#settings_options_9809403065').hide();
 		$('#nudge_options_9809403065').show();
@@ -71,7 +114,7 @@ $(document).ready(function() {
 	// 	// });
 	// });
 
-
+//===========================================================================//
 
 
 //=======SAVING ON/OFF STATE AND SETTINGS OF SCHEDULED MEDITATION=============
