@@ -48,7 +48,7 @@ $('#settings_9809403065').on('click', function(event) {
 	$(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
 
 	
-	//by default show the 'scheduled' subpage
+	//by default show the 'schedule' section
 	$('#settings_options_9809403065').hide();
 	$('#nudge_options_9809403065').hide();
 	$('#my_stats_options_9809403065').show();

@@ -21,7 +21,7 @@
 
 
 .meditations_page_background {
-	background: url('https://cdn.statically.io/gh/starlord92/mediatate/1537ecf3/images/early_dawn_background.jpg') no-repeat center center fixed;
+	background: url('https://cdn.statically.io/gh/starlord92/mediatate/1537ecf3/images/early_dawn_background.jpg') no-repeat center center scroll;
 
 	 /*url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
 
@@ -29,6 +29,7 @@
 	/*background-color:*/ /*#9de5aa*/ /*#6bcba3*/ /*#2a3743*/ /*#2e3943*/         /*#313c47*/ /*white ;*/
 	height: 100%;
 	width: 100%;
+
 }
 
 .setting_page_background {
@@ -36,7 +37,7 @@
 
 	 /*url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
 
-	background-size: cover;
+	/*background-size: cover;*/
 	/*background-color:*/ /*#9de5aa*/ /*#6bcba3*/ /*#2a3743*/ /*#2e3943*/         /*#313c47*/ /*white ;*/
 
 	height: 100%;
@@ -70,31 +71,15 @@ html, body {
 
 body{
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-	font: 1.1em 'apercu';
+	grid-template-columns: repeat(9, 1fr); 
+	grid-template-rows: repeat(11, 1fr); 
+	font: 1.5em 'apercu';
 	color: /*#c695c6;*/  #a5abb8;
 	
 	height: 100%;
 	width: 100%;
 
 }
-
-
-
-
-/*#user_profile_my_stats_9809403065 {
-	cursor: pointer;
-}
-
-#user_profile_settings_9809403065 {
-	cursor: pointer;
-}
-
-#user_profile_nudge_9809403065 {
-	cursor: pointer;
-}*/
-
 
 
 /*========================meditations page elements==========================*/
@@ -105,10 +90,55 @@ body{
 	grid-column-end:5;
 }
 
+
+
+
 #timer_control_9809403065 {
 	text-align: left;
 	cursor: pointer;
 }
+
+
+.recording_list_a_9809403065 {
+	
+	grid-row-start:9;
+	/*grid-row-end: span 100;*/
+	grid-column-start:3;
+	grid-column-end:8;
+
+	display:grid;
+
+	/*justify-content: center;*/
+
+}
+
+.recording_list_a_title_9809403065 {
+	font: 1.3rem 'apercu';
+	color: #a5abb8;
+	margin: auto;
+}
+
+.recording_track_a_of_list_a_9809403065 {
+
+	border-radius: 1%;
+	background-color: #7994af;
+	
+	padding: 8%;
+	/*font-weight: bold;*/
+	/*text-align: center;*/
+
+	/*margin: auto;*/
+	/*width: 100%*/
+
+	font: .8em 'apercu';
+	color: white;
+
+	cursor: pointer;
+
+
+}
+
+
 /*===========================================================================*/
 
 
@@ -118,31 +148,7 @@ body{
 /*========================settings page elements=============================*/
 
 
-/*profile pic in settings -----------------------------------------------------*/
-
-
-.user_profile_id_9809403065 {
-	grid-row-start:2;
-	grid-row-end:3;
-	grid-column-start:4;
-	grid-column-end:7;
-
-	text-align: center;
-
-	display: grid;
-}
-
-
-.user_profile_pic_9809403065 {
-	max-width: 30%; 
-    max-height: 120%;
-    border-radius: 50%;
- }
-
-
-
-/*setting menu elements -----------------------------------------------------*/
-
+/*create a white central column enclosing details of the settings page */ 
 .user_profile_section_and_menu_grid_divider_show_9809403065 {
 	display: block;
 	grid-row-start:1;
@@ -157,12 +163,34 @@ body{
 	/*border: 5px black solid;*/
 }
 
-/*.user_profile_menu_hide_9809403065 {
-	display: none;
-}*/
+
+/*profile pic in settings --------------------------------------------------*/
+
+.user_profile_id_9809403065 {
+	grid-row-start:2;
+	grid-row-end:3;
+	grid-column-start:4;
+	grid-column-end:7;
+
+	text-align: center;
+
+	display: grid;
+}
+
+
+.user_profile_pic_9809403065 {
+	max-width: 50%; 
+    max-height: 150%;
+    border-radius: 50%;
+ }
+
+
+
+/*setting menu elements -----------------------------------------------------*/
+
 	.user_profile_menu_show_9809403065 {
-		grid-row-start:4;
-		grid-row-end:4;
+		grid-row-start:3;
+		grid-row-end:3;
 		grid-column-start:3;
 		grid-column-end:8;
 
@@ -233,61 +261,68 @@ input{
 
 /*setting's section element--------------------------------------------------*/
 
-.user_profile_section_show_9809403065 {
-	grid-row-start:5;
-	grid-row-end:7;
-	grid-column-start:3;
-	grid-column-end:8;
+	.user_profile_section_show_9809403065 {
+		grid-row-start:4;
+		grid-row-end:6;
+		grid-column-start:3;
+		grid-column-end:8;
 
-	display: grid;
-	grid-template-rows: 1fr 1fr 1fr;
+		display: grid;
+		/*grid-template-rows: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
+*/
+		color: #313c47;
+		cursor: initial;
+		/*justify-content: center;*/
+		/*align-items: top;*/
 
-	color: #313c47;
-	cursor: initial;
-	/*justify-content: center;*/
-	/*align-items: top;*/
-}
+	/*	height: 100%;
+		width:100%;*/
+	}
 
-#settings_options_save_9809403065, #nudge_options_save_9809403065 {
-	grid-row-start:3;
-	grid-row-end:3;
+		#settings_options_9809403065 {
 
-	cursor: pointer;
-	border-radius: 3px;
-	background-color: #5c84f1;
-	color: white;
-	padding: 3px;
-	font-weight: bold;
-	text-align: center;
-}
+	/*		grid-row-start:1;
+			grid-row-end:3;
+			grid-column-start:1;
+			grid-column-end:4;*/
 
-/*#settings_options_save_9809403065, #nudge_options_save_9809403065 {
-	cursor: pointer;
-	border-radius: 3px;
-	background-color: #5c84f1;
-	color: white;
-	padding: 3px;
+			/*height: 100%;
+			width:100%;*/
 
-	display: block;
-	position: absolute;
-	right:48%;
-
-	font-weight: bold;
-	text-align: center;
-}*/
+			/*display: block;*/
 
 
-#my_stats_options_9809403065 {
-	display: block;
-}
+		}
 
-#settings_options_9809403065 {
-	display: block;
-}
+			#settings_options_save_9809403065, #nudge_options_save_9809403065 {
+	/*			grid-row-start:3;
+				grid-row-end:3;
+				grid-column-start:2;
+				grid-column-end:2;*/
 
-#nudge_options_9809403065 {
-	display: block;
-}
+
+				cursor: pointer;
+				border-radius: 3px;
+				background-color: #5c84f1;
+				color: white;
+				padding: 3px;
+				font-weight: bold;
+				text-align: center;
+
+				 margin: auto;
+				 width: 20%
+
+			}
+
+		#my_stats_options_9809403065 {
+			display: block;
+		}
+
+
+		#nudge_options_9809403065 {
+			display: block;
+		}
 
 
 /*===========================================================================*/

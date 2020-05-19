@@ -90,11 +90,11 @@ function setDefaultTimeSetting(val, callback) {
 	});
 	chrome.storage.sync.set({stored_active_medi_date: 'Monday to Fri'}, function() {
 	});
-	chrome.storage.sync.set({stored_scheduled_meditation_checkbox: true}, function() {
+	chrome.storage.sync.set({stored_scheduled_meditation_checkbox: false}, function() {
 	});
 
 	//nudge 
-	chrome.storage.sync.set({stored_nudge_checkbox:true}, function() {
+	chrome.storage.sync.set({stored_nudge_checkbox:false}, function() {
 	});
 	chrome.storage.sync.set({stored_nudge_start_time: '10:00:00'}, function() {
 	});
