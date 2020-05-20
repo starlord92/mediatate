@@ -3,7 +3,9 @@ $(document).ready(function() {
 	console.log("user_profile_settings script is working");
 
 
-
+function hide_headspace_page() {
+	;
+}
 
 
 function hide_settings_page () {
@@ -17,30 +19,54 @@ function hide_settings_page () {
 
 function hide_meditations_page () {
 		$(".recommended_meditation_recording_9809403065").hide();
-		$('html').removeClass();	
+		$('html').removeClass();
+		$('recording_list_a_9809403065').hide();
+		//we should NOT need this bevause by default the below class is hidden
+		$('individual_meditation_recording_player_9809403065').hide();
+
 }
 
+function hide_meditation_recording_player() {
+	// stop the mdia player
+	$('html').removeClass('individual_meditation_recording_player_background');
+}
 
-//by defaulf we show meditations page:
-hide_settings_page ();
-$('html').addClass('meditations_page_background');
-$(".recommended_meditation_recording_9809403065").show();
+//assumption: 
+// settigns and headsapce page are hidden.  
+// meditations page is shown
+// individual_meditation_recording_player_9809403065 is hidden by default
+
+function show_meditation_recording_player() {
+	hide_meditations_page();
+	$('html').addClass('individual_meditation_recording_player_background');
+	
+}
+
+//assumption, only meditation page elements are shown
+$('individual_meditation_recording_player_9809403065').on('click', function(event) {
 
 
 
-
-//clicking meditations page shows recommended meditations and other recordings while hiding other pages:
-$('#meditations_page_9809403065').on('click', function(event) {
-	hide_settings_page ();
-	$('html').addClass('meditations_page_background');
-	$(".recommended_meditation_recording_9809403065").show();
+	
 
 });
 
-//clicking user icon shows user profile menu and section and hides other pages
 
-$('#settings_9809403065').on('click', function(event) {
+
+
+function show_meditations_page() {
+	hide_settings_page();
+	hide_headspace_page();
+	$('html').addClass('meditations_page_background');
+	$(".recommended_meditation_recording_9809403065").show();
+	$('recording_list_a_9809403065').show();
+}
+
+
+function show_settings_page() {
+	hide_headspace_page();
 	hide_meditations_page();
+
 	$('html').addClass('setting_page_background');
 	$(".user_profile_id_9809403065").show();
 	$(".user_profile_section_show_9809403065").show();
@@ -49,9 +75,9 @@ $('#settings_9809403065').on('click', function(event) {
 
 	
 	//by default show the 'schedule' section
-	$('#settings_options_9809403065').hide();
+	$('#settings_options_9809403065').show();
 	$('#nudge_options_9809403065').hide();
-	$('#my_stats_options_9809403065').show();
+	$('#my_stats_options_9809403065').hide();
 
 	$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
 	$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
@@ -62,6 +88,53 @@ $('#settings_9809403065').on('click', function(event) {
 	$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
 	$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
 
+}
+
+
+
+
+
+
+//by defaulf we show meditations page:
+hide_settings_page ();
+
+show_meditations_page();
+
+
+
+//clicking meditations page shows recommended meditations and other recordings while hiding other pages:
+$('#meditations_page_9809403065').on('click', function(event) {
+
+	show_meditations_page();
+
+});
+
+//clicking user icon shows user profile menu and section and hides other pages
+
+$('#settings_9809403065').on('click', function(event) {
+	// hide_meditations_page();
+	// $('html').addClass('setting_page_background');
+	// $(".user_profile_id_9809403065").show();
+	// $(".user_profile_section_show_9809403065").show();
+	// $(".user_profile_menu_show_9809403065").show();
+	// $(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
+
+	
+	// //by default show the 'schedule' section
+	// $('#settings_options_9809403065').hide();
+	// $('#nudge_options_9809403065').hide();
+	// $('#my_stats_options_9809403065').show();
+
+	// $('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
+	// $('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+	// $('#user_profile_settings_text_9809403065').css("color", "#5c84f1");
+	// $('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
+
+	// $('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
+	// $('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+	show_settings_page();
 	
 
 	
@@ -76,9 +149,9 @@ $('#settings_9809403065').on('click', function(event) {
 	// });
 
 	//by default, show the settings option page
-	$('#settings_options_9809403065').show();
-	$('#nudge_options_9809403065').hide();
-	$('#my_stats_options_9809403065').hide();
+	// $('#settings_options_9809403065').show();
+	// $('#nudge_options_9809403065').hide();
+	// $('#my_stats_options_9809403065').hide();
 });
 
 //========USER INTERACTION WITH THE MENU: MY STATS * SETTINGS * NUDGE======
