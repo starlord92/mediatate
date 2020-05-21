@@ -45,10 +45,13 @@ html, body {
 
 body{
 	display: grid;
-	grid-template-columns: repeat(9, 1fr); 
-	grid-template-rows: repeat(11, 1fr); 
+	/*grid-template-columns: repeat(9, 1fr);*/
+	/*grid-template-rows: repeat(2, 1fr); */
+
+	grid-template-rows: repeat(9, 1fr);
 	font: 1.5em 'apercu';
 	color: /*#c695c6;*/  #a5abb8;
+
 	
 	height: 100%;
 	width: 100%;
@@ -128,29 +131,50 @@ body{
 /*========================meditations page elements==========================*/
 
 .recommended_meditation_recording_9809403065 {
-	grid-row-start:2;
-	grid-column-start:2;
-	grid-column-end:5;
+	/*containing-block = body*/
+	grid-row-start:1;
+
+	display: grid;
+	grid-template-columns: 50px minmax(150px,300px); 
+	grid-template-rows: 70px 1fr;
+
 	cursor: pointer;
 }
+	#timer_control_9809403065 {
+		/*containing-block = recommended_meditation_recording*/
+		grid-row-start:2;
+		grid-column-start:2;
+		grid-column-end:2;
+		
+	}
 
 
 
-
-#timer_control_9809403065 {
-	/*text-align: left;*/
-	
-}
+/*@media (min-width: 1000px) {
+  .recording_list_a_9809403065 {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 
+      "header  header"
+      "nav     nav"
+      "sidebar content"
+      "ad      footer";
+  }
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+}*/
 
 
 .recording_list_a_9809403065 {
-	
-	grid-row-start:8;
-	grid-row-end: span 100;
-	grid-column-start:3;
-	grid-column-end:8;
+	/*containing-block = body*/
+	grid-row-start:7;
+	grid-row-end:span 100;
+	grid-column-start: 1;
+
 
 	display:grid;
+	grid-template-columns: 
 
 	/*justify-content: center;*/
 
@@ -159,7 +183,7 @@ body{
 .recording_list_a_title_9809403065 {
 	font: 1.3rem 'apercu';
 	color: #a5abb8;
-	margin: auto;
+	/*margin: auto;*/
 }
 
 .recording_track_a_of_list_a_9809403065 {
