@@ -33,7 +33,7 @@ function hide_settings_page () {
 function hide_meditations_page () {
 		$('.recommended_meditation_recording_9809403065').hide();
 		$('html').removeClass();
-		$('.recording_list_a_9809403065').hide();
+		$('.recording_lists_9809403065').hide();
 		//we should NOT need this bevause by default the below class is hidden
 		// $('individual_meditation_recording_player_9809403065').hide();
 };
@@ -129,7 +129,7 @@ function show_meditations_page() {
 	hide_headspace_page();
 	$('html').addClass('meditations_page_background');
 	$(".recommended_meditation_recording_9809403065").show();
-	$('.recording_list_a_9809403065').show();
+	$('.recording_lists_9809403065').show();
 };
 
 
