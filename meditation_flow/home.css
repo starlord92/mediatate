@@ -79,17 +79,51 @@ body{
 	width: 100%;
 }
 
-.individual_meditation_recording_player_9809403065 {
-	display: none;
 
-}
+
+
+
+/*============INDIVIDUAL MEDITATION RECORDING SUBPAGE======================*/
 
 .individual_meditation_recording_player_background {
+	background: /*#fafafa;*/ /*#f0f0f0;*/ /*#f5f5f5;*/ #f8f8f8;
+	height: 100%;
+	width: 100%;
+}
+
+.individual_meditation_recording_player_9809403065 {
+	grid-row-start:1;
+	grid-row-end: span 100;
+	grid-column-start:1;
+	grid-column-end: span 100;
+
+
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%
+}
+
+#player_9809403065 {
+
+
+	
 
 }
 
+#recording_player_close_button_9809403065 {
+	cursor: pointer;
 
+	position: absolute;
+	top: 5%;
+	bottom: 90%;
+	right: 5%;
+	left:90%;
 
+}
+
+/*========================================================================*/
 
 /*========================meditations page elements==========================*/
 
@@ -97,6 +131,7 @@ body{
 	grid-row-start:2;
 	grid-column-start:2;
 	grid-column-end:5;
+	cursor: pointer;
 }
 
 
@@ -104,7 +139,7 @@ body{
 
 #timer_control_9809403065 {
 	/*text-align: left;*/
-	cursor: pointer;
+	
 }
 
 
@@ -189,7 +224,7 @@ body{
 
 .user_profile_pic_9809403065 {
 	max-width: 50%; 
-    max-height: 150%;
+    max-height: 140%;
     border-radius: 50%;
  }
 
@@ -199,7 +234,7 @@ body{
 
 	.user_profile_menu_show_9809403065 {
 		grid-row-start:3;
-		grid-row-end:3;
+		grid-row-end:4;
 		grid-column-start:3;
 		grid-column-end:8;
 
@@ -271,8 +306,8 @@ input{
 /*setting's section element--------------------------------------------------*/
 
 	.user_profile_section_show_9809403065 {
-		grid-row-start:4;
-		grid-row-end:6;
+		grid-row-start:5;
+		grid-row-end:7;
 		grid-column-start:3;
 		grid-column-end:8;
 
