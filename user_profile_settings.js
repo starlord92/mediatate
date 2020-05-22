@@ -1,5 +1,3 @@
-// import * as pages_switch from 'pages_show_hide_functions.js'
-
 $(document).ready(function() { 
 
 	console.log("user_profile_settings script is working");
@@ -33,10 +31,72 @@ function hide_settings_page () {
 function hide_meditations_page () {
 		$('.recommended_meditation_recording_9809403065').hide();
 		$('html').removeClass();
+		$('body').removeClass('meditations_page_body');
 		$('.recording_lists_9809403065').hide();
 		//we should NOT need this bevause by default the below class is hidden
 		// $('individual_meditation_recording_player_9809403065').hide();
 };
+
+
+
+function show_meditations_page() {
+	hide_settings_page();
+	hide_headspace_page();
+	$('html').addClass('meditations_page_background');
+	$('body').addClass('meditations_page_body');
+	$(".recommended_meditation_recording_9809403065").show();
+	$('.recording_lists_9809403065').show();
+};
+
+
+function show_settings_page() {
+	hide_headspace_page();
+	hide_meditations_page();
+
+	$('html').addClass('settings_page_background');
+	$(".user_profile_id_9809403065").show();
+	$(".user_profile_section_show_9809403065").show();
+	$(".user_profile_menu_show_9809403065").show();
+	$(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
+
+	
+	//by default show the 'schedule' section
+	$('#settings_options_9809403065').show();
+	$('#nudge_options_9809403065').hide();
+	$('#my_stats_options_9809403065').hide();
+
+	$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
+	$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+	$('#user_profile_settings_text_9809403065').css("color", "#5c84f1");
+	$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
+
+	$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
+	$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+
+};
+
+///////////////fixed bottom bar nav allows us to switch bewteen pages//////////
+
+//clicking meditations page shows recommended meditations and other recordings while hiding other pages:
+$('#meditations_page_9809403065').on('click', function(event) {
+
+	hide_settings_page (); 
+	show_meditations_page();
+
+});
+
+//clicking user icon shows user profile menu and section and hides other pages
+
+$('#settings_9809403065').on('click', function(event) {
+
+	hide_meditations_page (); 
+	show_settings_page();
+
+
+});
+
+//////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -124,68 +184,11 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 //////////////////////////////////////////////////////////////////////////
 
 
-function show_meditations_page() {
-	hide_settings_page();
-	hide_headspace_page();
-	$('html').addClass('meditations_page_background');
-	$(".recommended_meditation_recording_9809403065").show();
-	$('.recording_lists_9809403065').show();
-};
-
-
-function show_settings_page() {
-	hide_headspace_page();
-	hide_meditations_page();
-
-	$('html').addClass('setting_page_background');
-	$(".user_profile_id_9809403065").show();
-	$(".user_profile_section_show_9809403065").show();
-	$(".user_profile_menu_show_9809403065").show();
-	$(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
-
-	
-	//by default show the 'schedule' section
-	$('#settings_options_9809403065').show();
-	$('#nudge_options_9809403065').hide();
-	$('#my_stats_options_9809403065').hide();
-
-	$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
-	$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
-
-	$('#user_profile_settings_text_9809403065').css("color", "#5c84f1");
-	$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
-
-	$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
-	$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
-
-};
 
 
 
 
 
-
-
-
-
-
-//clicking meditations page shows recommended meditations and other recordings while hiding other pages:
-$('#meditations_page_9809403065').on('click', function(event) {
-
-	hide_settings_page (); 
-	show_meditations_page();
-
-});
-
-//clicking user icon shows user profile menu and section and hides other pages
-
-$('#settings_9809403065').on('click', function(event) {
-
-	hide_meditations_page (); 
-	show_settings_page();
-
-
-});
 
 //========USER INTERACTION WITH THE MENU: MY STATS * SETTINGS * NUDGE======
 
@@ -401,7 +404,9 @@ $('#settings_9809403065').on('click', function(event) {
 	
 	});
 
-}); 
+});
+
+
 
 
 
