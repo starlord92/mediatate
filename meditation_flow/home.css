@@ -36,8 +36,6 @@ html, body {
 	/* Vertically center EACH element in a grid with regard to its cell/track, mor more accurately grid area*/
 	/*align-items: center;*/
 	
-	height: 100%;
-	width: 100%;
 	/*background-color: #e9ebee;*/	/*fb desktop background*/
 }
 
@@ -55,19 +53,19 @@ html, body {
 
 }*/
 
-body{
+/*body{
 	display: grid;
 	grid-template-columns: repeat(9, 1fr); 
 	grid-template-rows: repeat(11, 1fr); 
 	font: 1.5em 'apercu';
-	color: /*#c695c6;*/  #a5abb8;
+	color: #a5abb8;
 	
 	height: 100%;
 	width: 100%;
 
-}
+}*/
 
-/*.meditations_page_body {
+.meditations_page_body {
 
 	display: grid;
 	
@@ -79,8 +77,23 @@ body{
 	
 	height: 100%;
 	width: 100%;
-}*/
+}
 
+
+.settings_page_body {
+	display: grid;
+	grid-template-columns: repeat(9, 1fr); 
+	grid-template-rows: repeat(11, 1fr); 
+	font: 1.5em 'apercu';
+	color: /*#c695c6;*/  #a5abb8;
+	
+	height: 100%;
+	width: 100%;
+
+}
+
+
+/*to be placed inside html element*/
 .meditations_page_background {
 	background: url('https://cdn.statically.io/gh/starlord92/mediatate/1537ecf3/images/early_dawn_background.jpg') no-repeat center center scroll;
 
