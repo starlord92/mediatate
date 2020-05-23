@@ -65,11 +65,11 @@ chrome.runtime.onMessage.addListener(
   function(incoming, sender, sendResponse) {
 
     //console.log("incoming message is " + incoming.message);
-    if (incoming.message == "turn off") {
+    if (incoming.message == "turn off scheduled meditation") {
     	clearInterval(scheduled_meditation_process);
     }
 
-    if (incoming.message == "turn on") {
+    if (incoming.message == "turn on scheduled meditation") {
     	exec();
     }
     return Promise.resolve("Dummy response to keep the console quiet");

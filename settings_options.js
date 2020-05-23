@@ -11,6 +11,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_scheduled_meditation_checkbox'], function(data) {
 	          console.log('stored_scheduled_meditation_checkbox is ' + data.stored_scheduled_meditation_checkbox);
 	          checkbox_value = data.stored_scheduled_meditation_checkbox;
+	          console.log('checkbox value is ' + checkbox_value);
 	          $('#scheduled_meditation_checkbox_9809403065').attr('value',checkbox_value);
 
 	});

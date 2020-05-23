@@ -286,13 +286,13 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 
 		//see if checkbox got checked
 		var scheduled_meditation_checkbox = $('#scheduled_meditation_checkbox_9809403065').prop("checked");
-		//if checkbox is checked, and current status of scheduled meditation is off, then send a mesage to background script teling it to turn scheduled meditation on
+		//if checkbox is checked, and current status of scheduled meditation is off, then send a mesage to background.js script teling it to turn scheduled meditation on
 		if (scheduled_meditation_checkbox) {
 
 			chrome.storage.sync.get(['stored_scheduled_meditation_checkbox'], function(data){
 			    //console.log('stored_scheduled_meditation_checkbox is ' + data.stored_scheduled_meditation_checkbox);
 			    if (data.stored_scheduled_meditation_checkbox == false) {
-			    	chrome.runtime.sendMessage({message: "turn on"}, function(r) {});
+			    	chrome.runtime.sendMessage({message: "turn on scheduled meditation"}, function(r) {});
 			    }
 			});
 		}
@@ -301,14 +301,14 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 			chrome.storage.sync.get(['stored_scheduled_meditation_checkbox'], function(data){
 			   // console.log('stored_scheduled_meditation_checkbox is ' + data.stored_scheduled_meditation_checkbox);
 			    if (data.stored_scheduled_meditation_checkbox == true) {
-			    	chrome.runtime.sendMessage({message: "turn off"}, function(r) {});
+			    	chrome.runtime.sendMessage({message:  "turn off scheduled meditation"}, function(r) {});
 			    }
 			});
 		}
 		
 		// in either scenario, update stored_scheduled_meditation_checkbox 
 		chrome.storage.sync.set({stored_scheduled_meditation_checkbox: scheduled_meditation_checkbox }, 
-			function() {//console.log('scheduled meditation?  ' + scheduled_meditation_checkbox );
+			function() {console.log('scheduled meditation?  ' + scheduled_meditation_checkbox );
 		});
 
 		var work_start_time = $('#work_start_time_9809403065').val();
@@ -323,24 +323,24 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 
 			//confirm user input is properly stored
 			chrome.storage.sync.get(['stored_work_start_time'], function(data) {
-			          //console.log('stored_work_start_time is ' + data.stored_work_start_time);
+			          console.log('stored_work_start_time is ' + data.stored_work_start_time);
 			});
 
 		});
 
 		chrome.storage.sync.set({stored_work_end_time: work_end_time}, 
 			function() {
-			//console.log('work end time is ' + work_end_time);
+			console.log('work end time is ' + work_end_time);
 		});
 
 		chrome.storage.sync.set({stored_medi_duration: medi_duration}, 
 			function() {
-		//console.log('the duration of each mediation period is ' + medi_duration);
+		console.log('the duration of each mediation period is ' + medi_duration);
 		});
 
 		chrome.storage.sync.set({stored_medi_frequency: medi_frequency}, 
 			function() {
-		//console.log('the frequency of each mediation period is ' + medi_frequency);
+		console.log('the frequency of each mediation period is ' + medi_frequency);
 		});
 
 		chrome.storage.sync.set({stored_active_medi_date: active_medi_date}, 
