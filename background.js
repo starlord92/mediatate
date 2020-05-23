@@ -193,9 +193,9 @@ chrome.storage.sync.get('stored_work_start_time', function(data) {
 	work_start_time_hr = parseInt(arr[0], 10); 
 	work_start_time_min = parseInt(arr[1], 10);
 	work_start_time_sec = parseInt(arr[2], 10);
-	//console.log(" updated work start hour is " + work_start_time_hr);
-	// console.log(" updated work start min is " + work_start_time_min);
-	// console.log(" updated work start sec is " + work_start_time_sec);
+	console.log(" updated work start hour is " + work_start_time_hr);
+	console.log(" updated work start min is " + work_start_time_min);
+	console.log(" updated work start sec is " + work_start_time_sec);
 });
 
 chrome.storage.sync.get('stored_work_end_time', function(data) {
@@ -204,18 +204,18 @@ chrome.storage.sync.get('stored_work_end_time', function(data) {
 	work_end_time_hr = parseInt(arr[0], 10); 
 	work_end_time_min = parseInt(arr[1], 10);
 	work_end_time_sec = parseInt(arr[2], 10);
-	//console.log(" updated work end hour is " + work_end_time_hr);
-	// console.log(" updated work end min is " + work_end_time_min);
-	// console.log(" updated work end sec is " + work_end_time_sec);
+	console.log(" updated work end hour is " + work_end_time_hr);
+	console.log(" updated work end min is " + work_end_time_min);
+	console.log(" updated work end sec is " + work_end_time_sec);
 });
 
 chrome.storage.sync.get('stored_medi_duration', function(data) {
-	//console.log(" stored medi duration is " + data.stored_medi_duration);
+	console.log(" stored medi duration is " + data.stored_medi_duration);
 	medi_duration = data.stored_medi_duration;
 });
 
 chrome.storage.sync.get('stored_medi_frequency', function(data) {
-	//console.log(" stored medi frequency is " + data.stored_medi_frequency);
+	console.log(" stored medi frequency is " + data.stored_medi_frequency);
 	medi_frequency = data.stored_medi_frequency;
 });
 
@@ -227,7 +227,7 @@ chrome.storage.sync.get('stored_active_medi_date', function(data) {
 
 
 chrome.storage.sync.get('stored_scheduled_meditation_checkbox', function(data) {
-	//console.log(" stored scheduled meditation checkbox status " + data.stored_scheduled_meditation_checkbox);
+	console.log(" stored scheduled meditation checkbox status " + data.stored_scheduled_meditation_checkbox);
 	scheduled_meditation_checkbox = data.stored_scheduled_meditation_checkbox;
 });
 
