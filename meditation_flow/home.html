@@ -14,13 +14,13 @@
 
 <body>
 
-<!---============================ CHROME EXTENSION: NEW TAB =================================-->
+<!---====================CHROME EXTENSION: NEW TAB =========================-->
 
 
 <!-------MEDITATIONS PAGE (start)--------------------------------------------->
 	
 	<div class="recommended_meditation_recording_9809403065">
-		<div id="timer_control_9809403065">
+		<div id="recommended_meditation_recording_link_9809403065">
 			The Warm Up: 
 			<br>find the right mindset before coding
 		</div>
@@ -66,7 +66,7 @@
 					apprentice -> master level
 				</div>
 			
-<br><br>
+<br><br><!-- ===> to create space after the last recording -->
 
 						
 			</div>
@@ -162,35 +162,50 @@
 <!-- hidden by default -->
 	<div class="individual_meditation_recording_player_9809403065">
 		<div id="player_9809403065">
-			
 			<br>meditation session progress bar
 
-			<audio id="zenbellsound">
-			<source src="../meditation_recordings/bell.mp3" typ="audio/mp3">
-		    Your browser does not support the
-		    <code>audio</code> element.
-			</audio>
-<div id="recording_player_close_button_9809403065">X</div>
-		
-
+			<div id="recording_player_close_button_9809403065">X</div>
 		</div>
-		<!-- <div id="recording_player_close_button_9809403065">X</div> -->
-
-		
-			
 	</div>
 
 <!--------------INDIVIDUAL MEDITATION RECORDING PAGE (end)  ------------------>
 
 
 
-<!-- 	<div></div>
-	<div></div>
-	<div></div>
+<!--------------LINKS TO MEDITATION RECORDINGS (start)------------------------>
 
-	<div></div>
-	<div></div>
-	<div></div> -->
+<!-- current list of recordings: 
+	warming up & getting the right mindset
+	 reading docs, 
+	 debugging
+	 writing code,
+	  general breathing, 
+	  general walking, 
+	  general eating. 
+
+each <div class="recording_track_a_of_list_a_9809403065"> and <div class="recording_track_b_of_list_b_9809403065"> will be given an id, which corresspond with an id of the audio files. for example, audio element 'zenbellsound' would pairs with <div class="recording_track_a_of_list_a_9809403065" id='zenbellsound' => 
+
+
+	-->
+
+
+<audio id="zenbellsound">
+<source src="../meditation_recordings/bell.mp3" type="audio/mp3">
+</audio>
+
+<audio id="runningsound">
+<source src="../meditation_recordings/running.wav" type="audio/wav">
+</audio>
+
+
+
+
+
+<!--------------LINKS TO MEDITATION RECORDINGS (end)-------------------------->
+
+
+
+
 
 
 

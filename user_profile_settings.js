@@ -134,19 +134,13 @@ function hide_meditation_recording_player() {
 }
 
 
+
  // when user click either an element of class 'recommended_meditation_recording_9809403065' of of class 'recording_track_a_of_list_a_980940306', open the individual_meditation_recording_player_9809403065 AND play the meditation recording
 
 var inside_meditation_session = false;
 var recording_is_playing = false;
 
-$('.recommended_meditation_recording_9809403065').on('click', function(event) {
-	hide_meditations_page();
-	show_meditation_recording_player();
-	var recording = document.getElementById("zenbellsound");
-	recording.play();
-	recording_is_playing = true;
-	inside_meditation_session = true;
-});
+//space bar only works to pause/resume a recording when we are inside a meditation session:
 
 	$('body').keydown(function (event) {
 		if (inside_meditation_session == true) {
@@ -164,6 +158,27 @@ $('.recommended_meditation_recording_9809403065').on('click', function(event) {
 		}; 
 	});
 
+
+// current list of recordings are taken from home.html.  we can change the links there.
+//
+// 	warming up & getting the right mindset
+var warmup_mindset = document.getElementById("runningsound");
+// 	reading documentations
+// 	debugging
+// 	writing code,
+// 	general breathing, 
+// 	general walking, 
+// 	eneral eating.
+
+
+$('#recommended_meditation_recording_link_9809403065').on('click', function(event) {
+	hide_meditations_page();
+	show_meditation_recording_player();
+	var recording = warmup_mindset;
+	recording.play();
+	recording_is_playing = true;
+	inside_meditation_session = true;
+});
 
 $('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
 	hide_meditations_page();
