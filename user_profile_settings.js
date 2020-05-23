@@ -32,7 +32,7 @@ function hide_settings_page () {
 };
 
 function hide_meditations_page () {
-		;
+		
 		$('html').removeClass();
 		$('body').removeClass('meditations_page_body');
 
@@ -121,12 +121,17 @@ function show_meditation_recording_player() {
 	hide_meditations_page();
 	$('.individual_meditation_recording_player_9809403065').show();
 	$('html').addClass('individual_meditation_recording_player_background');
+	$('body').addClass('individual_meditation_recording_player_body');
+
 	$('#bottom_fixed_nav_bar_9809403065').hide();
 }
 
 function hide_meditation_recording_player() {
 	// stop the media player
 	$('html').removeClass('individual_meditation_recording_player_background');
+	$('body').removeClass('individual_meditation_recording_player_body');
+
+	
 	$('.individual_meditation_recording_player_9809403065').hide();
 
 	//reshow the fixed bottom nav bar

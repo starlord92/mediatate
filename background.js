@@ -7,6 +7,7 @@ var installed_time_stamp;
 var scheduled_meditation_checkbox;
 
 
+//===========UPON INSTALLATION===============================================//
 
 chrome.runtime.onInstalled.addListener(function() {
 	//console.log("background.js: extension is installed");
@@ -22,7 +23,7 @@ chrome.runtime.onInstalled.addListener(function() {
     }]);
   	});
 
-  	//save the time user joins theana
+  	//save the time user joins Theana
   	installed_time_stamp = Date.now();
   	//console.log("installed time and date is " + installed_time_stamp);
   	chrome.storage.sync.set({stored_installed_time_stamp: installed_time_stamp}, function() {
@@ -31,7 +32,8 @@ chrome.runtime.onInstalled.addListener(function() {
 			        //console.log('stored_installed_time_stamp is ' + data.stored_installed_time_stamp);
 			});
 	});
-  	//scheduled meditation is on at installation
+
+  	//scheduled meditation is set to be on at installation
   	exec();
 
  //  	chrome.runtime.sendMessage({message: "turn off: nudge for nudge_content_script.js"}, function(r) {});
@@ -119,35 +121,9 @@ function setDefaultTimeSetting(val, callback) {
 	}
 };
 
-// if (
-// 		    		(work_start_hour < work_end_hour && 
-// 		    		current_hour >= work_start_hour && 
-// 		    		current_hour < work_end_hour) 
-
-// 				    ||
-
-// 				    (work_start_hour > ork_end_hour 
-// 				    &&
-// 				    ((current_hour >= nudge_start_hour && current_hour >= nudge_end_hour) || (current_hour <= nudge_start_hour && current_hour < nudge_end_hour))
-// 				    )
-
-// 				    ||
-
-// 				    (nudge_start_hour == nudge_end_hour)
-// 				)
-
-// 		    		{
-// 						enable_nudge = 1;
-// 						//console.log('nudge is enabled because it is during the period nudge is set to be active');
-						
-// 		    		} 
-// 		    	else {
-// 		    		enable_nudge = 0;
-// 		    		//console.log('nudge is disabled because it is NOT during the period nudge is set to be active');
-// 		    	}
 
 //check for updated user settings
-//check it is time to open the meditation tab and do so 
+//check it is time to open the scheduled meditation tab and do so 
 function checkTime() {
 	//console.log("checktime is running");
 	//updateTimeSetting();
@@ -162,7 +138,7 @@ function checkTime() {
 
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == -1 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() == 0 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		//console.log("open meditation tab");
 			}
