@@ -86,7 +86,11 @@ $(document).ready(function() {
 	});
 
 
+chrome.storage.sync.getBytesInUse(null, function(data) {
 
+	console.log("amount of sync storage being  used in total " + data);
+
+});
 
 
 
