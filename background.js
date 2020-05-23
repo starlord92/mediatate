@@ -41,6 +41,8 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 
+//===========================SCHEDULED MEDITATION BACKEND================= //
+
 //scheduled meditation
 //Order of execution: 
 	//set default time settings
@@ -183,56 +185,61 @@ function openMeditationTab() {
 }
 
 
-// actively listen for updated setting convert string user input for work start and end time stored in chrome.storage.sync to hour, minute, second in integer.  udpate will be written to chrome.storage by user_profile_settings.js
+// actively listen for updated setting convert string user input for work start and end time stored in chrome.storage.sync to hour, minute, second in integer.  this i ONLY for the purpose of stopping/ starting scheduled meditatgion
+
+
+//udpate will be written to chrome.storage by user_profile_settings.js, which handles data input to the forms in the settings page
+
+
 
 chrome.storage.onChanged.addListener(function () {
 
-chrome.storage.sync.get('stored_work_start_time', function(data) {
-	//console.log(" updated work start time is " + data.stored_work_start_time);
-	var arr = data.stored_work_start_time.split(':');
-	work_start_time_hr = parseInt(arr[0], 10); 
-	work_start_time_min = parseInt(arr[1], 10);
-	work_start_time_sec = parseInt(arr[2], 10);
-	console.log(" updated work start hour is " + work_start_time_hr);
-	console.log(" updated work start min is " + work_start_time_min);
-	console.log(" updated work start sec is " + work_start_time_sec);
+	chrome.storage.sync.get('stored_work_start_time', function(data) {
+		//console.log(" updated work start time is " + data.stored_work_start_time);
+		var arr = data.stored_work_start_time.split(':');
+		work_start_time_hr = parseInt(arr[0], 10); 
+		work_start_time_min = parseInt(arr[1], 10);
+		work_start_time_sec = parseInt(arr[2], 10);
+		console.log(" updated work start hour is " + work_start_time_hr);
+		console.log(" updated work start min is " + work_start_time_min);
+		console.log(" updated work start sec is " + work_start_time_sec);
+	});
+
+	chrome.storage.sync.get('stored_work_end_time', function(data) {
+		//console.log(" updated work end time is " + data.stored_work_end_time);
+		var arr = data.stored_work_end_time.split(':');
+		work_end_time_hr = parseInt(arr[0], 10); 
+		work_end_time_min = parseInt(arr[1], 10);
+		work_end_time_sec = parseInt(arr[2], 10);
+		console.log(" updated work end hour is " + work_end_time_hr);
+		console.log(" updated work end min is " + work_end_time_min);
+		console.log(" updated work end sec is " + work_end_time_sec);
+	});
+
+	chrome.storage.sync.get('stored_medi_duration', function(data) {
+		console.log(" stored medi duration is " + data.stored_medi_duration);
+		medi_duration = data.stored_medi_duration;
+	});
+
+	chrome.storage.sync.get('stored_medi_frequency', function(data) {
+		console.log(" stored medi frequency is " + data.stored_medi_frequency);
+		medi_frequency = data.stored_medi_frequency;
+	});
+
+
+	chrome.storage.sync.get('stored_active_medi_date', function(data) {
+		//console.log(" stored active medi dates are " + data.stored_active_medi_date);
+		active_medi_date = data.stored_active_medi_date;
+	});
+
+
+	chrome.storage.sync.get('stored_scheduled_meditation_checkbox', function(data) {
+		// console.log(" stored scheduled meditation checkbox status: " + data.stored_scheduled_meditation_checkbox);
+		scheduled_meditation_checkbox = data.stored_scheduled_meditation_checkbox;
+	});
+
 });
-
-chrome.storage.sync.get('stored_work_end_time', function(data) {
-	//console.log(" updated work end time is " + data.stored_work_end_time);
-	var arr = data.stored_work_end_time.split(':');
-	work_end_time_hr = parseInt(arr[0], 10); 
-	work_end_time_min = parseInt(arr[1], 10);
-	work_end_time_sec = parseInt(arr[2], 10);
-	console.log(" updated work end hour is " + work_end_time_hr);
-	console.log(" updated work end min is " + work_end_time_min);
-	console.log(" updated work end sec is " + work_end_time_sec);
-});
-
-chrome.storage.sync.get('stored_medi_duration', function(data) {
-	console.log(" stored medi duration is " + data.stored_medi_duration);
-	medi_duration = data.stored_medi_duration;
-});
-
-chrome.storage.sync.get('stored_medi_frequency', function(data) {
-	console.log(" stored medi frequency is " + data.stored_medi_frequency);
-	medi_frequency = data.stored_medi_frequency;
-});
-
-
-chrome.storage.sync.get('stored_active_medi_date', function(data) {
-	//console.log(" stored active medi dates are " + data.stored_active_medi_date);
-	active_medi_date = data.stored_active_medi_date;
-});
-
-
-chrome.storage.sync.get('stored_scheduled_meditation_checkbox', function(data) {
-	console.log(" stored scheduled meditation checkbox status " + data.stored_scheduled_meditation_checkbox);
-	scheduled_meditation_checkbox = data.stored_scheduled_meditation_checkbox;
-});
-
-});
-
+//==================END OF SCHEDULED MEDITATION BACKEND================= //
 
 
 
@@ -249,11 +256,11 @@ function getStoredNudgePeriod (val) {
 
 	return new Promise(function(resolve) {
 		chrome.storage.sync.get(['stored_nudge_start_time'], function(data) {
-		          //console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
+		          console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
 		          nudge_start_time = data.stored_nudge_start_time;
 		});
 		chrome.storage.sync.get(['stored_nudge_end_time'], function(data) {
-		          //console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
+		          console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
 		          nudge_end_time = data.stored_nudge_end_time;
 		});
 		resolve(val);
@@ -308,11 +315,9 @@ function checkNudgeOnCriteria (val) {
 
 				    (nudge_start_hour == nudge_end_hour)
 				)
-
 		    		{
 						enable_nudge = 1;
-						//console.log('nudge is enabled because it is during the period nudge is set to be active');
-						
+						//console.log('nudge is enabled because it is during the period nudge is set to be active');			
 		    		} 
 		    	else {
 		    		enable_nudge = 0;
@@ -430,7 +435,7 @@ async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_
 	        else if (distracting_site_flag(changeInfo_url) == true){
 	        	console.log ("last nudge time is: " + last_nudge_time) ;
 	        	console.log ("current time is: " + Date.now()) ;
-	        	if (Date.now() - last_nudge_time > 900000) {
+	        	if (Date.now() - last_nudge_time > 1) {
 	        		 chrome.tabs.update(tabId, { url: nudge_redirect });
 	          		console.log("nudge redirects user to breathing practice where they can override it");
 	          		last_nudge_time = Date.now();

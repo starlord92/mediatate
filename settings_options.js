@@ -1,4 +1,9 @@
-///display saved and updated settings
+
+
+///displaying saved and updated settings whenever user open the settings page
+
+//user_ptofile_settings takes care of the saving and updating
+
 $(document).ready(function() {
 
 

@@ -273,33 +273,6 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 		$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
 	});
 
-
-	// $('#user_profile_settings_9809403065').on('click', function (event) {
-	// 	$('#user_profile_display_box_9809403065').load("../settings_options.html", function() {
-	// 	});
-		
-	// 	// $.ajax({
-	// 	//   method: "GET",
-	// 	//   url: "../settings_options.js",
-	// 	//   dataType: "script"
-	// 	// });
-
-	// 	//chrome.tabs.executeScript({file:'settings_options.js'});
-
-
-	// 	// var duration;
-	// 	// 	chrome.storage.sync.get(['stored_medi_duration'], function(data) {
-	// 	// 	          console.log('stored_medi_duration is ' + data.stored_medi_duration);
-	// 	// 	          duration = data.stored_medi_duration;
-	// 	// 	});
-
-	// 	// $('#medi_duration_9809403065').attr('value',duration);
-
-	// 	// $.getScript("../settings_options.js", function(){
-	// 	//     //alert("Running test.js");
-	// 	// });
-	// });
-
 //===========================================================================//
 
 
