@@ -47,14 +47,15 @@ chrome.runtime.onInstalled.addListener(function() {
 	//via setIntervals(), check every second to see if the current local time is (a) in between work start time and work end time interval and (b) if it is exactly x'clock.  if so, open a new meditation tab.
 
 
+//this variable is how clearInterval will stop the checking for scherduled meditation
 var scheduled_meditation_process = true;
 
 function exec() {
- 	setDefaultTimeSetting(0, stopScheduledMeditation);
+ 	setDefaultTimeSetting(0, setUpScheduledMeditation);
 };
 
-function stopScheduledMeditation () {
-		scheduled_meditation_process = setInterval(checkTime, 1000);
+function setUpScheduledMeditation () {
+		scheduled_meditation_process = setInterval(checkScheduledMeditationTime, 1000);
 	};
 
 //stop scheduled meditation if user uncheck the box for it
@@ -92,15 +93,15 @@ function setDefaultTimeSetting(val, callback) {
 	});
 	chrome.storage.sync.set({stored_active_medi_date: 'Monday to Fri'}, function() {
 	});
-	chrome.storage.sync.set({stored_scheduled_meditation_checkbox: false}, function() {
+	chrome.storage.sync.set({stored_scheduled_meditation_checkbox: true}, function() {
 	});
 
 	//nudge 
-	chrome.storage.sync.set({stored_nudge_checkbox:false}, function() {
+	chrome.storage.sync.set({stored_nudge_checkbox:true}, function() {
 	});
 	chrome.storage.sync.set({stored_nudge_start_time: '10:00:00'}, function() {
 	});
-	chrome.storage.sync.set({stored_nudge_end_time: '10:00:00'}, function() {
+	chrome.storage.sync.set({stored_nudge_end_time: '09:00:00'}, function() {
 	});
 	
 	//each distracting site has an override_nudge signal that is 'on' when user choose to continue
@@ -112,9 +113,6 @@ function setDefaultTimeSetting(val, callback) {
 		});
 
 	chrome.storage.sync.set({stored_last_distracting_site_accessed: "" }, function() {});
-
-
-
 	
 	if (callback) {
 		callback();
@@ -124,7 +122,7 @@ function setDefaultTimeSetting(val, callback) {
 
 //check for updated user settings
 //check it is time to open the scheduled meditation tab and do so 
-function checkTime() {
+function checkScheduledMeditationTime() {
 	//console.log("checktime is running");
 	//updateTimeSetting();
 
@@ -138,7 +136,7 @@ function checkTime() {
 
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 0 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() == 29 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		//console.log("open meditation tab");
 			}
@@ -148,6 +146,8 @@ function checkTime() {
 	// }
 }
 
+
+//uncomment this to test scheduled meditation upon installation
 
 	// chrome.tabs.create({'url':'meditation_flow/home.html'}, 
 	// 	function(tab) {
