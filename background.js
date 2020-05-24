@@ -67,10 +67,12 @@ chrome.runtime.onMessage.addListener(
     //console.log("incoming message is " + incoming.message);
     if (incoming.message == "turn off scheduled meditation") {
     	clearInterval(scheduled_meditation_process);
+    	console.log("scheduled meditation is turned off");
     }
 
     if (incoming.message == "turn on scheduled meditation") {
     	exec();
+    	console.log("scheduled meditation is turned on");
     }
     return Promise.resolve("Dummy response to keep the console quiet");
       
@@ -138,7 +140,7 @@ function checkScheduledMeditationTime() {
 
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 29 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() == 56 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		//console.log("open meditation tab");
 			}
@@ -234,7 +236,7 @@ chrome.storage.onChanged.addListener(function () {
 
 
 	chrome.storage.sync.get('stored_scheduled_meditation_checkbox', function(data) {
-		// console.log(" stored scheduled meditation checkbox status: " + data.stored_scheduled_meditation_checkbox);
+		console.log(" stored scheduled meditation checkbox status: " + data.stored_scheduled_meditation_checkbox);
 		scheduled_meditation_checkbox = data.stored_scheduled_meditation_checkbox;
 	});
 

@@ -6,13 +6,13 @@
 
 $(document).ready(function() {
 
-
+	///ref: https://stackoverflow.com/questions/17420534/check-uncheck-checkbox-using-jquery
 	var checkbox_value;
 	chrome.storage.sync.get(['stored_scheduled_meditation_checkbox'], function(data) {
 	          console.log('stored_scheduled_meditation_checkbox is ' + data.stored_scheduled_meditation_checkbox);
 	          checkbox_value = data.stored_scheduled_meditation_checkbox;
-	          console.log('checkbox value is ' + checkbox_value);
-	          $('#scheduled_meditation_checkbox_9809403065').attr('value',checkbox_value);
+	          // console.log('checkbox value is ' + checkbox_value);
+	          $('#scheduled_meditation_checkbox_9809403065').prop('checked',checkbox_value);
 
 	});
 
@@ -63,7 +63,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_nudge_checkbox'], function(data) {
 	          console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox);
 	          nudge_checkbox_value = data.stored_nudge_checkbox;
-	          $('#nudge_checkbox_9809403065').attr('value',nudge_checkbox_value);
+	          $('#nudge_checkbox_9809403065').prop('checked',nudge_checkbox_value);
 
 	});
 
