@@ -144,6 +144,7 @@ function hide_meditation_recording_player() {
 
 var inside_meditation_session = false;
 var recording_is_playing = false;
+var chosen_recording = 0;
 
 //space bar only works to pause/resume a recording when we are inside a meditation session:
 

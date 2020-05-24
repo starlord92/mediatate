@@ -105,12 +105,17 @@ html, body {
 .meditations_page_background {
 /*	background: url('https://cdn.statically.io/gh/starlord92/mediatate/1537ecf3/images/early_dawn_background.jpg') no-repeat center center scroll;*/
 
-	background: url('https://cdn.statically.io/gh/starlord92/mediatate/ade998d3/images/early_dawn_background%206.jpg') no-repeat center center scroll;
+	/*background: url('https://cdn.statically.io/gh/starlord92/mediatate/ade998d3/images/early_dawn_background%206.jpg') no-repeat center center scroll;*/ 
+	/*background-color: rgb(204,214,220);*/ 
+
+	background: url('https://cdn.statically.io/gh/starlord92/mediatate/01ba0bda/images/early_dawn_background%204.jpg') no-repeat center center scroll;
+	background-color: rgb(221, 234, 247);
+	
 
 	 /*url('https://cdn.statically.io/gh/starlord92/git-visual/519768eb/morning.jpg') no-repeat center center fixed;*/
 
 	background-size: cover;
-	background-color: rgb(204,214,220); 
+	
 	/*background-color:*/ /*#9de5aa*/ /*#6bcba3*/ /*#2a3743*/ /*#2e3943*/         /*#313c47*/ /*white ;*/
 	height: 100%;
 	width: 100%;
@@ -142,7 +147,7 @@ html, body {
 	background-color: /*#fafafa;*/ /*#f0f0f0;*/ /*#f5f5f5;*/ /*#f8f8f8;*/
 
 	/*color for 'space' page*/
-	/*#f3ebe2;*/ rgb(247, 239, 228); /*#fcf7ef;*/ 
+	/*#f3ebe2;*/ /*rgb(247, 239, 228);*/ /*#fcf7ef;*/ rgb(221, 234, 247);
 	height: 100%;
 	width: 100%;
 }
@@ -204,14 +209,10 @@ html, body {
 	}
 
 
-
-
-
-
-
 .recording_list_a_9809403065, .recording_list_b_9809403065  {
   display: grid;
   grid-gap: 10%;
+  grid-column-gap: 20%;
 }
 
 
@@ -224,7 +225,6 @@ html, body {
 
 @media (min-width: 100px) {
 
-
     .recording_lists_9809403065 {
     	grid-row-start:7;
     	grid-row-end:span 100;
@@ -233,30 +233,43 @@ html, body {
 
     
       	grid-row-gap: 20%;
-      	grid-column-gap: 5%;      	
+      	grid-column-gap: 20%;    
     }
-
-
 
 	.recording_track_a_of_list_a_9809403065, .recording_track_b_of_list_b_9809403065  {
 
 		border-radius: 5px;
 		background-color: #7994af;
 		
-		padding: 5%;
+		
+		padding-top: 3.5% ;
+		padding-right:5%;
+		padding-left: 5%;
+		padding-bottom: 3.5%; 
 
 		font: .8em 'apercu';
 		color: white;
 
 		cursor: pointer;
 
-		width: 60%;
+	
+		width: 50%;
+
+		
 
 		margin:auto;
 	}
-
 }
 
+@media (min-width: 1100px) {
+
+	.recording_track_a_of_list_a_9809403065, .recording_track_b_of_list_b_9809403065  {
+
+		maax-width: 600px;
+
+	}
+
+}
 
 @media (min-width: 1400px) {
 
@@ -298,12 +311,6 @@ html, body {
 
   
 }
-
-
-
-
-
-
 
 
 /*===========================================================================*/
