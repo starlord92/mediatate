@@ -20,7 +20,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_medi_duration'], function(data) {
 	          console.log('stored_medi_duration is ' + data.stored_medi_duration);
 	          duration = data.stored_medi_duration;
-	          $('#medi_duration_9809403065').attr('value',duration);
+	          $('#medi_duration_9809403065').val(duration);
 
 	});
 
@@ -28,7 +28,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_medi_frequency'], function(data) {
 	          console.log('stored_medi_frequency is ' + data.stored_medi_frequency);
 	          frequency = data.stored_medi_frequency;
-	          $('#medi_frequency_9809403065').attr('value',frequency);
+	          $('#medi_frequency_9809403065').val(frequency);
 
 	});
 
@@ -37,7 +37,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_work_start_time'], function(data) {
 	          console.log('stored_work_start_time is ' + data.stored_work_start_time);
 	          start_time = data.stored_work_start_time;
-	          $('#work_start_time_9809403065').attr('value',start_time);
+	          $('#work_start_time_9809403065').val(start_time);
 
 	});
 
@@ -46,7 +46,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_work_end_time'], function(data) {
 	          console.log('stored_work_end_time is ' + data.stored_work_end_time);
 	          end_time = data.stored_work_end_time;
-	          $('#work_end_time_9809403065').attr('value',end_time);
+	          $('#work_end_time_9809403065').val(end_time);
 
 	});
 
@@ -55,7 +55,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_active_medi_date'], function(data) {
 	          console.log('active_medi_date is ' + data.stored_active_medi_date);
 	          active_date = data.stored_active_medi_date;
-	          $('#active_medi_date_9809403065').attr('value',active_date);
+	          $('#active_medi_date_9809403065').val(active_date);
 
 	});
 
@@ -72,7 +72,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_nudge_start_time'], function(data) {
 	          console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
 	          nudge_start_time = data.stored_nudge_start_time;
-	          $('#nudge_start_time_9809403065').attr('value',nudge_start_time);
+	          $('#nudge_start_time_9809403065').val(nudge_start_time);
 
 	});
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
 	chrome.storage.sync.get(['stored_nudge_end_time'], function(data) {
 	          console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
 	          nudge_end_time = data.stored_nudge_end_time;
-	          $('#nudge_end_time_9809403065').attr('value',nudge_end_time);
+	          $('#nudge_end_time_9809403065').val(nudge_end_time);
 
 	});
 

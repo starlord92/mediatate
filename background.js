@@ -61,20 +61,22 @@ function setUpScheduledMeditation () {
 	};
 
 //stop scheduled meditation if user uncheck the box for it
+//also update local variable ork_start_time_hr, work_start_time_min, work_start_time_sec and what not, which are used to determine when and how often scheduled meditation should be run 
 chrome.runtime.onMessage.addListener(
   function(incoming, sender, sendResponse) {
 
     //console.log("incoming message is " + incoming.message);
     if (incoming.message == "turn off scheduled meditation") {
     	clearInterval(scheduled_meditation_process);
-    	console.log("scheduled meditation is turned off");
+    	console.log("scheduled meditation is TURNED OFF");
     }
 
     if (incoming.message == "turn on scheduled meditation") {
     	exec();
-    	console.log("scheduled meditation is turned on");
+    	console.log("scheduled meditation is TURNED ON");
     }
-    return Promise.resolve("Dummy response to keep the console quiet");
+
+ //    return Promise.resolve("Dummy response to keep the console quiet");
       
   }); 
     
@@ -86,37 +88,37 @@ chrome.runtime.onMessage.addListener(
 //how to format html input of type time: https://www.w3schools.com/jsref/prop_input_time_value.asp
 //TO BE REPLACE BY A ONE TIME PROMPTING NEW USER TO CHOOSE THEIR SETTING OPTIONS
 function setDefaultTimeSetting(val, callback) {
-	//console.log("setDefaultTimeSetting is running");
-	chrome.storage.sync.set({stored_work_start_time: '06:00:00'}, function() {
-	});
-	chrome.storage.sync.set({stored_work_end_time: '23:00:00'}, function() {
-	});
-	chrome.storage.sync.set({stored_medi_duration: '5'}, function() {
-	});
-	chrome.storage.sync.set({stored_medi_frequency: '1'}, function() {
-	});
-	chrome.storage.sync.set({stored_active_medi_date: 'Monday to Fri'}, function() {
-	});
-	chrome.storage.sync.set({stored_scheduled_meditation_checkbox: true}, function() {
-	});
+	// console.log("setDefaultTimeSetting is running");
+	// chrome.storage.sync.set({stored_work_start_time: '06:00:00'}, function() {
+	// });
+	// chrome.storage.sync.set({stored_work_end_time: '23:00:00'}, function() {
+	// });
+	// chrome.storage.sync.set({stored_medi_duration: '5'}, function() {
+	// });
+	// chrome.storage.sync.set({stored_medi_frequency: '1'}, function() {
+	// });
+	// chrome.storage.sync.set({stored_active_medi_date: 'Monday to Fri'}, function() {
+	// });
+	// chrome.storage.sync.set({stored_scheduled_meditation_checkbox: true}, function() {
+	// });
 
-	//nudge 
-	chrome.storage.sync.set({stored_nudge_checkbox:true}, function() {
-	});
-	chrome.storage.sync.set({stored_nudge_start_time: '10:00:00'}, function() {
-	});
-	chrome.storage.sync.set({stored_nudge_end_time: '09:00:00'}, function() {
-	});
+	// //nudge 
+	// chrome.storage.sync.set({stored_nudge_checkbox:true}, function() {
+	// });
+	// chrome.storage.sync.set({stored_nudge_start_time: '10:00:00'}, function() {
+	// });
+	// chrome.storage.sync.set({stored_nudge_end_time: '09:00:00'}, function() {
+	// });
 	
-	//each distracting site has an override_nudge signal that is 'on' when user choose to continue
-	chrome.storage.sync.set({stored_facebook_continue: false}, function() {
-		});
-	chrome.storage.sync.set({stored_nytimes_continue: false}, function() {
-		});
-	chrome.storage.sync.set({stored_reddit_continue: false}, function() {
-		});
+	// //each distracting site has an override_nudge signal that is 'on' when user choose to continue
+	// chrome.storage.sync.set({stored_facebook_continue: false}, function() {
+	// 	});
+	// chrome.storage.sync.set({stored_nytimes_continue: false}, function() {
+	// 	});
+	// chrome.storage.sync.set({stored_reddit_continue: false}, function() {
+	// 	});
 
-	chrome.storage.sync.set({stored_last_distracting_site_accessed: "" }, function() {});
+	// chrome.storage.sync.set({stored_last_distracting_site_accessed: "" }, function() {});
 	
 	if (callback) {
 		callback();
@@ -140,7 +142,7 @@ function checkScheduledMeditationTime() {
 
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 56 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() == 3 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
 		 		//console.log("open meditation tab");
 			}
@@ -187,10 +189,8 @@ function openMeditationTab() {
 }
 
 
-// actively listen for updated setting convert string user input for work start and end time stored in chrome.storage.sync to hour, minute, second in integer.  this i ONLY for the purpose of stopping/ starting scheduled meditatgion
-
-
-//udpate will be written to chrome.storage by user_profile_settings.js, which handles data input to the forms in the settings page
+// AFTER user_profile_setting register a setting change from the user, it will send a signal to background.js so that the latter can update its local variables work_start_time_hr, work_start_time_min, work_start_time_sec using local storage
+//This is ONLY for the purpose of stopping/ starting scheduled meditatgion
 
 
 

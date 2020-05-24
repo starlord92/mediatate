@@ -311,12 +311,12 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 			function() {console.log('scheduled meditation?  ' + scheduled_meditation_checkbox );
 		});
 
-		var work_start_time = $('#work_start_time_9809403065').val();
-		var work_end_time = $('#work_end_time_9809403065').val();
-		var medi_duration = $('#medi_duration_9809403065').val();
-		var medi_frequency = $('#medi_frequency_9809403065').val();
-		var active_medi_date =$('#active_medi_date_9809403065').val();
-		var scheduled_medi_on_off = 
+		var work_start_time = $('#work_start_time_9809403065').prop('value');
+		var work_end_time = $('#work_end_time_9809403065').prop('value');
+		var medi_duration = $('#medi_duration_9809403065').prop('value');
+		var medi_frequency = $('#medi_frequency_9809403065').prop('value');
+		var active_medi_date =$('#active_medi_date_9809403065').prop('value');
+		
 
 		chrome.storage.sync.set({stored_work_start_time: work_start_time}, function() {	
 			//console.log('work start time entered is ' + work_start_time);
@@ -382,8 +382,8 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 		});
 
 		//store times
-		var nudge_start_time = $('#nudge_start_time_9809403065').val();
-		var nudge_end_time = $('#nudge_end_time_9809403065').val();
+		var nudge_start_time = $('#nudge_start_time_9809403065').prop('value');
+		var nudge_end_time = $('#nudge_end_time_9809403065').prop('value');
 		
 
 		chrome.storage.sync.set({stored_nudge_start_time: nudge_start_time}, function() {	
