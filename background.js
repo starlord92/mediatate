@@ -2,7 +2,12 @@
 
 var work_start_time_hr, work_start_time_min, work_start_time_sec;
 var work_end_time_hr, work_end_time_min, work_end_time_sec;
-var medi_duration, medi_frequency, active_medi_date;
+
+
+var medi_duration; // only alows 1, 3, and 5
+var medi_frequency; //only allows a number from 1 to 8
+var daily_skipped_meditation; // a 'day' last for 24 hours from the first meditation
+var active_medi_date;
 var installed_time_stamp;
 var scheduled_meditation_checkbox;
 
@@ -53,11 +58,12 @@ chrome.runtime.onInstalled.addListener(function() {
 var scheduled_meditation_process = true;
 
 function exec() {
- 	setDefaultTimeSetting(0, setUpScheduledMeditation);
+ 	// setDefaultTimeSetting(0, setUpScheduledMeditation);
+ 	setUpScheduledMeditation();
 };
 
 function setUpScheduledMeditation () {
-		scheduled_meditation_process = setInterval(checkScheduledMeditationTime, 1000);
+		scheduled_meditation_process = setInterval(checkScheduledMeditationTime2, 1000);
 	};
 
 //stop scheduled meditation if user uncheck the box for it
@@ -79,6 +85,10 @@ chrome.runtime.onMessage.addListener(
  //    return Promise.resolve("Dummy response to keep the console quiet");
       
   }); 
+
+
+
+
     
 
 
@@ -136,14 +146,17 @@ function checkScheduledMeditationTime() {
 	//console.log("current time is " + curr_time);
 	current_hour = curr_time.getHours();
 
+
 	
 	//to test if exec work, set a specific curr_time and see if a new tab open:
 	//curr_time = new Date('December 17, 1995 22:00:00');
 
 	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
 		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 3 && curr_time.getSeconds() ==0) {
+			if(curr_time.getMinutes() == 30 && curr_time.getSeconds() ==0) {
 				openMeditationTab();
+					var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
+  					sound.play();
 		 		//console.log("open meditation tab");
 			}
 	}
@@ -151,6 +164,72 @@ function checkScheduledMeditationTime() {
 	// 	console.log("the current time is NOT between work_end_time and work_start_time");
 	// }
 }
+
+
+function checkScheduledMeditationTime2() {
+	//console.log("checktime is running");
+	//updateTimeSetting();
+
+	curr_time = new Date();
+	//console.log("current time is " + curr_time);
+	current_hour = curr_time.getHours();
+
+	//tests scenario (b) - must change user settings start time to 8 pm, end time to 1 am, curr_time.getMinutes() == 0, and setInterval(checkScheduledMeditationTime2, 10000)
+	// curr_time = new Date('May 26, 2020 23:00:00');
+	// current_hour = curr_time.getHours();
+
+	//tests scenario (c) must change user settings start time to 1 am, end time to 5 am, and curr_time.getMinutes() == 0, and setInterval(checkScheduledMeditationTime2, 10000)
+	// curr_time = new Date('May 26, 2020 2:00:00');
+	// current_hour = curr_time.getHours();
+
+
+	// three scenarios:
+	//    (a) start time < end time 
+	//    (b)time is set between 8 pm and 6 am the next morning (start time > end time, current time > both start anf end time) 
+	//    (c) between 1 am and 5 am (start time > end time and current time < both start anf end time) 
+	    
+		if (
+			(work_start_time_hr < work_end_time_hr && 
+			current_hour >= work_start_time_hr && 
+			current_hour < work_end_time_hr) //scenario (a)
+
+		    ||
+
+		    (work_start_time_hr > work_end_time_hr 
+		    &&
+		    ((current_hour >= work_start_time_hr && current_hour >= work_end_time_hr) || (current_hour <= work_start_time_hr && current_hour < work_end_time_hr))
+		    )
+
+		    ||
+
+		    (work_start_time_hr == work_end_time_hr)
+		)
+			{
+				
+				console.log('it is a time scheduled meditation should be active ');
+
+				
+			 	// console.log('the current time is between work_end_time and work_start_time');
+				if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 0) {
+					openMeditationTab();
+						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
+	  					sound.play();
+			 		//console.log("open meditation tab");
+				}
+			} 
+		else {
+			
+			console.log('it is a time scheduled meditation should be INactive ');
+		}
+
+
+	
+
+}
+
+
+
+
 
 
 //uncomment this to test scheduled meditation upon installation

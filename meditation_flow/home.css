@@ -17,6 +17,9 @@
 
 }
 
+* {
+	box-sizing: border-box;
+}
 
 /*  background-color: #CBF4C3;*/
 }
@@ -147,7 +150,7 @@ html, body {
 	background-color: /*#fafafa;*/ /*#f0f0f0;*/ /*#f5f5f5;*/ /*#f8f8f8;*/
 
 	/*color for 'space' page*/
-	/*#f3ebe2;*/ /*rgb(247, 239, 228);*/ /*#fcf7ef;*/ rgb(221, 234, 247);
+	/*#f3ebe2;*/ /*#fcf7ef;*/ rgb(247, 239, 228);  /*rgb(221, 234, 247);*/
 	height: 100%;
 	width: 100%;
 }
@@ -194,7 +197,7 @@ html, body {
 
 	display: grid;
 	grid-template-columns: minmax(50px, 100px) minmax(150px,300px); 
-	grid-template-rows: minmax(50px, 100px) 1fr;
+	grid-template-rows: minmax(50px, 60px) 1fr;
 
 	
 }
@@ -253,7 +256,7 @@ html, body {
 		cursor: pointer;
 
 	
-		width: 50%;
+		width: 45%;
 
 		
 
@@ -263,9 +266,9 @@ html, body {
 
 @media (min-width: 1100px) {
 
-	.recording_track_a_of_list_a_9809403065, .recording_track_b_of_list_b_9809403065  {
+	.recording_track_a_of_list_a_9809403065,  .recording_track_b_of_list_ab9809403065 {
 
-		maax-width: 600px;
+		max-width: 600px;
 
 	}
 
