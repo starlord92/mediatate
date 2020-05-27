@@ -6,7 +6,7 @@ var work_end_time_hr, work_end_time_min, work_end_time_sec;
 
 var medi_duration; // only alows 1, 3, and 5
 var medi_frequency; //only allows a number from 1 to 8
-var daily_skipped_meditation; // a 'day' last for 24 hours from the first meditation
+var daily_skipped_meditation; // a 'day' last for 24 hours from the work_start_time_hour
 var active_medi_date;
 var installed_time_stamp;
 var scheduled_meditation_checkbox;
@@ -63,7 +63,7 @@ function exec() {
 };
 
 function setUpScheduledMeditation () {
-		scheduled_meditation_process = setInterval(checkScheduledMeditationTime2, 1000);
+		scheduled_meditation_process = setInterval(checkScheduledMeditationTime, 1000);
 	};
 
 //stop scheduled meditation if user uncheck the box for it
@@ -87,86 +87,7 @@ chrome.runtime.onMessage.addListener(
   }); 
 
 
-
-
-    
-
-
-
-
-//create default input for settings
-//how to format html input of type time: https://www.w3schools.com/jsref/prop_input_time_value.asp
-//TO BE REPLACE BY A ONE TIME PROMPTING NEW USER TO CHOOSE THEIR SETTING OPTIONS
-function setDefaultTimeSetting(val, callback) {
-	// console.log("setDefaultTimeSetting is running");
-	// chrome.storage.sync.set({stored_work_start_time: '06:00:00'}, function() {
-	// });
-	// chrome.storage.sync.set({stored_work_end_time: '23:00:00'}, function() {
-	// });
-	// chrome.storage.sync.set({stored_medi_duration: '5'}, function() {
-	// });
-	// chrome.storage.sync.set({stored_medi_frequency: '1'}, function() {
-	// });
-	// chrome.storage.sync.set({stored_active_medi_date: 'Monday to Fri'}, function() {
-	// });
-	// chrome.storage.sync.set({stored_scheduled_meditation_checkbox: true}, function() {
-	// });
-
-	// //nudge 
-	// chrome.storage.sync.set({stored_nudge_checkbox:true}, function() {
-	// });
-	// chrome.storage.sync.set({stored_nudge_start_time: '10:00:00'}, function() {
-	// });
-	// chrome.storage.sync.set({stored_nudge_end_time: '09:00:00'}, function() {
-	// });
-	
-	// //each distracting site has an override_nudge signal that is 'on' when user choose to continue
-	// chrome.storage.sync.set({stored_facebook_continue: false}, function() {
-	// 	});
-	// chrome.storage.sync.set({stored_nytimes_continue: false}, function() {
-	// 	});
-	// chrome.storage.sync.set({stored_reddit_continue: false}, function() {
-	// 	});
-
-	// chrome.storage.sync.set({stored_last_distracting_site_accessed: "" }, function() {});
-	
-	if (callback) {
-		callback();
-	}
-};
-
-
-//check for updated user settings
-//check it is time to open the scheduled meditation tab and do so 
 function checkScheduledMeditationTime() {
-	//console.log("checktime is running");
-	//updateTimeSetting();
-
-	curr_time = new Date();
-	//console.log("current time is " + curr_time);
-	current_hour = curr_time.getHours();
-
-
-	
-	//to test if exec work, set a specific curr_time and see if a new tab open:
-	//curr_time = new Date('December 17, 1995 22:00:00');
-
-	if (curr_time.getHours() >= work_start_time_hr && curr_time.getHours() < work_end_time_hr) {
-		 	// console.log('the current time is between work_end_time and work_start_time');
-			if(curr_time.getMinutes() == 30 && curr_time.getSeconds() ==0) {
-				openMeditationTab();
-					var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
-  					sound.play();
-		 		//console.log("open meditation tab");
-			}
-	}
-	// if (curr_time.getHours() < work_start_time_hr || curr_time.getHours() > work_end_time_hr) {
-	// 	console.log("the current time is NOT between work_end_time and work_start_time");
-	// }
-}
-
-
-function checkScheduledMeditationTime2() {
 	//console.log("checktime is running");
 	//updateTimeSetting();
 
@@ -188,14 +109,23 @@ function checkScheduledMeditationTime2() {
 	//    (b)time is set between 8 pm and 6 am the next morning (start time > end time, current time > both start anf end time) 
 	//    (c) between 1 am and 5 am (start time > end time and current time < both start anf end time) 
 	    
-		if (
-			(work_start_time_hr < work_end_time_hr && 
+		if (work_start_time_hr < work_end_time_hr && 
 			current_hour >= work_start_time_hr && 
-			current_hour < work_end_time_hr) //scenario (a)
+			current_hour < work_end_time_hr) 
 
-		    ||
+			{
+				console.log('it is a time scheduled meditation should be active ');
 
-		    (work_start_time_hr > work_end_time_hr 
+			 	// console.log('the current time is between work_end_time and work_start_time');
+				if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 0) {
+					openMeditationTab();
+						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
+	  					sound.play();
+			 		//console.log("open meditation tab");
+				}
+			}
+
+		else if ( (work_start_time_hr > work_end_time_hr 
 		    &&
 		    ((current_hour >= work_start_time_hr && current_hour >= work_end_time_hr) || (current_hour <= work_start_time_hr && current_hour < work_end_time_hr))
 		    )
@@ -208,7 +138,6 @@ function checkScheduledMeditationTime2() {
 				
 				console.log('it is a time scheduled meditation should be active ');
 
-				
 			 	// console.log('the current time is between work_end_time and work_start_time');
 				if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 0) {
 					openMeditationTab();
@@ -221,13 +150,9 @@ function checkScheduledMeditationTime2() {
 			
 			console.log('it is a time scheduled meditation should be INactive ');
 		}
+};
 
-
-	
-
-}
-
-
+var hoursToMeditate = [];
 
 
 
@@ -270,8 +195,6 @@ function openMeditationTab() {
 
 // AFTER user_profile_setting register a setting change from the user, it will send a signal to background.js so that the latter can update its local variables work_start_time_hr, work_start_time_min, work_start_time_sec using local storage
 //This is ONLY for the purpose of stopping/ starting scheduled meditatgion
-
-
 
 chrome.storage.onChanged.addListener(function () {
 
