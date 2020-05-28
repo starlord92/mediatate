@@ -6,7 +6,9 @@ var work_end_time_hr, work_end_time_min, work_end_time_sec;
 
 var medi_duration; // only alows 1, 3, and 5
 var medi_frequency; //only allows a number from 1 to 8
-var daily_skipped_meditation; // a 'day' last for 24 hours from the work_start_time_hour
+
+var hoursToMeditate = [];
+var daily_skipped_meditation; // a 'day' last for 24 hours from the work_start_time_hour;
 var active_medi_date;
 var installed_time_stamp;
 var scheduled_meditation_checkbox;
@@ -105,19 +107,26 @@ function checkScheduledMeditationTime() {
 
 
 	// three scenarios:
-	//    (a) start time < end time 
+	//    (a) 
 	//    (b)time is set between 8 pm and 6 am the next morning (start time > end time, current time > both start anf end time) 
 	//    (c) between 1 am and 5 am (start time > end time and current time < both start anf end time) 
+
+	generateScheduledMeditationHours(medi_frequency, work_start_time_hr, work_end_time_hr);
+
+	// correctMeditationFrequency(current_hour);
+
+
 	    
-		if (work_start_time_hr < work_end_time_hr && 
-			current_hour >= work_start_time_hr && 
-			current_hour < work_end_time_hr) 
+		if ( (work_start_time_hr < work_end_time_hr && 
+			 current_hour >= work_start_time_hr && 
+			 current_hour < work_end_time_hr) 
+			&& correctMeditationFrequency(current_hour) == true )
 
 			{
-				console.log('it is a time scheduled meditation should be active ');
+				console.log('start work time < end work time');
 
 			 	// console.log('the current time is between work_end_time and work_start_time');
-				if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 0) {
+				if(curr_time.getMinutes() == 48 && curr_time.getSeconds() == 0) {
 					openMeditationTab();
 						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
 	  					sound.play();
@@ -125,7 +134,7 @@ function checkScheduledMeditationTime() {
 				}
 			}
 
-		else if ( (work_start_time_hr > work_end_time_hr 
+		else if ( ( (work_start_time_hr > work_end_time_hr 
 		    &&
 		    ((current_hour >= work_start_time_hr && current_hour >= work_end_time_hr) || (current_hour <= work_start_time_hr && current_hour < work_end_time_hr))
 		    )
@@ -133,13 +142,15 @@ function checkScheduledMeditationTime() {
 		    ||
 
 		    (work_start_time_hr == work_end_time_hr)
-		)
+		) &&  correctMeditationFrequency(current_hour) == true)
+
+
 			{
 				
-				console.log('it is a time scheduled meditation should be active ');
+				console.log('start work time > end work time');
 
 			 	// console.log('the current time is between work_end_time and work_start_time');
-				if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 0) {
+				if(curr_time.getMinutes() == 48 && curr_time.getSeconds() == 0) {
 					openMeditationTab();
 						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
 	  					sound.play();
@@ -148,11 +159,99 @@ function checkScheduledMeditationTime() {
 			} 
 		else {
 			
-			console.log('it is a time scheduled meditation should be INactive ');
+			// console.log('it is a time scheduled meditation should be INactive ');
 		}
 };
 
-var hoursToMeditate = [];
+
+
+//generate the hours wwhere meditation should take place according to the meditation frquency set by the user
+function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, work_end_time_hr) {
+
+	console.log("medi_frequency is a number? " + Number.isInteger(medi_frequency));
+	while(hoursToMeditate.length > 0) {
+    	hoursToMeditate.pop();
+	}
+
+	//    scenarios:
+	//    (b)time is set between 8 pm and 6 am the next morning (start time > end time, current time > both start anf end time) 
+	//    (c) between 1 am and 5 am (start time > end time and current time < both start anf end time) 
+
+ 
+	if (work_start_time_hr >= work_end_time_hr) {
+		var eligible_hour = work_start_time_hr;
+		var done = false;
+		var metZero = false;
+
+		while (metZero == false) {
+
+		// console.log ("done sttaus is " + done);
+		// console.log ("eligible_hour is " + eligible_hour);
+		// console.log ("metZero status is " + metZero);
+		// console.log("work_end_time_hr is " + work_end_time_hr);
+
+
+		hoursToMeditate.push(eligible_hour);
+		eligible_hour = eligible_hour + medi_frequency;
+
+		if (eligible_hour >= 24) {
+			// console.log("eligible_hour >= 24");
+			eligible_hour = eligible_hour-24;
+			metZero = true;
+			
+		}
+
+		// console.log ("================================");
+		
+		}
+
+		while (eligible_hour <= work_end_time_hr) {
+
+			hoursToMeditate.push(eligible_hour);
+			eligible_hour = eligible_hour + medi_frequency;
+		}
+
+	}
+
+	else { //scenario (a): start time < end time 
+
+		var eligible_hour = work_start_time_hr;
+		while (eligible_hour <= work_end_time_hr) {
+			hoursToMeditate.push(eligible_hour);
+			eligible_hour = eligible_hour + medi_frequency;
+		}
+	}
+
+	console.log("start of array");
+	for (var i = 0; i <= hoursToMeditate.length - 1; i++) {
+		console.log(hoursToMeditate[i]);
+
+	}
+	console.log("end of array");
+};
+
+
+//return true if the current_hour match with any number in the global array hoursToMeditate
+function correctMeditationFrequency(current_hour) {
+	for (var i = 0; i <= hoursToMeditate.length; i++) {
+		if (i == hoursToMeditate.length) {console.log("match NOT found"); return false;}
+		//console.log(hoursToMeditate[i]);
+		if (hoursToMeditate[i] == current_hour) {
+
+			console.log("current hour is: " + current_hour);
+			console.log("match found: " + hoursToMeditate[i]);
+			return true;
+			
+		}
+			
+	}
+	
+	return false;
+}
+
+
+
+
 
 
 
@@ -222,12 +321,12 @@ chrome.storage.onChanged.addListener(function () {
 
 	chrome.storage.sync.get('stored_medi_duration', function(data) {
 		console.log(" stored medi duration is " + data.stored_medi_duration);
-		medi_duration = data.stored_medi_duration;
+		medi_duration = parseInt(data.stored_medi_duration, 10);
 	});
 
 	chrome.storage.sync.get('stored_medi_frequency', function(data) {
 		console.log(" stored medi frequency is " + data.stored_medi_frequency);
-		medi_frequency = data.stored_medi_frequency;
+		medi_frequency = parseInt(data.stored_medi_frequency, 10);
 	});
 
 
