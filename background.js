@@ -7,7 +7,7 @@ var work_end_time_hr, work_end_time_min, work_end_time_sec;
 var medi_duration; // only alows 1, 3, and 5
 var medi_frequency; //only allows a number from 1 to 8
 
-var hoursToMeditate = [];
+var hoursToMeditate = []; //an array storing all the hours during the next 24 hours when scheduled meditation should be offered to the user, the hours are 1 hour head of the actual meditation hour.  (for example, if i wanna meditate at 5, then the array has '4' instead of '5' as an array element.  this allows the alogirthm to ease the user into meditation before it actually occurs)
 var daily_skipped_meditation; // a 'day' last for 24 hours from the work_start_time_hour;
 var active_medi_date;
 var installed_time_stamp;
@@ -97,6 +97,7 @@ function checkScheduledMeditationTime() {
 	//console.log("current time is " + curr_time);
 	current_hour = curr_time.getHours();
 
+
 	//tests scenario (b) - must change user settings start time to 8 pm, end time to 1 am, curr_time.getMinutes() == 0, and setInterval(checkScheduledMeditationTime2, 10000)
 	// curr_time = new Date('May 26, 2020 23:00:00');
 	// current_hour = curr_time.getHours();
@@ -123,12 +124,33 @@ function checkScheduledMeditationTime() {
 			&& correctMeditationFrequency(current_hour) == true )
 
 			{
-				console.log('start work time < end work time');
+
+				//onsole.log('start work time < end work time');
+
+				//25 - 20 seconds before: send content script a message to darken the current active window (0% -> 30% )
+				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 30){			
+					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+					  chrome.tabs.sendMessage(tabs[0].id, {message: "darken the screen"}, function(response) {
+					    console.log(response.message);
+					  });
+					});
+				}
+
+				// 20 seconds before: a voice nudging user to meditate. bottom-of-the-window dialog menu with  'begin meditation' button shows up.
+				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 40){
+
+					var sound = new Audio (chrome.extension.getURL('/meditation_recordings/running.wav'));
+	  				sound.play();
+
+				}
+		
 
 			 	// console.log('the current time is between work_end_time and work_start_time');
-				if(curr_time.getMinutes() == 48 && curr_time.getSeconds() == 0) {
+
+			 	//at the hour mark, run the 
+				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 59){
 					openMeditationTab();
-						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
+						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/running.wav'));
 	  					sound.play();
 			 		//console.log("open meditation tab");
 				}
@@ -143,16 +165,13 @@ function checkScheduledMeditationTime() {
 
 		    (work_start_time_hr == work_end_time_hr)
 		) &&  correctMeditationFrequency(current_hour) == true)
-
-
 			{
-				
-				console.log('start work time > end work time');
+				//console.log('start work time > end work time');
 
 			 	// console.log('the current time is between work_end_time and work_start_time');
 				if(curr_time.getMinutes() == 48 && curr_time.getSeconds() == 0) {
 					openMeditationTab();
-						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/bell.mp3'));
+						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/running.wav'));
 	  					sound.play();
 			 		//console.log("open meditation tab");
 				}
@@ -168,7 +187,7 @@ function checkScheduledMeditationTime() {
 //generate the hours wwhere meditation should take place according to the meditation frquency set by the user
 function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, work_end_time_hr) {
 
-	console.log("medi_frequency is a number? " + Number.isInteger(medi_frequency));
+	//console.log("medi_frequency is a number? " + Number.isInteger(medi_frequency));
 	while(hoursToMeditate.length > 0) {
     	hoursToMeditate.pop();
 	}
@@ -222,24 +241,26 @@ function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, w
 		}
 	}
 
-	console.log("start of array");
+	//console.log("start of array");
 	for (var i = 0; i <= hoursToMeditate.length - 1; i++) {
-		console.log(hoursToMeditate[i]);
+		hoursToMeditate[i] = hoursToMeditate[i] - 1;
+		//console.log(hoursToMeditate[i]);
 
 	}
-	console.log("end of array");
+	//console.log("end of array");
 };
 
 
 //return true if the current_hour match with any number in the global array hoursToMeditate
 function correctMeditationFrequency(current_hour) {
-	for (var i = 0; i <= hoursToMeditate.length; i++) {
-		if (i == hoursToMeditate.length) {console.log("match NOT found"); return false;}
+	for (var i = 0; i <= hoursToMeditate.length-1; i++) {
+		//if (i == hoursToMeditate.length) {console.log("match NOT found"); return false;}
 		//console.log(hoursToMeditate[i]);
+		
 		if (hoursToMeditate[i] == current_hour) {
 
-			console.log("current hour is: " + current_hour);
-			console.log("match found: " + hoursToMeditate[i]);
+			//console.log("current hour is: " + current_hour);
+			//console.log("match found: " + hoursToMeditate[i]);
 			return true;
 			
 		}
@@ -419,7 +440,7 @@ function checkNudgeOnCriteria (val) {
 				    (nudge_start_hour == nudge_end_hour)
 				)
 		    		{
-						enable_nudge = 1;
+						enable_nudge = 0;
 						//console.log('nudge is enabled because it is during the period nudge is set to be active');			
 		    		} 
 		    	else {
