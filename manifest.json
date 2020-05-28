@@ -53,20 +53,20 @@
 
     {
       "matches": [
-        "*://*/*"
+        "https://*.nytimes.com/*"
 
       ],
       "js": [ "jquery-3.4.1.js",
-        "nudge_content_script.js" 
+        "scheduled_meditation_easing_content_script.js" 
       ],
-      "css": ["nudge.css"],
+      "css": ["ease.css"],
       "run_at": "document_end"
     }
 
 	],
 
 	"web_accessible_resources": ["jquery-3.4.1.js","nudge.html", "settings_option.html", "settings_option.js", "nudge_content_script.js",
-    "user_profile_settings.js", "meditation_flow/morning.jpg"],
+    "user_profile_settings.js", "meditation_flow/morning.jpg", "scheduled_meditation_easing_content_script.js", "ease.html", "ease.css"],
 
 
 	"page_action": {					
