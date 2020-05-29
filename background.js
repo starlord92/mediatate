@@ -177,10 +177,21 @@ function checkScheduledMeditationTime() {
 
 			 	// 20 seconds before: a voice nudging user to meditate & shows a meditation balloon animation
 
-			 	if(curr_time.getMinutes() == 46 && curr_time.getSeconds() == 30){
+			 	if(curr_time.getMinutes() == 50 && curr_time.getSeconds() == 15){
 
 					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 					  chrome.tabs.sendMessage(tabs[0].id, {message: "show breathing animation"}, function(response) {;}
+					  );
+					});
+
+					var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
+	  				reminder.play();
+				}
+
+				if(curr_time.getMinutes() == 50 && curr_time.getSeconds() ==35 ){
+
+					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+					  chrome.tabs.sendMessage(tabs[0].id, {message: "hide breathing animation"}, function(response) {;}
 					  );
 					});
 

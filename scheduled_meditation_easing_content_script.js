@@ -69,14 +69,30 @@ chrome.runtime.onMessage.addListener(
     	
     	console.log("message to show breathing animation is received");
 
-    	// $('myModal472826662848262673').show();
+    	$('myModal472826662848262673').show();
+    	$('myModal472826662848262673').css({'display':'grid'});
 
 
-  //   	var modal = document.getElementById("myModal472826662848262673");
-		// modal.style.display = "grid";
+    	var modal = document.getElementById("myModal472826662848262673");
+		modal.style.display = "grid";
 	
 
     	$('#myModal472826662848262673').css({"animation-play-state" : "running"});
+    }
+
+     if (incoming.message == "hide breathing animation") {
+    	
+    	console.log("message to show breathing animation is received");
+
+    	$('myModal472826662848262673').hide();
+    	$('myModal472826662848262673').css({'display':'none'});
+
+
+    	var modal = document.getElementById("myModal472826662848262673");
+		modal.style.display = "none";
+	
+
+    	$('#myModal472826662848262673').css({"animation-play-state" : "paused"});
     }
 
  //    return Promise.resolve("Dummy response to keep the console quiet");

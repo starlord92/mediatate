@@ -81,7 +81,7 @@ hmm_472826662848262673{
 
 
 #myModal472826662848262673 {
-  display: grid; 
+  display: grid;
   align-items: center;
 
   position: fixed; 
@@ -139,9 +139,10 @@ hmm_472826662848262673{
   animation-timing-function: linear; 
   animation-delay: 0s;
   animation-direction: normal;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-play-state: paused;
+  animation-iteration-count: 3;
+  animation-fill-mode: none;
+  animation-play-state: running;
+
 }
 
 
@@ -160,21 +161,10 @@ hmm_472826662848262673{
     background-color:  rgb(247, 239, 228);
  
   }
- 
-  
-  99% {
-  border-radius: 100%;
-    transform: scale(1);
-    background-color:  rgb(247, 239, 228);
-    
-
-    
-  }
-
 
    100% {
   	border-radius: 100%;
-    transform: scale(0);
+    transform: scale(1);
     background-color:  rgb(247, 239, 228);
     
     
