@@ -61,6 +61,18 @@
       ],
       "css": ["ease.css"],
       "run_at": "document_end"
+    },
+
+    {
+      "matches": [
+        "*://*/*"
+
+      ],
+      "js": [ "jquery-3.4.1.js",
+        "scheduled_meditation_easing_content_script.js" 
+      ],
+      "css": ["ease.css"],
+      "run_at": "document_end"
     }
 
 	],

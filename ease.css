@@ -18,10 +18,10 @@ html{
 
 }
 
-
-html{
+.hmm_472826662848262673{
   -webkit-animation: filter-animation 10s 1;
 }
+
 
 @-webkit-keyframes filter-animation {
   0% {
@@ -29,7 +29,7 @@ html{
   }
   
   50% {
-    -webkit-filter: brightness(0);
+    -webkit-filter: brightness(0.4);
   }
 
   100% {
@@ -58,11 +58,14 @@ html{
 }
 
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
-  #bg {
+  #darkening_effect_background_472826662848262673 {
     left: 50%;
     margin-left: -512px;   /* 50% */
   }
 }
+
+
+
 
 
 
