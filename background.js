@@ -8,7 +8,7 @@ var medi_duration; // only alows 1, 3, and 5
 var medi_frequency; //only allows a number from 1 to 8
 
 var hoursToMeditate = []; //an array storing all the hours during the next 24 hours when scheduled meditation should be offered to the user, the hours are 1 hour head of the actual meditation hour.  (for example, if i wanna meditate at 5, then the array has '4' instead of '5' as an array element.  this allows the alogirthm to ease the user into meditation before it actually occurs)
-var daily_skipped_meditation; // a 'day' last for 24 hours from the work_start_time_hour;
+
 var active_medi_date;
 var installed_time_stamp;
 var scheduled_meditation_checkbox;
@@ -88,6 +88,10 @@ chrome.runtime.onMessage.addListener(
       
   }); 
 
+var user_selects_begin_meditation = false;
+var user_selects_skip_meditation = false;
+var user_selects_nothing_for_scheduled_meditation = true;
+var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the work_start_time_hour; 
 
 function checkScheduledMeditationTime() {
 	//console.log("checktime is running");
@@ -128,8 +132,8 @@ function checkScheduledMeditationTime() {
 				console.log('start work time < end work time');
 
 				//25 - 20 seconds before: send content script a message to darken the current active window (0% -> 30% )
+				//this option is currently in active
 				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 30){			
-					console.log('start work time < end work time');
 					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 					  chrome.tabs.sendMessage(tabs[0].id, {message: "darken the screen"}, function(response) {;}
 					  );
@@ -170,36 +174,38 @@ function checkScheduledMeditationTime() {
 		    (work_start_time_hr == work_end_time_hr)
 		) &&  correctMeditationFrequency(current_hour) == true)
 			{
-				
-
-			 	// console.log('the current time is between work_end_time and work_start_time');
 			 	console.log('start work time > end work time');
 
-			 	// 20 seconds before: a voice nudging user to meditate & shows a meditation balloon animation
-
-			 	if(curr_time.getMinutes() == 50 && curr_time.getSeconds() == 15){
-
+			 	// 15 seconds before: a meditation balloon (within which there is a 'begin meditation' button) shows up.  
+			 	//add sound effects as a notification if the user has skipped x numbers of meditations.
+			 	if(curr_time.getMinutes() == 40 && curr_time.getSeconds() == 45){
 					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 					  chrome.tabs.sendMessage(tabs[0].id, {message: "show breathing animation"}, function(response) {;}
 					  );
 					});
+				
+					if (daily_skipped_meditation_count >= 3) {
+						var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
+						reminder.play();
+					}
+				}
+				
+				//// 5 seconds after:  'skip meditation' button shows up in the bottom dialog menu.  
+				//balloon animation stops. 
 
-					var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
-	  				reminder.play();
+				if(curr_time.getMinutes() == 41 && curr_time.getSeconds() == 5 ){
+					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+					  chrome.tabs.sendMessage(tabs[0].id, {message: "skip meditation button shows up ; balloon animation stops on its own"}, function(response) {;}
+					  );
+					});
 				}
 
-				if(curr_time.getMinutes() == 50 && curr_time.getSeconds() ==35 ){
-
+				if(curr_time.getMinutes() == 41 && curr_time.getSeconds() == 10 ){
 					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 					  chrome.tabs.sendMessage(tabs[0].id, {message: "hide breathing animation"}, function(response) {;}
 					  );
 					});
-
-					var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
-	  				reminder.play();
 				}
-
-
 			} 
 		else {
 			

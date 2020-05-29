@@ -81,7 +81,7 @@ hmm_472826662848262673{
 
 
 #myModal472826662848262673 {
-  display: grid;
+  display: none;
   align-items: center;
 
   position: fixed; 

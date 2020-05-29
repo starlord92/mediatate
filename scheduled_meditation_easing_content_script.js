@@ -66,7 +66,7 @@ chrome.runtime.onMessage.addListener(
     }
 
     if (incoming.message == "show breathing animation") {
-    	
+   	
     	console.log("message to show breathing animation is received");
 
     	$('myModal472826662848262673').show();
@@ -80,9 +80,22 @@ chrome.runtime.onMessage.addListener(
     	$('#myModal472826662848262673').css({"animation-play-state" : "running"});
     }
 
-     if (incoming.message == "hide breathing animation") {
+    if (incoming.message == "skip meditation button shows up ; balloon animation stops on its own") {
+
+    	console.log("message to show skip meditation button is received");
+
+
+  //   	var modal = document.getElementById("myModal472826662848262673");
+		// modal.style.display = "block";
+
+
+    }
+
+    if (incoming.message == "hide breathing animation") {
     	
-    	console.log("message to show breathing animation is received");
+    	console.log("message to hide breathing animation is received");
+
+    	$('myModal472826662848262673').fadeOut();
 
     	$('myModal472826662848262673').hide();
     	$('myModal472826662848262673').css({'display':'none'});
