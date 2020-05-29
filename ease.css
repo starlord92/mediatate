@@ -1,4 +1,4 @@
-/*make sure something is in front of all other elements using z-index: 
+make sure something is in front of all other elements using z-index: 
 https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-chrome-extension*/
 
 html{
@@ -18,7 +18,11 @@ html{
 
 }
 
-.hmm_472826662848262673{
+/*.
+
+an attempt to darken the background but does not pan out well
+
+hmm_472826662848262673{
   -webkit-animation: filter-animation 10s 1;
 }
 
@@ -41,15 +45,15 @@ html{
 
 
 #darkening_effect_background_472826662848262673 {
-  /* Set rules to fill background */
+  
   min-height: 100%;
   min-width: 1024px;
   
-  /* Set up proportionate scaling */
+  
   width: 100%;
   height: auto;
   
-  /* Set up positioning */
+  
   position: fixed;
   top: 0;
   left: 0;
@@ -57,28 +61,140 @@ html{
   z-index:-100000000000000000;
 }
 
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
+@media screen and (max-width: 1024px) { 
   #darkening_effect_background_472826662848262673 {
     left: 50%;
-    margin-left: -512px;   /* 50% */
+    margin-left: -512px;   
   }
+}*/
+
+@font-face {
+    font-family: 'apercu';
+    src: url('https://cdn.statically.io/gh/starlord92/mediatate/9faf7eaf/font/apercu/ApercuPro.woff2') format('woff2'),
+         url('https://cdn.statically.io/gh/starlord92/mediatate/9faf7eaf/font/apercu/ApercuPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 
 
 
 
+#myModal472826662848262673 {
+  display: grid; 
+  align-items: center;
+
+  position: fixed; 
+  z-index: 100000000000; 
+  right:7%;
+  bottom:7%;
+  width: 250px; 
+  height: 250px; 
+
+  border-radius: 50%;
+  
+  /*background-color: rgba(0,0,0,0.8); */
+  /*background-color: rgba(130,136,143,0.8);*/
+  background-color:rgb(247, 239, 228);
+
+  
+
+}
 
 
 
+#begin_meditation_button_66345654628423 {
+	border-radius: 10px;
+	padding: 4px; 
+	/*background-color: black;*/
+	
+	margin: 10%;
+
+	text-align: center;
+	cursor: pointer;
+
+	font: 16px 'apercu' !important;
+  color:rgb(223, 148, 102);
+
+}
+
+
+
+
+.begin_meditation_button_66345654628423:hover,
+.begin_meditation_button_66345654628423:focus {
+  /*background-color: black;*/
+  color: rgb(217,130,79);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+#myModal472826662848262673 {
+
+  animation-name: balloon;
+  animation-duration:6s; 
+  animation-timing-function: linear; 
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+}
+
+
+@keyframes balloon {
+  0% {
+  	border-radius: 100%;
+    transform: scale(1);
+    background-color: rgb(247, 239, 228);
+
+  }
+  
+  50% {
+  border-radius: 100%;
+  	transform: scale(1.6);
+    
+    background-color:  rgb(247, 239, 228);
+ 
+  }
+ 
+  
+  99% {
+  border-radius: 100%;
+    transform: scale(1);
+    background-color:  rgb(247, 239, 228);
+    
+
+    
+  }
+
+
+   100% {
+  	border-radius: 100%;
+    transform: scale(0);
+    background-color:  rgb(247, 239, 228);
+    
+    
+  }
+
+
+
+}
+
+
+
+/*
 #myModal472826662848262673 {
   display: block; 
   position: fixed; 
   z-index: 100000000000; 
   right:0;
   bottom:0;
-  width: 100%; 
-  height: 100%; 
+  width: 20%; 
+  height: 20%; 
   
   background-color: rgba(0,0,0,0.8); 
   background-color: rgba(130,136,143,0.8);
@@ -89,14 +205,10 @@ html{
 
 #modal-content66345654628423 {
   	display: block;
-  	/*border-radius: 6px;*/
-  	/*background-color: #fefefe;*/
+  	
   	margin: auto;	  	
 	position: fixed;
- 	/*right:10%;
- 	bottom:20%;
- 	left:10%;
- 	top:20%;*/
+ 	
  	right:0%;
  	bottom:0%;
  	left:0%;
@@ -104,8 +216,6 @@ html{
 
 background: url('https://cdn.statically.io/gh/starlord92/git-visual/d2984666/morning.jpg') no-repeat center center fixed;
 
-/*background: url('chrome-extension://cniabmfhflgaankghinamkbojmgidedk/meditation_flow/morning.jpg') no-repeat center center fixed;
-*/
 
 	background-size: cover;
 	-webkit-background-size: cover;

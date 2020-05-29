@@ -125,30 +125,35 @@ function checkScheduledMeditationTime() {
 
 			{
 
-				//onsole.log('start work time < end work time');
+				console.log('start work time < end work time');
 
 				//25 - 20 seconds before: send content script a message to darken the current active window (0% -> 30% )
-				if(curr_time.getMinutes() == 36 && curr_time.getSeconds() == 30){			
+				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 30){			
+					console.log('start work time < end work time');
 					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 					  chrome.tabs.sendMessage(tabs[0].id, {message: "darken the screen"}, function(response) {;}
 					  );
 					});
 				}
 
-				// 20 seconds before: a voice nudging user to meditate. bottom-of-the-window dialog menu with  'begin meditation' button shows up.
-				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 40){
+				// 20 seconds before: a voice nudging user to meditate & shows a meditation balloon animation
+				if(curr_time.getMinutes() == 9 && curr_time.getSeconds() == 10){
 
-					var sound = new Audio (chrome.extension.getURL('/meditation_recordings/running.wav'));
-	  				sound.play();
+					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+					  chrome.tabs.sendMessage(tabs[0].id, {message: "show breathing animation"}, function(response) {;}
+					  );
+					});
 
+					var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
+	  				reminder.play();
 				}
 		
 
 			 	// console.log('the current time is between work_end_time and work_start_time');
 
 			 	//at the hour mark, run the 
-				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 59){
-					openMeditationTab();
+				if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 10){
+					//openMeditationTab();
 						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/running.wav'));
 	  					sound.play();
 			 		//console.log("open meditation tab");
@@ -165,19 +170,29 @@ function checkScheduledMeditationTime() {
 		    (work_start_time_hr == work_end_time_hr)
 		) &&  correctMeditationFrequency(current_hour) == true)
 			{
-				//console.log('start work time > end work time');
+				
 
 			 	// console.log('the current time is between work_end_time and work_start_time');
-				if(curr_time.getMinutes() == 48 && curr_time.getSeconds() == 0) {
-					openMeditationTab();
-						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/running.wav'));
-	  					sound.play();
-			 		//console.log("open meditation tab");
+			 	console.log('start work time > end work time');
+
+			 	// 20 seconds before: a voice nudging user to meditate & shows a meditation balloon animation
+
+			 	if(curr_time.getMinutes() == 46 && curr_time.getSeconds() == 30){
+
+					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+					  chrome.tabs.sendMessage(tabs[0].id, {message: "show breathing animation"}, function(response) {;}
+					  );
+					});
+
+					var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
+	  				reminder.play();
 				}
+
+
 			} 
 		else {
 			
-			// console.log('it is a time scheduled meditation should be INactive ');
+			console.log('it is a time scheduled meditation should be INactive ');
 		}
 };
 
@@ -240,26 +255,26 @@ function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, w
 		}
 	}
 
-	//console.log("start of array");
+	console.log("start of array");
 	for (var i = 0; i <= hoursToMeditate.length - 1; i++) {
-		hoursToMeditate[i] = hoursToMeditate[i] - 1;
-		//console.log(hoursToMeditate[i]);
+		hoursToMeditate[i] = hoursToMeditate[i];
+		console.log(hoursToMeditate[i]);
 
 	}
-	//console.log("end of array");
+	console.log("end of array");
 };
 
 
 //return true if the current_hour match with any number in the global array hoursToMeditate
 function correctMeditationFrequency(current_hour) {
 	for (var i = 0; i <= hoursToMeditate.length-1; i++) {
-		//if (i == hoursToMeditate.length) {console.log("match NOT found"); return false;}
+		if (i == hoursToMeditate.length) {console.log("match NOT found"); return false;}
 		//console.log(hoursToMeditate[i]);
 		
 		if (hoursToMeditate[i] == current_hour) {
 
-			//console.log("current hour is: " + current_hour);
-			//console.log("match found: " + hoursToMeditate[i]);
+			console.log("current hour is: " + current_hour);
+			console.log("match found: " + hoursToMeditate[i]);
 			return true;
 			
 		}
@@ -439,7 +454,7 @@ chrome.storage.onChanged.addListener(function () {
 // 				    (nudge_start_hour == nudge_end_hour)
 // 				)
 // 		    		{
-// 						enable_nudge = 0;
+// 						enable_nudge = 1;
 // 						//console.log('nudge is enabled because it is during the period nudge is set to be active');			
 // 		    		} 
 // 		    	else {
