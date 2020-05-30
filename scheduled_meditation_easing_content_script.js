@@ -51,6 +51,36 @@ $(document).ready(function() {
 	// 		);
 
 
+//similuate the fadein and fadeout function in jquery
+function fadeOutEffect(target_id) {
+    var fadeTarget = document.getElementById(target_id);
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.1;
+        } 
+        else {
+            clearInterval(fadeOutEffect);
+        }
+    }, 100);
+}
+
+function fadeInEffect(target_id) {
+    var fadeTarget = document.getElementById(target_id);
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 0;
+        }
+        if (fadeTarget.style.opacity < 1) {
+            fadeTarget.style.opacity += 0.1;
+        } else {
+            clearInterval(fadeInEffect);
+        }
+    }, 100);
+}
+
 
 
 
@@ -62,54 +92,36 @@ chrome.runtime.onMessage.addListener(
 
     	 // $('#darkening_effect_background_472826662848262673').show().delay(20000).hide();
     	 //no working solution for all sites (only reddit, google, insta, asana)
-
     }
 
     if (incoming.message == "show breathing animation") {
-   	
     	console.log("message to show breathing animation is received");
-
     	$('myModal472826662848262673').show();
-    	$('myModal472826662848262673').css({'display':'grid'});
-
-
+    	$('myModal472826662848262673').css({'display':'block'});
     	var modal = document.getElementById("myModal472826662848262673");
-		modal.style.display = "grid";
-	
-
+		modal.style.display = "block";
     	$('#myModal472826662848262673').css({"animation-play-state" : "running"});
     }
 
     if (incoming.message == "skip meditation button shows up ; balloon animation stops on its own") {
-
     	console.log("message to show skip meditation button is received");
-
-
-  //   	var modal = document.getElementById("myModal472826662848262673");
-		// modal.style.display = "block";
-
-
+   		var skip_button= document.getElementById("skip_meditation_button_66345654628423");
+		skip_button.style.display = "block"; 
     }
 
-    if (incoming.message == "hide breathing animation") {
-    	
+    if (incoming.message == "fade out breathing animation") {
     	console.log("message to hide breathing animation is received");
-
-    	$('myModal472826662848262673').fadeOut();
-
-    	$('myModal472826662848262673').hide();
-    	$('myModal472826662848262673').css({'display':'none'});
-
-
-    	var modal = document.getElementById("myModal472826662848262673");
-		modal.style.display = "none";
-	
-
+    	// $('myModal472826662848262673').fadeOut();
+    	fadeOutEffect("myModal472826662848262673");
     	$('#myModal472826662848262673').css({"animation-play-state" : "paused"});
     }
 
- //    return Promise.resolve("Dummy response to keep the console quiet");
-      
+     if (incoming.message == "hide breathing animation") {
+      	$('myModal472826662848262673').hide();
+      	$('myModal472826662848262673').css({'display':'none'});
+ 		var modal = document.getElementById("myModal472826662848262673");
+ 		modal.style.display = "none";
+     }
   }); 
 
 

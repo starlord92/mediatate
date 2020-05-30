@@ -1,5 +1,5 @@
-make sure something is in front of all other elements using z-index: 
-https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-chrome-extension*/
+/*make sure something is in front of all other elements using z-index: 
+https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-chrome-extension*/*/
 
 html{
 	/*display: grid;*/
@@ -68,6 +68,9 @@ hmm_472826662848262673{
   }
 }*/
 
+
+
+
 @font-face {
     font-family: 'apercu';
     src: url('https://cdn.statically.io/gh/starlord92/mediatate/9faf7eaf/font/apercu/ApercuPro.woff2') format('woff2'),
@@ -77,33 +80,37 @@ hmm_472826662848262673{
 }
 
 
-
-
-
+/*modal here is the balloon*/
 #myModal472826662848262673 {
   display: none;
+  /*display: block;*/
   align-items: center;
 
   position: fixed; 
   z-index: 100000000000; 
   right:7%;
-  bottom:7%;
+  bottom:10%;
   width: 250px; 
   height: 250px; 
 
   border-radius: 50%;
+  align-content: center;
   
   /*background-color: rgba(0,0,0,0.8); */
   /*background-color: rgba(130,136,143,0.8);*/
   background-color:rgb(247, 239, 228);
 
-  
-
 }
 
+#skip_meditation_button_66345654628423 {
 
+	display: none;
+	/*opacity: 0;*/
 
-#begin_meditation_button_66345654628423 {
+	position: absolute;
+	top: 50%;
+	right: 33%;
+
 	border-radius: 10px;
 	padding: 4px; 
 	/*background-color: black;*/
@@ -113,18 +120,33 @@ hmm_472826662848262673{
 	text-align: center;
 	cursor: pointer;
 
-	font: 16px 'apercu' !important;
-  color:rgb(223, 148, 102);
-
+	font: 13px 'apercu' !important;
+  	color:rgb(171,164,157);
 }
 
+#begin_meditation_button_66345654628423 {
 
+	position: absolute;
+	top: 34%;
+	right: 13%;
+
+	border-radius: 10px;
+	padding: 4px;
+	margin: 10%;
+
+	text-align: center;
+	cursor: pointer;
+
+	font: 16px 'apercu' !important;
+  	color:rgb(223, 148, 102);
+
+}
 
 
 .begin_meditation_button_66345654628423:hover,
 .begin_meditation_button_66345654628423:focus {
   /*background-color: black;*/
-  color: rgb(217,130,79);
+  color: black;
   text-decoration: none;
   cursor: pointer;
 }
@@ -141,7 +163,7 @@ hmm_472826662848262673{
   animation-direction: normal;
   animation-iteration-count: 3;
   animation-fill-mode: none;
-  animation-play-state: running;
+  animation-play-state: paused;
 
 }
 
@@ -162,15 +184,11 @@ hmm_472826662848262673{
  
   }
 
-   100% {
+  100% {
   	border-radius: 100%;
     transform: scale(1);
-    background-color:  rgb(247, 239, 228);
-    
-    
+    background-color:  rgb(247, 239, 228);    
   }
-
-
 
 }
 

@@ -5,7 +5,7 @@
 	"manifest_version": 2,
 	"description": "5 minute meditation",
 	"permissions": ["declarativeContent","storage", "lockWindowFullscreenPrivate","activeTab", "tabs", "notifications", "webRequest", "webRequestBlocking","*://www.facebook.com/*",  "*://*/*"],
-	//permission for sall sites: "*://*/*"
+	//permission for all sites: "*://*/*"
 
 	"chrome_url_overrides": {                
 		"newtab": "meditation_flow/home.html"
