@@ -40,6 +40,12 @@ chrome.runtime.onInstalled.addListener(function() {
 			});
 	});
 
+	chrome.storage.sync.set({stored_skipped_meditation_count: 0}, function() {
+  			chrome.storage.sync.get(['stored_skipped_meditation_count'], function(data) {
+			        //console.log('stored_skipped_meditation_count is ' + data.stored_skipped_meditation_count);
+			});
+	});
+
   	//scheduled meditation is set to be on at installation
   	exec();
 
@@ -48,14 +54,11 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 
-//===========================SCHEDULED MEDITATION BACKEND================= //
-
-//scheduled meditation
-//Order of execution: 
-	//set default time settings
-	//via setIntervals(), check every second to see if the current local time is (a) in between work start time and work end time interval and (b) if it is exactly x'clock.  if so, open a new meditation tab.
+//===========================SCHEDULED MEDITATION BACKEND======================
 
 
+
+//TURNING MEDITATION ON AND OFF----------------------------------------------
 //this variable is how clearInterval will stop the checking for scherduled meditation
 var scheduled_meditation_process = true;
 
@@ -72,7 +75,6 @@ function setUpScheduledMeditation () {
 //also update local variable ork_start_time_hr, work_start_time_min, work_start_time_sec and what not, which are used to determine when and how often scheduled meditation should be run 
 chrome.runtime.onMessage.addListener(
   function(incoming, sender, sendResponse) {
-
     //console.log("incoming message is " + incoming.message);
     if (incoming.message == "turn off scheduled meditation") {
     	clearInterval(scheduled_meditation_process);
@@ -83,17 +85,19 @@ chrome.runtime.onMessage.addListener(
     	exec();
     	console.log("scheduled meditation is TURNED ON");
     }
+  });
+//-----------------------------------------------------------------------------
 
- //    return Promise.resolve("Dummy response to keep the console quiet");
-      
-  }); 
-
+//REMINDER MESSAGE FOR USER WHEN IT'S TIME TO MEDITATE-------------------------
 var user_selects_begin_meditation = false;
 var user_selects_skip_meditation = false;
 var user_selects_nothing_for_scheduled_meditation = true;
 var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the work_start_time_hour; 
 
 var tab_id = 0;
+
+var phase1 = 44;
+var phase2 = phase1 +1;
 
 function checkScheduledMeditationTime() {
 	//console.log("checktime is running");
@@ -103,7 +107,6 @@ function checkScheduledMeditationTime() {
 	//console.log("current time is " + curr_time);
 	current_hour = curr_time.getHours();
 
-
 	//tests scenario (b) - must change user settings start time to 8 pm, end time to 1 am, curr_time.getMinutes() == 0, and setInterval(checkScheduledMeditationTime2, 10000)
 	// curr_time = new Date('May 26, 2020 23:00:00');
 	// current_hour = curr_time.getHours();
@@ -111,7 +114,6 @@ function checkScheduledMeditationTime() {
 	//tests scenario (c) must change user settings start time to 1 am, end time to 5 am, and curr_time.getMinutes() == 0, and setInterval(checkScheduledMeditationTime2, 10000)
 	// curr_time = new Date('May 26, 2020 2:00:00');
 	// current_hour = curr_time.getHours();
-
 
 	// three scenarios:
 	//    (a) 
@@ -121,70 +123,37 @@ function checkScheduledMeditationTime() {
 	generateScheduledMeditationHours(medi_frequency, work_start_time_hr, work_end_time_hr);
 
 	// correctMeditationFrequency(current_hour);
-
-
-
-
-	    
-		if ( (work_start_time_hr < work_end_time_hr && 
+		if 
+		(
+			((work_start_time_hr < work_end_time_hr && 
 			 current_hour >= work_start_time_hr && 
 			 current_hour < work_end_time_hr) 
-			&& correctMeditationFrequency(current_hour) == true )
+			&& correctMeditationFrequency(current_hour) == true)
+			
+			||
+		 
+			(((work_start_time_hr > work_end_time_hr 
+			    &&
+			    ((current_hour >= work_start_time_hr && current_hour >= work_end_time_hr) || (current_hour <= work_start_time_hr && current_hour < work_end_time_hr)))
+
+			    ||
+
+			    (work_start_time_hr == work_end_time_hr)
+			) &&  correctMeditationFrequency(current_hour) == true)
+		)
+
 			{
-				console.log('start work time < end work time');
-
-				//25 - 20 seconds before: send content script a message to darken the current active window (0% -> 30% )
-				//this option is currently in active
-				if(curr_time.getMinutes() == 59 && curr_time.getSeconds() == 30){			
-					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-					  chrome.tabs.sendMessage(tabs[0].id, {message: "darken the screen"}, function(response) {;}
-					  );
-					});
-				}
-
-				// 20 seconds before: a voice nudging user to meditate & shows a meditation balloon animation
-				if(curr_time.getMinutes() == 9 && curr_time.getSeconds() == 10){
-
-					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-					  chrome.tabs.sendMessage(tabs[0].id, {message: "show breathing animation"}, function(response) {;}
-					  );
-					});
-
-					var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
-	  				reminder.play();
-				}
-
-			 	// console.log('the current time is between work_end_time and work_start_time');
-
-			 	//at the hour mark, run the 
-				if(curr_time.getMinutes() == 0 && curr_time.getSeconds() == 10){
-					//openMeditationTab();
-						var sound = new Audio (chrome.extension.getURL('/meditation_recordings/running.wav'));
-	  					sound.play();
-			 		//console.log("open meditation tab");
-				}
-			}
-
-		else if ( ( (work_start_time_hr > work_end_time_hr 
-		    &&
-		    ((current_hour >= work_start_time_hr && current_hour >= work_end_time_hr) || (current_hour <= work_start_time_hr && current_hour < work_end_time_hr))
-		    )
-
-		    ||
-
-		    (work_start_time_hr == work_end_time_hr)
-		) &&  correctMeditationFrequency(current_hour) == true)
-			{
-			 	console.log('start work time > end work time');
+			 	console.log('time to remind the user to meditate');
 
 			 	// 15 seconds before: a meditation balloon (within which there is a 'begin meditation' button) shows up.  
-			 	//add sound effects as a notification if the user has skipped x numbers of meditations.
-			 	if(curr_time.getMinutes() == 49 && curr_time.getSeconds() == 45){
+			 	//add sound effects as a notification if the user has skipped x numbers of meditations
+			 	if(curr_time.getMinutes() == phase1 && curr_time.getSeconds() == 45){
 
+			 		console.log("meditation reminder starts playing.");
 			 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-
 				 		console.log('id of tab where balloon animation starts: ' + tabs[0].id)
 
+				 		// save the  id of the tab where balloon meditation animation starts to a local variable named 'tab_id' so that the animation continues to play out on this tab even after user changes the active tab
 				 		chrome.tabs.sendMessage(tabs[0].id, {message: "show breathing animation"}, function(response) {
 				 			if (tabs[0] != undefined && tabs != undefined){
 				 				tab_id = tabs[0].id;
@@ -202,82 +171,54 @@ function checkScheduledMeditationTime() {
 				// 3 seconds after balloon animation stops on its own.
 
 				// 5 seconds after:  'skip meditation' button shows up in the bottom dialog men
-				if(curr_time.getMinutes() == 50 && curr_time.getSeconds() == 5 ){
-
+				if(curr_time.getMinutes() == phase2 && curr_time.getSeconds() == 5 ){
 					console.log('id tab when skip meditation button shows up: ' + tab_id);
 				  	chrome.tabs.sendMessage(tab_id, {message: "skip meditation button shows up ; balloon animation stops on its own"}, function(response) {;}
 				  	);
-					
 				}
 
-				// 15 second after: in the absence user action, the skip the meditation and the balloon opacity is changed to 0, rendering it invisible.  then its display property is chnaged to none
-				if(curr_time.getMinutes() == 50 && curr_time.getSeconds() == 15 ){	
-
+				// No user interaction: 15 second after reminder shows up: the skip the meditation and the balloon opacity is changed to 0, rendering it invisible.  then its display property is changed to none
+				// user selects to skip the meditation: fades the balloon
+				if(curr_time.getMinutes() == phase2 && curr_time.getSeconds() == 14
+				){	
 					console.log('id tab when breathing meditation fades out: ' + tab_id);
 				  	chrome.tabs.sendMessage(tab_id, {message: "fade out breathing animation"}, function(response) {;});	
 				}
-
-				if(curr_time.getMinutes() == 50 && curr_time.getSeconds() == 16 ){
+				if(curr_time.getMinutes() == phase2 && curr_time.getSeconds() == 15 ){
 					chrome.tabs.sendMessage(tab_id, {message: "hide breathing animation"}, function(response) {;}
 				  	);
-				
 				}
-
-
-////////////////////////////////////////
-
-
-
-			 	// 15 seconds before: a meditation balloon (within which there is a 'begin meditation' button) shows up.  
-			 	//add sound effects as a notification if the user has skipped x numbers of meditations.
-			 	if(curr_time.getMinutes() == 9 && curr_time.getSeconds() == 45){
-					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-					  chrome.tabs.sendMessage(tabs[0].id, {message: "show breathing animation"}, function(response) {;}
-					  );
-					});
-				
-					if (daily_skipped_meditation_count >= 3) {
-						var reminder = new Audio (chrome.extension.getURL('/meditation_recordings/scheduled_meditation_reminder.mp4'));
-						reminder.play();
-					}
-				}
-
-				// 3 seconds after balloon animation stops on its own.
-
-				// 5 seconds after:  'skip meditation' button shows up in the bottom dialog men
-				if(curr_time.getMinutes() == 10 && curr_time.getSeconds() == 5 ){
-					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-					  chrome.tabs.sendMessage(tabs[0].id, {message: "skip meditation button shows up ; balloon animation stops on its own"}, function(response) {;}
-					  );
-					});
-				}
-
-				// 15 second after: in the absence user action, the skip the meditation and the balloon opacity is changed to 0, rendering it invisible.  then its display property is chnaged to none
-				if(curr_time.getMinutes() == 49 && curr_time.getSeconds() == 15 ){
-					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-					  chrome.tabs.sendMessage(tabs[0].id, {message: "fade out breathing animation"}, function(response) {;}
-					  );
-					});
-				}
-
-				if(curr_time.getMinutes() == 49 && curr_time.getSeconds() == 16 ){
-					chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-					  chrome.tabs.sendMessage(tabs[0].id, {message: "hide breathing animation"}, function(response) {;}
-					  );
-					});
-				}
-
-
 			} 
 		else {
-			
 			console.log('it is a time scheduled meditation should be INactive ');
 		}
 };
 
+// if the user clicks 'begin meditation', open the correct meditation recording
+chrome.runtime.onMessage.addListener(
+  function(incoming, sender, sendResponse) {
 
+  	var id = 0;
+    //console.log("incoming message is " + incoming.message);
+    if (incoming.message == "open meditation recording page") {
+    	chrome.tabs.create({'url':'meditation_flow/scheduled_meditation_recording_page.html'}, 
+			function(tab) {
+				id = tab.id;
+				console.log("tab.id of meditation recording player is " + tab.id);
+				//console.log("tab.windowId is " + tab.windowId);
+				//chrome.windows.getCurrent
+				// chrome.windows.update(tab.windowId,{'state':'fullscreen'});
+			}
+		);
+    }
 
-//generate the hours wwhere meditation should take place according to the meditation frquency set by the user
+    // if (incoming.message == "close the meditation recording page") {
+    // 	chrome.tabs.remove(id);
+    // }
+
+ });
+
+//Helper function generate the hours wwhere meditation should take place according to the meditation frquency set by the user
 function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, work_end_time_hr) {
 
 	//console.log("medi_frequency is a number? " + Number.isInteger(medi_frequency));
@@ -288,8 +229,6 @@ function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, w
 	//    scenarios:
 	//    (b)time is set between 8 pm and 6 am the next morning (start time > end time, current time > both start anf end time) 
 	//    (c) between 1 am and 5 am (start time > end time and current time < both start anf end time) 
-
- 
 	if (work_start_time_hr >= work_end_time_hr) {
 		var eligible_hour = work_start_time_hr;
 		var done = false;
@@ -302,15 +241,13 @@ function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, w
 		// console.log ("metZero status is " + metZero);
 		// console.log("work_end_time_hr is " + work_end_time_hr);
 
-
 		hoursToMeditate.push(eligible_hour);
 		eligible_hour = eligible_hour + medi_frequency;
 
 		if (eligible_hour >= 24) {
 			// console.log("eligible_hour >= 24");
 			eligible_hour = eligible_hour-24;
-			metZero = true;
-			
+			metZero = true;			
 		}
 		// console.log ("================================");
 		}
@@ -333,11 +270,9 @@ function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, w
 	for (var i = 0; i <= hoursToMeditate.length - 1; i++) {
 		hoursToMeditate[i] = hoursToMeditate[i];
 		//console.log(hoursToMeditate[i]);
-
 	}
 	//console.log("end of array");
 };
-
 
 //return true if the current_hour match with any number in the global array hoursToMeditate
 function correctMeditationFrequency(current_hour) {
@@ -346,20 +281,13 @@ function correctMeditationFrequency(current_hour) {
 		//console.log(hoursToMeditate[i]);
 		
 		if (hoursToMeditate[i] == current_hour) {
-
 			//console.log("current hour is: " + current_hour);
 			//console.log("match found: " + hoursToMeditate[i]);
 			return true;
-			
-		}
-			
+		}		
 	}
-	
 	return false;
 }
-
-
-
 
 
 
@@ -380,29 +308,10 @@ function correctMeditationFrequency(current_hour) {
 		// );
 
 
-//auxiliary function: open a new tab nudging user to meditate
-//activetabs/current tabs only
-function openMeditationTab() {
-	//chrome.tabs.create defaults to the current window, which is different from the one in focus: https://developer.chrome.com/extensions/windows#current-window
-	//chrome.tabs.create({'url':'meditation_flow/home.html'}, );
-
-	//we have to create and then update the state for fullscreen.  creating alone doesn't work. poor design on chrome's part
-	// chrome.windows.create({'url':'meditation_flow/home.html', 'focused' : true, 'state':'fullscreen', 'type': 'popup'},
-	// 	function(w) {chrome.windows.update(w.id,{'state':'fullscreen'});}
-	// 	);
-
-	chrome.tabs.create({'url':'meditation_flow/home.html'}, 
-		function(tab) {
-			console.log("tab.windowId is " + tab.windowId);
-			//chrome.windows.getCurrent
-			chrome.windows.update(tab.windowId,{'state':'fullscreen'});
-		}
-	);
-}
 
 
 // AFTER user_profile_setting register a setting change from the user, it will send a signal to background.js so that the latter can update its local variables work_start_time_hr, work_start_time_min, work_start_time_sec using local storage
-//This is ONLY for the purpose of stopping/ starting scheduled meditatgion
+//This is ONLY for the purpose of providing uptodate data for the scheduled meditation algorithm
 
 chrome.storage.onChanged.addListener(function () {
 

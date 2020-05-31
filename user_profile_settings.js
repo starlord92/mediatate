@@ -131,7 +131,6 @@ function hide_meditation_recording_player() {
 	$('html').removeClass('individual_meditation_recording_player_background');
 	$('body').removeClass('individual_meditation_recording_player_body');
 
-	
 	$('.individual_meditation_recording_player_9809403065').hide();
 
 	//reshow the fixed bottom nav bar
