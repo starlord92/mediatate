@@ -1,29 +1,14 @@
-//check if nudge option is on
-//check if it's a time nudge should be on
-//sort through the stored array that contains distracting websites
-//if the current url obtained from wberequest is a match, then run the modal
+// var iframe_reminder = document.createElement ("iframe");
+// iframe_reminder.style.zIndex = "2147483647"; 
+// iframe_reminder.style.display = "none";
+
+// iframe_reminder.src  = chrome.extension.getURL ("/ease.html");
+// document.body.appendChild(iframe_reminder);
 
 
-var nudge_start_time;
-var nudge_end_time;
-//var imgURL = chrome.extension.getURL("meditation_flow/morning.jpg");
+var user_interacted_with_the_reminder = false;
 
-function injectHTML(val, callback) {
-
-	// $(document).ready(function() {
-		$.get(chrome.extension.getURL('/ease.html'), function(data) {
-	    $(data).appendTo('body');
-	    console.log("ease.html injected");
-		});
-	// });
-
-	if (callback) {
-		callback();
-	}
-	
-};
-
-//similuate the fadein and fadeout function in jquery
+//similuate the fadeout function in jquery
 function fadeOutReminder() {
     var fadeTarget = document.getElementById("myModal472826662848262673");
     var fadeEffect = setInterval(function () {
@@ -36,111 +21,120 @@ function fadeOutReminder() {
         else {
             clearInterval(fadeOutReminder);
         }
-    }, 100);
-}
+    }, 100);  
+};
+
+function stopVideo (callback) {
+
+    var videos = [].slice.call(document.getElementsByTagName('video'), 0);
+    console.log("number of videos: " + videos.length);
+    for(i = 0;i < videos.length; i++)
+    {
+        videos[i].pause();
+    }
+
+    chrome.storage.sync.get(['stored_open_meditation_recording_page_flag'], function(data) {
+        console.log('stored_open_meditation_recording_page_flag before the begin meditation button pressed is ' + data.stored_open_meditation_recording_page_flag);
+    });
+
+    callback();
+};
+
+function tell_background_script_to_open_meditation_recording_page () {
+    stopVideo( function() {
+
+        chrome.storage.sync.set({stored_open_meditation_recording_page_flag: true}, 
+            function() {
+                chrome.storage.sync.get(['stored_open_meditation_recording_page_flag'], function(data) {
+                        console.log('stored_open_meditation_recording_page_flag is ' + data.stored_open_meditation_recording_page_flag);
+                });
+        });
+
+        //fade out reminder and then hide it
+        fadeOutReminder();
+        var modal = document.getElementById("myModal472826662848262673");
+        modal.style.display = "none";
+    });
+
+    user_interacted_with_the_reminder = true;
+};
 
 
-$(document).ready(function() {
-
-	// $('html').addClass("hmm_472826662848262673");
-
-
-	$('#myModal472826662848262673').css({"animation-play-state" : "running"});
-
-	//$('#myModal472826662848262673').hide();
-	// $('#myModal472826662848262673').css({"display":"none"});
-
-	// var modal = document.getElementById("myModal472826662848262673");
-
-	// modal.style.display = "none";
+var reminder_modal = document.createElement ("div");
+reminder_modal.id = "myModal472826662848262673";
 
 
-	// close_button_174162884722728293.addEventListener("click", function() {
-	// 				modal.style.display = "none";
-	// 			}
-	// 		);
+var begin_meditation_button = document.createElement ("div");
+begin_meditation_button.id = "begin_meditation_button_66345654628423";
+begin_meditation_button.innerHTML="begin meditation";
 
-	//takes care of user NON-interaction with the scheduled meditation reminder
-	chrome.runtime.onMessage.addListener(
-	  function(incoming, sender, sendResponse) {
+var skip_meditation_button = document.createElement ("div");
+skip_meditation_button.id = "skip_meditation_button_66345654628423";
+skip_meditation_button.innerHTML="skip";
 
-	    if (incoming.message == "darken the screen") {
-	    	console.log("message to darken the screen is received");
 
-	    	 // $('#darkening_effect_background_472826662848262673').show().delay(20000).hide();
-	    	 //no working solution for all sites (only reddit, google, insta, asana)
-	    }
+reminder_modal.appendChild(begin_meditation_button);
+reminder_modal.appendChild(skip_meditation_button);
+document.body.appendChild(reminder_modal);
 
-	    if (incoming.message == "show breathing animation") {
-	    	console.log("message to show breathing animation is received");
-	    	$('myModal472826662848262673').show();
-	    	$('myModal472826662848262673').css({'display':'block'});
-	    	var modal = document.getElementById("myModal472826662848262673");
-			modal.style.display = "block";
-	    	$('#myModal472826662848262673').css({"animation-play-state" : "running"});
-	    }
 
-	    if (incoming.message == "skip meditation button shows up ; balloon animation stops on its own") {
-	    	console.log("message to show skip meditation button is received");
-	   		var skip_button= document.getElementById("skip_meditation_button_66345654628423");
-			skip_button.style.display = "block"; 
-	    }
 
-	    if (incoming.message == "fade out breathing animation") {
-	    	console.log("message to hide breathing animation is received");
-	    	// $('myModal472826662848262673').fadeOut();
-	    	fadeOutReminder();
-	    	$('#myModal472826662848262673').css({"animation-play-state" : "paused"});
-	    }
+async function reminderAnimationSequence () {
 
-	    if (incoming.message == "hide breathing animation") {
-	      	$('myModal472826662848262673').hide();
-	      	$('myModal472826662848262673').css({'display':'none'});
-	 		var modal = document.getElementById("myModal472826662848262673");
-	 		modal.style.display = "none";
-	    }
-	});
+    const show_reminder_and_begin_button = new Promise((resolve, reject) => {
+        reminder_modal.style.display = "block";
+        reminder_modal.style.animationPlayState = "running";
+        console.log("show the reminder's animation and begin button");
+        setTimeout(() => resolve("done!"), 29000);
+    });
+    let step1 = await show_reminder_and_begin_button;
 
-	// user interaction: skip.  update the daily skipped meditation count   
-	var skip_button = document.getElementById("skip_meditation_button_66345654628423");
+    const show_skip_button = new Promise((resolve, reject) => {
+        skip_meditation_button.style.display = "block"; 
+        console.log("show skip meditation button");
+        setTimeout(() => resolve("done!"), 10000);
+    });
+    let step2 = await show_skip_button;
+
+    let fade_reminder = new Promise((resolve, reject) => {
+        console.log("fade reminder");
+        fadeOutReminder();
+        reminder_modal.style.animationPlayState = "paused";
+    });
+    let step3 = await show_skip_button;
+
+    let hide_reminder = new Promise((resolve, reject) => {
+        reminder_modal.display = "none";
+        console.log("hide reminder");
+    });
+
+
+};
+
+window.onload = function() {
+
+    //takes care of user NON-interaction with the scheduled meditation reminder
+    chrome.runtime.onMessage.addListener(
+      function(incoming, sender, sendResponse) {
+
+        if (incoming.message == "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user") 
+        {
+            console.log("message to show scheduled meditation reminder to user is received");
+
+            reminderAnimationSequence();
+        } 
+
+        return Promise.resolve("Dummy response to keep the console quiet");
+    });
+
+    // user interaction: skip.  update the daily skipped meditation count   
+    var skip_button = document.getElementById("skip_meditation_button_66345654628423");
     skip_button.addEventListener('click', fadeOutReminder); 
 
     var begin_meditation_button = document.getElementById("begin_meditation_button_66345654628423");
-    begin_meditation_button.addEventListener('click', tell_background_script_to_pen_meditation_recording_page); 
+    begin_meditation_button.addEventListener('click', tell_background_script_to_open_meditation_recording_page); 
 
 
-});
-
-
-injectHTML(0);
-
-
-
-function stopVideo (callback) {
-	// $('video').pause();
-	// $('.video-stream').pause();
-	
-	var videos = [].slice.call(document.getElementsByTagName('video'), 0);
-	console.log("number of videos: " + videos.length);
-
-	for(i = 0;i < videos.length; i++)
-	{
-    	videos[i].pause();
-	}
-
-	callback();
-};
-
-//--------------INDIVIDUAL MEDITATION RECORDING PAGE---------------------------
-function tell_background_script_to_pen_meditation_recording_page () {
-	stopVideo( function() {
-		chrome.runtime.sendMessage({message: "open meditation recording page"}, function(response) {	
-			//dafe out reminder and then hide it
-			fadeOutReminder();
-			var modal = document.getElementById("myModal472826662848262673");
-	 		modal.style.display = "none";
-		});
-	});
 };
 
 
@@ -148,6 +142,106 @@ function tell_background_script_to_pen_meditation_recording_page () {
 
 
 
+
+
+// window.onload = function() {
+
+// var reminder_modal = document.createElement ("div");
+// reminder_modal.id = "myModal472826662848262673";
+
+
+// var begin_meditation_button = document.createElement ("div");
+// begin_meditation_button.id = "begin_meditation_button_66345654628423";
+// begin_meditation_button.innerHTML="begin meditation";
+
+// var skip_meditation_button = document.createElement ("div");
+// skip_meditation_button.id = "skip_meditation_button_66345654628423";
+// skip_meditation_button.innerHTML="skip";
+
+
+// reminder_modal.appendChild(begin_meditation_button);
+// reminder_modal.appendChild(skip_meditation_button);
+// document.body.appendChild(reminder_modal);
+
+
+
+
+//     //takes care of user NON-interaction with the scheduled meditation reminder
+//     chrome.runtime.onMessage.addListener(
+//       function(incoming, sender, sendResponse) {
+
+//         if (incoming.message == "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user") {
+//             console.log("message to show scheduled mediation reminder to user is received");
+//         }
+
+
+
+//         if (incoming.message == "darken the screen" && user_interacted_with_the_reminder == false) {
+//             console.log("message to darken the screen is received");
+//         }
+
+
+//         if (incoming.message == "darken the screen" && user_interacted_with_the_reminder == false) {
+//             console.log("message to darken the screen is received");
+//         }
+
+
+
+//         if (incoming.message == "show breathing animation" && user_interacted_with_the_reminder == false) {
+//         	console.log("message to show breathing animation is received");
+//         	var modal = document.getElementById("myModal472826662848262673");
+//     		modal.style.display = "block";
+    		
+//         	reminder_modal.style.animationPlayState = "running";
+//         }
+
+//         if (incoming.message == "skip meditation button shows up ; balloon animation stops on its own" && user_interacted_with_the_reminder == false) {
+//         	console.log("message to show skip meditation button is received");
+//        		var skip_button= document.getElementById("skip_meditation_button_66345654628423");
+//     		skip_button.style.display = "block"; 
+//         }
+
+//         if (incoming.message == "fade out breathing animation" && user_interacted_with_the_reminder == false) {
+//         	console.log("message to hide breathing animation is received");
+//         	fadeOutReminder();
+//         	reminder_modal.style.animationPlayState = "paused";
+//         }
+
+//         if (incoming.message == "hide breathing animation") {
+//      		var modal = document.getElementById("myModal472826662848262673");
+//      		modal.style.display = "none";
+//             user_interacted_with_the_reminder = false;
+//         }
+
+//         return Promise.resolve("Dummy response to keep the console quiet");
+//     });
+
+//     // user interaction: skip.  update the daily skipped meditation count   
+//     var skip_button = document.getElementById("skip_meditation_button_66345654628423");
+//     skip_button.addEventListener('click', fadeOutReminder); 
+
+//     var begin_meditation_button = document.getElementById("begin_meditation_button_66345654628423");
+//     begin_meditation_button.addEventListener('click', tell_background_script_to_open_meditation_recording_page); 
+
+
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var nudge_start_time;
+var nudge_end_time;
 
 
 //used in v.1.0 to create modal ontop of the existing distracting page
