@@ -106,7 +106,7 @@ var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the w
 
 
 
-var time = 50;
+var time = 52;
 var second = 40;
 
 
