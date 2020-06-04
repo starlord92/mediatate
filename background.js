@@ -106,24 +106,52 @@ var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the w
 
 
 
-var time = 0;
+time = 38;
 var time1 = 5;
-var time2 = 10;
-var time3 = 15;
-var time4 = 20;
-var time5 = 25;
-var time6 = 30;
-var time7 = 35;
-var time8 = 40;
-var time9 = 45;
-var time10 = 50;
-var time11 = 55;
-var time12 = 0;
+var time2 = 7;
+var time3 = 9;
+var time4 = 11;
+var time5 = 13;
+var time6 = 15;
+var time7 = 17;
+var time8 = 19;
+var time9 = 21;
+var time10 = 23;
+var time11 = 25;
+var time12 = 27;
+var time13 = 11;
+var time14 = 13;
+var time15 = 15;
+var time16 = 17;
+var time17 = 19;
+var time9 = 21;
+var time10 = 23;
+var time11 = 25;
+var time12 = 27;
+var time4 = 11;
+var time5 = 13;
+var time6 = 15;
+var time7 = 17;
+var time8 = 19;
+var time9 = 21;
+var time10 = 23;
+var time11 = 25;
+var time12 = 27;
+var time4 = 11;
+var time5 = 13;
+var time6 = 15;
+var time7 = 17;
+var time8 = 19;
+var time9 = 21;
+var time10 = 23;
+var time11 = 25;
+var time12 = 27;
+
 
 
 var second = 0;
 
-
+var counter = 0;
 
 async function checkScheduledMeditationTime() {
 	//console.log("checktime is running");
@@ -173,29 +201,32 @@ async function checkScheduledMeditationTime() {
 				console.log('it is a time scheduled meditation should be ACtive ');
 			 	// 15 seconds before: an animated reminder (within which there is a 'begin meditation' button) shows up.  
 			 	//add sound effects as a notification if the user has skipped x numbers of meditations
-			 	if((curr_time.getMinutes() == time  || 
-			 		curr_time.getMinutes() == time1 ||
-			 		curr_time.getMinutes() == time2 || 
-			 		curr_time.getMinutes() == time3 || 
-			 		curr_time.getMinutes() == time4 || 
-			 		curr_time.getMinutes() == time5 || 
-			 		curr_time.getMinutes() == time6 || 
-			 		curr_time.getMinutes() == time7  ||
-			 		curr_time.getMinutes() == time8 ||
-			 		curr_time.getMinutes() == time9 ||
-			 		curr_time.getMinutes() == time10 ||
-			 		curr_time.getMinutes() == time11 ||
-			 		curr_time.getMinutes() == time12) 
+			 	if((curr_time.getMinutes() == time) 
+			 		// curr_time.getMinutes() == time1 ||
+			 		// curr_time.getMinutes() == time2 || 
+			 		// curr_time.getMinutes() == time3 || 
+			 		// curr_time.getMinutes() == time4 || 
+			 		// curr_time.getMinutes() == time5 || 
+			 		// curr_time.getMinutes() == time6 || 
+			 		// curr_time.getMinutes() == time7  ||
+			 		// curr_time.getMinutes() == time8 ||
+			 		// curr_time.getMinutes() == time9 ||
+			 		// curr_time.getMinutes() == time10 ||
+			 		// curr_time.getMinutes() == time11 ||
+			 		// curr_time.getMinutes() == time12) 
 			 		&& curr_time.getSeconds() == second){
 
-			 		console.log("sending message to the play the reminder to the correct content script")
+			 		counter = counter + 1; 
+			 	    time = time + 1;
 
 			 		//this async function is simply an attempt to send the message to play the remidner animation once and then chck if the id of the tab receicing the message is NOT undefined.  if it is undefined, we try again 
 			 		let send_message_to_show_reminder = new Promise((resolve, reject) => {
 			 				chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 				 				if (tabs[0] != undefined && tabs != undefined){
 									console.log('defined tab id found is: ' + tabs[0].id);
-						 			chrome.tabs.sendMessage(tabs[0].id, {message: "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user"}, function(response) {;});
+						 			chrome.tabs.sendMessage(tabs[0].id, {message: "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user"}, function(response) {
+			 								console.log("sending message to the play the reminder to the correct content script for the " + counter + " time");
+						 				});
 							        // chrome.storage.sync.set({stored_message_to_send_reminder_succeeds: true}, 
 							        //     function() {
 							        //         chrome.storage.sync.get(['stored_message_to_send_reminder_succeeds'], function(data) {
