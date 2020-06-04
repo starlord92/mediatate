@@ -106,46 +106,46 @@ var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the w
 
 
 
-time = 38;
-var time1 = 5;
-var time2 = 7;
-var time3 = 9;
-var time4 = 11;
-var time5 = 13;
-var time6 = 15;
-var time7 = 17;
-var time8 = 19;
-var time9 = 21;
-var time10 = 23;
-var time11 = 25;
-var time12 = 27;
-var time13 = 11;
-var time14 = 13;
-var time15 = 15;
-var time16 = 17;
-var time17 = 19;
-var time9 = 21;
-var time10 = 23;
-var time11 = 25;
-var time12 = 27;
-var time4 = 11;
-var time5 = 13;
-var time6 = 15;
-var time7 = 17;
-var time8 = 19;
-var time9 = 21;
-var time10 = 23;
-var time11 = 25;
-var time12 = 27;
-var time4 = 11;
-var time5 = 13;
-var time6 = 15;
-var time7 = 17;
-var time8 = 19;
-var time9 = 21;
-var time10 = 23;
-var time11 = 25;
-var time12 = 27;
+time = 18;
+// var time1 = 5;
+// var time2 = 7;
+// var time3 = 9;
+// var time4 = 11;
+// var time5 = 13;
+// var time6 = 15;
+// var time7 = 17;
+// var time8 = 19;
+// var time9 = 21;
+// var time10 = 23;
+// var time11 = 25;
+// var time12 = 27;
+// var time13 = 11;
+// var time14 = 13;
+// var time15 = 15;
+// var time16 = 17;
+// var time17 = 19;
+// var time9 = 21;
+// var time10 = 23;
+// var time11 = 25;
+// var time12 = 27;
+// var time4 = 11;
+// var time5 = 13;
+// var time6 = 15;
+// var time7 = 17;
+// var time8 = 19;
+// var time9 = 21;
+// var time10 = 23;
+// var time11 = 25;
+// var time12 = 27;
+// var time4 = 11;
+// var time5 = 13;
+// var time6 = 15;
+// var time7 = 17;
+// var time8 = 19;
+// var time9 = 21;
+// var time10 = 23;
+// var time11 = 25;
+// var time12 = 27;
 
 
 
@@ -219,14 +219,29 @@ async function checkScheduledMeditationTime() {
 			 		counter = counter + 1; 
 			 	    time = time + 1;
 
+			 	    console.log('all conditions met ');
 			 		//this async function is simply an attempt to send the message to play the remidner animation once and then chck if the id of the tab receicing the message is NOT undefined.  if it is undefined, we try again 
 			 		let send_message_to_show_reminder = new Promise((resolve, reject) => {
 			 				chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 				 				if (tabs[0] != undefined && tabs != undefined){
 									console.log('defined tab id found is: ' + tabs[0].id);
-						 			chrome.tabs.sendMessage(tabs[0].id, {message: "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user"}, function(response) {
-			 								console.log("sending message to the play the reminder to the correct content script for the " + counter + " time");
-						 				});
+						 			// chrome.tabs.sendMessage(tabs[0].id, {message: "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user"}, function(response) {
+			 						// 		console.log("sending message to the play the reminder to the correct content script for the " + counter + " time");
+						 			// 	});
+						 			chrome.tabs.insertCSS(
+						 				tabs[0].id, 
+						 				{file:'/ease.css'},
+						 				function () {
+							 				chrome.tabs.executeScript(tabs[0].id, 
+							 				{file:'/scheduled_meditation_easing_content_script.js'},
+							 				function(done) {
+				 								console.log("injecting content script and css to play the reminder to the correct content script for the " + counter + " time");
+							 					}
+							 				);
+						 				}
+
+						 			);
+
 							        // chrome.storage.sync.set({stored_message_to_send_reminder_succeeds: true}, 
 							        //     function() {
 							        //         chrome.storage.sync.get(['stored_message_to_send_reminder_succeeds'], function(data) {
@@ -266,6 +281,8 @@ async function checkScheduledMeditationTime() {
 			 		// let result_check = await send_message_to_show_reminder_check;
 
 				}
+
+				else {console.log ("some conditions not met");}
 			} 
 		else {
 			console.log('it is a time scheduled meditation should be INactive ');

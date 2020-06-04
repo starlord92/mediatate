@@ -63,17 +63,17 @@
     //   "run_at": "document_end"
     // },
 
-    {
-      "matches": [
-        "*://*/*"
+    // {
+    //   "matches": [
+    //     "*://*/*"
 
-      ],
-      "js": [ "jquery-3.4.1.js",
-        "scheduled_meditation_easing_content_script.js", "scheduled_meditation_recording_page.js" 
-      ],
-      "css": ["ease.css"],
-      "run_at": "document_end"
-    }
+    //   ],
+    //   "js": [ "jquery-3.4.1.js",
+    //     "scheduled_meditation_easing_content_script.js", "scheduled_meditation_recording_page.js" 
+    //   ],
+    //   "css": ["ease.css"],
+    //   "run_at": "document_end"
+    // }
 
 	],
 

@@ -85,14 +85,14 @@ async function reminderAnimationSequence () {
         reminder_modal.style.display = "block";
         reminder_modal.style.animationPlayState = "running";
         console.log("show the reminder's animation and begin button");
-        setTimeout(() => resolve("done!"), 29000);
+        setTimeout(() => resolve("done!"), 7000);
     });
     let step1 = await show_reminder_and_begin_button;
 
     const show_skip_button = new Promise((resolve, reject) => {
         skip_meditation_button.style.display = "block"; 
         console.log("show skip meditation button");
-        setTimeout(() => resolve("done!"), 10000);
+        setTimeout(() => resolve("done!"), 1000);
     });
     let step2 = await show_skip_button;
 
@@ -100,32 +100,38 @@ async function reminderAnimationSequence () {
         console.log("fade reminder");
         fadeOutReminder();
         reminder_modal.style.animationPlayState = "paused";
+        setTimeout(() => resolve("done!"), 2000);
     });
-    let step3 = await show_skip_button;
+    let step3 = await fade_reminder;
 
     let hide_reminder = new Promise((resolve, reject) => {
         reminder_modal.display = "none";
+        document.getElementById('myModal472826662848262673').remove();
+        document.getElementById('begin_meditation_button_66345654628423').remove();
+        document.getElementById('skip_meditation_button_66345654628423').remove();
         console.log("hide reminder");
     });
 
 
 };
 
-window.onload = function() {
+//window.onload = function() {
 
     //takes care of user NON-interaction with the scheduled meditation reminder
-    chrome.runtime.onMessage.addListener(
-      function(incoming, sender, sendResponse) {
+    // chrome.runtime.onMessage.addListener(
+    //   function(incoming, sender, sendResponse) {
 
-        if (incoming.message == "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user") 
-        {
-            console.log("message to show scheduled meditation reminder to user is received");
+    //     // if (incoming.message == "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user") 
+    //     // {
+    //         console.log("message to show scheduled meditation reminder to user is received");
 
-            reminderAnimationSequence();
-        } 
+    //         reminderAnimationSequence();
+    //     //} 
 
-        return Promise.resolve("Dummy response to keep the console quiet");
-    });
+    //     return Promise.resolve("Dummy response to keep the console quiet");
+    // });
+
+    reminderAnimationSequence();
 
     // user interaction: skip.  update the daily skipped meditation count   
     var skip_button = document.getElementById("skip_meditation_button_66345654628423");
@@ -135,7 +141,7 @@ window.onload = function() {
     begin_meditation_button.addEventListener('click', tell_background_script_to_open_meditation_recording_page); 
 
 
-};
+//};
 
 
 
