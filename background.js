@@ -106,8 +106,22 @@ var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the w
 
 
 
-var time = 52;
-var second = 40;
+var time = 0;
+var time1 = 5;
+var time2 = 10;
+var time3 = 15;
+var time4 = 20;
+var time5 = 25;
+var time6 = 30;
+var time7 = 35;
+var time8 = 40;
+var time9 = 45;
+var time10 = 50;
+var time11 = 55;
+var time12 = 0;
+
+
+var second = 0;
 
 
 
@@ -159,7 +173,22 @@ async function checkScheduledMeditationTime() {
 				console.log('it is a time scheduled meditation should be ACtive ');
 			 	// 15 seconds before: an animated reminder (within which there is a 'begin meditation' button) shows up.  
 			 	//add sound effects as a notification if the user has skipped x numbers of meditations
-			 	if(curr_time.getMinutes() == time && curr_time.getSeconds() == second){
+			 	if((curr_time.getMinutes() == time  || 
+			 		curr_time.getMinutes() == time1 ||
+			 		curr_time.getMinutes() == time2 || 
+			 		curr_time.getMinutes() == time3 || 
+			 		curr_time.getMinutes() == time4 || 
+			 		curr_time.getMinutes() == time5 || 
+			 		curr_time.getMinutes() == time6 || 
+			 		curr_time.getMinutes() == time7  ||
+			 		curr_time.getMinutes() == time8 ||
+			 		curr_time.getMinutes() == time9 ||
+			 		curr_time.getMinutes() == time10 ||
+			 		curr_time.getMinutes() == time11 ||
+			 		curr_time.getMinutes() == time12) 
+			 		&& curr_time.getSeconds() == second){
+
+			 		console.log("sending message to the play the reminder to the correct content script")
 
 			 		//this async function is simply an attempt to send the message to play the remidner animation once and then chck if the id of the tab receicing the message is NOT undefined.  if it is undefined, we try again 
 			 		let send_message_to_show_reminder = new Promise((resolve, reject) => {

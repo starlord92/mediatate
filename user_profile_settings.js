@@ -176,14 +176,14 @@ var warmup_mindset = document.getElementById("runningsound");
 // 	eneral eating.
 
 
-$('#recommended_meditation_recording_link_9809403065').on('click', function(event) {
-	hide_meditations_page();
-	show_meditation_recording_player();
-	var recording = warmup_mindset;
-	recording.play();
-	recording_is_playing = true;
-	inside_meditation_session = true;
-});
+// $('#recommended_meditation_recording_link_9809403065').on('click', function(event) {
+// 	hide_meditations_page();
+// 	show_meditation_recording_player();
+// 	var recording = warmup_mindset;
+// 	recording.play();
+// 	recording_is_playing = true;
+// 	inside_meditation_session = true;
+// });
 
 $('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
 	hide_meditations_page();

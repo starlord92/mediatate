@@ -196,19 +196,94 @@ html, body {
 
 	display: grid;
 	grid-template-columns: minmax(50px, 100px) minmax(150px,300px); 
-	grid-template-rows: minmax(50px, 60px) 1fr;
+	grid-template-rows: minmax(50px, 60px) auto;
+	grid-row-gap: 20px; 
 
 	
 }
 	#recommended_meditation_recording_link_9809403065 {
 		/*containing-block = recommended_meditation_recording*/
-		grid-row-start:2;
+		grid-row-start:3;
 		grid-column-start:2;
 		grid-column-end:2;
 
 		cursor: pointer;
 		
 	}
+
+	#recommended_meditation_recording_begin_button_9809403065 {
+		/*containing-block = recommended_meditation_recording*/
+		grid-row-start:4;
+		grid-column-start:2;
+		grid-column-end:2;
+
+		cursor: pointer;
+
+		border-radius: 60px ;
+		background-color:  #a5abb8;
+		color:#2e3943;
+		text-align: center;
+		font-size: 1.1rem;
+
+		width: 140px;
+		height: 40px;
+		line-height: 40px;
+		
+	}
+
+	#recommended_meditation_recording_begin_button_9809403065:hover {
+		background-color:  #e2e4e9;
+	}
+
+
+/*.triangle {
+	position: relative;
+	background-color:rgb(221, 234, 247) ;
+	text-align: left;
+}
+.triangle:before,
+.triangle:after {
+	content: '';
+	position: absolute;
+	background-color: inherit;
+}
+.triangle,
+.triangle:before,
+.triangle:after {
+	width:  30px;
+	height: 30px;
+	border-top-right-radius: 30%;
+}
+
+.triangle {
+	transform: rotate(-90.2deg) skewX(-30deg) scale(1,.866);
+}
+.triangle:before {
+	transform: rotate(-135deg) skewX(-45deg) scale(1.414,.707) translate(0,-50%);
+}
+.triangle:after {
+	transform: rotate(135deg) skewY(-45deg) scale(.707,1.414) translate(50%);
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .recording_list_a_9809403065, .recording_list_b_9809403065  {
@@ -222,6 +297,16 @@ html, body {
 	font: 1.3rem 'apercu';
 	color: #a5abb8;
 	text-align: center;
+}
+
+.recording_track_a_of_list_a_9809403065:hover
+{
+	background-color: #7390ab;
+}
+
+.recording_track_b_of_list_b_9809403065:hover
+{
+	background-color: #7390ab;
 }
 
 
@@ -240,7 +325,7 @@ html, body {
 
 	.recording_track_a_of_list_a_9809403065, .recording_track_b_of_list_b_9809403065  {
 
-		border-radius: 60px;
+		border-radius: 5px;
 		background-color: #7994af;
 		
 		
