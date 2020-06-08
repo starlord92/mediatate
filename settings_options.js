@@ -2,7 +2,9 @@
 
 ///displaying saved and updated settings whenever user open the settings page
 
-//user_ptofile_settings takes care of the saving and updating
+//gray out scheduled meditation and nudge when their checkbox is turned 'off'
+
+//user_ptofile_settings takes care of the saving and updating of data of the settings page
 
 $(document).ready(function() {
 
@@ -86,11 +88,66 @@ $(document).ready(function() {
 	});
 
 
+
+var scheduled_meditation_checkbox = document.querySelector("input[name=scheduled_meditation_checkbox_9809403065]");
+
+scheduled_meditation_checkbox.addEventListener( 'change', function() {
+    if(this.checked) {
+        // Checkbox is checked..
+        document.getElementById("medi_duration_9809403065").disabled = false;
+        document.getElementById("medi_frequency_9809403065").disabled = false;
+        document.getElementById("work_start_time_9809403065").disabled = false;
+        document.getElementById("work_start_time_am_pm_9809403065").disabled = false;
+        document.getElementById("work_end_time_9809403065").disabled = false;
+        document.getElementById("work_end_time_am_pm_9809403065").disabled = false;
+        document.getElementById("settings_options_9809403065").style.color = "rgb(0,0,0)";
+
+
+    } else {
+        document.getElementById("medi_duration_9809403065").disabled = true;
+        document.getElementById("medi_frequency_9809403065").disabled = true;
+        document.getElementById("work_start_time_9809403065").disabled = true;
+        document.getElementById("work_start_time_am_pm_9809403065").disabled = true;
+        document.getElementById("work_end_time_9809403065").disabled = true;
+        document.getElementById("work_end_time_am_pm_9809403065").disabled = true;
+        
+        $("#settings_options_9809403065").css("color", "rgb(156,156,157)");
+        $("label[for='scheduled_meditation_9809403065'").css("color", "rgb(0,0,0)");
+    }
+});
+
+
+var nudge_checkbox = document.querySelector("input[name=nudge_checkbox_9809403065]");
+
+nudge_checkbox.addEventListener( 'change', function() {
+    if(this.checked) {
+        // Checkbox is checked..
+        document.getElementById("nudge_start_time_9809403065").disabled = false;
+        document.getElementById("nudge_start_time_am_pm_9809403065").disabled = false;
+        document.getElementById("nudge_end_time_9809403065").disabled = false;
+        document.getElementById("nudge_end_time_am_pm_9809403065").disabled = false;
+        document.getElementById("nudge_options_9809403065").style.color = "rgb(0,0,0)";
+
+
+    } else {
+        document.getElementById("nudge_start_time_9809403065").disabled = true;
+        document.getElementById("nudge_start_time_am_pm_9809403065").disabled = true;
+        document.getElementById("nudge_end_time_9809403065").disabled = true;
+        document.getElementById("nudge_end_time_am_pm_9809403065").disabled = true;
+ 
+        $("#nudge_options_9809403065").css("color", "rgb(156,156,157)");
+        $("label[for='nudge_checkbox_9809403065'").css("color", "rgb(0,0,0)");
+    }
+});
+
+
 chrome.storage.sync.getBytesInUse(null, function(data) {
 
 	console.log("amount of sync storage being  used in total " + data);
 
 });
+
+
 
 
 

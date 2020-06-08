@@ -29,7 +29,7 @@ html, body {
 	/*font: bold 1.2em 'robotolight';*/
 	/*font-family: roboto-light;*/
 	/*color: #08596a;*/
-	color: /*#c695c6;*/  #a5abb8;
+	color: /*#c695c6;*/ /* #a5abb8; */
 
 	/* Horizontally center EACH element in a grid with regard to its inline axis*/
 	/*justify-content: center;*/
@@ -41,54 +41,21 @@ html, body {
 	/*background-color: #e9ebee;*/	/*fb desktop background*/
 }
 
-/*body{
-	display: grid;
-	
-	grid-template-rows: repeat(9, 1fr);
-	font: 1.5em 'apercu';
-	color:   #a5abb8;
-	
-	height: 100%;
-	width: 100%;
-}*/
 
-/*body{
-	display: grid;
-	grid-template-columns: repeat(9, 1fr); 
-	grid-template-rows: repeat(11, 1fr); 
-	font: 1.5em 'apercu';
-	color: #a5abb8;
-	
-	height: 100%;
-	width: 100%;
-}*/
 
 .meditations_page_body {
-
 	display: grid;
-	
 
 	grid-template-rows: repeat(9, 1fr);
 	font: 1.5em 'apercu';
 	color: #a5abb8;
-
 	
 	height: 100%;
 	width: 100%;
 }
 
 
-.settings_page_body {
-	display: grid;
-	grid-template-columns: repeat(9, 1fr); 
-	grid-template-rows: repeat(11, 1fr); 
-	font: 1.5em 'apercu';
-	color:  #a5abb8; 
-	
-	height: 100%;
-	width: 100%;
 
-}
 
 .individual_meditation_recording_player_body {
 	display: grid;
@@ -126,7 +93,8 @@ html, body {
 
 .settings_page_background {
 	/*#fafafa;*/ /*#f0f0f0;*/ /*#f5f5f5;*/
-	background:  #f8f8f8; /*#f3ebe2;*/ /*rgb(247, 239, 228);*/
+	background: /*#f8f8f8;*/ /*#f3ebe2;*/ /*rgb(247, 239, 228);*/ /*rgb(246,248,249);*/ rgb(22,27,37);
+
 
 
 
@@ -137,6 +105,7 @@ html, body {
 
 	height: 100%;
 	width: 100%;
+	
 }
 
 
@@ -160,19 +129,11 @@ html, body {
 	grid-column-start:1;
 	grid-column-end: span 100;
 
-
 	display: grid;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
 	width: 100%
-}
-
-#player_9809403065 {
-
-
-	
-
 }
 
 #recording_player_close_button_9809403065 {
@@ -183,7 +144,6 @@ html, body {
 	bottom: 90%;
 	right: 5%;
 	left:90%;
-
 }
 
 /*========================================================================*/
@@ -201,14 +161,22 @@ html, body {
 
 	
 }
+
+
+
+@media (min-width: 1500px) {
+	.recommended_meditation_recording_9809403065{
+		grid-template-columns: minmax(300px,320px) minmax(150px,300px); 
+		grid-template-rows: 160px auto;
+	}
+}
 	#recommended_meditation_recording_link_9809403065 {
 		/*containing-block = recommended_meditation_recording*/
 		grid-row-start:3;
 		grid-column-start:2;
 		grid-column-end:2;
 
-		cursor: pointer;
-		
+		cursor: pointer;		
 	}
 
 	#recommended_meditation_recording_begin_button_9809403065 {
@@ -266,26 +234,6 @@ html, body {
 }*/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .recording_list_a_9809403065, .recording_list_b_9809403065  {
   display: grid;
   grid-gap: 10%;
@@ -318,7 +266,6 @@ html, body {
     	
     	display:grid;
 
-    
       	grid-row-gap: 20%;
       	grid-column-gap: 20%;    
     }
@@ -327,7 +274,6 @@ html, body {
 
 		border-radius: 5px;
 		background-color: #7994af;
-		
 		
 		padding-top: 3.5% ;
 		padding-right:5%;
@@ -339,10 +285,7 @@ html, body {
 
 		cursor: pointer;
 
-	
 		width: 45%;
-
-		
 
 		margin:auto;
 	}
@@ -360,7 +303,7 @@ html, body {
 
 @media (min-width: 1400px) {
 
-	.recording_list_a_9809403065 {
+/*	.recording_list_a_9809403065 {
   		grid-area: list_a;
 	}
 
@@ -373,139 +316,160 @@ html, body {
     	grid-template-areas: 
       	"list_a  list_b";
     	grid-gap: 5%;
-  	}
+  	}*/
 
-
-/*Actually we don't need to set these properties! they carry over from min-width 100px*/
 	.recording_track_a_of_list_a_9809403065, .recording_track_b_of_list_b_9809403065  {
-		
-		border-radius: 5px;
-		background-color: #7994af;
-		
-		padding: 5%;
-
-		font: .8em 'apercu';
-		color: white;
-
-		cursor: pointer;
-
-		width: 60%;
-
-		margin:auto;
-
-
+	
+		padding-top: 53px ;
+		padding-right: 47px ;
+		padding-left: 47px ;
+		padding-bottom: 53px ; 	
 	}
-
-  
 }
-
-
 /*===========================================================================*/
-
-
-
-
-
 
 
 /*========================settings page elements=============================*/
 
+@media (max-width: 400px) {
+
+	.settings_page_body {
+		display: grid;
+		/*grid-template-columns: repeat(9, 1fr); 
+		grid-template-rows: repeat(11, 1fr); */
+		font: 1.5em 'apercu';
+		color:  #a5abb8; 
+		
+		height: 100%;
+		width: 100%;
+		
+		grid-template-columns: 1fr;
+		/*background:*/  /*#f8f8f8;*//* white;*/
+	}
+}
+
+@media (min-width: 400px) {
+	.settings_page_body {
+		display: grid;
+		/*grid-template-columns: repeat(9, 1fr); 
+		grid-template-rows: repeat(11, 1fr); */
+		font: 1.5em 'apercu';
+		color:  #a5abb8; 
+		
+		height: 100%;
+		width: 100%;
+		
+		grid-template-columns: 0.3fr 1fr 0.3fr;
+		/*background:  #f8f8f8;*/
+	}
+}
+
+@media (min-width: 1200px) {
+
+	.settings_page_body {
+		display: grid;
+		/*grid-template-columns: repeat(9, 1fr); 
+		grid-template-rows: repeat(11, 1fr); */
+		font: 1.5em 'apercu';
+		color:  #a5abb8; 
+		
+		height: 100%;
+		width: 100%;
+		/*background:  #f8f8f8;*/
+		
+		grid-template-columns: 1fr 750px 1fr;
+	}
+
+}
 
 /*create a white central column enclosing details of the settings page */ 
-.user_profile_section_and_menu_grid_divider_show_9809403065 {
-	display: block;
-	grid-row-start:1;
-	grid-row-end:12;
-	grid-column-start:2;
-	grid-column-end:9;
+.settings_box_size_9809403065 {
 
-	background: white;
+	grid-column-start: 2;
 
-	border-radius: ;
+	/*display: grid;*/
+	
+	background: /*rgb(252,252,252);*/ rgb(246,248,249);
 
-	/*border: 5px black solid;*/
+	/*font-size: 15px;*/
+
+	margin-top: 80px;
+
+	border: solid 1px #ebedf2;
+	border-radius: 8px;
+
+	height: 75%;
+
 }
 
 
 /*profile pic in settings --------------------------------------------------*/
 
 .user_profile_id_9809403065 {
-	grid-row-start:2;
-	grid-row-end:3;
-	grid-column-start:4;
-	grid-column-end:7;
 
 	text-align: center;
+	/*display: grid;*/
 
-	display: grid;
+	font-size: 20px;
+	color: black;
+
+	margin-bottom: 10px;
+	margin-top: 30px;
 }
 
-
 .user_profile_pic_9809403065 {
-	max-width: 50%; 
-    max-height: 150%;
+	width: 100px; 
+    height: 100px;
     border-radius: 50%;
+    margin-bottom: 5px;
  }
 
 
 
-/*setting menu elements -----------------------------------------------------*/
+/*setting sections elements -----------------------------------------------------*/
 
-	.user_profile_menu_show_9809403065 {
-		grid-row-start:3;
-		grid-row-end:3;
-		grid-column-start:3;
-		grid-column-end:8;
-
-		display: grid;
-		grid-template-column: 1fr 1fr 1fr;
-		grid-template-row: 1fr 1fr 1fr ;
-		/*border-right: solid #a5abb8 1.5px;*/
+	.settings_sections_titles_9809403065 {
+			display: grid;
+			border-bottom: 1px solid #ebedf2;
 	}
 
-		#user_profile_my_stats_9809403065 {
-			grid-row-start:2;
-			grid-row-end:2;
-			grid-column-start:1;
-			grid-column-end:3;
-		}
-
-			#user_profile_my_stats_text_9809403065 {
-				border-bottom: .5px solid #a5abb8;
-				cursor: pointer;
-				text-align: center;
-			}
-
-
-		 #user_profile_settings_9809403065 {
+		#settings_my_stats_9809403065, #settings_scheduled_meditation_9809403065, #settings_nudge_9809403065 {
 			cursor: pointer;
-			grid-row-start:2;
-			grid-row-end:2;
-			grid-column-start:3;
-			grid-column-end:5;
+			margin: auto;
+			/*border-bottom: 4px solid #a5abb8;*/
+			/*grid-column-start:1;*/
 		}
 
-			#user_profile_settings_text_9809403065 {
-				border-bottom: .5px solid #a5abb8;
-				cursor: pointer;
-				text-align: center;
-			}
-
-
-		#user_profile_nudge_9809403065 {
-			cursor: pointer;
-			grid-row-start:2;
-			grid-row-end:2;
-			grid-column-start:5;
-			grid-column-end:7;
+		#settings_scheduled_meditation_9809403065 {
+			border-bottom: 4px solid #5c84f1; 
+			/*border-radius: 1px;*/
 		}
+/*		#settings_scheduled_meditation_text_9809403065 {
+			color: #5c84f1;
+		}*/
 
-			#user_profile_nudge_text_9809403065 {
-				border-bottom: .5px solid #a5abb8;
+		
+			#settings_my_stats_text_9809403065, #settings_scheduled_meditation_text_9809403065,#settings_nudge_text_9809403065  {
+				/*border-bottom: .5px solid #a5abb8;*/
 				cursor: pointer;
 				text-align: center;
-				
+				font-size: 20px ; 
+				margin-left: auto;
+				margin-right: auto;
+				margin-bottom: 5px;
 			}
+
+			#settings_my_stats_text_9809403065:hover,  #settings_scheduled_meditation_text_9809403065:hover ,#settings_nudge_text_9809403065:hover{
+
+				color: #5c84f1 !important;
+
+			}
+
+	@media (min-width: 400px) {
+		.settings_sections_titles_9809403065 {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+	}
 
 /*input[type=submit] {
 	font: 0.87em "avenir", sans-serif;
@@ -514,9 +478,30 @@ html, body {
 */
 
 
-input{
-	font: 1em 'apercu' ;
+.dropdown {
+	font: 18px 'apercu';
+	/*color: rgb(22,27,37);*/
+
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0;
+	/*box-shadow: 0 1px 0 1px rgba(0,0,0,.04);*/
+	border-radius: 5px;
+	border: .5px solid #ebedf2 ;
+
+	-moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+	/*background-color: white;*/
+	cursor: pointer;
+}
+
+
+
+.digits {
+	font: 18px 'apercu' ;
 	font-color: #313c47;
+	width: 30px;
 
 	/*border-radius: 10px;*/
 }
@@ -525,64 +510,39 @@ input{
 /*setting's section element--------------------------------------------------*/
 
 	.user_profile_section_show_9809403065 {
-		grid-row-start:4;
-		grid-row-end:6;
-		grid-column-start:3;
-		grid-column-end:8;
-
 		display: grid;
-
-	/*	grid-template-rows: 1fr 1fr 1fr;
-		grid-template-columns: 1fr 1fr 1fr;*/
-
-		color: #313c47;
-		cursor: initial;
-		/*justify-content: center;*/
-		/*align-items: top;*/
-
-	/*	height: 100%;
-		width:100%;*/
+		/*color: #313c47;*/
+		color: rgb(22,27,37);
+		font: 17px 'apercu' ;
+		margin-top: 45px;
+		line-height: 2;	
+		margin-left: 10%;
+		margin-right: 10%;
 	}
 
 		#settings_options_9809403065 {
-/*
-			grid-row-start:1;
-			grid-row-end:3;
-			grid-column-start:1;
-			grid-column-end:4;*/
-
-			/*height: 100%;
-			width:100%;*/
-
-			/*display: block;*/
-
-
 		}
 
 			#settings_options_save_9809403065, #nudge_options_save_9809403065 {
-				/*grid-row-start:3;
-				grid-row-end:3;
-				grid-column-start:3;
-				grid-column-end:3;
-*/
-
 				cursor: pointer;
 				border-radius: 3px;
-				background-color: #5c84f1;
+				background-color: #5c84f1; /*rgb(22,27,37);*/ /*#1d72e8;*/
 				color: white;
 				padding: 3px;
 				font-weight: bold;
 				text-align: center;
+				margin: auto;
+				width: 20%
+			}
 
-				 margin: auto;
-				 width: 20%
+			#settings_options_save_9809403065:hover, #nudge_options_save_9809403065:hover {
+				background-color: #1d72e8; /*#5CF17F;*/
 
 			}
 
 		#my_stats_options_9809403065 {
 			display: block;
 		}
-
 
 		#nudge_options_9809403065 {
 			display: block;
@@ -600,35 +560,74 @@ input{
 	position: fixed;
 	z-index: 1;
 	background-color: white; 
-	
-	border-top: 2.5px solid #a5abb8 ;
+	border: solid 2px #ebedf2;
 	
 	bottom:0;
 	right:0;
 	left:0;
 	width: 100%;
-	height: 50px;
+	
 	text-align: left;
 
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	/*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;*/
+	/*grid-template-columns: repeat(auto-fill, minmax(100px,1fr));*/
 	align-items: center;
+
+	font-size: 1.3rem;
+
+	/*border-top: 7px solid #a5abb8 ;*/
+
 }
 
-#front_page_9809403065 {	
-	grid-column-start:3;
+#front_page_9809403065, #meditations_page_9809403065, #settings_9809403065  {
+	/*grid-column-start:1;*/
 	cursor: pointer;
+	margin: auto;
+	color: #a5abb8;
+	/*background-color: black;*/
+
 }
 
-#meditations_page_9809403065 {	
-	grid-column-start:5;
-	cursor: pointer;
+@media (max-width: 400px) {
+	#bottom_fixed_nav_bar_9809403065 {
+		height: 150px;
+	}
 }
 
-#settings_9809403065 {	
-	grid-column-start:7;
-	cursor: pointer;
+@media (min-width: 401px) {
+	#bottom_fixed_nav_bar_9809403065 {
+		height: 60px;
+
+		grid-auto-flow: column;
+	}
 }
+
+@media (min-width: 1500px) {
+
+	#bottom_fixed_nav_bar_9809403065 {
+		height: 60px;
+
+		grid-template-columns: 1fr 450px 450px 450px 1fr;
+
+		grid-auto-flow: column;
+	}
+
+	#front_page_9809403065 {
+		grid-column-start: 2;
+
+	}
+
+	#meditations_page_9809403065 {
+		grid-column-start: 3;
+	}
+
+	#settings_9809403065 {
+		grid-column-start: 4;
+	}
+}
+
+
 
 /*
 ===========================================================================

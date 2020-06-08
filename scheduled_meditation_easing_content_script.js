@@ -52,8 +52,9 @@ function tell_background_script_to_open_meditation_recording_page () {
 
         //fade out reminder and then hide it
         fadeOutReminder();
-        var modal = document.getElementById("myModal472826662848262673");
-        modal.style.display = "none";
+        document.getElementById('myModal472826662848262673').remove();
+        document.getElementById('begin_meditation_button_66345654628423').remove();
+        document.getElementById('skip_meditation_button_66345654628423').remove();
     });
 
     user_interacted_with_the_reminder = true;
@@ -99,7 +100,7 @@ async function reminderAnimationSequence () {
     let fade_reminder = new Promise((resolve, reject) => {
         console.log("fade reminder");
         fadeOutReminder();
-        reminder_modal.style.animationPlayState = "paused";
+        //reminder_modal.style.animationPlayState = "paused";
         setTimeout(() => resolve("done!"), 2000);
     });
     let step3 = await fade_reminder;
@@ -111,25 +112,7 @@ async function reminderAnimationSequence () {
         document.getElementById('skip_meditation_button_66345654628423').remove();
         console.log("hide reminder");
     });
-
-
 };
-
-//window.onload = function() {
-
-    //takes care of user NON-interaction with the scheduled meditation reminder
-    // chrome.runtime.onMessage.addListener(
-    //   function(incoming, sender, sendResponse) {
-
-    //     // if (incoming.message == "dear scheduled_meditation_easing_content_script.js:  show scheduled mediation reminder to user") 
-    //     // {
-    //         console.log("message to show scheduled meditation reminder to user is received");
-
-    //         reminderAnimationSequence();
-    //     //} 
-
-    //     return Promise.resolve("Dummy response to keep the console quiet");
-    // });
 
     reminderAnimationSequence();
 
@@ -139,13 +122,6 @@ async function reminderAnimationSequence () {
 
     var begin_meditation_button = document.getElementById("begin_meditation_button_66345654628423");
     begin_meditation_button.addEventListener('click', tell_background_script_to_open_meditation_recording_page); 
-
-
-//};
-
-
-
-
 
 
 

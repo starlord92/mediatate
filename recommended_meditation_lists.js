@@ -20,9 +20,9 @@ var being_liked_recording_title_innerhtml_list = [
 
 ];
 
-var being_liked_recording_file_html_id_list = ["runningsound", "zenbellsound"];
+var being_liked_recording_file_html_id_list = ["runningsound", "zenbellsound", "bright_metal_tune_mallet"];
 
-var curr_recommended_meditation_file = 0 ;;
+var curr_recommended_meditation_file = 0;
 
 $(document).ready(function() { 
 	console.log("recommended_meditation_lists.js script is loaded");
@@ -47,28 +47,28 @@ function setRecommendedRecordings(recording_title_innerhtml_list, recording_file
 	var curr_sec  = curr_time.getSeconds();
 
 	//console.log("mike check check);
-	if (curr_hour ==21 && curr_min ==43 && curr_sec ==30) {
+	if (curr_hour ==16 && curr_min == 43 && curr_sec ==0) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 6);
 	} 
 
-	if (curr_hour == 9 && curr_min == 0 && curr_sec == 0) {
-		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 9);
+	if (curr_hour == 16 && curr_min == 43 && curr_sec == 10) {
+		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 1, 1, 9);
 	} 
 
-	if (curr_hour == 12 && curr_min == 0 && curr_sec == 0) {
+	if (curr_hour == 16 && curr_min == 43 && curr_sec == 20) {
+		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 2, 0, 6);
+	} 
+
+	if (curr_hour == 16 && curr_min == 43 && curr_sec == 30) {
+		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 3, 1, 6);
+	} 
+
+	if (curr_hour == 16 && curr_min == 43 && curr_sec == 40) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 6);
 	} 
 
-	if (curr_hour == 14 && curr_min == 0 && curr_sec == 0) {
-		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 6);
-	} 
-
-	if (curr_hour == 19 && curr_min == 0 && curr_sec == 0) {
-		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 6);
-	} 
-
-	if (curr_hour == 21 && curr_min == 0 && curr_sec == 0) {
-		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 6);
+	if (curr_hour == 26 && curr_min == 43 && curr_sec == 50) {
+		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 1, 1, 6);
 	} 
 
 };
@@ -83,10 +83,6 @@ function helper_setRecommendedRecordings(recording_title_innerhtml_list, recordi
 
 		//change the recording file stored in global variable
 		curr_recommended_meditation_file = document.getElementById(recording_file_html_id_list[recording_file_index]);
-
-		// change the recording file for the button. not necessary
-		// var link_button = document.getElementsByClassName("recommended_meditation_recording_begin_button_9809403065");
-		// link_button[0].innerHTML = being_liked_recording_file_html_id_list[0];
 };
 
 

@@ -6,33 +6,27 @@ $(document).ready(function() {
 
 	//NEED TO ASYNC THIS SEQUENCE
 	$('.individual_meditation_recording_player_9809403065').hide();
-	hide_headspace_page();
+	//hide_headspace_page();
+
+	show_settings_page ();
 	
-	hide_settings_page ();
-
-	show_meditations_page();
-
-
+	//show_meditations_page();
 
 function hide_headspace_page() {
 	;
 };
 
-
 function hide_settings_page () {
 		$('html').removeClass();
 		$('body').removeClass('settings_page_body');
 		
-		$(".user_profile_id_9809403065").hide();
-		$(".user_profile_section_show_9809403065").hide();
-		$(".user_profile_menu_show_9809403065").hide();
-		$(".user_profile_section_and_menu_grid_divider_show_9809403065").hide()
-
-
+		// $(".user_profile_id_9809403065").hide();
+		// $(".user_profile_section_show_9809403065").hide();
+		// $(".user_profile_menu_show_9809403065").hide();
+		$(".settings_box_size_9809403065").hide()
 };
 
 function hide_meditations_page () {
-		
 		$('html').removeClass();
 		$('body').removeClass('meditations_page_body');
 
@@ -41,8 +35,6 @@ function hide_meditations_page () {
 		//we should NOT need this bevause by default the below class is hidden
 		// $('individual_meditation_recording_player_9809403065').hide();
 };
-
-
 
 function show_meditations_page() {
 	hide_settings_page();
@@ -61,27 +53,24 @@ function show_settings_page() {
 	$('html').addClass('settings_page_background');
 	$('body').addClass('settings_page_body');
 
+	// $(".user_profile_id_9809403065").show();
+	// $(".user_profile_section_show_9809403065").show();
+	// $(".user_profile_menu_show_9809403065").show();
+	$(".settings_box_size_9809403065").show();
 
-	$(".user_profile_id_9809403065").show();
-	$(".user_profile_section_show_9809403065").show();
-	$(".user_profile_menu_show_9809403065").show();
-	$(".user_profile_section_and_menu_grid_divider_show_9809403065").show();
+	//by default show the 'my stats' section
+	$('#settings_options_9809403065').hide();
+		$('#nudge_options_9809403065').hide();
+		$('#my_stats_details_9809403065').show();
+		//highlight the color of the title 'my stats' while graying out 'schedule' and 'nudge'
+		$('#settings_my_stats_text_9809403065').css("color", "#5c84f1");
+		$('#settings_my_stats_9809403065').css("border-bottom", " 4px solid #5c84f1");
 
-	
-	//by default show the 'schedule' section
-	$('#settings_options_9809403065').show();
-	$('#nudge_options_9809403065').hide();
-	$('#my_stats_options_9809403065').hide();
+		$('#settings_scheduled_meditation_text_9809403065').css("color", "#a5abb8");
+		$('#settings_scheduled_meditation_9809403065').css("border-bottom", "0px");
 
-	$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
-	$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
-
-	$('#user_profile_settings_text_9809403065').css("color", "#5c84f1");
-	$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
-
-	$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
-	$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
-
+		$('#settings_nudge_text_9809403065').css("color", "#a5abb8");
+		$('#settings_nudge_9809403065').css("border-bottom", "");
 };
 
 ///////////////fixed bottom bar nav allows us to switch bewteen pages//////////
@@ -92,6 +81,15 @@ $('#meditations_page_9809403065').on('click', function(event) {
 	hide_settings_page (); 
 	show_meditations_page();
 
+	//change color and font size of the nav bar tab
+	$('#front_page_9809403065').css('color', '#a5abb8');
+	$('#settings_9809403065').css('color', '#a5abb8');
+	$('#meditations_page_9809403065').css('color', 'rgb(22,27,37)');
+
+	$('#front_page_9809403065').css('font-size', '1.3rem');
+	$('#settings_9809403065').css('font-size', '1.3rem');
+	$('#meditations_page_9809403065').css('font-size', '1.42rem');
+
 });
 
 //clicking user icon shows user profile menu and section and hides other pages
@@ -101,155 +99,56 @@ $('#settings_9809403065').on('click', function(event) {
 	hide_meditations_page (); 
 	show_settings_page();
 
+	//change color of the nav bar tab
+	$('#meditations_page_9809403065').css('color', '#a5abb8');
+	$('#front_page_9809403065').css('color', '#a5abb8');
+	$('#settings_9809403065').css('color', 'rgb(22,27,37)');
+
+	$('#front_page_9809403065').css('font-size', '1.3rem');
+	$('#settings_9809403065').css('font-size', '1.42rem');
+	$('#meditations_page_9809403065').css('font-size', '1.3rem');
+
 
 });
 
-//////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////
-//////////////////////INDIVIDUAL MEDITATION RECORDING SUBPAGE//////////////
-
-
-//assumption: 
-// settigns and headsapce page are hidden.  
-// meditations page is shown
-// individual_meditation_recording_player_9809403065 is hidden by default
-
-
-function show_meditation_recording_player() {
-	hide_meditations_page();
-	$('.individual_meditation_recording_player_9809403065').show();
-	$('html').addClass('individual_meditation_recording_player_background');
-	$('body').addClass('individual_meditation_recording_player_body');
-
-	$('#bottom_fixed_nav_bar_9809403065').hide();
-}
-
-function hide_meditation_recording_player() {
-	// stop the media player
-	$('html').removeClass('individual_meditation_recording_player_background');
-	$('body').removeClass('individual_meditation_recording_player_body');
-
-	$('.individual_meditation_recording_player_9809403065').hide();
-
-	//reshow the fixed bottom nav bar
-	$('#bottom_fixed_nav_bar_9809403065').show();
-}
-
-
-
- // when user click either an element of class 'recommended_meditation_recording_9809403065' of of class 'recording_track_a_of_list_a_980940306', open the individual_meditation_recording_player_9809403065 AND play the meditation recording
-
-var inside_meditation_session = false;
-var recording_is_playing = false;
-var chosen_recording = 0;
-
-//space bar only works to pause/resume a recording when we are inside a meditation session:
-
-	$('body').keydown(function (event) {
-		if (inside_meditation_session == true) {
-			console.log("inside_meditation_session is true.  can play and pause using space bar");
-			var recording = document.getElementById("zenbellsound");
-
-			if (event.which == 32 && recording_is_playing == true ) {
-				recording.pause();
-				recording_is_playing = false;
-			}
-			else if (event.which == 32 &&  recording_is_playing == false) {
-				recording.play();
-				recording_is_playing = true;
-			}
-		}; 
-	});
-
-
-// current list of recordings are taken from home.html.  we can change the links there.
-//
-// 	warming up & getting the right mindset
-var warmup_mindset = document.getElementById("runningsound");
-// 	reading documentations
-// 	debugging
-// 	writing code,
-// 	general breathing, 
-// 	general walking, 
-// 	eneral eating.
-
-
-// $('#recommended_meditation_recording_link_9809403065').on('click', function(event) {
-// 	hide_meditations_page();
-// 	show_meditation_recording_player();
-// 	var recording = warmup_mindset;
-// 	recording.play();
-// 	recording_is_playing = true;
-// 	inside_meditation_session = true;
-// });
-
-$('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
-	hide_meditations_page();
-	show_meditation_recording_player();
-	var recording = document.getElementById("zenbellsound");
-	recording.play();
-	recording_is_playing = true;
-	inside_meditation_session = true;
-});
-
-//WHEN USER CLICKS 'X' BUTTON
-$('#recording_player_close_button_9809403065').on('click', function(event) {
-	hide_meditation_recording_player();
-	$('.individual_meditation_recording_player_9809403065').hide();
-	show_meditations_page();
-	inside_meditation_session = false;
-	var recording = document.getElementById("zenbellsound");
-	recording.pause();
-	recording.currentTime = 0;
-
-	
-});
-
-
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////
 
 
 
 
 //========USER INTERACTION WITH THE MENU: MY STATS * SETTINGS * NUDGE======
+//change color of the title of each parts MY STATS * SETTINGS * NUDGE when they are clicked
 
-	//clicking 'my stats' reveal current stats
-	$('#user_profile_my_stats_9809403065').on('click', function (event) {
+	//clicking 'my stats' 
+	$('#settings_my_stats_text_9809403065').on('click', function (event) {
 		$('#settings_options_9809403065').hide();
 		$('#nudge_options_9809403065').hide();
-		$('#my_stats_options_9809403065').show();
+		$('#my_stats_details_9809403065').show();
+		//highlight the color of the title 'my stats' while graying out 'schedule' and 'nudge'
+		$('#settings_my_stats_text_9809403065').css("color", "#5c84f1");
+		$('#settings_my_stats_9809403065').css("border-bottom", " 4px solid #5c84f1");
 
-		$('#user_profile_my_stats_text_9809403065').css("color", "#5c84f1");
-		$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
+		$('#settings_scheduled_meditation_text_9809403065').css("color", "#a5abb8");
+		$('#settings_scheduled_meditation_9809403065').css("border-bottom", "0px");
 
-		$('#user_profile_settings_text_9809403065').css("color", "#a5abb8");
-		$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
-
-		$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
-		$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+		$('#settings_nudge_text_9809403065').css("color", "#a5abb8");
+		$('#settings_nudge_9809403065').css("border-bottom", "");
 	});
 
-	//clicking 'settings' reveal previously saved setting options
-	$('#user_profile_settings_9809403065').on('click', function (event) {
+	//clicking 'schedule'
+	$('#settings_scheduled_meditation_text_9809403065').on('click', function (event) {
 		$('#nudge_options_9809403065').hide();
-		$('#my_stats_options_9809403065').hide();
+		$('#my_stats_details_9809403065').hide();
 		$('#settings_options_9809403065').show();
 
-		$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
-		$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+		$('#settings_scheduled_meditation_text_9809403065').css("color", "#5c84f1");
+		$('#settings_scheduled_meditation_9809403065').css("border-bottom", " 4px solid #5c84f1");
 
-		$('#user_profile_settings_text_9809403065').css("color", "#5c84f1");
-		$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
+		$('#settings_my_stats_text_9809403065').css("color", "#a5abb8");
+		$('#settings_my_stats_9809403065').css("border-bottom", "");
 
-		$('#user_profile_nudge_text_9809403065').css("color", "#a5abb8");
-		$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+		$('#settings_nudge_text_9809403065').css("color", "#a5abb8");
+		$('#settings_nudge_9809403065').css("border-bottom", "");
 
 
 		//console.log('HI HI HI HI');
@@ -257,20 +156,19 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 
 
 	//clicking 'nudge' reveal setting options
-	$('#user_profile_nudge_9809403065').on('click', function (event) {
+	$('#settings_nudge_9809403065').on('click', function (event) {
 		$('#settings_options_9809403065').hide();
 		$('#nudge_options_9809403065').show();
-		$('#my_stats_options_9809403065').hide();
+		$('#my_stats_details_9809403065').hide();
 
+		$('#settings_nudge_text_9809403065').css("color", "#5c84f1");
+		$('#settings_nudge_9809403065').css("border-bottom", " 4px solid #5c84f1");
 
-		$('#user_profile_my_stats_text_9809403065').css("color", "#a5abb8");
-		$('#user_profile_my_stats_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
+		$('#settings_my_stats_text_9809403065').css("color", "#a5abb8");
+		$('#settings_my_stats_9809403065').css("border-bottom", "");
 
-		$('#user_profile_settings_text_9809403065').css("color", "#a5abb8");
-		$('#user_profile_settings_text_9809403065').css("border-bottom", " 2px solid #a5abb8");
-
-		$('#user_profile_nudge_text_9809403065').css("color", "#5c84f1");
-		$('#user_profile_nudge_text_9809403065').css("border-bottom", " 2px solid #5c84f1");
+		$('#settings_scheduled_meditation_text_9809403065').css("color", "#a5abb8");
+		$('#settings_scheduled_meditation_9809403065').css("border-bottom", "0px");
 	});
 
 //===========================================================================//
@@ -411,6 +309,110 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 });
 
 
+
+// //////////////////////////////////////////////////////////////////////////
+// //////////////////////INDIVIDUAL MEDITATION RECORDING SUBPAGE//////////////
+
+
+// //assumption: 
+// // settigns and headsapce page are hidden.  
+// // meditations page is shown
+// // individual_meditation_recording_player_9809403065 is hidden by default
+
+
+// function show_meditation_recording_player() {
+// 	hide_meditations_page();
+// 	$('.individual_meditation_recording_player_9809403065').show();
+// 	$('html').addClass('individual_meditation_recording_player_background');
+// 	$('body').addClass('individual_meditation_recording_player_body');
+
+// 	$('#bottom_fixed_nav_bar_9809403065').hide();
+// }
+
+// function hide_meditation_recording_player() {
+// 	// stop the media player
+// 	$('html').removeClass('individual_meditation_recording_player_background');
+// 	$('body').removeClass('individual_meditation_recording_player_body');
+
+// 	$('.individual_meditation_recording_player_9809403065').hide();
+
+// 	//reshow the fixed bottom nav bar
+// 	$('#bottom_fixed_nav_bar_9809403065').show();
+// }
+
+
+
+//  // when user click either an element of class 'recommended_meditation_recording_9809403065' of of class 'recording_track_a_of_list_a_980940306', open the individual_meditation_recording_player_9809403065 AND play the meditation recording
+
+// var inside_meditation_session = false;
+// var recording_is_playing = false;
+// var chosen_recording = 0;
+
+// //space bar only works to pause/resume a recording when we are inside a meditation session:
+
+// 	$('body').keydown(function (event) {
+// 		if (inside_meditation_session == true) {
+// 			console.log("inside_meditation_session is true.  can play and pause using space bar");
+// 			var recording = document.getElementById("zenbellsound");
+
+// 			if (event.which == 32 && recording_is_playing == true ) {
+// 				recording.pause();
+// 				recording_is_playing = false;
+// 			}
+// 			else if (event.which == 32 &&  recording_is_playing == false) {
+// 				recording.play();
+// 				recording_is_playing = true;
+// 			}
+// 		}; 
+// 	});
+
+
+// // current list of recordings are taken from home.html.  we can change the links there.
+// //
+// // 	warming up & getting the right mindset
+// var warmup_mindset = document.getElementById("runningsound");
+// // 	reading documentations
+// // 	debugging
+// // 	writing code,
+// // 	general breathing, 
+// // 	general walking, 
+// // 	eneral eating.
+
+
+// // $('#recommended_meditation_recording_link_9809403065').on('click', function(event) {
+// // 	hide_meditations_page();
+// // 	show_meditation_recording_player();
+// // 	var recording = warmup_mindset;
+// // 	recording.play();
+// // 	recording_is_playing = true;
+// // 	inside_meditation_session = true;
+// // });
+
+// $('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
+// 	hide_meditations_page();
+// 	show_meditation_recording_player();
+// 	var recording = document.getElementById("zenbellsound");
+// 	recording.play();
+// 	recording_is_playing = true;
+// 	inside_meditation_session = true;
+// });
+
+// //WHEN USER CLICKS 'X' BUTTON
+// $('#recording_player_close_button_9809403065').on('click', function(event) {
+// 	hide_meditation_recording_player();
+// 	$('.individual_meditation_recording_player_9809403065').hide();
+// 	show_meditations_page();
+// 	inside_meditation_session = false;
+// 	var recording = document.getElementById("zenbellsound");
+// 	recording.pause();
+// 	recording.currentTime = 0;
+
+	
+// });
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
 

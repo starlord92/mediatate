@@ -50,21 +50,21 @@
 <br><br><br><br>
 			</div>
 
-			<div class="recording_list_b_9809403065">
-				<div class="recording_list_b_title_9809403065">MASTER LIFE:</div> 
+			<div class="recording_list_a_9809403065">
+				<div class="recording_list_a_title_9809403065">LIFE</div> 
 				
-				<div class="recording_track_b_of_list_b_9809403065">
+				<div class="recording_track_a_of_list_a_9809403065">
 					finding bugs: enjoy your puzzles <br>
 					apprentice (10 mins) -> master (3-5 mins)
 				</div>
 
 
-				<div class="recording_track_b_of_list_b_9809403065">
+				<div class="recording_track_a_of_list_a_9809403065">
 					reading documentations: connect the dots <br>
 					apprentice -> master level
 				</div>
 
-				<div class="recording_track_b_of_list_b_9809403065">
+				<div class="recording_track_a_of_list_a_9809403065">
 					reading documentations: connect the dots <br>
 					apprentice -> master level
 				</div>
@@ -88,74 +88,188 @@
 
 <!-------SETTINGS PAGE (start)------------------------------------------------>
 
-		<div class='user_profile_section_and_menu_grid_divider_show_9809403065'></div>
+		<div class='settings_box_size_9809403065'>
 
-		<div class='user_profile_id_9809403065'>
-			<div class='user_profile_pic_frame_9809403065'>
-				<img class='user_profile_pic_9809403065' src="https://cdn.statically.io/gh/starlord92/mediatate/f6d7b152/images/profile_pic.png">
+			<div class='user_profile_id_9809403065'>
+				<div class='user_profile_pic_frame_9809403065'>
+					<img class='user_profile_pic_9809403065' src="https://cdn.statically.io/gh/starlord92/mediatate/f6d7b152/images/profile_pic.png">
+				</div>
+				<div class='user_profile_name_9809403065'>mark</div>
 			</div>
-			<div class='user_profile_name_9809403065'></div>
-		</div>
-			
-		<!-- SETTINGS: menu -->
-        <div class='user_profile_menu_show_9809403065'>
-	        <div id='user_profile_my_stats_9809403065'> 
-	        	<p id='user_profile_my_stats_text_9809403065'>my stats</p>
-	        </div>
-	        <div id='user_profile_settings_9809403065'> 
-	        	<p id='user_profile_settings_text_9809403065'>schedule</p>
-	        </div>
-	        <div id='user_profile_nudge_9809403065'>
-	        	<p id='user_profile_nudge_text_9809403065'>nudge</p>
-	    	</div>
+				
+			<!-- SETTINGS: menu -->
+	        <div class='settings_sections_titles_9809403065'>
+		        <div id='settings_my_stats_9809403065'> 
+		        	<p class="title_small_font" id='settings_my_stats_text_9809403065'>my stats</p>
+		        </div>
+		        <div id='settings_scheduled_meditation_9809403065'> 
+		        	<p id='settings_scheduled_meditation_text_9809403065'>schedule</p>
+		        </div>
+		        <div id='settings_nudge_9809403065'>
+		        	<p id='settings_nudge_text_9809403065'>nudge</p>
+		    	</div>
+	    	</div> 
 
-	        <div id='user_profile_menu_line_9809403065'></div>
-    	</div> 
+	    	<!-- SETTINGS: details of each part: 'my stats', 'schedule', nudge -->
+			<div class='user_profile_section_show_9809403065'> 
+				
+		        <div id='my_stats_details_9809403065'>
+		            <!-- <p>you have meditated for 20 days in a row!</p> -->
+		            <label>you have meditated for 20 days in a row!</label>
+		        </div> 
 
-    	<!-- SETTINGS: section -->
-		<div class='user_profile_section_show_9809403065'> 
-			
-	        <div id='my_stats_options_9809403065'>
-	            <p>you have meditated for 20 days in a row!</p>
-	        </div> 
+		        <div id='settings_options_9809403065'>  
+		            
+		            <input type="checkbox" id="scheduled_meditation_checkbox_9809403065"
+		            name="scheduled_meditation_checkbox_9809403065" >
+		            <label for="scheduled_meditation_9809403065">turn on scheduled meditation reminder</label>
+		            <p>
 
-	        <div id='settings_options_9809403065'>  
-	            <br>
-	            <input type="checkbox" id="scheduled_meditation_checkbox_9809403065" >
-	            <label for="scheduled_meditation_9809403065">turn on scheduled meditation</label>
-	            <p>
-	                I will meditate for 
-	                <input type="text" id='medi_duration_9809403065' > 
-	                minutes every 
-	                <input type="text" id='medi_frequency_9809403065' > hours, <br> <br>
+		                I will meditate for 
+<!-- 		                <input type="text" id='medi_duration_9809403065' class="digits">  -->
 
-	                from <input id='work_start_time_9809403065' type="time" step='1'> to <input id='work_end_time_9809403065' type="time" step='1'> on 
+						<select id='medi_duration_9809403065' class="dropdown">
+						  <option value="1">1</option>
+						  <option value="3">3</option>
+						  <option value="5">5</option>
+						</select>
+		                minutes every 
 
-	                <input id='active_medi_date_9809403065' type="text" >
-	            </p>
 
-	            <br>
-	            <div id='settings_options_save_9809403065'>save</div>
-	        </div>
-	        
-	        <!-- <div></div>
-	        <div></div> -->
+<!-- 		                <input type="text" id='medi_frequency_9809403065' class="digits"> hours, <br> <br> -->
 
-	        <div id='nudge_options_9809403065'>
-	            <br>
-	            <input type="checkbox" id="nudge_checkbox_9809403065" >
-	            <label for="nudge_checkbox_9809403065">nudge me to meditate when I visit a distracting website</label>
+						<select id='medi_frequency_9809403065' class="dropdown">
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						</select> hours,
 
-	            <br><br>
-	            from <input id='nudge_start_time_9809403065' type="time">
-	            to <input id='nudge_end_time_9809403065' type="time">
-	            <br> <br>
-	            
-	             <div id='nudge_options_save_9809403065'>save</div>
+						
 
-	            <br>
-	            
-	        </div>
+		                from <!-- <input id='work_start_time_9809403065' type="time" step='1' class="digits">  -->
+		                <select id='work_start_time_9809403065' class="dropdown"> 
+		                	<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  	<option value="7">7</option>
+						  	<option value="8">8</option>
+						  	<option value="9" selected="">9</option>
+						 	<option value="10">10</option>					
+						 	<option value="11">11</option>
+						 	<option value="12">12</option>
+		                </select>
+		                <select id='work_start_time_am_pm_9809403065' class="dropdown"> 
+		                	<option value="0" selected>am</option>
+							<option value="12">pm</option>
+		                </select>
+
+		                
+
+		                to <!-- <input id='work_end_time_9809403065' type="time" step='1' class="time"> -->
+		                <select id='work_end_time_9809403065' class="dropdown">
+		                	<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  	<option value="7">7</option>
+						  	<option value="8">8</option>
+						  	<option value="9" selected >9</option>
+						 	<option value="10">10</option>					
+						 	<option value="11">11</option>
+						 	<option value="12">12</option>
+		                </select>
+		                <select id='work_end_time_am_pm_9809403065' class="dropdown"> 
+		                	<option value="0">am</option>
+							<option value="12" selected>pm</option>
+		                </select> 
+
+		                
+		                <!-- , on --> 
+
+		                <!-- <input id='active_medi_date_9809403065' type="text" class="digits"> -->
+
+		     <!--            <select id='active_medi_date_9809403065' class="dropdown">
+		                	<option value="1">sunday</option>
+							<option value="2" >monday</option>
+							<option value="3" >tuesday</option>
+							<option value="4">wednesday</option>
+							<option value="5">thursday</option>
+							<option value="6">friday</option>
+						  	<option value="7">saturday</option>
+		                </select> -->
+		            </p>
+
+		            <br>
+		            <div id='settings_options_save_9809403065'>save</div>
+		        </div>
+		        
+		        <!-- <div></div>
+		        <div></div> -->
+
+		        <div id='nudge_options_9809403065'>
+		            
+		            <input type="checkbox" id="nudge_checkbox_9809403065" name="nudge_checkbox_9809403065" checked="true">
+		            <label for="nudge_checkbox_9809403065">gently remind me to be mindful when visiting a potentially distracting website, </label>
+
+		            
+	<!-- 	            from <input id='nudge_start_time_9809403065' type="time" class="digits"> -->
+					<span> from </span>
+		            <select id='nudge_start_time_9809403065' class="dropdown">
+		                	<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  	<option value="7">7</option>
+						  	<option value="8">8</option>
+						  	<option value="9" selected >9</option>
+						 	<option value="10">10</option>					
+						 	<option value="11">11</option>
+						 	<option value="12">12</option>
+		                </select>
+		                <select id='nudge_start_time_am_pm_9809403065' class="dropdown"> 
+		                	<option value="0" selected>am</option>
+							<option value="12">pm</option>
+		                </select> 
+
+
+		            to <!-- <input id='nudge_end_time_9809403065' type="time" class="digits"> -->
+
+		            <select id='nudge_end_time_9809403065' class="dropdown">
+		                	<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						  	<option value="7">7</option>
+						  	<option value="8">8</option>
+						  	<option value="9" selected >9</option>
+						 	<option value="10">10</option>					
+						 	<option value="11">11</option>
+						 	<option value="12">12</option>
+		                </select>
+		                <select id='nudge_end_time_am_pm_9809403065' class="dropdown"> 
+		                	<option value="0">am</option>
+							<option value="12" selected>pm</option>
+		                </select> 
+		            <br> <br>
+		            
+		             <div id='nudge_options_save_9809403065'>save</div>
+
+		            <br>
+		            
+		        </div>
+			</div>
+
 		</div>
 <!---------------SETTTINGS PAGE (END) ---------------------------------------->
 
@@ -242,6 +356,9 @@ each <div class="recording_track_a_of_list_a_9809403065"> and <div class="record
 	
     <!-- SCRIPT to pre-populate form with saved data -->
     <script src="../settings_options.js"></script>
+
+
+    <script src="../ui_styling.js"></script>
 
     
 
