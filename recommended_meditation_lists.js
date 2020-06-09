@@ -1,3 +1,4 @@
+//LOGIC PART
 // Broad topics may include: look, wealth, intelligence, vocal qualities.
 // Each day a broad topic is selected. Based on this, a set of recordings will be presented through out the day.
 
@@ -86,9 +87,8 @@ function helper_setRecommendedRecordings(recording_title_innerhtml_list, recordi
 };
 
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////INDIVIDUAL MEDITATION RECORDING SUBPAGE//////////////
 
+//VIEW PART
 
 //assumption: 
 // settigns and headsapce page are hidden.  
@@ -150,6 +150,7 @@ $('#recommended_meditation_recording_link_9809403065, #recommended_meditation_re
 	curr_recommended_meditation_file.play();
 	recording_is_playing = true;
 	inside_meditation_session = true;
+	//$('.individual_meditation_recording_player_background').css("animation-play-state","running");
 });
 
 $('.recording_track_a_of_list_a_9809403065').on('click', function(event) {

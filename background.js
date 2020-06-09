@@ -168,7 +168,7 @@ async function checkScheduledMeditationTime() {
 			 		&& curr_time.getSeconds() == second){
 
 			 		counter = counter + 1; 
-			 	    time = (time + 1)%60;
+			 	    //time = (time + 1)%60;
 
 			 	    //console.log('all conditions met ');
 			 		//this async function is simply an attempt to send the message to play the remidner animation once and then chck if the id of the tab receicing the message is NOT undefined.  if it is undefined, we try again 

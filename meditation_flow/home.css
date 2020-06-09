@@ -121,7 +121,36 @@ html, body {
 	/*#f3ebe2;*/ /*#fcf7ef;*/ rgb(247, 239, 228);  /*rgb(221, 234, 247);*/
 	height: 100%;
 	width: 100%;
+
+	animation-name: perspective;
+  	animation-duration:60s; 
+  	animation-timing-function: linear; 
+  	animation-delay: 0s;
+  	animation-direction: normal;
+  	animation-iteration-count: infinite;
+  	animation-fill-mode: forwards;
+  	animation-play-state: running;
 }
+
+
+@keyframes perspective {
+  0% {
+
+    background-color: rgb(247, 239, 228);
+
+  }
+ 
+  100% {
+
+    background-color:  rgb(235, 242, 245);    
+  }
+
+}
+
+
+
+
+
 
 .individual_meditation_recording_player_9809403065 {
 	grid-row-start:1;
@@ -519,10 +548,10 @@ html, body {
 		margin-left: 10%;
 		margin-right: 10%;
 	}
-
-		#settings_options_9809403065 {
+		#settings_options_9809403065, #my_stats_details_9809403065, #nudge_options_9809403065 {
+			margin-left: 20px;
+			display: block;
 		}
-
 			#settings_options_save_9809403065, #nudge_options_save_9809403065 {
 				cursor: pointer;
 				border-radius: 3px;
@@ -539,14 +568,6 @@ html, body {
 				background-color: #1d72e8; /*#5CF17F;*/
 
 			}
-
-		#my_stats_options_9809403065 {
-			display: block;
-		}
-
-		#nudge_options_9809403065 {
-			display: block;
-		}
 
 
 /*===========================================================================*/

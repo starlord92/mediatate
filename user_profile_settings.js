@@ -116,7 +116,7 @@ $('#settings_9809403065').on('click', function(event) {
 
 
 
-//========USER INTERACTION WITH THE MENU: MY STATS * SETTINGS * NUDGE======
+//========USER INTERACTION WITH THE 3 PAGES: MY STATS * SETTINGS * NUDGE======
 //change color of the title of each parts MY STATS * SETTINGS * NUDGE when they are clicked
 
 	//clicking 'my stats' 
