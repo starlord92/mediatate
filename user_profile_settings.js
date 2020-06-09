@@ -212,22 +212,62 @@ $('#settings_9809403065').on('click', function(event) {
 			function() {console.log('scheduled meditation?  ' + scheduled_meditation_checkbox );
 		});
 
-		var work_start_time = $('#work_start_time_9809403065').prop('value');
-		var work_end_time = $('#work_end_time_9809403065').prop('value');
-		var medi_duration = $('#medi_duration_9809403065').prop('value');
-		var medi_frequency = $('#medi_frequency_9809403065').prop('value');
-		var active_medi_date =$('#active_medi_date_9809403065').prop('value');
-		
 
-		chrome.storage.sync.set({stored_work_start_time: work_start_time}, function() {	
+		var work_start_time, work_end_time;
+
+		// function storeWorkStartTime(callback) {
+			//calculate the time for work and and start time  
+			var work_start_time = $('#work_start_time_9809403065').prop('value');
+			var work_start_time_am_pm = $('#work_start_time_am_pm_9809403065').prop('value');
+			//console.log('work_start_time_am_pm is ' + $('#work_start_time_am_pm_9809403065').prop('value'));
+			work_start_time = parseInt(work_start_time,10);
+			work_start_time_am_pm  = parseInt(work_start_time_am_pm ,10);
+			work_start_time = (work_start_time + work_start_time_am_pm);
+			if (work_start_time == 12) {work_start_time = 0;}
+			if (work_start_time == 24) {work_start_time = 12;}
 			//console.log('work start time entered is ' + work_start_time);
 
-			//confirm user input is properly stored
-			chrome.storage.sync.get(['stored_work_start_time'], function(data) {
-			          console.log('stored_work_start_time is ' + data.stored_work_start_time);
-			});
+			//callback();
+		// };
 
-		});
+		// function storeWorkEndTime (callback) {
+			var work_end_time = $('#work_end_time_9809403065').prop('value');
+			var work_end_time_am_pm = $('#work_end_time_am_pm_9809403065').prop('value');
+			//console.log('work_end_time_am_pm is ' + work_end_time_am_pm);
+			work_end_time = parseInt(work_end_time,10);
+			work_end_time_am_pm = parseInt(work_end_time_am_pm,10);
+			work_end_time = (work_end_time + work_end_time_am_pm);
+			if (work_end_time == 12) {work_end_time = 0;}
+			if (work_end_time == 24) {work_end_time = 12;}
+			//console.log('work end time is ' + work_end_time);
+
+		// 	callback();
+		// }
+		
+		// storeWorkStartTime( function() {
+			chrome.storage.sync.set({stored_work_start_time: work_start_time}, function() {	
+				// console.log('work start time entered is ' + work_start_time);
+
+				//confirm user input is properly stored
+				chrome.storage.sync.get(['stored_work_start_time'], function(data) {
+				          console.log('stored_work_start_time is ' + data.stored_work_start_time);
+				});
+			});
+		// });
+
+		// storeWorkEndTime( function() {
+			chrome.storage.sync.set({stored_work_end_time: work_end_time}, function() {	
+				//console.log('work end time entered is ' + work_end_time);
+				//confirm user input is properly stored
+				chrome.storage.sync.get(['stored_work_end_time'], function(data) {
+				          console.log('stored_work_end_time is ' + data.stored_work_end_time);
+				});
+			});
+		// });
+		
+		var medi_duration = $('#medi_duration_9809403065').prop('value');
+		var medi_frequency = $('#medi_frequency_9809403065').prop('value');
+		//var active_medi_date =$('#active_medi_date_9809403065').prop('value');
 
 		chrome.storage.sync.set({stored_work_end_time: work_end_time}, 
 			function() {
@@ -244,10 +284,10 @@ $('#settings_9809403065').on('click', function(event) {
 		console.log('the frequency of each mediation period is ' + medi_frequency);
 		});
 
-		chrome.storage.sync.set({stored_active_medi_date: active_medi_date}, 
-			function() {
-		//console.log('days of the week the extension is active: ' + active_medi_date);
-		})
+		// chrome.storage.sync.set({stored_active_medi_date: active_medi_date}, 
+		// 	function() {
+		// //console.log('days of the week the extension is active: ' + active_medi_date);
+		// });
 	});
 
 //=======SAVING SETTINGS FOR NUDGE: DISTRACTING SITES=====================
@@ -255,7 +295,7 @@ $('#settings_9809403065').on('click', function(event) {
 
 	$('#nudge_options_save_9809403065').on('click', function (event) {
 		
-		console.log(" nudge settings saved");
+		console.log("nudge settings saved");
 
 		var nudge_checkbox = $('#nudge_checkbox_9809403065').prop("checked");
 		//if checkbox is checked, and current status of nudge is off, change the chrome.storage value for nudge to nudge to on.  nudge_content script will read this value and enable/disable nudge accordingly
@@ -263,7 +303,7 @@ $('#settings_9809403065').on('click', function(event) {
 			chrome.storage.sync.get(['stored_nudge_checkbox'], function(data){
 			    console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox);
 			    if (data.stored_nudge_checkbox == false) {
-			    	
+			    	chrome.runtime.sendMessage({message: "turn on: nudge"}, function(r) {});
 			    }
 			});
 		}
@@ -282,13 +322,28 @@ $('#settings_9809403065').on('click', function(event) {
 			function() {console.log(' nudge on? ' + nudge_checkbox );
 		});
 
-		//store times
+		//resolve and store nudge end and start times
 		var nudge_start_time = $('#nudge_start_time_9809403065').prop('value');
-		var nudge_end_time = $('#nudge_end_time_9809403065').prop('value');
+		var nudge_start_time_am_pm = $('#nudge_start_time_am_pm_9809403065').prop('value');
+		//console.log('nudge_start_time_am_pm is ' + $('#nudge_start_time_am_pm_9809403065').prop('value'));
+		nudge_start_time = parseInt(nudge_start_time,10);
+		nudge_start_time_am_pm  = parseInt(nudge_start_time_am_pm ,10);
+		nudge_start_time = (nudge_start_time+ nudge_start_time_am_pm);
+		if (nudge_start_time == 12) {nudge_start_time = 0;}
+		if (nudge_start_time == 24) {nudge_start_time = 12;}
 		
 
+		var nudge_end_time = $('#nudge_end_time_9809403065').prop('value');
+		var nudge_end_time_am_pm = $('#nudge_end_time_am_pm_9809403065').prop('value');
+		//console.log('nudge_end_time_am_pm is ' + $('#nudge_end_time_am_pm_9809403065').prop('value'));
+		nudge_end_time = parseInt(nudge_end_time,10);
+		nudge_end_time_am_pm  = parseInt(nudge_end_time_am_pm ,10);
+		nudge_end_time = (nudge_end_time + nudge_end_time_am_pm);
+		if (nudge_end_time == 12) {nudge_end_time = 0;}
+		if (nudge_end_time == 24) {nudge_end_time = 12;}
+
 		chrome.storage.sync.set({stored_nudge_start_time: nudge_start_time}, function() {	
-			//console.log('work start time entered is ' + work_start_time);
+			//console.log('nudge start time entered is ' + nudge_start_time);
 			//confirm user input is properly stored
 			chrome.storage.sync.get(['stored_nudge_start_time'], function(data){
 			        console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
@@ -296,9 +351,14 @@ $('#settings_9809403065').on('click', function(event) {
 
 		});
 
-		chrome.storage.sync.set({stored_nudge_end_time: nudge_end_time}, 
-			function() {
-			console.log('work end time is ' + data.nudge_end_time);
+
+		chrome.storage.sync.set({stored_nudge_end_time: nudge_end_time}, function() {	
+			//console.log('nudge end time entered is ' + nudge_end_time);
+			//confirm user input is properly stored
+			chrome.storage.sync.get(['stored_nudge_end_time'], function(data){
+			        console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
+			});
+
 		});
 
 
