@@ -1,3 +1,101 @@
+////////////////////////////////////////////////////////////////////////
+///////////////////////////LOGIC OF THE MEDIA PLAYER FOR RECORDING OF MEDITATION//////////////////////////////////////////////
+
+
+ // when user click either an element of class 'recommended_meditation_recording_9809403065' of of class 'recording_track_a_of_list_a_980940306', open the individual_meditation_recording_player_9809403065 AND play the meditation recording
+
+var inside_meditation_session = false;
+var recording_is_playing = false;
+var chosen_recording = 0;
+
+
+// pressing space bar to pause/play a recording
+//space bar only works to pause/play a recording when we are inside a meditation session
+//selector 'body' should be .individual_meditation_recording_player_body class selector instead
+function mediaPlayer () {
+  $('body').keydown(function (event) {
+    if (inside_meditation_session == true) {
+      console.log("inside_meditation_session is true.  user can play and pause using space bar");
+      var recording = curr_recommended_meditation_file;
+      recording.addEventListener("timeupdate", updateProgressBarAndAudio);
+
+      if (event.which == 32 && recording_is_playing == true ) {
+        recording.pause();
+        recording_is_playing = false;
+      }
+      else if (event.which == 32 &&  recording_is_playing == false) {
+        recording.play();
+        recording_is_playing = true;
+      }
+    }; 
+  });
+};
+
+
+function updateProgressBarAndAudio() {
+  var recording_file = curr_recommended_meditation_file;
+  var length = recording_file.duration; //unit: seconds
+  var current_time = recording_file.currentTime; //https://www.w3schools.com/tags/av_prop_currenttime.asp
+
+  // calculate total length of value ansd set it for end time html element
+  var totalLength = calculateTotalValue(length)
+  //$(".end-time").html(totalLength);
+
+  // calculate current value time and set it for start-time html element
+  var currentTime = calculateCurrentValue(current_time);
+  //$(".start-time").html(currentTime);
+
+  var progressbar = document.getElementById('seekObj');
+  progressbar.value = (recording_file.currentTime / recording_file.duration);
+  progressbar.addEventListener("click", seek);
+
+  //users reach the end of the meditation recording:
+  //reset the progress bar
+  if (recording_file.currentTime == recording_file.duration) {
+    progressbar.value = 0;
+  }
+
+  function seek(evt) {
+  var percent = evt.offsetX / this.offsetWidth;
+  recording_file.currentTime = percent * recording_file.duration;
+  progressbar.value = percent / 100;
+  }
+
+};
+
+$('#recommended_meditation_recording_link_9809403065, #recommended_meditation_recording_begin_button_9809403065').on('click', function(event) {
+  hide_meditations_page();
+  show_meditation_recording_player();
+  //curr_recommended_meditation_file.play();
+  //recording_is_playing = true;
+  inside_meditation_session = true;
+  mediaPlayer();
+
+  //$('.individual_meditation_recording_player_background').css("animation-play-state","running");
+});
+
+$('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
+  hide_meditations_page();
+  show_meditation_recording_player();
+  var recording = document.getElementById("zenbellsound");
+  recording.play();
+  recording_is_playing = true;
+  inside_meditation_session = true;
+});
+
+//WHEN USER CLICKS 'X' BUTTON
+$('#recording_player_close_button_9809403065').on('click', function(event) {
+  hide_meditation_recording_player();
+  $('.individual_meditation_recording_player_9809403065').hide();
+  show_meditations_page();
+  inside_meditation_session = false;
+  var recording = curr_recommended_meditation_file;
+  recording.pause();
+  curr_recommended_meditation_file.currentTime = 0; 
+});
+
+
+//helpers
 // converts html DOM audio.duration (which is an integer in seconds) to a string that displays the duration in the minute and seconds format:
 // exmaple: 132 seoconds turn to 2:14
 //calculateTotalValue(134); 
@@ -26,34 +124,8 @@ function calculateCurrentValue(currentTime) {
   return current_time;
 }
 
-function initProgressBar() {
-  var player = document.getElementById('player');
-  var length = player.duration; //unit: seconds
-  var current_time = player.currentTime; //https://www.w3schools.com/tags/av_prop_currenttime.asp
-
-  // calculate total length of value ansd set it for end time html element
-  var totalLength = calculateTotalValue(length)
-  $(".end-time").html(totalLength);
-
-  // calculate current value time and set it for start-time html element
-  var currentTime = calculateCurrentValue(current_time);
-  $(".start-time").html(currentTime);
-
-  var progressbar = document.getElementById('seekObj');
-  progressbar.value = (player.currentTime / player.duration);
-  progressbar.addEventListener("click", seek);
-
-  // if (player.currentTime == player.duration) {
-  //   $('#play-btn').removeClass('pause');
-  // }
-
-  function seek(evt) {
-    var percent = evt.offsetX / this.offsetWidth;
-    player.currentTime = percent * player.duration;
-    progressbar.value = percent / 100;
-  }
-};
-
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
 
