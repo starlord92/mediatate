@@ -122,18 +122,18 @@ html, body {
 	height: 100%;
 	width: 100%;
 
-	animation-name: perspective;
+/*	animation-name: perspective;
   	animation-duration:60s; 
   	animation-timing-function: linear; 
   	animation-delay: 0s;
   	animation-direction: normal;
   	animation-iteration-count: infinite;
   	animation-fill-mode: forwards;
-  	animation-play-state: running;
+  	animation-play-state: running;*/
 }
 
 
-@keyframes perspective {
+/*@keyframes perspective {
   0% {
 
     background-color: rgb(247, 239, 228);
@@ -145,7 +145,7 @@ html, body {
     background-color:  rgb(235, 242, 245);    
   }
 
-}
+}*/
 
 
 

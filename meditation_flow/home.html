@@ -5,6 +5,7 @@
 	<title>meditate</title>
 	
 	<link rel="stylesheet" href="home.css">
+	<!-- <link rel="stylesheet" href="meditation_session_media_player.css"> -->
 	<link rel="icon" href="ensoicon128.png" type="image" sizes="16x16">
 
 	<script src="../jquery-3.4.1.js"></script>
@@ -285,10 +286,40 @@
 <!-- hidden by default -->
 	<div class="individual_meditation_recording_player_9809403065">
 		<div id="player_9809403065">
-			<br>meditation session progress bar
-
-			<div id="recording_player_close_button_9809403065">X</div>
+			<div>press space bar to play/pause</div>
 		</div>
+		<div id="recording_player_close_button_9809403065">X</div>
+
+		<!-- an indicator of how much time is left in the meditation session
+		track how much time has elapsed and add it to the usr's total number minutes meditated afte the session completes OR user quits -->
+
+
+<!-- 		<div class="audio-player">
+		    <div id="play-btn"></div>
+		    <div class="audio-wrapper" id="player-container" href="javascript:;">
+		      <audio id="player" ontimeupdate="initProgressBar()">
+					  <source src="http://www.lukeduncan.me/oslo.mp3" type="audio/mp3">
+					</audio>
+		    </div> -->
+		    
+		    <div class="player-controls scrubber">
+		      
+		      <span id="seekObjContainer">
+					  <progress id="seekObj" value="0" max="1"></progress>
+					</span>
+		      <br>
+		      
+<!-- 		      <small  class="start-time"></small>
+		      <small  class="end-time"></small> -->
+
+		    </div>
+		 
+		<!-- </div> -->
+
+		<!-- hidden until after the meditation session completes
+		toggle for guided and unguided options
+		button for 1, 3, 5 minute -->
+		
 	</div>
 
 <!--------------INDIVIDUAL MEDITATION RECORDING PAGE (end)  ------------------>
@@ -321,6 +352,13 @@ each <div class="recording_track_a_of_list_a_9809403065"> and <div class="record
 </audio>
 
 
+<audio id="bright_metal_tune_mallet">
+<source src="../meditation_recordings/bright_metal_tune_mallet.mp3" type="audio/wav">
+</audio>
+
+<audio id="andrew_scheduled_meditation_reminder">
+<source src="../meditation_recordings/andrew_reminder.wav" type="audio/wav">
+</audio>
 
 
 
@@ -362,6 +400,9 @@ each <div class="recording_track_a_of_list_a_9809403065"> and <div class="record
 	
     <!-- SCRIPT to pre-populate form with saved data -->
     <script src="../settings_options.js"></script>
+
+    <!-- SCRIPT to pre-populate form with saved data -->
+    <script src="meditation_session_media_player.js"></script>
 
 
     <!-- <script src="../ui_styling.js"></script>
