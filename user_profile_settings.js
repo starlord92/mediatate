@@ -8,9 +8,9 @@ $(document).ready(function() {
 	$('.individual_meditation_recording_player_9809403065').hide();
 	//hide_headspace_page();
 
-	show_settings_page ();
+	//hide_settings_page ();
 	
-	//show_meditations_page();
+	show_meditations_page();
 
 function hide_headspace_page() {
 	;

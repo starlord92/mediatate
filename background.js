@@ -96,7 +96,7 @@ var user_selects_skip_meditation = false;
 var user_selects_nothing_for_scheduled_meditation = true;
 var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the work_start_time_hour; 
 
-var time = 0;
+var time = 50;
 
 var second = 0;
 
@@ -126,8 +126,8 @@ async function checkScheduledMeditationTime() {
 	generateScheduledMeditationHours(medi_frequency, work_start_time_hr, work_end_time_hr);
 
 	// correctMeditationFrequency(current_hour);
-	console.log("work_start_time_hr is " + work_start_time_hr);
-	console.log("work_end_time_hr is " + work_end_time_hr);
+	//console.log("work_start_time_hr is " + work_start_time_hr);
+	//console.log("work_end_time_hr is " + work_end_time_hr);
 		if 
 		(
 			((work_start_time_hr < work_end_time_hr && 
@@ -148,29 +148,16 @@ async function checkScheduledMeditationTime() {
 		)
 			{
 				var found_defined_id = false;
-
 				console.log('it is a time scheduled meditation should be ACtive ');
 			 	// 15 seconds before: an animated reminder (within which there is a 'begin meditation' button) shows up.  
 			 	//add sound effects as a notification if the user has skipped x numbers of meditations
 			 	if((curr_time.getMinutes() == time) 
-			 		// curr_time.getMinutes() == time1 ||
-			 		// curr_time.getMinutes() == time2 || 
-			 		// curr_time.getMinutes() == time3 || 
-			 		// curr_time.getMinutes() == time4 || 
-			 		// curr_time.getMinutes() == time5 || 
-			 		// curr_time.getMinutes() == time6 || 
-			 		// curr_time.getMinutes() == time7  ||
-			 		// curr_time.getMinutes() == time8 ||
-			 		// curr_time.getMinutes() == time9 ||
-			 		// curr_time.getMinutes() == time10 ||
-			 		// curr_time.getMinutes() == time11 ||
-			 		// curr_time.getMinutes() == time12) 
 			 		&& curr_time.getSeconds() == second){
-
 			 		counter = counter + 1; 
-			 	    //time = (time + 1)%60;
+			 	    //to play animation reminder every minute :
+			 	    //time = (time + 1)%60; 
 
-			 	    //console.log('all conditions met ');
+			 	    console.log('all conditions met ');
 			 		//this async function is simply an attempt to send the message to play the remidner animation once and then chck if the id of the tab receicing the message is NOT undefined.  if it is undefined, we try again 
 			 		let send_message_to_show_reminder = new Promise((resolve, reject) => {
 			 				chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {

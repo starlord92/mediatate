@@ -21,14 +21,15 @@ var being_liked_recording_title_innerhtml_list = [
 
 ];
 
-var being_liked_recording_file_html_id_list = ["runningsound", "zenbellsound", "bright_metal_tune_mallet"];
+var being_liked_recording_file_html_id_list = ["runningsound", "zenbellsound", "bright_metal_tune_mallet", "andrew_scheduled_meditation_reminder"];
 
-var curr_recommended_meditation_file = 0;
+var curr_recommended_meditation_file = document.getElementById("bright_metal_tune_mallet");
+//var curr_recommended_meditation_file = document.getElementById("andrew_scheduled_meditation_reminder");
 
 $(document).ready(function() { 
 	console.log("recommended_meditation_lists.js script is loaded");
 
-	changeRecommendedRecordings();
+	//changeRecommendedRecordings();
 
 
 });
@@ -88,7 +89,7 @@ function helper_setRecommendedRecordings(recording_title_innerhtml_list, recordi
 
 
 
-//VIEW PART
+//VIEW 
 
 //assumption: 
 // settigns and headsapce page are hidden.  
@@ -117,61 +118,296 @@ function hide_meditation_recording_player() {
 }
 
 
+/////////////////////////////////////////////////////////////////////////
+///////////////////////////LOGIC OF THE MEDIA PLAYER FOR RECORDING OF MEDITATION//////////////////////////////////////////////
+
 
  // when user click either an element of class 'recommended_meditation_recording_9809403065' of of class 'recording_track_a_of_list_a_980940306', open the individual_meditation_recording_player_9809403065 AND play the meditation recording
+
+//BUGS:
+//when time is too short, fading out operation wont; end
+ 
+// at the end, ui that fades won't show up
+
 
 var inside_meditation_session = false;
 var recording_is_playing = false;
 var chosen_recording = 0;
+var recording_is_started = false;
+var recording_ended = false;
 
-//space bar only works to pause/resume a recording when we are inside a meditation session:
 
-	$('body').keydown(function (event) {
-		if (inside_meditation_session == true) {
-			console.log("inside_meditation_session is true.  can play and pause using space bar");
-			var recording = document.getElementById("zenbellsound");
 
-			if (event.which == 32 && recording_is_playing == true ) {
-				recording.pause();
-				recording_is_playing = false;
-			}
-			else if (event.which == 32 &&  recording_is_playing == false) {
-				recording.play();
+// pressing space bar to pause/play a recording
+//space bar only works to pause/play a recording when we are inside a meditation session
+//selector 'body' should be .individual_meditation_recording_player_body class selector instead
+
+
+function mediaPlayer () {
+	$('html').keydown(function (event) {
+		event.stopImmediatePropagation();
+		if (event.which == 32) {
+
+			//playing from 00:00, i.e this space bar keydown signals the first time we play this recording since the last time the same recording concludes (and not just paused)
+			if (inside_meditation_session == true && recording_is_started == false) {
+				recording_ended = false;
+				setTimeout(function(){ nonInitialfadeOutWhenInactive(); }, 10000);
+				curr_recommended_meditation_file.play();
 				recording_is_playing = true;
+				var recording = curr_recommended_meditation_file;
+				// recording.addEventListener("timeupdate", updateProgressBarAndAudio);
+				recording_is_started = true;
+				//console.log(" inside_meditation_session is " + inside_meditation_session);
+				//console.log(" recording_is_started is " + recording_is_started);
+				//console.log(" recording_is_playing is " + recording_is_playing);
 			}
-		}; 
+			else if (inside_meditation_session == true) {	
+				var recording = curr_recommended_meditation_file;
+				if (recording_is_playing == true) {
+					recording.pause();
+					recording_is_playing = false;
+					console.log('pausing');
+					//console.log(" inside_meditation_session is " + inside_meditation_session);
+					//console.log(" recording_is_started is " + recording_is_started);
+					//console.log(" recording_is_playing is " + recording_is_playing);
+				}
+				else {
+					recording.play();
+					recording_is_playing = true;
+					console.log('playing/resuming');
+					//console.log(" inside_meditation_session is " + inside_meditation_session);
+					//console.log(" recording_is_started is " + recording_is_started);
+					//console.log(" recording_is_playing is " + recording_is_playing);
+					//console.log("count is " + count);
+				}
+			}; 
+			
+		}
+		
 	});
-
+};
 
 
 $('#recommended_meditation_recording_link_9809403065, #recommended_meditation_recording_begin_button_9809403065').on('click', function(event) {
 	hide_meditations_page();
 	show_meditation_recording_player();
-	curr_recommended_meditation_file.play();
-	recording_is_playing = true;
-	inside_meditation_session = true;
+
+	//space bar is activated as the play/pause button
+	resetMediaPlayerStateThenPlay();
+	
 	//$('.individual_meditation_recording_player_background').css("animation-play-state","running");
 });
 
-$('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
-	hide_meditations_page();
-	show_meditation_recording_player();
-	var recording = document.getElementById("zenbellsound");
-	recording.play();
-	recording_is_playing = true;
-	inside_meditation_session = true;
-});
+// $('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
+// 	hide_meditations_page();
+// 	show_meditation_recording_player();
+// 	var recording = document.getElementById("zenbellsound");
+// 	recording.play();
+// 	recording_is_playing = true;
+// 	inside_meditation_session = true;
+// });
 
 //WHEN USER CLICKS 'X' BUTTON
 $('#recording_player_close_button_9809403065').on('click', function(event) {
 	hide_meditation_recording_player();
 	$('.individual_meditation_recording_player_9809403065').hide();
 	show_meditations_page();
+	//disable the media player and reset the audio
 	inside_meditation_session = false;
-	var recording = document.getElementById("zenbellsound");
-	recording.pause();
-	recording.currentTime = 0;	
+	recording_is_started = false;
+	recording_is_playing = false;
+	recording_ended = true;
+	curr_recommended_meditation_file.currentTime = 0;	
+	curr_recommended_meditation_file.pause();
+	
 });
+
+//helper function: after the recording file is done, reove the mousemove eevnt and turn opacity to 1
+function endFadeWhenInactive() {
+	recording_is_playing == false;
+	$('html').off('mousemove');
+	$(".fade_when_user_inactive").css("opacity", 1);
+	console.log ('recording file is done playing');
+}
+
+//update progress bar, which also ends fading in and out of the media player
+curr_recommended_meditation_file.addEventListener("timeupdate", updateProgressBarAndAudio);
+
+function updateProgressBarAndAudio() {
+	var recording_file = curr_recommended_meditation_file;
+	var length = recording_file.duration; //unit: seconds
+	var current_time = recording_file.currentTime; //https://www.w3schools.com/tags/av_prop_currenttime.asp
+
+	// calculate total length of value ansd set it for end time html element
+	var totalLength = calculateTotalValue(length)
+	//$(".end-time").html(totalLength);
+
+	// calculate current value time and set it for start-time html element
+	var currentTime = calculateCurrentValue(current_time);
+	//$(".start-time").html(currentTime);
+
+	var progressbar = document.getElementById('seekObj');
+	progressbar.value = (recording_file.currentTime / recording_file.duration);
+	progressbar.addEventListener("click", seek);
+
+	//users reach the end of the meditation recording:
+	//reset the progress bar
+	if (recording_file.currentTime == recording_file.duration) {
+	 	progressbar.value = 1;
+	 	endFadeWhenInactive();
+
+	 	recording_file.pause();
+	 	recording_file.currentTime = 0;	
+	 	recording_is_playing = false;
+	 	recording_ended = true;
+		
+	}
+
+	function seek(evt) {
+	var percent = evt.offsetX / this.offsetWidth;
+	recording_file.currentTime = percent * recording_file.duration;
+	progressbar.value = percent / 100;
+	}
+
+};
+
+//wait for user inactivity (mouse and key) of x seconds before fading out.  after that, if user move themouse but then go quiet for y seconds again, then fade out the elements.
+//the key here is that this function is only triggered if there is an initial user interactivity
+
+// function fadeOutWhenInactive () {
+// 	var time_idle = 0;
+
+// 	//run etectInitialUserInactivity every second
+// 	var keep_visible = setInterval(detectInitialUserInactivity, 1000);
+
+// 	function myStopFunction() {
+// 		console.log("clear interval");
+// 			clearInterval(keep_visible);
+// 	};
+
+// 	function detectInitialUserInactivity() {
+// 		// reset time idle if there is user activity
+// 		console.log("time idle is " + time_idle);
+// 		$("html").on("mousemove", function () {
+// 			time_idle = 0;
+// 			console.log("user activity detected, time idle reset to " + time_idle);
+// 		});
+// 		//var activity = await user_input_event;
+
+// 		//if user is inactive for more than 7 seconds, end this function
+// 		// and transfer control to fadeOutWhenInactive()
+// 		time_idle += 1000;
+// 		if (time_idle > 7000) {
+// 			console.log("time idle passes threshold, make item transparent"); 
+// 			myStopFunction();
+// 			nonInitialfadeOutWhenInactive();
+// 		}
+
+// 	};
+// };
+
+function exec() {
+	// first time item is made transparent after the rcording is played an no user activity is detected
+	$(".fade_when_user_inactive").css("opacity", 0);
+
+	$("html").on("mousemove", function( event ) {
+		//when there is mouse movement, make the item opaque
+	    $(".fade_when_user_inactive").css("opacity", 1);
+	    
+	    //and if  there exists a timeOut function running, stop it.
+	    myStopFunction();
+	    //restart a new timeOut, which waits for x seconds before making the item transaprent again
+	    myFunction();
+	    //console.log("byee");
+	});
+
+	//wait for x seconds before turning making the item transparent
+	function myFunction() {
+	    myVar = setTimeout(function(){
+	        $(".fade_when_user_inactive").css("opacity", 0);
+	    }, 6000);
+	}
+	//end the TimeOut
+	function myStopFunction() {
+	    if(typeof myVar != 'undefined'){
+	        clearTimeout(myVar);
+	        //console.log("hiii");
+	    }
+	}
+};
+
+function nonInitialfadeOutWhenInactive() { 
+	if (recording_ended == false) {
+		exec();
+	}
+	else return;
+	
+};
+
+
+//helpers
+// converts html DOM audio.duration (which is an integer in seconds) to a string that displays the duration in the minute and seconds format:
+// exmaple: 132 seoconds turn to 2:14
+//calculateTotalValue(134); 
+
+function calculateTotalValue(length) { //length is in seconds
+  var minutes = Math.floor(length / 60),
+    seconds = length - minutes * 60,
+    // seconds_str = seconds_int.toString(),
+    // seconds = seconds_str.substr(0, 2),
+    time = minutes + ':' + seconds
+
+  // console.log("time is " + time);
+  // console.log(typeof time );
+  return time;
+}
+
+
+//displays current time in a nice "00:00" string-based format
+function calculateCurrentValue(currentTime) {
+  var current_hour = parseInt(currentTime / 3600) % 24,
+    current_minute = parseInt(currentTime / 60) % 60,
+    current_seconds_long = currentTime % 60,
+    current_seconds = current_seconds_long.toFixed(),
+    current_time = (current_minute < 10 ? "0" + current_minute : current_minute) + ":" + (current_seconds < 10 ? "0" + current_seconds : current_seconds);
+   console.log("time is " + current_time);
+  return current_time;
+}
+
+async function resetMediaPlayerStateThenPlay () {
+
+	let before_reset = new Promise((resolve, reject) => {
+		//console.log("before reset, inside_meditation_session is " + inside_meditation_session);
+		//console.log("before reset, recording_is_started is " + recording_is_started);
+		//console.log("before reset, recording_is_playing is " + recording_is_playing);
+		resolve("reset done!")
+  	});
+  	let result0 = await before_reset;
+
+	let reset = new Promise((resolve, reject) => {
+		inside_meditation_session = true;
+		recording_is_started == false;
+		recording_is_playing = false;
+    	resolve("reset done!")
+  	});
+  	let result = await reset;
+
+	let after_reset = new Promise((resolve, reject) => {
+		//console.log("after reset, inside_meditation_session is " + inside_meditation_session);
+		//console.log("after reset, recording_is_started is " + recording_is_started);
+		//console.log("after reset, recording_is_playing is " + recording_is_playing);
+		resolve("reset done!")
+  	});
+  	let result1 = await after_reset;
+
+	let mediaPlayerReady = new Promise((resolve, reject) => {
+		mediaPlayer();
+    	resolve("media player ready");
+  	});
+	let result2 = await mediaPlayerReady;
+
+	return Promise.resolve(1);
+};
 
 
 //////////////////////////////////////////////////////////////////////////
