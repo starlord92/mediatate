@@ -95,6 +95,8 @@ html, body {
 }
 
 
+
+
 /*UI class for icons that fades out when user is inactive*/
 .fade_when_user_inactive {
 	transition: opacity 1000ms ease-in-out;
