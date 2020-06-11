@@ -1,12 +1,9 @@
 #seekObj {
-
   margin: auto;
-
-
 }
 
 
-
+/*reset to the default look of progress bar for chrome and style its*/
 progress[value] {
   width: 300px;
   height: 10px;
@@ -17,15 +14,16 @@ progress[value] {
   appearance: none;
   border: none;
 }
-
+/*style the progress bar*/
 progress[value]::-webkit-progress-bar {
-  background-color: #a5abb8;
+  background-color: /*brown:*/ rgb(116, 102, 97);
+  /*gray:*//* #a5abb8;*/
   
   border-radius: 50px;
   
 }
 
-
+/*style the progress value*/ 
 progress[value]::-webkit-progress-value {
   border-radius: 50px;
 
