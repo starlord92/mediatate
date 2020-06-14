@@ -23,13 +23,15 @@ var being_liked_recording_title_innerhtml_list = [
 
 var being_liked_recording_file_html_id_list = ["runningsound", "zenbellsound", "bright_metal_tune_mallet", "andrew_scheduled_meditation_reminder"];
 
-var curr_recommended_meditation_file = document.getElementById("bright_metal_tune_mallet");
-//var curr_recommended_meditation_file = document.getElementById("andrew_scheduled_meditation_reminder");
+var curr_recommended_meditation_file = "bright_metal_tune_mallet";
+var curr_recommended_meditation_file = "andrew_scheduled_meditation_reminder";
+
+
 
 $(document).ready(function() { 
 	console.log("recommended_meditation_lists.js script is loaded");
 
-	//changeRecommendedRecordings();
+	changeRecommendedRecordings();
 
 
 });
@@ -84,7 +86,7 @@ function helper_setRecommendedRecordings(recording_title_innerhtml_list, recordi
 		link_title.innerHTML = recording_title_innerhtml_list[recording_title_index];
 
 		//change the recording file stored in global variable
-		curr_recommended_meditation_file = document.getElementById(recording_file_html_id_list[recording_file_index]);
+		curr_recommended_meditation_file = recording_file_html_id_list[recording_file_index];
 };
 
 
@@ -117,6 +119,36 @@ function hide_meditation_recording_player() {
 	$('#bottom_fixed_nav_bar_9809403065').show();
 }
 
+var one_min_option = document.getElementById("meditation_session_length_option_1");
+var three_min_option = document.getElementById("meditation_session_length_option_3");
+var five_min_option = document.getElementById("meditation_session_length_option_5");
+
+//radio button logic for the length options
+one_min_option.addEventListener("click", function() {
+		three_min_option.classList.remove("meditation_session_length_option_chosen");
+		five_min_option.classList.remove("meditation_session_length_option_chosen");
+		one_min_option.classList.add("meditation_session_length_option_chosen");
+		console.log("button 1 min is clicked");
+	}
+);
+
+three_min_option.addEventListener("click", function() {
+		one_min_option.classList.remove("meditation_session_length_option_chosen");
+		five_min_option.classList.remove("meditation_session_length_option_chosen");
+		three_min_option.classList.add("meditation_session_length_option_chosen");
+		console.log("button 3 min is clicked");
+	}
+);
+
+five_min_option.addEventListener("click", function() {
+		one_min_option.classList.remove("meditation_session_length_option_chosen");
+		three_min_option.classList.remove("meditation_session_length_option_chosen");
+		five_min_option.classList.add("meditation_session_length_option_chosen");
+		console.log("button 5 min is clicked");
+	}
+);
+
+
 
 /////////////////////////////////////////////////////////////////////////
 ///////////////////////////LOGIC OF THE MEDIA PLAYER FOR RECORDING OF MEDITATION//////////////////////////////////////////////
@@ -125,7 +157,7 @@ function hide_meditation_recording_player() {
  // when user click either an element of class 'recommended_meditation_recording_9809403065' of of class 'recording_track_a_of_list_a_980940306', open the individual_meditation_recording_player_9809403065 AND play the meditation recording
 
 //BUGS:
-//when time is too short, fading out operation wont; end
+//when time is too short, fading out operation won't stop after recording is over
  
 // at the end, ui that fades won't show up
 
@@ -138,11 +170,10 @@ var recording_ended = false;
 
 
 
+
 // pressing space bar to pause/play a recording
 //space bar only works to pause/play a recording when we are inside a meditation session
 //selector 'body' should be .individual_meditation_recording_player_body class selector instead
-
-
 function mediaPlayer () {
 	$('html').keydown(function (event) {
 		event.stopImmediatePropagation();
@@ -152,9 +183,49 @@ function mediaPlayer () {
 			if (inside_meditation_session == true && recording_is_started == false) {
 				recording_ended = false;
 				setTimeout(function(){ nonInitialfadeOutWhenInactive(); }, 10000);
-				curr_recommended_meditation_file.play();
+
+				//figure out duration and guided/unguided status chosen by the user and choose the right recommended_meditation_file to play
+				if (document.getElementById("toggle_9809403065").checked == false) 
+				{
+					console.log("checkbox for guided meditation is unchecked");
+					var chosen_duration = document.getElementsByClassName("meditation_session_length_option_chosen")[0];
+					console.log("id of length option is " + chosen_duration);
+					if (chosen_duration.id == "meditation_session_length_option_1") {
+						console.log("unguided 1 minute recording playing");
+						curr_recommended_meditation_file = "bright_metal_tune_mallet";
+					}
+					else if (chosen_duration.id == "meditation_session_length_option_3") {
+						console.log("unguided 3 minute recording playing");
+						curr_recommended_meditation_file = "runningsound";
+					}
+					else {
+						console.log("unguided 5 minute recording playing");
+						curr_recommended_meditation_file = "andrew_scheduled_meditation_reminder";
+						}
+				}
+
+				else {
+					console.log("checkbox for guided meditation is checked");
+					var chosen_duration = document.getElementsByClassName("meditation_session_length_option_chosen")[0];
+					console.log("id of length option is " + chosen_duration);
+					if (chosen_duration.id == "meditation_session_length_option_1") {
+						console.log("unguided 1 minute recording playing");
+						curr_recommended_meditation_file = "andrew_scheduled_meditation_reminder";
+					}
+					else if (chosen_duration.id == "meditation_session_length_option_3") {
+						console.log("guided 3 minute recording playing");
+						curr_recommended_meditation_file = "runningsound";
+					}
+					else {
+						console.log("guided 5 minute recording playing");
+						curr_recommended_meditation_file = "zenbellsound";
+						}
+				}
+
+
+				document.getElementById(curr_recommended_meditation_file).play();
 				recording_is_playing = true;
-				var recording = curr_recommended_meditation_file;
+				var recording = document.getElementById(curr_recommended_meditation_file);
 				// recording.addEventListener("timeupdate", updateProgressBarAndAudio);
 				recording_is_started = true;
 				//console.log(" inside_meditation_session is " + inside_meditation_session);
@@ -162,7 +233,7 @@ function mediaPlayer () {
 				//console.log(" recording_is_playing is " + recording_is_playing);
 			}
 			else if (inside_meditation_session == true) {	
-				var recording = curr_recommended_meditation_file;
+				var recording = document.getElementById(curr_recommended_meditation_file);
 				if (recording_is_playing == true) {
 					recording.pause();
 					recording_is_playing = false;
@@ -217,8 +288,8 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 	recording_is_started = false;
 	recording_is_playing = false;
 	recording_ended = true;
-	curr_recommended_meditation_file.currentTime = 0;	
-	curr_recommended_meditation_file.pause();
+	document.getElementById(curr_recommended_meditation_file).currentTime = 0;	
+	document.getElementById(curr_recommended_meditation_file).pause();
 	
 });
 
@@ -231,10 +302,10 @@ function endFadeWhenInactive() {
 }
 
 //update progress bar, which also ends fading in and out of the media player
-curr_recommended_meditation_file.addEventListener("timeupdate", updateProgressBarAndAudio);
+document.getElementById(curr_recommended_meditation_file).addEventListener("timeupdate", updateProgressBarAndAudio);
 
 function updateProgressBarAndAudio() {
-	var recording_file = curr_recommended_meditation_file;
+	var recording_file = document.getElementById(curr_recommended_meditation_file);
 	var length = recording_file.duration; //unit: seconds
 	var current_time = recording_file.currentTime; //https://www.w3schools.com/tags/av_prop_currenttime.asp
 
@@ -409,6 +480,31 @@ async function resetMediaPlayerStateThenPlay () {
 	return Promise.resolve(1);
 };
 
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//settings (guide vs unguided meditation, meditation duration)
+
+// meditation duration radio button
+
+
+$('#toggle_9809403065').on('keypress keydown keypress', function(e) {
+    if(e.which == 32)
+    	console.log("disable spacebar control over the toggle");
+        e.preventDefault();
+        return false;
+});
+
+//prevent automatic scrolling to the bottom of the page
+$("body").on('keydown keydown keypress', function(e) {
+  if(e.which == 32) {
+    e.preventDefault();
+    // return false;
+  }
+});
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////

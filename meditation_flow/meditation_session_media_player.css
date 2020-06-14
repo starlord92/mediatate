@@ -1,39 +1,357 @@
-#seekObj {
-  margin: auto;
+
+
+/*styling <body> tag */
+.individual_meditation_recording_player_body {
+  display: grid; 
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+
+  overflow-y: hidden; /* novertical scrolling*/
+  
+  /*color:  #a5abb8; */
+  color: rgb(116,102,97);
+  font: 1.5em 'apercu';
+}
+
+/* setting background color/image */
+.individual_meditation_recording_player_background {
+  background-color: /*#fafafa;*/ /*#f0f0f0;*/ /*#f5f5f5;*/ /*#f8f8f8;*/
+  /*color for 'space' page*/
+  /*#f3ebe2;*/ /*#fcf7ef;*/ rgb(247, 239, 228);  /*rgb(221, 234, 247);*/ /*rgb(252, 242, 230);*/
+
+  height: 100%;
+  width: 100%;
+}
+  .individual_meditation_recording_player_9809403065 {
+    /*margin: auto;*/
+    height: 100%;
+    width: 100%;
+
+    /*margin-top: 25%;
+    margin-bottom: 0%;*/
+  }
+
+  #recording_player_close_button_9809403065 {
+    position: absolute;
+    top: 5%;
+    bottom: 90%;
+    right: 90%;
+    left:5%;
+    font-size: 28px;
+
+    color:  #a5abb8;
+    cursor: pointer;
+  }
+
+
+/* aka the 'press space bar to play/pause' text */
+#playback_instruction {
+  
+  text-align: center;
+  
+  margin-top: 50%;
+  color: rgb(229,158,108);
 }
 
 
-/*reset to the default look of progress bar for chrome and style its*/
-progress[value] {
-  width: 300px;
-  height: 10px;
-  margin: 50px auto;
+
+/*progress bar------------------------------------------------------------*/
+.progress_bar_container {
   display: block;
+}
+
+  /*reset to the default look of progress bar for chrome and style its*/
+  progress[value] {
+    width: 300px;
+    height: 10px;
+    margin: 50px auto;
+    display: block;
+   
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+  }
+  /*style the progress bar*/
+  progress[value]::-webkit-progress-bar {
+    background-color: /*brown:*/ rgb(116, 102, 97);
+    /*gray:*//* #a5abb8;*/
+    border-radius: 50px;
+  }
+
+  /*style the progress value*/ 
+  progress[value]::-webkit-progress-value {
+    border-radius: 50px;
+
+    background-color: rgb(229,158,108); /* feals orange*/
+     /*rgb(236,242,245);*/ /*feals light blue*/;
+    /*background-size: 25px 14px, 100% 100%, 100% 100%;*/
+  }
+/*progress bar (end of)-----------------------------------------------------*/
+
+
+
+/*control the micro-animation of icons that fades out when user is inactive*/
+.fade_when_user_inactive {
+  transition: opacity 1000ms ease-in-out;
+}
+/*(end of)----------------------------------------------*/
+
+
+.meditation_session_settings_options {
+ /* margin:auto;*/
+}
+
+
+
+
+/*radio buttons for meditation session length--------------------------------*/
+
+/*common properties among options for recording length
+
+
+the vertical version
+
+*/
+.meditation_session_length_options {
+  /*text-align: center;*/
+  /*margin: auto;*/
+  margin-top: 35px;
+  margin-left: 27%;
+}
+
+/*#meditation_session_length_option_1:hover, #meditation_session_length_option_3:hover, #meditation_session_length_option_5:hover {
+  background-color: rgb(116, 102, 97);
+  color: rgb(247, 239, 228);
+}*/
+
+
+
+#meditation_session_length_option_1, #meditation_session_length_option_3, #meditation_session_length_option_5 {
+  
+  cursor: pointer;
+  margin:-1px;
+  
+  border-color:rgb(116, 102, 97);
+  width:14%;
+  height:14%;
+  text-align:center;
+  margin-left: 12px ;
+  padding-left: auto;
+  padding-right: auto;
+}
+
+#meditation_session_length_option_1 {
+  border-top: solid 2px;
+  border-left: solid 2px;
+  border-right: solid 2px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  border-color:rgb(116, 102, 97);
+}
+
+#meditation_session_length_option_3 {
+  border: solid 2px rgb(116, 102, 97);
+}
+
+
+#meditation_session_length_option_5 {
+  border-bottom: solid 2px;
+  border-left: solid 2px;
+  border-right: solid 2px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border-color:rgb(116, 102, 97);
+}
+
+#meditation_session_length_option_3 {
+  background-color: rgb(247, 239, 228); 
+  color: rgb(116, 102, 97);
+}
+
+
+.meditation_session_length_option_text {
+ /* text-align: center;*/
+ /*margin-top: 11px*/
+ position: relative;
+
+ bottom:64px;
+ left:25%;
+
+ width: 30px;
+ height: 30px;
+
+  cursor: pointer;
+  margin:-1px;
+  text-align: center;
+  padding-left: 8px; 
+  padding-right:8px;
+  padding-top: 1.6px;
+  padding-bottom: 1.6px;
  
-  -webkit-appearance: none;
-  appearance: none;
-  border: none;
-}
-/*style the progress bar*/
-progress[value]::-webkit-progress-bar {
-  background-color: /*brown:*/ rgb(116, 102, 97);
-  /*gray:*//* #a5abb8;*/
-  
-  border-radius: 50px;
-  
 }
 
-/*style the progress value*/ 
-progress[value]::-webkit-progress-value {
-  border-radius: 50px;
 
-  /*box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.5);
-  background-image: -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, .5), rgba(0, 0, 0, .3)), -webkit-linear-gradient(left, #673ab7, #6518ef)*/;
-  /* with stripe pattern*/
 
-  background-color: rgb(229,158,108);
-   /*rgb(236,242,245);*/ /*feals light blue*/;
-  
-  
-  /*background-size: 25px 14px, 100% 100%, 100% 100%;*/
+.meditation_session_length_option_chosen {
+  background-color: rgb(116, 102, 97) !important;
+  color: rgb(247, 239, 228) !important;
 }
+
+
+
+/*----------------------------------------------------*/
+/*.meditation_session_length_options span {
+  cursor: pointer;
+  margin:-3.5px;
+  text-align: center;
+  padding-left: 8px; 
+  padding-right:8px;
+  padding-top: 1.6px;
+  padding-bottom: 1.6px;
+}
+
+.meditation_session_length_options span:hover {
+  background-color: rgb(116, 102, 97);
+  color: rgb(247, 239, 228);
+}
+
+#meditation_session_length_option_1 {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-left: solid 2px; 
+  border-top:solid 2px;
+  border-bottom: solid 2px;
+  border-color:rgb(116, 102, 97);
+}
+
+#meditation_session_length_option_3 {
+  border:solid 2px;
+  border-color:rgb(116, 102, 97);
+}
+#meditation_session_length_option_5 {
+  border-top-right-radius:10px;
+  border-bottom-right-radius: 10px;
+  border-right: solid 2px; 
+  border-top:solid 2px;
+  border-bottom: solid 2px;
+  border-color:rgb(116, 102, 97);
+}
+
+.meditation_session_length_options {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 9px;
+}
+
+.meditation_session_length_option_text {
+ margin-top: 11px
+*/}
+
+
+/* turn checkbox into a toggle for guide vs unguided meditation--------------*/
+
+.toggle_container {
+  /*margin-right: auto;
+  margin-left: auto;*/
+  margin-bottom: 50px;
+  display: grid;
+  justify-items: center;
+}
+
+
+
+/*the pill-form'background'/base of the toggle on which the ball of the toggle will run*/
+.pill_form_toggle_background {
+  position: relative;
+  display: inline-block;
+  width: 54px ;
+  height: 30px ;
+  text-align: center; 
+  margin-left:27%;
+  margin-bottom: 11px;
+
+}
+
+.meditation_session_toggle_text {
+  display: inline-block;
+  margin-left: 6px;
+}
+
+
+
+/*the ball moving inside the toggle button
+
+we can change the size of the toggle: 
+
+height: the background height is 30px, the height of the ball is 23, so that means we must set bottom to 3.5 to ensure that  the distance of the ball from the bottom of the background is equal to that from the top of the background (23 + 3.5 + 3.5 = 30)
+
+width: width of base of 54, and wifth of the ball is 23, so we have 31 px to plan both the ball's distance from the right and left edge.  so here we set left to 4px, meaning the ball should travel 23 px so that it is 4px from the right when its done traveling.
+
+play with the width, left, height, bottom numbers to keep the positioning the same while increasing/decreasing the size
+*/
+.toggle_ball:before {
+  position: absolute;
+  content: "";
+  width: 23px;
+  left: 4px;
+  height: 23px;
+  bottom: 3.5px;
+  
+  
+  background-color:/* white;*/ rgb(247, 239, 228);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+/*delete default appearance of the radio button*/
+.pill_form_toggle_background input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* and repalce radio button with a span that acts as the ball of the toggle button
+slider is a baseball term referring to a ball throwing technique*/
+.toggle_ball {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(116, 102, 97); /*#ccc;*/
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+
+/* color change when toggle is on*/
+input:checked + .toggle_ball {
+  background-color: rgb(229,158,108); /*#2196F3;*/ /*blue*/
+}
+
+input:focus + .toggle_ball {
+  box-shadow: 0 0 1px rgb(229,158,108); /*#2196F3;*/
+}
+
+/* move the white ball when the toggle is on*/
+input:checked + .toggle_ball:before {
+  -webkit-transform: translateX(23px);
+  -ms-transform: translateX(23px);
+  transform: translateX(23px);
+}
+
+/* gives the toggle background a pill-shape */
+.toggle_ball.round {
+  border-radius: 15px;
+}
+
+/* makes the toggle_ball round*/
+.toggle_ball.round:before {
+  border-radius: 50%;
+}
+
+

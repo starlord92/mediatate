@@ -31,12 +31,6 @@ html, body {
 	/*color: #08596a;*/
 	color: /*#c695c6;*/ /* #a5abb8; */
 
-	/* Horizontally center EACH element in a grid with regard to its inline axis*/
-	/*justify-content: center;*/
-	
-
-	/* Vertically center EACH element in a grid with regard to its cell/track, mor more accurately grid area*/
-	/*align-items: center;*/
 	
 	/*background-color: #e9ebee;*/	/*fb desktop background*/
 }
@@ -97,97 +91,13 @@ html, body {
 
 
 
-/*UI class for icons that fades out when user is inactive*/
-.fade_when_user_inactive {
-	transition: opacity 1000ms ease-in-out;
-}
+
 
 
 
 /*============INDIVIDUAL MEDITATION RECORDING SUBPAGE======================*/
 
 
-.individual_meditation_recording_player_body {
-	display: grid;
-	grid-template-columns: repeat(9, 1fr); 
-	grid-template-rows: repeat(11, 1fr); 
-	font: 1.5em 'apercu';
-	/*color:  #a5abb8; */
-	color: rgb(116,102,97);
-	
-	height: 100%;
-	width: 100%;
-
-}
-
-
-
-
-.individual_meditation_recording_player_background {
-	background-color: /*#fafafa;*/ /*#f0f0f0;*/ /*#f5f5f5;*/ /*#f8f8f8;*/
-
-	/*color for 'space' page*/
-	/*#f3ebe2;*/ /*#fcf7ef;*/ rgb(247, 239, 228);  /*rgb(221, 234, 247);*/ /*rgb(252, 242, 230);*/
-	height: 100%;
-	width: 100%;
-
-
-/*	animation-name: perspective;
-  	animation-duration:60s; 
-  	animation-timing-function: linear; 
-  	animation-delay: 0s;
-  	animation-direction: normal;
-  	animation-iteration-count: infinite;
-  	animation-fill-mode: forwards;
-  	animation-play-state: running;*/
-}
-
-
-/*@keyframes perspective {
-  0% {
-
-    background-color: rgb(247, 239, 228);
-
-  }
- 
-  100% {
-
-    background-color:  rgb(235, 242, 245);    
-  }
-
-}*/
-
-
-
-
-
-
-.individual_meditation_recording_player_9809403065 {
-	grid-row-start:1;
-	grid-row-end: span 100;
-	grid-column-start:1;
-	grid-column-end: span 100;
-
-	display: grid;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
-
-	
-}
-
-#recording_player_close_button_9809403065 {
-	cursor: pointer;
-
-	position: absolute;
-	top: 5%;
-	bottom: 90%;
-	right: 5%;
-	left:90%;
-
-	color:  #a5abb8;
-}
 
 /*========================================================================*/
 

@@ -247,9 +247,7 @@
 							<option value="12">pm</option>
 		                </select> 
 
-
 		            to <!-- <input id='nudge_end_time_9809403065' type="time" class="digits"> -->
-
 		            <select id='nudge_end_time_9809403065' class="dropdown">
 		                	<option value="1">1</option>
 							<option value="2">2</option>
@@ -271,33 +269,54 @@
 		            <br> <br>
 		            
 		             <div id='nudge_options_save_9809403065'>save</div>
-
-		            <br>
-		            
+		            <br>        
 		        </div>
 			</div>
-
 		</div>
 <!---------------SETTTINGS PAGE (END) ---------------------------------------->
 
 
 <!--------------INDIVIDUAL MEDITATION RECORDING PAGE (start)------------------>
-
+<div class="fade_when_user_inactive" id="playback_instruction">press space bar to play/pause</div>
 <!-- hidden by default -->
 	<div class="individual_meditation_recording_player_9809403065">
-		<!-- <div id="player_9809403065"> -->
-			<div class="fade_when_user_inactive">press space bar to play/pause</div>
-		<!-- </div> -->
-		<div id="recording_player_close_button_9809403065" >X</div>
+		
+		<!-- <div class="fade_when_user_inactive" id="playback_intruction">press space bar to play/pause</div> -->
+		
+		<div id="recording_player_close_button_9809403065"> &lt; </div>
 
-		<!-- an indicator of how much time is left in the meditation session
+		
+
+<!-- 		an indicator of how much time is left in the meditation session
 		track how much time has elapsed and add it to the usr's total number minutes meditated afte the session completes OR user quits -->
-		<progress id="seekObj" class="fade_when_user_inactive" value="1" max="1"></progress>
-					
+	<!-- 	<div class="progress_bar_container">
+			<progress id="seekObj" class="fade_when_user_inactive" value="1" max="1"></progress>
+		</div>  -->
+				
 
-		<!-- hidden until after the meditation session completes
-		toggle for guided and unguided options
-		button for 1, 3, 5 minute -->
+		<!-- hidden after the meditation recoding starts playing-->
+		<!--toggle for guided and unguided options-->
+		<div class="meditation_session_settings_options">
+			<div class="toggle_container">
+				<label class="pill_form_toggle_background">
+				  <input id="toggle_9809403065" type="checkbox"> 
+				  <span class="toggle_ball round"></span>
+				</label>
+				<span class="meditation_session_toggle_text">guided<span>
+			</div>
+
+			<!-- button for 1, 3, 5 minute --> 
+			<div class="meditation_session_length_options">
+				<div id="meditation_session_length_option_1">1</div>
+				<div id="meditation_session_length_option_3">3
+				</div>
+
+				<div id="meditation_session_length_option_5">5</div>
+				
+				<div class="meditation_session_length_option_text"> minutes </div>
+				
+			</div>
+		</div>
 		
 	</div>
 
