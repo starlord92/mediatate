@@ -184,7 +184,7 @@ function mediaPlayer () {
 				recording_ended = false;
 				setTimeout(function(){ nonInitialfadeOutWhenInactive(); }, 10000);
 
-				//figure out duration and guided/unguided status chosen by the user and choose the right recommended_meditation_file to play
+				//figure out duration and guided/unguided status chosen by the user and choose the right recommended_meditation_file to play by checking the settings user set before pressing play
 				if (document.getElementById("toggle_9809403065").checked == false) 
 				{
 					console.log("checkbox for guided meditation is unchecked");
@@ -221,16 +221,13 @@ function mediaPlayer () {
 						curr_recommended_meditation_file = "zenbellsound";
 						}
 				}
-
-
+				//fade out the time and guided/unguided toggle and show the progress bar, ideally BEFORE playing the chosen audio file
+				fadeSettingsShowProgressBar();
 				document.getElementById(curr_recommended_meditation_file).play();
+				
 				recording_is_playing = true;
-				var recording = document.getElementById(curr_recommended_meditation_file);
-				// recording.addEventListener("timeupdate", updateProgressBarAndAudio);
 				recording_is_started = true;
-				//console.log(" inside_meditation_session is " + inside_meditation_session);
-				//console.log(" recording_is_started is " + recording_is_started);
-				//console.log(" recording_is_playing is " + recording_is_playing);
+
 			}
 			else if (inside_meditation_session == true) {	
 				var recording = document.getElementById(curr_recommended_meditation_file);
@@ -257,6 +254,34 @@ function mediaPlayer () {
 		
 	});
 };
+
+	async function fadeSettingsShowProgressBar(){
+		console.log("fadeSettingsShowProgressBar running ");
+		let step_one = new Promise((resolve, reject) => {
+		   $('.meditation_session_settings_options').css("opacity", 0);
+		   setTimeout(() => resolve("done!"), 1000);
+		 });
+		let wait_one = await step_one;
+
+		let step_two = new Promise((resolve, reject) => {
+			$('.meditation_session_settings_options').hide();
+		   	setTimeout(() => resolve("done!"), 10);
+		});
+		let wait_two = await step_two;
+		
+		let step_three = new Promise((resolve, reject) => {
+			$('.progress_bar_container').show();
+		   	setTimeout(() => resolve("done!"), 0);
+		});
+		let wait_three = await step_three;
+
+		let step_four = new Promise((resolve, reject) => {
+		   $(".progress_bar_container").css("opacity", 1);
+		   setTimeout(() => resolve("done!"), 1000);
+		});
+		let wait_four = await step_four;
+		return Promise.resolve(1);
+	};
 
 
 $('#recommended_meditation_recording_link_9809403065, #recommended_meditation_recording_begin_button_9809403065').on('click', function(event) {
@@ -288,8 +313,37 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 	recording_is_started = false;
 	recording_is_playing = false;
 	recording_ended = true;
-	document.getElementById(curr_recommended_meditation_file).currentTime = 0;	
+	document.getElementById(curr_recommended_meditation_file).currentTime = 0;
 	document.getElementById(curr_recommended_meditation_file).pause();
+
+
+	async function fadeProgressBarShowSettings(){
+		let step_one = new Promise((resolve, reject) => {
+			$(".progress_bar_container").css("opacity", 0);
+		   	setTimeout(() => resolve("done!"), 1000);
+		 });
+		let wait_one = await step_one;
+
+		let step_two = new Promise((resolve, reject) => {
+			$('.progress_bar_container').hide();
+		   	setTimeout(() => resolve("done!"), 0);
+		});
+		let wait_two = await step_two;
+		
+		let step_three = new Promise((resolve, reject) => {
+		   $('.meditation_session_settings_options').show();
+		   setTimeout(() => resolve("done!"), 0);
+		});
+		let wait_three = await step_three;
+
+		let step_four = new Promise((resolve, reject) => {
+		   $('.meditation_session_settings_options').css("opacity", 1);
+		   setTimeout(() => resolve("done!"), 1000);
+		});
+		let wait_four = await step_four;
+		return Promise.resolve(1);
+	};
+	fadeProgressBarShowSettings();
 	
 });
 

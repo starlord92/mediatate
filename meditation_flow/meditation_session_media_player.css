@@ -60,7 +60,7 @@
 
 /*progress bar------------------------------------------------------------*/
 .progress_bar_container {
-  display: block;
+  display: none;
 }
 
   /*reset to the default look of progress bar for chrome and style its*/
@@ -100,9 +100,11 @@
 /*(end of)----------------------------------------------*/
 
 
-.meditation_session_settings_options {
- /* margin:auto;*/
+/*control the micro-animation of fading out the time and guided/unguided toggle and showing the progress bar when user starts a meditation recording*/
+.progress_bar_container, .meditation_session_settings_options {
+  transition: opacity 1000ms ease-in-out;
 }
+
 
 
 
