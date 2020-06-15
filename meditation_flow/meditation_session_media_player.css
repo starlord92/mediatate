@@ -49,18 +49,20 @@
 
 /* aka the 'press space bar to play/pause' text */
 #playback_instruction {
-  
+  display: none;
   text-align: center;
   
   margin-top: 50%;
   color: rgb(229,158,108);
+  transition: opacity 1000ms ease-in-out;
 }
 
 
 
 /*progress bar------------------------------------------------------------*/
 .progress_bar_container {
-  display: none;
+  display: block;
+  opacity: 0;
 }
 
   /*reset to the default look of progress bar for chrome and style its*/

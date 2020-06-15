@@ -102,6 +102,7 @@ function helper_setRecommendedRecordings(recording_title_innerhtml_list, recordi
 function show_meditation_recording_player() {
 	hide_meditations_page();
 	$('.individual_meditation_recording_player_9809403065').show();
+	$('#playback_instruction').show();
 	$('html').addClass('individual_meditation_recording_player_background');
 	$('body').addClass('individual_meditation_recording_player_body');
 
@@ -113,6 +114,7 @@ function hide_meditation_recording_player() {
 	$('html').removeClass('individual_meditation_recording_player_background');
 	$('body').removeClass('individual_meditation_recording_player_body');
 
+	$('#playback_instruction').hide();
 	$('.individual_meditation_recording_player_9809403065').hide();
 
 	//reshow the fixed bottom nav bar
@@ -259,18 +261,19 @@ function mediaPlayer () {
 		console.log("fadeSettingsShowProgressBar running ");
 		let step_one = new Promise((resolve, reject) => {
 		   $('.meditation_session_settings_options').css("opacity", 0);
+		   $('#playback_instruction').css("color", "rgb(116, 102, 97)");
 		   setTimeout(() => resolve("done!"), 1000);
 		 });
 		let wait_one = await step_one;
 
 		let step_two = new Promise((resolve, reject) => {
-			$('.meditation_session_settings_options').hide();
+			//$('.meditation_session_settings_options').hide();
 		   	setTimeout(() => resolve("done!"), 10);
 		});
 		let wait_two = await step_two;
 		
 		let step_three = new Promise((resolve, reject) => {
-			$('.progress_bar_container').show();
+			//$('.progress_bar_container').show();
 		   	setTimeout(() => resolve("done!"), 0);
 		});
 		let wait_three = await step_three;
@@ -319,26 +322,28 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 
 	async function fadeProgressBarShowSettings(){
 		let step_one = new Promise((resolve, reject) => {
+			$('#playback_instruction').css("color", "rgb(229,158,108)");
+			$("#playback_instruction").html("press space bar to play/pause");
 			$(".progress_bar_container").css("opacity", 0);
-		   	setTimeout(() => resolve("done!"), 1000);
+		   	setTimeout(() => resolve("done!"), 0);
 		 });
 		let wait_one = await step_one;
 
 		let step_two = new Promise((resolve, reject) => {
-			$('.progress_bar_container').hide();
+			//$('.progress_bar_container').hide();
 		   	setTimeout(() => resolve("done!"), 0);
 		});
 		let wait_two = await step_two;
 		
 		let step_three = new Promise((resolve, reject) => {
-		   $('.meditation_session_settings_options').show();
+		   //$('.meditation_session_settings_options').show();
 		   setTimeout(() => resolve("done!"), 0);
 		});
 		let wait_three = await step_three;
 
 		let step_four = new Promise((resolve, reject) => {
 		   $('.meditation_session_settings_options').css("opacity", 1);
-		   setTimeout(() => resolve("done!"), 1000);
+		   setTimeout(() => resolve("done!"), 0);
 		});
 		let wait_four = await step_four;
 		return Promise.resolve(1);
@@ -378,8 +383,10 @@ function updateProgressBarAndAudio() {
 	//users reach the end of the meditation recording:
 	//reset the progress bar
 	if (recording_file.currentTime == recording_file.duration) {
-	 	progressbar.value = 1;
+	 	// $('#seekObj').prop("value","1");
 	 	endFadeWhenInactive();
+	 	$("#playback_instruction").html("hold 'command w' to exit");
+
 
 	 	recording_file.pause();
 	 	recording_file.currentTime = 0;	
