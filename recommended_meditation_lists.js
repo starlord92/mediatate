@@ -11,7 +11,7 @@
 // 9-12 pm: 'journey not the reward' typed
 // 11 pm -1 am: winding down
 
-var being_liked_recording_title_innerhtml_list = [
+var recommended_recording_title_innerhtml_list = [
 
 "The Wake Up: Someone Like(s) You",
 "The Warm Up: Theory of being Liked",
@@ -21,17 +21,18 @@ var being_liked_recording_title_innerhtml_list = [
 
 ];
 
-var being_liked_recording_file_html_id_list = ["runningsound", "zenbellsound", "bright_metal_tune_mallet", "andrew_scheduled_meditation_reminder"];
-
-var curr_recommended_meditation_file = "bright_metal_tune_mallet";
-var curr_recommended_meditation_file = "andrew_scheduled_meditation_reminder";
+var recommended_recording_file_html_id_list = ["1rec3min", "2rec3min", "3rec3min", "4rec3min", "5rec3min"];
+//var curr_recommended_meditation_file = "default_error";
+var curr_recommended_meditation_file = "1rec1min";
+// var curr_recommended_meditation_file = "bright_metal_tune_mallet";
+// var curr_recommended_meditation_file = "andrew_scheduled_meditation_reminder";
 
 
 
 $(document).ready(function() { 
 	console.log("recommended_meditation_lists.js script is loaded");
 
-	changeRecommendedRecordings();
+	//changeRecommendedRecordings();
 
 
 });
@@ -39,7 +40,7 @@ $(document).ready(function() {
 var  monitor_time = 0;
 function changeRecommendedRecordings () {
 		monitor_time = setInterval(function() {
-			setRecommendedRecordings( being_liked_recording_title_innerhtml_list, being_liked_recording_file_html_id_list);
+			setRecommendedRecordings( recommended_recording_title_innerhtml_list, recommended_recording_file_html_id_list);
 		}, 1000);
 	};
 
@@ -51,27 +52,27 @@ function setRecommendedRecordings(recording_title_innerhtml_list, recording_file
 	var curr_sec  = curr_time.getSeconds();
 
 	//console.log("mike check check);
-	if (curr_hour ==16 && curr_min == 43 && curr_sec ==0) {
+	if (curr_hour ==14 && curr_min == 43 && curr_sec ==0) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 6);
 	} 
 
-	if (curr_hour == 16 && curr_min == 43 && curr_sec == 10) {
+	if (curr_hour == 14 && curr_min == 43 && curr_sec == 0) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 1, 1, 9);
 	} 
 
-	if (curr_hour == 16 && curr_min == 43 && curr_sec == 20) {
+	if (curr_hour == 14 && curr_min == 43 && curr_sec == 0) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 2, 0, 6);
 	} 
 
-	if (curr_hour == 16 && curr_min == 43 && curr_sec == 30) {
+	if (curr_hour == 14 && curr_min == 43 && curr_sec == 0) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 3, 1, 6);
 	} 
 
-	if (curr_hour == 16 && curr_min == 43 && curr_sec == 40) {
+	if (curr_hour == 14 && curr_min == 43 && curr_sec == 0) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 0, 0, 6);
 	} 
 
-	if (curr_hour == 26 && curr_min == 43 && curr_sec == 50) {
+	if (curr_hour == 14 && curr_min == 43 && curr_sec == 0) {
 		helper_setRecommendedRecordings(recording_title_innerhtml_list, recording_file_html_id_list, 1, 1, 6);
 	} 
 
@@ -87,6 +88,7 @@ function helper_setRecommendedRecordings(recording_title_innerhtml_list, recordi
 
 		//change the recording file stored in global variable
 		curr_recommended_meditation_file = recording_file_html_id_list[recording_file_index];
+		console.log("curr_recommended_meditation_file as updated by the second is " + curr_recommended_meditation_file);
 };
 
 
@@ -187,42 +189,50 @@ function mediaPlayer () {
 				setTimeout(function(){ nonInitialfadeOutWhenInactive(); }, 10000);
 
 				//figure out duration and guided/unguided status chosen by the user and choose the right recommended_meditation_file to play by checking the settings user set before pressing play
+				//case 1: toggle for guided is OFF
 				if (document.getElementById("toggle_9809403065").checked == false) 
 				{
-					console.log("checkbox for guided meditation is unchecked");
+					//console.log("checkbox for guided meditation is unchecked");
 					var chosen_duration = document.getElementsByClassName("meditation_session_length_option_chosen")[0];
-					console.log("id of length option is " + chosen_duration);
+					//console.log("id of length option is " + chosen_duration);
 					if (chosen_duration.id == "meditation_session_length_option_1") {
-						console.log("unguided 1 minute recording playing");
-						curr_recommended_meditation_file = "bright_metal_tune_mallet";
+						//console.log("unguided 1 minute recording playing");
+						curr_recommended_meditation_file = "1minsilence";
 					}
 					else if (chosen_duration.id == "meditation_session_length_option_3") {
-						console.log("unguided 3 minute recording playing");
-						curr_recommended_meditation_file = "runningsound";
+						//console.log("unguided 3 minute recording playing");
+						curr_recommended_meditation_file = "3minsilence";
 					}
 					else {
-						console.log("unguided 5 minute recording playing");
-						curr_recommended_meditation_file = "andrew_scheduled_meditation_reminder";
+						//console.log("unguided 5 minute recording playing");
+						curr_recommended_meditation_file = "5minsilence";
 						}
 				}
 
+				//case 1: toggle for guided is on
+				//case 1a: the current top recommended recording is selected
+				//case 1b: a recording from the playlist is selected
 				else {
 					console.log("checkbox for guided meditation is checked");
 					var chosen_duration = document.getElementsByClassName("meditation_session_length_option_chosen")[0];
-					console.log("id of length option is " + chosen_duration);
-					if (chosen_duration.id == "meditation_session_length_option_1") {
-						console.log("unguided 1 minute recording playing");
-						curr_recommended_meditation_file = "andrew_scheduled_meditation_reminder";
+					//console.log("id of length option is " + chosen_duration);
+					if (chosen_duration.id == "meditation_session_length_option_1") 
+					{
+						curr_recommended_meditation_file = replaceAt(curr_recommended_meditation_file, 4, "1");
+						console.log("guided 1 minute recording playing.");
 					}
 					else if (chosen_duration.id == "meditation_session_length_option_3") {
-						console.log("guided 3 minute recording playing");
-						curr_recommended_meditation_file = "runningsound";
+						curr_recommended_meditation_file = replaceAt(curr_recommended_meditation_file, 4, "3");
+						console.log("guided 3 minute recording playing.");
 					}
 					else {
-						console.log("guided 5 minute recording playing");
-						curr_recommended_meditation_file = "zenbellsound";
+						curr_recommended_meditation_file = replaceAt(curr_recommended_meditation_file, 4, "5");
+						console.log("guided 5 minute recording playing. ");
 						}
+	
 				}
+												//timeupdate event track the current time of the audio file while its playing in order to update the progress bar, which also ends fading in and out of the media player after the recoding completes
+				document.getElementById(curr_recommended_meditation_file).addEventListener("timeupdate", updateProgressBarAndAudio);
 				//fade out the time and guided/unguided toggle and show the progress bar, ideally BEFORE playing the chosen audio file
 				fadeSettingsShowProgressBar();
 				document.getElementById(curr_recommended_meditation_file).play();
@@ -256,6 +266,8 @@ function mediaPlayer () {
 		
 	});
 };
+
+
 
 	async function fadeSettingsShowProgressBar(){
 		console.log("fadeSettingsShowProgressBar running ");
@@ -291,20 +303,24 @@ $('#recommended_meditation_recording_link_9809403065, #recommended_meditation_re
 	hide_meditations_page();
 	show_meditation_recording_player();
 
+	recording_ended = false;
 	//space bar is activated as the play/pause button
 	resetMediaPlayerStateThenPlay();
+
+	//declare the correct recording file to be played
+	//curr_recommended_meditation_file=
 	
 	//$('.individual_meditation_recording_player_background').css("animation-play-state","running");
 });
 
-// $('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
-// 	hide_meditations_page();
-// 	show_meditation_recording_player();
-// 	var recording = document.getElementById("zenbellsound");
-// 	recording.play();
-// 	recording_is_playing = true;
-// 	inside_meditation_session = true;
-// });
+$('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
+	hide_meditations_page();
+	show_meditation_recording_player();
+	recording_ended = false;
+	//space bar is activated as the play/pause button
+	resetMediaPlayerStateThenPlay();
+	
+});
 
 //WHEN USER CLICKS 'X' BUTTON
 $('#recording_player_close_button_9809403065').on('click', function(event) {
@@ -357,16 +373,17 @@ function endFadeWhenInactive() {
 	recording_is_playing == false;
 	$('html').off('mousemove');
 	$(".fade_when_user_inactive").css("opacity", 1);
-	console.log ('recording file is done playing');
+	console.log("meditation recording finished playing");
 }
 
-//update progress bar, which also ends fading in and out of the media player
-document.getElementById(curr_recommended_meditation_file).addEventListener("timeupdate", updateProgressBarAndAudio);
+
 
 function updateProgressBarAndAudio() {
+	console.log(" elememnt id for the audio file is " + curr_recommended_meditation_file);
 	var recording_file = document.getElementById(curr_recommended_meditation_file);
-	var length = recording_file.duration; //unit: seconds
+	var duration = recording_file.duration; //unit: seconds
 	var current_time = recording_file.currentTime; //https://www.w3schools.com/tags/av_prop_currenttime.asp
+	
 
 	// calculate total length of value ansd set it for end time html element
 	var totalLength = calculateTotalValue(length)
@@ -384,9 +401,12 @@ function updateProgressBarAndAudio() {
 	//reset the progress bar
 	if (recording_file.currentTime == recording_file.duration) {
 	 	// $('#seekObj').prop("value","1");
+	 	
 	 	endFadeWhenInactive();
-	 	$("#playback_instruction").html("hold 'command w' to exit");
+	 	$("#playback_instruction").html("hold 'command' and press 'w' once to exit");
 
+	 	//console.log("current time is " + current_time);
+	//console.log("duration of the recording is " + duration);
 
 	 	recording_file.pause();
 	 	recording_file.currentTime = 0;	
@@ -502,7 +522,7 @@ function calculateCurrentValue(currentTime) {
     current_seconds_long = currentTime % 60,
     current_seconds = current_seconds_long.toFixed(),
     current_time = (current_minute < 10 ? "0" + current_minute : current_minute) + ":" + (current_seconds < 10 ? "0" + current_seconds : current_seconds);
-   console.log("time is " + current_time);
+   //console.log("time is " + current_time);
   return current_time;
 }
 
@@ -520,6 +540,7 @@ async function resetMediaPlayerStateThenPlay () {
 		inside_meditation_session = true;
 		recording_is_started == false;
 		recording_is_playing = false;
+		recording_ended = false;
     	resolve("reset done!")
   	});
   	let result = await reset;
@@ -575,6 +596,26 @@ $("body").on('keydown keydown keypress', function(e) {
 
 
 // TO BE MODULARIZED ONCE WE GOT OFF OUR LAZY ASS AND READ UP ON MODULAR JS:
+
+
+
+//extend strong prototype of string to add a replace function which replaces a-character-at-a-particular-index
+// String.prototype.replaceAt = function(index, replacement) {
+//     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+// };
+
+// function replaceAt(string, index, replace) {
+//   return string.substring(0, index) + replace + string.substring(index + 1);
+// }
+function replaceAt(string, index, replace) {
+  return string.substring(0, index) + replace + string.substring(index + 1);
+}
+
+var stringo = "1rec1min";
+console.log(replaceAt(stringo, 4, "3"));
+
+
+
 function hide_headspace_page() {
 	;
 };
