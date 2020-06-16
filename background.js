@@ -148,7 +148,7 @@ async function checkScheduledMeditationTime() {
 		)
 			{
 				var found_defined_id = false;
-				console.log('it is a time scheduled meditation should be ACtive ');
+				//console.log('it is a time scheduled meditation should be ACtive ');
 			 	// 15 seconds before: an animated reminder (within which there is a 'begin meditation' button) shows up.  
 			 	//add sound effects as a notification if the user has skipped x numbers of meditations
 			 	if((curr_time.getMinutes() == time) 
@@ -188,7 +188,7 @@ async function checkScheduledMeditationTime() {
 							        // });
 								}
 								else {
-									console.log("id of active tab is undefined!")
+									//console.log("id of active tab is undefined!")
 								}
 			 				});		 			
 			 			resolve("true");
