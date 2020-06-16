@@ -86,7 +86,7 @@ async function reminderAnimationSequence () {
         reminder_modal.style.display = "block";
         reminder_modal.style.animationPlayState = "running";
         console.log("show the reminder's animation and begin button");
-        setTimeout(() => resolve("done!"), 7000);
+        setTimeout(() => resolve("done!"), 30000);
     });
     let step1 = await show_reminder_and_begin_button;
 

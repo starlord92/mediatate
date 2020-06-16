@@ -24,6 +24,7 @@ function injectHTML(val, callback) {
 
 };
 
+//display the nudge modal window where user can interact and choose to navigate away from distracting sites
 
 function displayNudge () {
 	$(document).ready(function() {

@@ -96,7 +96,7 @@ var user_selects_skip_meditation = false;
 var user_selects_nothing_for_scheduled_meditation = true;
 var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the work_start_time_hour; 
 
-var time = 50;
+var time = 57;
 
 var second = 0;
 
@@ -219,7 +219,7 @@ chrome.storage.onChanged.addListener(function () {
 	
 			// console.log(" stored_open_meditation_recording_page_flag is " + data.stored_open_meditation_recording_page_flag);
 			if (data.stored_open_meditation_recording_page_flag == true) {
-		    	chrome.tabs.create({'url':'meditation_flow/scheduled_meditation_recording_page.html'}, 
+		    	chrome.tabs.create({'url':'meditation_flow/home.html'}, 
 					function(tab) {
 						// var id = tab.id;
 						// console.log("tab.id of meditation recording player is " + tab.id);
@@ -362,6 +362,64 @@ chrome.storage.onChanged.addListener(function () {
 
 });
 //==================END OF SCHEDULED MEDITATION BACKEND================= //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

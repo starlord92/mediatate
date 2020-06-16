@@ -32,7 +32,7 @@ var curr_recommended_meditation_file = "1rec1min";
 $(document).ready(function() { 
 	console.log("recommended_meditation_lists.js script is loaded");
 
-	//changeRecommendedRecordings();
+	// changeRecommendedRecordings();
 
 
 });
@@ -121,6 +121,7 @@ function hide_meditation_recording_player() {
 
 	//reshow the fixed bottom nav bar
 	$('#bottom_fixed_nav_bar_9809403065').show();
+	show_meditations_page();
 }
 
 var one_min_option = document.getElementById("meditation_session_length_option_1");
@@ -187,7 +188,7 @@ function mediaPlayer () {
 			if (inside_meditation_session == true && recording_is_started == false) {
 				recording_ended = false;
 				setTimeout(function(){ nonInitialfadeOutWhenInactive(); }, 10000);
-
+				document.documentElement.requestFullscreen();
 				//figure out duration and guided/unguided status chosen by the user and choose the right recommended_meditation_file to play by checking the settings user set before pressing play
 				//case 1: toggle for guided is OFF
 				if (document.getElementById("toggle_9809403065").checked == false) 

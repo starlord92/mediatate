@@ -6,9 +6,9 @@ $(document).ready(function() {
 
 	//NEED TO ASYNC THIS SEQUENCE
 	$('.individual_meditation_recording_player_9809403065').hide();
-	//hide_headspace_page();
+	hide_headspace_page();
 
-	//hide_settings_page ();
+	hide_settings_page ();
 	
 	show_meditations_page();
 
@@ -20,9 +20,9 @@ function hide_settings_page () {
 		$('html').removeClass();
 		$('body').removeClass('settings_page_body');
 		
-		// $(".user_profile_id_9809403065").hide();
-		// $(".user_profile_section_show_9809403065").hide();
-		// $(".user_profile_menu_show_9809403065").hide();
+		$(".user_profile_id_9809403065").hide();
+		$(".user_profile_section_show_9809403065").hide();
+		
 		$(".settings_box_size_9809403065").hide()
 };
 
@@ -53,10 +53,12 @@ function show_settings_page() {
 	$('html').addClass('settings_page_background');
 	$('body').addClass('settings_page_body');
 
-	// $(".user_profile_id_9809403065").show();
-	// $(".user_profile_section_show_9809403065").show();
+	$(".user_profile_id_9809403065").show();
+	$(".user_profile_section_show_9809403065").show();
+	
 	// $(".user_profile_menu_show_9809403065").show();
 	$(".settings_box_size_9809403065").show();
+	
 
 	//by default show the 'my stats' section
 	$('#settings_options_9809403065').hide();
