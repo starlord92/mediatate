@@ -3,11 +3,13 @@
 var enable_nudge = 1;  // 0 = disable nudge |   1 = enable nudge
 var nudge_start_time;
 var nudge_end_time;
+var nudge_start_hour, nudge_end_hour;
 
 // get stored nudge start and end time
 function getStoredNudgePeriod (val) {
 
-	return new Promise(function(resolve) {
+	//return new Promise(function(resolve) {
+		console.log("getStoredNudgePeriod is running");
 		chrome.storage.sync.get(['stored_nudge_start_time'], function(data) {
 		          console.log('stored_nudge_start_time is ' + data.stored_nudge_start_time);
 		          nudge_start_time = data.stored_nudge_start_time;
@@ -16,19 +18,19 @@ function getStoredNudgePeriod (val) {
 		          console.log('stored_nudge_end_time is ' + data.stored_nudge_end_time);
 		          nudge_end_time = data.stored_nudge_end_time;
 		});
-		resolve(val);
-	});
+		//resolve(val);
+	//});
 };
 
 //getStoredNudgePeriod(1).then(function(val){console.log(" val is " + val)});
 
 //nudge ON/OFF status
 function checkNudgeOnCriteria (val) {
-	return new Promise(function(resolve) {
-
+	//return new Promise(function(resolve) {
+		console.log("checkNudgeOnCriteria is running");
 		chrome.storage.sync.get(['stored_nudge_checkbox'], function(data){	  
 		    if (data.stored_nudge_checkbox == false) {
-		    	//console.log('nudge is disabled because the checkbox check status is ' + data.stored_nudge_checkbox);
+		    	console.log('nudge is disabled because the checkbox check status is ' + data.stored_nudge_checkbox);
 		    	enable_nudge = 0;
 		    }
 
@@ -36,17 +38,22 @@ function checkNudgeOnCriteria (val) {
 
 		    	// console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox);
 
-		    	var arr1 = nudge_start_time.split(':');
-				var nudge_start_hour = parseInt(arr1[0], 10); 
-				var nudge_start_min = parseInt(arr1[1], 10);
+		  //   	var arr1 = nudge_start_time.split(':');
+				// var nudge_start_hour = parseInt(arr1[0], 10); 
+				// var nudge_start_min = parseInt(arr1[1], 10);
 
-				var arr2 = nudge_end_time.split(':');
-				var nudge_end_hour = parseInt(arr2[0], 10);
-				var nudge_end_min = parseInt(arr2[1], 10);
+				// var arr2 = nudge_end_time.split(':');
+				// var nudge_end_hour = parseInt(arr2[0], 10);
+				// var nudge_end_min = parseInt(arr2[1], 10);
 
-				var now = new Date(); // current time
-			    var current_hour = now.getHours();
-			    var current_min = now.getMinutes();
+				// var now = new Date(); // current time
+			 //    var current_hour = now.getHours();
+			 //    var current_min = now.getMinutes();
+
+			    nudge_start_hour = nudge_start_time;
+			    nudge_end_hour = nudge_end_time;
+			    console.log("nudge_start_hour inside checkNudgeOnCriteria is " + nudge_start_time);
+			    console.log("nudge_start_hour inside checkNudgeOnCriteria is " + nudge_end_time);
 		    	
 
 			    //three scenarios: 
@@ -71,20 +78,20 @@ function checkNudgeOnCriteria (val) {
 				)
 		    		{
 						enable_nudge = 1;
-						//console.log('nudge is enabled because it is during the period nudge is set to be active');			
+						console.log('nudge is enabled because it is during the period nudge is set to be active');			
 		    		} 
 		    	else {
 		    		enable_nudge = 0;
-		    		//console.log('nudge is disabled because it is NOT during the period nudge is set to be active');
+		    		console.log('nudge is disabled because it is NOT during the period nudge is set to be active');
 		    	}
 		    }
 		});
 
 		//console.log("val passed to checkNudgeOnCriteria is: " + val);
 		//console.log("enable nudge value after checkNudgeOnCriteria() is " + enable_nudge);
-		resolve(val);
+		//resolve(val);
 
-	});
+	//});
 
 };
 
@@ -155,75 +162,102 @@ const distracting_time_threshold = 10;
 async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_id) {
 
 	//find the time nudge should be active per user settings and whether nudge is set to on
-	let promise = await getStoredNudgePeriod(1).then(function(val) {checkNudgeOnCriteria(val);}).
-                        then(function(val) {});
+	// let promise = await getStoredNudgePeriod(1).then(function(val) {checkNudgeOnCriteria(val);}).
+ //                        then(function(val) {});
 
     //console.log("DISTRACTING SITE ? " + distracting_site_flag(changeInfo_url));
 	
 	//console.log("enable_nudge status after checkNudgeOnCriteria and before the logic  " +  enable_nudge);
 
-	if (enable_nudge == 0) {
-		console.log("nudge is not active or enabled. distracting sites can be accessed. ");
-		return 0;
-	}
-	else {
-		//console.log("nudge is active! ");
-		//var previous_url;
-		
-		if (changeInfo_url != undefined) {
-			 console.log(" changeInfo_url is: " + changeInfo_url);
-	        //make sure the tab has the right id before getting its url 
-	        if (tabId == tab_dot_id) {
-	        	
-	        	
-	            console.log("previous_url is " + previousUrl);
-	        }
-	        else {
-	        	//console.log("tabId !== tab_dot_id");
-	        	//console.log("tabID = " + tabId + " tab_dot_id " + tab_dot_id);
-	        }
+	
+	let op1 = new Promise((resolve, reject) => {
+			getStoredNudgePeriod(1);
+		   	setTimeout(() => resolve("done!"), 10);
+	});
+	let result1 = await op1;
 
-	        //user is going from a non-distracting site to a site in the distracting list: 
-	        //starts the counter if it's at 0
-	        //otherwise continue the counter  
-	        if (distracting_site_flag(changeInfo_url) == true &&distracting_site_flag(previousUrl) == false)
-	        {
-	        	//console.log ("last nudge time is: " + last_nudge_time) ;
-	        	// console.log ("current time is: " + Date.now()) ;
-	        	console.log ("user is going from a non-distracting site to a site in the distracting list") ;
-	        	// if (Date.now() - last_nudge_time > 1) {
-	        	// 	 chrome.tabs.update(tabId, { url: nudge_redirect });
-	         //  		console.log("nudge redirects user to breathing practice where they can override it");
-	         //  		last_nudge_time = Date.now();
-	        	// }
 
-	        	user_is_on_distracting_site = true;
+	let op2 = new Promise((resolve, reject) => {
+			checkNudgeOnCriteria(1);
+		   	setTimeout(() => resolve("done!"), 10);
+	});
+	
+	let result2 = await op2;
 
-    	   		chrome.storage.sync.set({stored_last_distracting_site_accessed: changeInfo_url }, function() {});
-	         
-	        }
-	        //user navigates from a distracting site to a non distracting site: stop the counter 
-	        // else if ((previousUrl != undefined)  &&  (distracting_site_flag(previousUrl) == true && distracting_site_flag(changeInfo_url) == false) ||  )
-	          else if ((previousUrl != undefined)  &&  (distracting_site_flag(previousUrl) == true && distracting_site_flag(changeInfo_url) == false))
+	
 
-	        {
-	        	user_is_on_distracting_site = false;
-	        	console.log ("user is going from a distracting site to a site in the NON-distracting list. status of user_is_on_distracting_site is " + user_is_on_distracting_site); 
-	        }
+	let op3 = new Promise((resolve, reject) => {
+		if (enable_nudge == 0) {
+			console.log("nudge is not active or enabled. distracting sites can be accessed. ");
+			return 0;
+		}
+		else {
+			//console.log("nudge is active! ");
+			//var previous_url;
+			
+			if (changeInfo_url != undefined) {
+				 console.log(" changeInfo_url is: " + changeInfo_url);
+		        //make sure the tab has the right id before getting its url 
+		        if (tabId == tab_dot_id) {
+		        	
+		        	
+		            console.log("previous_url is " + previousUrl);
+		        }
+		        else {
+		        	//console.log("tabId !== tab_dot_id");
+		        	//console.log("tabID = " + tabId + " tab_dot_id " + tab_dot_id);
+		        }
 
-	        else {
-	          ;
-	        }
-	        // Add the current url as previous url
-	        previousUrl = changeInfo_url;
-	        console.log("updated previousUrl is  " + previousUrl);
-	       
-	    }
-	    else {
-	    	//console.log(" changeInfo_url is " + changeInfo_url + ".  Ignore this tab update.");
-	    }
+		        //user is going from a non-distracting site to a site in the distracting list: 
+		        //starts the counter if it's at 0
+		        //otherwise continue the counter  
+		        if (distracting_site_flag(changeInfo_url) == true &&distracting_site_flag(previousUrl) == false)
+		        {
+		        	//console.log ("last nudge time is: " + last_nudge_time) ;
+		        	// console.log ("current time is: " + Date.now()) ;
+		        	console.log ("user is going from a non-distracting site to a site in the distracting list") ;
+		        	// if (Date.now() - last_nudge_time > 1) {
+		        	// 	 chrome.tabs.update(tabId, { url: nudge_redirect });
+		         //  		console.log("nudge redirects user to breathing practice where they can override it");
+		         //  		last_nudge_time = Date.now();
+		        	// }
 
-	}
+		        	user_is_on_distracting_site = true;
+
+	    	   		chrome.storage.sync.set({stored_last_distracting_site_accessed: changeInfo_url }, function() {});
+		         
+		        }
+		        //user navigates from a distracting site to a non distracting site: stop the counter 
+		        // else if ((previousUrl != undefined)  &&  (distracting_site_flag(previousUrl) == true && distracting_site_flag(changeInfo_url) == false) ||  )
+		          else if ((previousUrl != undefined)  &&  (distracting_site_flag(previousUrl) == true && distracting_site_flag(changeInfo_url) == false))
+
+		        {
+		        	user_is_on_distracting_site = false;
+		        	console.log ("user is going from a distracting site to a site in the NON-distracting list. status of user_is_on_distracting_site is " + user_is_on_distracting_site); 
+		        }
+
+		        else {
+		          ;
+		        }
+		        // Add the current url as previous url
+		        previousUrl = changeInfo_url;
+		        console.log("updated previousUrl is  " + previousUrl);
+		       
+		    }
+		    else {
+		    	//console.log(" changeInfo_url is " + changeInfo_url + ".  Ignore this tab update.");
+		    }
+
+		}
+		resolve("done!");
+
+
+	});
+	let result3 = await op3;
+
+
+
+	return Promise.resolve(1);
 };
 
 //listen for when user switches tab: send the details of current tab to resolveNudge() 
