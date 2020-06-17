@@ -149,7 +149,7 @@ var tabIdToPreviousUrl = {};
 var previousUrl = 0;
 var time_on_distracting_site_counter = 0;
 var user_is_on_distracting_site = false;
-const distracting_time_threshold = 100;
+const distracting_time_threshold = 10;
 
 //resolveNudge(changeInfo.url, tabIdToPreviousUrl[tabId], tabId, tab.id);
 async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_id) {
@@ -226,6 +226,7 @@ async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_
 	}
 };
 
+//listen for when user switches tab: send the details of current tab to resolveNudge() 
 chrome.tabs.onActivated.addListener(
 	function callback(activeInfo) 
 	{
@@ -244,13 +245,10 @@ chrome.tabs.onActivated.addListener(
 				console.log("id of active tab is undefined!");
 			}
 		});	
-
-
 	}
 );
 
-
-//listen for change in the tab id of the currently active tab, which happens and execute the algorithm in resolveNudge() to handle distracting site
+//listen for when user update a url of the current tab: send the details of current tab to resolveNudge()  
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if (changeInfo.url != undefined) {
 			console.log("changeInfo.url == " + changeInfo.url + " | tabIdToPreviousUrl[tabId] == " + previousUrl + "  | tabId ==  " + tabId + " tab.id ==     " +  tab.id);
@@ -261,48 +259,162 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 //when the counter reach x minute, inject the nudge content script
-
 var runNudgeAlgoEverySec = setInterval(injectNudgeContentScript, 1000);
+var meditation_session_in_progress_flag = 0;
+async function injectNudgeContentScript() {
 
-function injectNudgeContentScript() {
+
 	if (user_is_on_distracting_site == true) {
 		time_on_distracting_site_counter += 1;
 		console.log("user has spent " + time_on_distracting_site_counter + " secs on distracting sites");
 	}
 	if (time_on_distracting_site_counter == distracting_time_threshold) {
-		console.log("inject Nudge Content Script now.  reset counter");
-		//inject the script only on distracting page
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			if (tabs[0] != undefined && tabs != undefined){
-			console.log('defined tab id found is: ' + tabs[0].id);
-	 			chrome.tabs.insertCSS(
-	 				tabs[0].id, 
-	 				{file:'/ease.css'},
-	 				function () {
-		 				chrome.tabs.executeScript(tabs[0].id, 
-		 				{file:'/scheduled_meditation_easing_content_script.js'},
-		 				function(done) {
-								console.log("injecting content script and css to play the reminder to the correct content script for the " + counter + " time");
-		 					}
-		 				);
-	 				}
-	 			);
-			}
-			else {
-				console.log("id of active tab is undefined!")
-			}
-		});	
+		
+		//inject the script only on distracting page and...
+		let result = new Promise((resolve,reject)=> {
+			var work_start_time_hr, work_end_time_hr, medi_frequency;
+			var meditation_session_in_progress_flag;
+			chrome.storage.sync.get('stored_medi_frequency', function(data) {medi_frequency = parseInt(data.stored_medi_frequency, 10);
+			});
+			chrome.storage.sync.get('stored_work_start_time', function(data) {
+				work_start_time_hr=parseInt(data.stored_work_start_time, 10);
+			});
+			chrome.storage.sync.get('stored_work_end_time', function(data) {
+				work_end_time_hr=parseInt(data.stored_work_end_time, 10);
+			});
+			chrome.storage.sync.get('stored_meditation_session_in_progress_flag', function(data) {
+				meditation_session_in_progress_flag = data.stored_meditation_session_in_progress_flag;
+				console.log("stored_meditation_session_in_progress_flag signal is  "+ data.stored_meditation_session_in_progress_flag);
+			});
+			resolve("done");
+		});
+		let wait = await result;
 
-		time_on_distracting_site_counter = 0;
+		let result1 = new Promise((resolve,reject)=> {
+			generateScheduledMeditationHours(medi_frequency, work_start_time_hr, work_end_time_hr);
+			resolve("done");
+		});
+		let wait1 = await result1;
+
+		let result2 = new Promise((resolve,reject)=> {
+		
+			console.log ("correctMeditationFrequency(current_hour) is " + correctMeditationFrequency(new Date().getHours()));
+			resolve("done");
+		});
+		let wait2 = await result2;
+
+	
+
+		//10 mins or more apart from a scheduled meditation sesssion and ...
+		//and there is no meditation in progress
+		if (((correctMeditationFrequency(new Date().getHours()) && new Date().getMinutes() >= 15 && new Date().getMinutes() <= 45) || (correctMeditationFrequency(new Date().getHours()) == false) ) && meditation_session_in_progress_flag == false)
+		{
+			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+				if (tabs[0] != undefined && tabs != undefined){
+				console.log('defined tab id found is: ' + tabs[0].id);
+		 			chrome.tabs.insertCSS(
+		 				tabs[0].id, 
+		 				{file:'/ease.css'},
+		 				function () {
+			 				chrome.tabs.executeScript(tabs[0].id, 
+			 				{file:'/scheduled_meditation_easing_content_script.js'},
+			 				function(done) {
+									console.log("inject Nudge Content Script now.  reset counter");
+			 					}
+			 				);
+		 				}
+		 			);
+				}
+				else {
+					console.log("id of active tab is undefined!")
+				}
+			});	
+
+			time_on_distracting_site_counter = 0;
+		}
 	}
+
+	return Promise.resolve(1);
 };
 
 
 //setInterval(injectNudgeContentScript, 1000);
 
 
+//these functions are helpers from background js
+// to be modularized
 
+var hoursToMeditate = []; //an array storing all the hours during the next 24 hours when scheduled meditation should be offered to the user, the hours are 1 hour head of the actual meditation hour.  (for example, if i wanna meditate at 5, then the array has '4' instead of '5' as an array element.  this allows the alogirthm to ease the user into meditation before it actually occurs)
+//Helper function generate the hours wwhere meditation should take place according to the meditation frquency set by the user
+function generateScheduledMeditationHours (medi_frequency, work_start_time_hr, work_end_time_hr) {
 
+	//console.log("medi_frequency is a number? " + Number.isInteger(medi_frequency));
+	while(hoursToMeditate.length > 0) {
+    	hoursToMeditate.pop();
+	}
+
+	//    scenarios:
+	//    (b)time is set between 8 pm and 6 am the next morning (start time > end time, current time > both start anf end time) 
+	//    (c) between 1 am and 5 am (start time > end time and current time < both start anf end time) 
+	if (work_start_time_hr >= work_end_time_hr) {
+		var eligible_hour = work_start_time_hr;
+		var done = false;
+		var metZero = false;
+
+		while (metZero == false) {
+
+		// console.log ("done sttaus is " + done);
+		// console.log ("eligible_hour is " + eligible_hour);
+		// console.log ("metZero status is " + metZero);
+		// console.log("work_end_time_hr is " + work_end_time_hr);
+
+		hoursToMeditate.push(eligible_hour);
+		eligible_hour = eligible_hour + medi_frequency;
+
+		if (eligible_hour >= 24) {
+			// console.log("eligible_hour >= 24");
+			eligible_hour = eligible_hour-24;
+			metZero = true;			
+		}
+		// console.log ("================================");
+		}
+		while (eligible_hour <= work_end_time_hr) {
+
+			hoursToMeditate.push(eligible_hour);
+			eligible_hour = eligible_hour + medi_frequency;
+		}
+	}
+
+	else { //scenario (a): start time < end time 
+		var eligible_hour = work_start_time_hr;
+		while (eligible_hour <= work_end_time_hr) {
+			hoursToMeditate.push(eligible_hour);
+			eligible_hour = eligible_hour + medi_frequency;
+		}
+	}
+
+	//console.log("start of array");
+	for (var i = 0; i <= hoursToMeditate.length - 1; i++) {
+		hoursToMeditate[i] = hoursToMeditate[i];
+		//console.log(hoursToMeditate[i]);
+	}
+	//console.log("end of array");
+};
+
+//return true if the current_hour match with any number in the global array hoursToMeditate
+function correctMeditationFrequency(current_hour) {
+	for (var i = 0; i <= hoursToMeditate.length-1; i++) {
+		if (i == hoursToMeditate.length) {console.log("match NOT found"); return false;}
+		//console.log(hoursToMeditate[i]);
+		
+		if (hoursToMeditate[i] == current_hour) {
+			//console.log("current hour is: " + current_hour);
+			//console.log("match found: " + hoursToMeditate[i]);
+			return true;
+		}		
+	}
+	return false;
+}
 
 
 

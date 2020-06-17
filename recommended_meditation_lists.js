@@ -186,6 +186,10 @@ function mediaPlayer () {
 
 			//playing from 00:00, i.e this space bar keydown signals the first time we play this recording since the last time the same recording concludes (and not just paused)
 			if (inside_meditation_session == true && recording_is_started == false) {
+				//avoid beinginterfered with by nudge
+				chrome.storage.sync.set({stored_meditation_session_in_progress_flag: true},
+				            function() {
+				 });
 				recording_ended = false;
 				setTimeout(function(){ nonInitialfadeOutWhenInactive(); }, 10000);
 				document.documentElement.requestFullscreen();
@@ -335,6 +339,11 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 	recording_ended = true;
 	document.getElementById(curr_recommended_meditation_file).currentTime = 0;
 	document.getElementById(curr_recommended_meditation_file).pause();
+
+	//avoid beinginterfered with by nudge
+	chrome.storage.sync.set({stored_meditation_session_in_progress_flag: false},
+		function() {
+	});
 
 
 	async function fadeProgressBarShowSettings(){

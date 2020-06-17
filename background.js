@@ -46,6 +46,13 @@ chrome.runtime.onInstalled.addListener(function() {
 			});
 	});
 
+
+	chrome.storage.sync.set({stored_meditation_session_in_progress_flag: false}, function() {
+  			chrome.storage.sync.get(['stored_meditation_session_in_progress_flag'], function(data) {
+			        console.log('stored_meditation_session_in_progress_flag is ' + data.stored_meditation_session_in_progress_flag);
+			});
+	});
+
   	//scheduled meditation is set to be on at installation
   	exec();
 
@@ -96,7 +103,7 @@ var user_selects_skip_meditation = false;
 var user_selects_nothing_for_scheduled_meditation = true;
 var daily_skipped_meditation_count = 0;  // a 'day' last for 24 hours from the work_start_time_hour; 
 
-var time = 57;
+var time = 0;
 
 var second = 0;
 
