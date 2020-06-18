@@ -61,6 +61,22 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 
+//browser/page icon
+chrome.pageAction.onClicked.addListener(function (tab) 
+	{	
+		chrome.tabs.create({'url':'meditation_flow/home.html'}, 
+			function(tab) {
+				// var id = tab.id;
+				console.log("open home page ");
+		        chrome.storage.sync.set({stored_open_meditation_recording_page_flag: false},
+		            function() {
+		        });
+			}
+		);
+	}
+);
+
+
 //===========================SCHEDULED MEDITATION BACKEND======================
 
 

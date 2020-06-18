@@ -12,6 +12,47 @@ $(document).ready(function() {
 	
 	show_meditations_page();
 
+	//show_meditation_recording_player();
+
+	// function exec() {
+
+	// };
+
+// function show_meditation_recording_player() {
+// 	hide_meditations_page();
+// 	$('.individual_meditation_recording_player_9809403065').show();
+// 	$('#playback_instruction').show();
+// 	$('html').addClass('individual_meditation_recording_player_background');
+// 	$('body').addClass('individual_meditation_recording_player_body');
+
+// 	$('#bottom_fixed_nav_bar_9809403065').hide();
+
+// 	//search chrome.storage variable to determine how many minutes user sets as their default meditation period
+// 	chrome.storage.sync.get('stored_medi_duration', function(data) {
+// 		console.log(" the latest stored medi duration before we open the meditation window is " + data.stored_medi_duration);
+// 		//medi_frequency = parseInt(data.stored_medi_frequency, 10);
+
+// 		if (data.stored_medi_duration == "1") {
+// 			document.getElementById("meditation_session_length_option_1").classList.add("meditation_session_length_option_chosen");
+// 			document.getElementById("meditation_session_length_option_3").classList.remove("meditation_session_length_option_chosen");
+// 			document.getElementById("meditation_session_length_option_5").classList.remove("meditation_session_length_option_chosen");
+// 		}
+// 		else if (data.stored_medi_duration == "3") {
+// 			document.getElementById("meditation_session_length_option_1").classList.remove("meditation_session_length_option_chosen");
+// 			document.getElementById("meditation_session_length_option_3").classList.add("meditation_session_length_option_chosen");
+// 			document.getElementById("meditation_session_length_option_5").classList.remove("meditation_session_length_option_chosen");
+// 		}
+// 		else {
+// 			document.getElementById("meditation_session_length_option_1").classList.remove("meditation_session_length_option_chosen");
+// 			document.getElementById("meditation_session_length_option_3").classList.remove("meditation_session_length_option_chosen");
+// 			document.getElementById("meditation_session_length_option_5").classList.add("meditation_session_length_option_chosen");
+// 		}
+// 	});
+
+// };
+
+
+
 function hide_headspace_page() {
 	;
 };
@@ -369,6 +410,7 @@ $('#settings_9809403065').on('click', function(event) {
 	});
 
 });
+
 
 
 

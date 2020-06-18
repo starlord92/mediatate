@@ -4,9 +4,10 @@
 	"version": "0.1",
 	"manifest_version": 2,
 	"description": "5 minute meditation",
-	"permissions": ["declarativeContent","storage", "lockWindowFullscreenPrivate","activeTab", "tabs", "notifications", "webRequest", "webRequestBlocking","*://www.facebook.com/*",  "*://*/*"],
+	"permissions": ["declarativeContent","storage", "lockWindowFullscreenPrivate","activeTab", "tabs", "*://www.facebook.com/*",  "*://*/*"],
 	//permission for all sites: "*://*/*"
 
+  //set the newtab's url
 	"chrome_url_overrides": {                
 		"newtab": "meditation_flow/home.html"
 	},
@@ -86,8 +87,8 @@
 			"16": "images/ensoicon16.png",  	
 			"48": "images/ensoicon48.png",
 			"128": "images/ensoicon128.png"
-      },
-      	"default_popup": "page_action.html"
+      }
+      	//"default_popup": "meditation_flow/home.html"
     },
 
   //   "browser_action": {					

@@ -109,7 +109,29 @@ function show_meditation_recording_player() {
 	$('body').addClass('individual_meditation_recording_player_body');
 
 	$('#bottom_fixed_nav_bar_9809403065').hide();
-}
+
+	//search chrome.storage variable to determine how many minutes user sets as their default meditation period
+	// chrome.storage.sync.get('stored_medi_duration', function(data) {
+	// 	console.log(" the latest stored medi duration before we open the meditation window is " + data.stored_medi_duration);
+	// 	//medi_frequency = parseInt(data.stored_medi_frequency, 10);
+
+	// 	if (data.stored_medi_duration == "1") {
+	// 		document.getElementById("meditation_session_length_option_1").classList.add("meditation_session_length_option_chosen");
+	// 		document.getElementById("meditation_session_length_option_3").classList.remove("meditation_session_length_option_chosen");
+	// 		document.getElementById("meditation_session_length_option_5").classList.remove("meditation_session_length_option_chosen");
+	// 	}
+	// 	else if (data.stored_medi_duration == "3") {
+	// 		document.getElementById("meditation_session_length_option_1").classList.remove("meditation_session_length_option_chosen");
+	// 		document.getElementById("meditation_session_length_option_3").classList.add("meditation_session_length_option_chosen");
+	// 		document.getElementById("meditation_session_length_option_5").classList.remove("meditation_session_length_option_chosen");
+	// 	}
+	// 	else {
+	// 		document.getElementById("meditation_session_length_option_1").classList.remove("meditation_session_length_option_chosen");
+	// 		document.getElementById("meditation_session_length_option_3").classList.remove("meditation_session_length_option_chosen");
+	// 		document.getElementById("meditation_session_length_option_5").classList.add("meditation_session_length_option_chosen");
+	// 	}
+	// });
+};
 
 function hide_meditation_recording_player() {
 	// stop the media player
@@ -122,7 +144,7 @@ function hide_meditation_recording_player() {
 	//reshow the fixed bottom nav bar
 	$('#bottom_fixed_nav_bar_9809403065').show();
 	show_meditations_page();
-}
+};
 
 var one_min_option = document.getElementById("meditation_session_length_option_1");
 var three_min_option = document.getElementById("meditation_session_length_option_3");
@@ -211,7 +233,7 @@ function mediaPlayer () {
 	$('html').keydown(function (event) {
 		event.stopImmediatePropagation();
 		if (event.which == 32) {
-
+			console.log("space bar is pressed");
 			//playing from 00:00, i.e this space bar keydown signals the first time we play this recording since the last time the same recording concludes (and not just paused)
 			if (inside_meditation_session == true && recording_is_started == false) {
 				//avoid beinginterfered with by nudge
@@ -347,7 +369,7 @@ $('#recommended_meditation_recording_link_9809403065, #recommended_meditation_re
 	//$('.individual_meditation_recording_player_background').css("animation-play-state","running");
 
 	//search chrome.storage variable to determine how many minutes user sets as their default meditation period
-	chrome.storage.sync.get('stored_medi_duration is ', function(data) {
+	chrome.storage.sync.get('stored_medi_duration', function(data) {
 		console.log(" the latest stored medi duration before we open the meditation window is " + data.stored_medi_duration);
 		//medi_frequency = parseInt(data.stored_medi_frequency, 10);
 
