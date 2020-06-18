@@ -93,7 +93,7 @@ function helper_setRecommendedRecordings(recording_title_innerhtml_list, recordi
 
 
 
-//VIEW 
+//VIEW / LOOK
 
 //assumption: 
 // settigns and headsapce page are hidden.  
@@ -152,6 +152,34 @@ five_min_option.addEventListener("click", function() {
 		console.log("button 5 min is clicked");
 	}
 );
+
+
+
+
+
+
+
+
+//toggle changes the word guided to unguided and vice versa
+var guided_unguided_toggle = document.getElementById("toggle_9809403065");
+var toggle_text = document.getElementsByClassName("meditation_session_toggle_text")[0];
+guided_unguided_toggle.addEventListener( 'change', function() {
+    if(this.checked) {
+        //toggle_text.innerHTML = "guided";
+        toggle_text.style.opacity = 1;
+    } else {
+        //toggle_text.innerHTML = "guided";
+        toggle_text.style.opacity = 0.3;
+    }
+
+    // if(this.checked) {
+    //     //toggle_text.innerHTML = "guided";
+    //     toggle_text.style.opacity = 1;
+    // } else {
+    //     //toggle_text.innerHTML = "unguided";
+    //     toggle_text.style.opacity = 0;
+    // }
+});
 
 
 
@@ -305,8 +333,9 @@ function mediaPlayer () {
 
 
 $('#recommended_meditation_recording_link_9809403065, #recommended_meditation_recording_begin_button_9809403065').on('click', function(event) {
-	hide_meditations_page();
-	show_meditation_recording_player();
+	setTimeout(function(){ hide_meditations_page(); }, 100);
+	setTimeout(function(){ show_meditation_recording_player(); }, 100);
+
 
 	recording_ended = false;
 	//space bar is activated as the play/pause button
@@ -316,7 +345,34 @@ $('#recommended_meditation_recording_link_9809403065, #recommended_meditation_re
 	//curr_recommended_meditation_file=
 	
 	//$('.individual_meditation_recording_player_background').css("animation-play-state","running");
+
+	//search chrome.storage variable to determine how many minutes user sets as their default meditation period
+	chrome.storage.sync.get('stored_medi_duration is ', function(data) {
+		console.log(" the latest stored medi duration before we open the meditation window is " + data.stored_medi_duration);
+		//medi_frequency = parseInt(data.stored_medi_frequency, 10);
+
+		if (data.stored_medi_duration == "1") {
+			document.getElementById("meditation_session_length_option_1").classList.add("meditation_session_length_option_chosen");
+			document.getElementById("meditation_session_length_option_3").classList.remove("meditation_session_length_option_chosen");
+			document.getElementById("meditation_session_length_option_5").classList.remove("meditation_session_length_option_chosen");
+		}
+		else if (data.stored_medi_duration == "3") {
+			document.getElementById("meditation_session_length_option_1").classList.remove("meditation_session_length_option_chosen");
+			document.getElementById("meditation_session_length_option_3").classList.add("meditation_session_length_option_chosen");
+			document.getElementById("meditation_session_length_option_5").classList.remove("meditation_session_length_option_chosen");
+		}
+		else {
+			document.getElementById("meditation_session_length_option_1").classList.remove("meditation_session_length_option_chosen");
+			document.getElementById("meditation_session_length_option_3").classList.remove("meditation_session_length_option_chosen");
+			document.getElementById("meditation_session_length_option_5").classList.add("meditation_session_length_option_chosen");
+		}
+	});
+
+	
+
 });
+
+
 
 $('.recording_track_a_of_list_a_9809403065').on('click', function(event) {
 	hide_meditations_page();
@@ -342,7 +398,7 @@ $('#recording_player_close_button_9809403065').on('click', function(event) {
 
 	//avoid beinginterfered with by nudge
 	chrome.storage.sync.set({stored_meditation_session_in_progress_flag: false},
-		function() {
+		function() { console.log(" avoid beinginterfered with by nudge");
 	});
 
 

@@ -279,12 +279,6 @@ the vertical version
 
 }
 
-.meditation_session_toggle_text {
-  display: inline-block;
-  margin-left: 6px;
-}
-
-
 
 /*the ball moving inside the toggle button
 
@@ -327,14 +321,30 @@ slider is a baseball term referring to a ball throwing technique*/
   right: 0;
   bottom: 0;
   background-color: rgb(116, 102, 97); /*#ccc;*/
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: .8s;
+  transition: .8s;
+    -moz-transition: opacity 0.8s ease-in-out;
+  -ms-transition: opacity 0.8s ease-in-out;
+  -o-transition: opacity 0.8s ease-in-out;
+}
+
+/*the text that also changes as the ball rolls back and froth during toggling*/
+.meditation_session_toggle_text {
+  display: inline-block;
+  margin-left: 6px;
+
+  -webkit-transition: opacity 0.8s ease-in-out;
+  -moz-transition: opacity 0.8s ease-in-out;
+  -ms-transition: opacity 0.8s ease-in-out;
+  -o-transition: opacity 0.8s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
 
 /* color change when toggle is on*/
 input:checked + .toggle_ball {
   background-color: rgb(229,158,108); /*#2196F3;*/ /*blue*/
+  background-color: #2196F3;
 }
 
 input:focus + .toggle_ball {
