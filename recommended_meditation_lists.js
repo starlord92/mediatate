@@ -233,7 +233,7 @@ function mediaPlayer () {
 	$('html').keydown(function (event) {
 		event.stopImmediatePropagation();
 		if (event.which == 32) {
-			console.log("space bar is pressed");
+			//console.log("space bar is pressed");
 			//playing from 00:00, i.e this space bar keydown signals the first time we play this recording since the last time the same recording concludes (and not just paused)
 			if (inside_meditation_session == true && recording_is_started == false) {
 				//avoid beinginterfered with by nudge
@@ -242,7 +242,8 @@ function mediaPlayer () {
 				 });
 				recording_ended = false;
 				setTimeout(function(){ nonInitialfadeOutWhenInactive(); }, 10000);
-				document.documentElement.requestFullscreen();
+				//make the window full screen
+				//document.documentElement.requestFullscreen();
 				//figure out duration and guided/unguided status chosen by the user and choose the right recommended_meditation_file to play by checking the settings user set before pressing play
 				//case 1: toggle for guided is OFF
 				if (document.getElementById("toggle_9809403065").checked == false) 
