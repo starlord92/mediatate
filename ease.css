@@ -1,5 +1,5 @@
 /*make sure something is in front of all other elements using z-index: 
-https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-chrome-extension*/*/
+https://stackoverflow.com/questions/31787455/css-fixed-positioning-z-index-in-chrome-extension*/
 
 html{
 	/*display: grid;*/
@@ -14,7 +14,11 @@ html{
 	
 	/*height: 100%;
 	width: 100%;*/
-	/*background-color: #e9ebee;*/	/*fb desktop background*/
+	background-color: #e9ebee;	/*fb desktop background*/
+  /*background-color: #313c47;*/ 
+/*background-color: rgb(247, 239, 228);*/
+/*background-color: gray;*/
+background-color: white;
 
 }
 
@@ -84,21 +88,22 @@ hmm_472826662848262673{
 #myModal472826662848262673 {
   display: none;
   /*display: block;*/
-  align-items: center;
-
+  /*align-items: center;*/
+ /* background: url('https://cdn.statically.io/gh/chumptoro/git-visual/1bdd92ba/Artboard_2.png') no-repeat center center scroll;*/
   position: fixed; 
   z-index: 100000000000; 
-  right:7%;
-  bottom:10%;
-  width: 250px; 
-  height: 250px; 
+  right:25%;
+  bottom:0%;
+  width: 800px; 
+  height: 400px; 
 
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   align-content: center;
   
   /*background-color: rgba(0,0,0,0.8); */
   /*background-color: rgba(130,136,143,0.8);*/
-  background-color:rgb(247, 239, 228);
+  /*background-color:rgb(247, 239, 228);*/
+
 
 }
 
@@ -138,7 +143,7 @@ hmm_472826662848262673{
 	cursor: pointer;
 
 	font: 16px 'apercu' !important;
-  	color:rgb(223, 148, 102);
+  color:rgb(223, 148, 102);
 
 }
 
@@ -156,12 +161,12 @@ hmm_472826662848262673{
 
 #myModal472826662848262673 {
 
-  animation-name: balloon;
-  animation-duration:6s; 
+  /*animation-name: balloon;*/
+  animation-duration:4s; 
   animation-timing-function: linear; 
   animation-delay: 0s;
   animation-direction: normal;
-  animation-iteration-count: 5;
+  animation-iteration-count: 17;
   animation-fill-mode: none;
   animation-play-state: paused;
 
@@ -169,26 +174,133 @@ hmm_472826662848262673{
 
 
 @keyframes balloon {
-  0% {
-  	border-radius: 100%;
-    transform: scale(1);
-    background-color: rgb(247, 239, 228);
 
+  0% {
+    
+    transform: scale(1.06);
+    
+  }
+  1% {
+    
+    transform: scale(1.065);
+    
+  }
+  2% {
+    
+    transform: scale(1.070);
+    
+  }
+  3% {
+    
+    transform: scale(1.075);
+    
+  }
+  4% {
+    
+    transform: scale(1.080);
+    
+  }
+  5% {
+  	
+    transform: scale(1.085);
+    
   }
   
-  50% {
-  border-radius: 100%;
-  	transform: scale(1.6);
-    
-    background-color:  rgb(247, 239, 228);
- 
+  40% {
+  
+  	transform: scale(1.4);    
+   
+  }
+    41% {
+  
+    transform: scale(1.405);    
+   
+  }
+    42% {
+  
+    transform: scale(1.41);    
+   
+  }
+    43% {
+  
+    transform: scale(1.415);    
+   
+  }
+    44% {
+  
+    transform: scale(1.420);    
+   
+  }
+    45% {
+  
+    transform: scale(1.425);    
+   
+  }
+      46% {
+  
+    transform: scale(1.430);    
+   
+  }
+      47% {
+  
+    transform: scale(1.435);    
+   
+  }
+      48% {
+  
+    transform: scale(1.440);    
+   
+  }
+      49% {
+  
+    transform: scale(1.445);    
+   
   }
 
-  100% {
-  	border-radius: 100%;
-    transform: scale(1);
-    background-color:  rgb(247, 239, 228);    
+
+  50% {
+  
+    transform: scale(1.446);    
+   
   }
+
+
+  95% {
+  	
+    transform: scale(1.09);
+       
+  }
+  96% {
+    
+    transform: scale(1.085);
+       
+  }
+  97% {
+    
+    transform: scale(1.08);
+       
+  }
+  98% {
+    
+    transform: scale(1.075);
+       
+  }
+  99% {
+    
+    transform: scale(1.07);
+       
+  }
+  99% {
+    
+    transform: scale(1.065);
+       
+  }
+  100% {
+   
+    transform: scale(1.06);
+       
+  }
+
 
 }
 

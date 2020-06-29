@@ -7,14 +7,21 @@
 
 }
 
-
 @font-face {
-    font-family: 'apercu';
-    src: url('../font/apercu/ApercuPro.woff2') format('woff2'),
-         url('../font/apercu/ApercuPro.woff') format('woff');
+	        src: url('https://cdn.statically.io/gh/starlord92/mediatate/9faf7eaf/font/apercu/ApercuPro.woff2') format('woff2'),
+         url('https://cdn.statically.io/gh/starlord92/mediatate/9faf7eaf/font/apercu/ApercuPro.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'apercu';
+    src: url('https://cdn.statically.io/gh/starlord92/mediatate/9faf7eaf/font/apercu/ApercuPro.woff2') format('woff2'),
+         url('https://cdn.statically.io/gh/starlord92/mediatate/9faf7eaf/font/apercu/ApercuPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 * {
 	box-sizing: border-box;
@@ -29,7 +36,7 @@ html, body {
 	/*font: bold 1.2em 'robotolight';*/
 	/*font-family: roboto-light;*/
 	/*color: #08596a;*/
-	color: /*#c695c6;*/ /* #a5abb8; */
+	 /*#c695c6;*/ /* #a5abb8; */
 
 	
 	/*background-color: #e9ebee;*/	/*fb desktop background*/
@@ -464,8 +471,8 @@ html, body {
 
 	.user_profile_section_show_9809403065 {
 		display: grid;
-		/*color: #313c47;*/
-		color: rgb(22,27,37);
+		color: #313c47; /*asana deep blue*/
+		/*color: rgb(22,27,37);*/
 		font: 17px 'apercu' ;
 		margin-top: 45px;
 		line-height: 2;	

@@ -156,7 +156,7 @@ var tabIdToPreviousUrl = {};
 var previousUrl = 0;
 var time_on_distracting_site_counter = 0;
 var user_is_on_distracting_site = false;
-const distracting_time_threshold = 10;
+const distracting_time_threshold = 300;
 
 //resolveNudge(changeInfo.url, tabIdToPreviousUrl[tabId], tabId, tab.id);
 async function resolveNudge(changeInfo_url, stored_previous_url, tabId, tab_dot_id) {
