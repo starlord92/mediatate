@@ -36,20 +36,6 @@ function checkNudgeOnCriteria (val) {
 
 		    else {
 
-		    	// console.log('stored_nudge_checkbox is ' + data.stored_nudge_checkbox);
-
-		  //   	var arr1 = nudge_start_time.split(':');
-				// var nudge_start_hour = parseInt(arr1[0], 10); 
-				// var nudge_start_min = parseInt(arr1[1], 10);
-
-				// var arr2 = nudge_end_time.split(':');
-				// var nudge_end_hour = parseInt(arr2[0], 10);
-				// var nudge_end_min = parseInt(arr2[1], 10);
-
-				// var now = new Date(); // current time
-			 //    var current_hour = now.getHours();
-			 //    var current_min = now.getMinutes();
-
 			    nudge_start_hour = nudge_start_time;
 			    nudge_end_hour = nudge_end_time;
 			    console.log("nudge_start_hour inside checkNudgeOnCriteria is " + nudge_start_time);
@@ -291,6 +277,16 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		}
 		else {;}
 });
+
+//reset user_is_on_distracting_site to false, which is set by resolveNudge, each time Chrome starts so that we dont have injectNudgeContentScript running when nudge is set to off
+chrome.runtime.onStartup.addListener(
+	function callback() {
+		user_is_on_distracting_site = false;
+		console.log(" user_is_on_distracting_site is set to " + user_is_on_distracting_site);
+	}
+
+);
+
 
 //when the counter reach x minute, inject the nudge content script
 var runNudgeAlgoEverySec = setInterval(injectNudgeContentScript, 1000);
